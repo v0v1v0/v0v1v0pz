@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.tfl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Printing Type Frequency Lists (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Implementations of the <code>print</code> and <code>summary</code>
+methods for type frequency list objects (of class <code>tfl</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'tfl'
+print(x, all=FALSE, ...)
+
+  ## S3 method for class 'tfl'
+summary(object, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, object</code></td>
+<td>
+<p>an object of class <code>tfl</code>, representing a type
+frequency list</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all</code></td>
+<td>
+<p>if <code>FALSE</code>, only the twenty most frequent types will
+be shown (default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments passed on from generic method will be ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><b>NB:</b> implementation details and format of the summary are subject to
+change in future releases
+</p>
+<p><code>print.tfl</code> works similar to the standard <code>print</code> method for
+data frames, but provides additional information about <code class="reqn">N</code> and
+<code class="reqn">V</code>.  Unless <code>all</code> is set to <code>TRUE</code>, only the twenty
+most frequent types will be shown.
+</p>
+<p><code>summary.tfl</code> gives a concise summary of the most important
+information about the type frequency list.  In addition to showing
+<code class="reqn">N</code> <code class="reqn">V</code>, the summary also indicates whether the list is
+incomplete and shows examples of type representations (if present).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>NULL</code>
+</p>
+<p>Unlike other implementations of the <code>summary</code> method,
+<code>summary.tfl</code> only prints a summary on screen and does not return
+a special "summary" object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the <code>tfl</code> manpage for details on <code>tfl</code> objects.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load Brown tfl
+data(Brown.tfl)
+
+## summary and print most frequent types
+summary(Brown.tfl)
+print(Brown.tfl)
+
+## the whole type list (don't try this unless you have some time to spare)
+## Not run: 
+print(Brown.tfl,all=TRUE)
+## End(Not run)
+</code></pre>
+
+
+</div>

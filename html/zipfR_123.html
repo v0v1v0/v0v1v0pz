@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Tiger</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Tiger NP and PP expansions (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Objects of classes <code>tfl</code>, <code>spc</code> and
+<code>vgc</code> that contain frequency data for the syntactic
+expansions of Noun Phrases (NP) and Prepositional Phrases (PP) in
+the Tiger German treebank.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+TigerNP.tfl
+TigerNP.spc
+TigerNP.emp.vgc
+
+TigerPP.tfl
+TigerPP.spc
+TigerPP.emp.vgc
+
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p>In this dataset, types are not words, but syntactic expansions,
+i.e., sequences of syntactic categories that form NPs (in
+<code>TigerNP</code>) or PPs (in <code>TigerPP</code>), according to the Tiger
+annotation scheme for German. Thus, for example, among the expansion
+types in the <code>TigerNP</code> dataset, we find <code>ART_NN</code> and
+<code>ART_ADJA_NN</code>, whereas among the PP expansions in
+<code>TigerPP</code> we find <code>APPR_ART_NN</code> and <code>APPR_NN</code>
+(<code>APPR</code> is the tag for prepositions in the Tiger tagset).
+</p>
+<p>The Tiger treebank contains about 900,000 tokens (50,000 sentences)
+of German newspaper text from the Frankfurter Rundschau. The token
+frequencies of the expansion types are taken from this corpus.
+</p>
+<p><code>TigerNP.tfl</code> and <code>TigerPP.tfl</code> are the type frequency
+lists.  <code>TigerNP.spc</code> and <code>TigerPP.spc</code> are frequency
+spectra. <code>TigerNP.emp.vgc</code> and <code>TigerPP.emp.vgc</code> are the
+corresponding observed vocabulary growth curves (tracking the
+development of <code>V</code> and <code>V(1)</code> in the original order of
+occurrence of the expansion tokens in the source corpus).
+</p>
+
+
+<h3>References</h3>
+
+<p>Tiger Project:
+<a href="https://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger/">https://www.ims.uni-stuttgart.de/forschung/ressourcen/korpora/tiger/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+TigerNP.tfl
+summary(TigerNP.spc)
+summary(TigerNP.emp.vgc)
+
+TigerPP.tfl
+summary(TigerPP.spc)
+summary(TigerPP.emp.vgc)
+
+</code></pre>
+
+
+</div>

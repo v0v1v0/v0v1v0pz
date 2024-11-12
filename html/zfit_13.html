@@ -1,0 +1,41 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zlm_robust</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Pipe-friendly wrappers for external fitters</h2>
+
+<h3>Description</h3>
+
+<p>These functions provide pipe-friendly wrappers around model fitters provided
+by several external packages. The functions require the corresponding
+packages to be installed, if the required package is missing the functions
+warns with directions for how to install it.
+</p>
+<p><code>zlm_robust()</code> wraps <code>estimatr::lm_robust()</code>, which fits a linear model with
+a variety of options for estimating robust standard errors.
+</p>
+<p><code>zpolr()</code> wraps <code>MASS::polr()</code>, which fits an ordered logistic response for
+multi-value ordinal variables, using a proportional odds logistic regression.
+</p>
+<p><code>zplsr()</code> wraps <code>pls::plsr()</code>, which performs a partial least squares
+regression.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">if (requireNamespace("estimatr") &amp;&amp; getRversion() &gt;= "4.1.0")
+  zlm_robust(cars, dist ~ speed) |&gt; summary() |&gt; try()
+
+if (requireNamespace("MASS") &amp;&amp; getRversion() &gt;= "4.1.0")
+  zpolr(mtcars, ordered(gear) ~ mpg + hp) |&gt; summary() |&gt; try()
+
+if (requireNamespace("pls") &amp;&amp; getRversion() &gt;= "4.1.0")
+  zplsr(cars, dist ~ speed) |&gt; summary() |&gt; try()
+
+</code></pre>
+
+
+</div>

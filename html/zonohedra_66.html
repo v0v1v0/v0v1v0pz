@@ -1,0 +1,192 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plothighertrans</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+plot abundant and deficient parallelograms
+</h2>
+
+<h3>Description</h3>
+
+<p>The 2-transition surface associated with a zonohedron
+is a topological sphere and is contained in the zonohedron.
+The surface is centrally symmetric, with the same center as the zonohedron.
+The surface may have self-intersections.
+For this function, the surface is required to be strictly starshaped at
+the center.
+For the definition of <em>strictly starshaped</em> see the vignette
+<a href="../doc/transitions.html">The 2-Transition Subcomplex and the 2-Transition Surface</a>.
+</p>
+<p>The 2-transition surface is a union of parallelograms.
+Each parallelogram has a unit normal that defines a linear functional.
+<br>
+If a 2-transition parallelogram is in the <em>interior</em> of the zonohedron
+then the functional is not maximized on the parallelogram,
+and there is a corresponding similar parallelogram
+on the boundary of the zonohedron where the functional *is* maximized.
+The first parallelogram (in the surface) is called <em>deficient</em> because
+the functional is not maximized,
+and the second parallelogram (in the boundary)
+is called <em>abundant</em> because the number of corresponding
+transitions across this parallelogram is more than 2.
+<br>
+If the 2-transition parallelogram is on the boundary,
+then it is called <em>coincident</em>.
+The coincident parallelograms are ignored and
+not drawn in this function.
+</p>
+<p>Because of this 1-1 correspondence between deficient parallelograms (in the 2-transition surface)
+and the abundant parallelograms (in the boundary of the zonohedron),
+the area of these two surfaces are the same.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plothighertrans( x, abalpha=1, defcol='green', defalpha=0, ecol=NA,
+                  connections=FALSE, bgcol="gray40", both=TRUE, ...  )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>abalpha</code></td>
+<td>
+
+<p>The opacity to use when drawing the abundant parallelograms.
+If <code>abalpha=0</code> then they are not drawn.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>defcol</code></td>
+<td>
+
+<p>The color to use when drawing the deficient parallelograms
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>defalpha</code></td>
+<td>
+
+<p>The opacity to use when drawing the deficient parallelograms.
+If <code>defalpha=0</code> (the default), then they are not drawn.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ecol</code></td>
+<td>
+
+<p>The color to use when drawing the edges.
+If <code>ecol=NA</code> (the default), then they are not drawn.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>connections</code></td>
+<td>
+
+<p>If <code>TRUE</code> then draw segments between centers of the
+deficient parallelograms in the 2-transition surface,
+and centers of the the corresponding abundant parallelograms
+in the zonohedron boundary
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bgcol</code></td>
+<td>
+
+<p>the background color
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>both</code></td>
+<td>
+
+<p>if <code>FALSE</code> then draw only one half of the centrally symmetric boundary.
+Otherwise draw both halves.
+This affects edges and parallelograms.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Connections are drawn with <code>rgl::segments3d()</code> and 
+<code>rgl::points3d()</code> .
+parallelograms and edges are drawn with <code>rgl::quads3d()</code>.
+Both parallelograms and edges are drawn unlit (<code>lit=FALSE</code>).
+The parallelograms are colored by the number of transitions
+using the color codes in <b>Burns</b>, up to 10 transitions.
+</p>
+<p>A large black point is drawn at 0, 
+a large white point at the "white point",
+and a 50% gray point at the center.
+A line from the black point to the white point is also drawn.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns <code>TRUE</code> when successful; 
+or <code>FALSE</code> in case of error.
+</p>
+
+
+<h3>WARNING</h3>
+
+<p>This function currently only works when the 2-transition surface
+is starshaped at the center.
+This excludes many of the classic zonohedra.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The package <span class="pkg">rgl</span> is required for 3D plots.
+</p>
+
+
+<h3>References</h3>
+
+<p>Scott A Burns.
+<b>The location of optimal object colors with more than two transitions</b>.
+Color Research &amp; Application.
+Vol. 46.
+No. 6.
+pp 1180-1193.
+2021.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>plot.zonohedron()</code>,
+<code>plot2trans()</code>
+</p>
+
+
+</div>

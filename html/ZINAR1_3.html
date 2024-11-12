@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>SIM_ZINAR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate values for ZINAR(1)</h2>
+
+<h3>Description</h3>
+
+<p>This function generates realizations of a ZINAR(1) process.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">SIM_ZINAR(n, alpha, rho, th, innovation)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of realizations of the ZINAR(1) process.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>The probability of an element remaining in the process. The parameter alpha must be in [0,1].</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>The probability of the innovation be from the state zero. The parameter rho must be in [0,1].</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>th</code></td>
+<td>
+<p>Is equal the value of the parameter lambda, if the innovations follow a Zero-Inflated Poisson (ZIP) distribution, and is a vector containing the values of the parameters (mu,phi), if the innovations follow a Zero-Inflated Negative Binomial (ZINB) or Zero-Inflated Inverse Gaussian (ZIPIG) distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>innovation</code></td>
+<td>
+<p>Must be "Po" if Poisson, "NB" if Negative binomial or "GI" if Gaussian inverse.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a numeric vector representing a realization of a ZINAR(1) process.
+</p>
+
+
+<h3>References</h3>
+
+<p>Aldo M.; Medina, Francyelle L.; Jales, Isaac C.; Bertail, Patrice. First-order integer valued AR processes with zero-inflated innovations. Cyclostationarity: Theory and Methods, Springer Verlag - 2021, v. 1, p. 19-40.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Simulates values for ZIPInar1 model and estimate its parameters.
+
+set.seed(5)
+
+model = "zinar"
+innv = "Po"
+y = SIM_ZINAR(n = 500,alpha = 0.3,rho = 0.5,th = 3,innovation = innv)
+ZIPInar1 = EST_ZINAR(y,model=model,innovation=innv,desc = TRUE)
+
+
+</code></pre>
+
+
+</div>

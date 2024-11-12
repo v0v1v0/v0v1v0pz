@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>minkowskisum</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Minkowski sum of Two zonotopes
+</h2>
+
+<h3>Description</h3>
+
+<p>A zonotope can be viewed as a Minkowski sum of line segments,
+with one endpoint at 0.
+Therefore, the Minkowski sum of two zonotopes (in the same dimension)
+is also a zonotope.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonotope'
+minkowskisum( zono1, zono2, e0=0, e1=1.e-6, e2=1.e-10, ground=NULL, ... )
+
+## S3 method for class 'zonotope'
+zono1 %+% zono2
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zono1</code></td>
+<td>
+
+<p>a zonotope object - a <b>zonohedron</b>, a <b>zonogon</b>, or a <b>zonoseg</b>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zono2</code></td>
+<td>
+
+<p>a zonotope object with the same dimension as <code>zono1</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e0</code></td>
+<td>
+<p>see <code>zonohedron()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e1</code></td>
+<td>
+<p>see <code>zonohedron()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e2</code></td>
+<td>
+<p>see <code>zonohedron()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ground</code></td>
+<td>
+<p>the ground set of the returned zonotope.
+If <code>ground</code> is <code>NULL</code>, it is set to the ground set of <code>zono1</code>
+followed by the ground set of <code>zono2</code> translated sufficiently
+to not intersect that of <code>zono1</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>After verifying that <code>zono1</code> and <code>zono2</code> are the same dimension,
+it takes the 2 matrices, <code>cbind</code>s them,
+and passes the new matrix to the appropriate constructor,
+along with the other arguments.
+There are no special optimizations.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>minkowskisum()</code> returns a zonotope of the same dimension
+as <code>zono1</code> and <code>zono2</code>.<br><code>%+%</code> is a more convenient binary operator that calls
+<code>minkowskisum()</code>, but without the flexibility of
+the extra arguments.
+<br>
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p><b>Zonohedron - Wikipedia</b>.<br><a href="https://en.wikipedia.org/wiki/Zonohedron">https://en.wikipedia.org/wiki/Zonohedron</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>zonogon()</code>,
+<code>zonoseg()</code>
+</p>
+
+
+</div>

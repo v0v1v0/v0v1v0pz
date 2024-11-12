@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>same</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dataset composed of five different countries (BRA appears as both exporter
+and importer).</h2>
+
+<h3>Description</h3>
+
+<p>A dummy dataset to illustrate the final size of the base after
+expansion.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">same
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A dataframe object.
+</p>
+
+
+<h3>Details</h3>
+
+<p>A dataset cosisting of three years, three exporting countries,
+three importing countries, three Harmonized System code and value of exports
+(all data is fictitious). The data includes the following fields:
+</p>
+<p>* ano - Numeric. Year in which exports were carried out.
+* ido - String. ISO code corresponding to the exporting country.
+* idd - String. ISO code corresponding to the importing country.
+* HS4 - Numeric. HS4 code corresponding to the merchandise sold.
+* comercio - Numeric. Dollar value of exports.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a dataframe object contains the five variables passed as parameters
+to the get_zerotradeflow() function (year, exporter, importer, item, trade)
+including the bilateral trade flow equal to zero.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# On the other hand, in the same.rda base, Brazil (BRA) appears as both an
+# exporter and an importer and, in this case, when expanding the base, there
+# are 72 observations as a result.
+
+
+
+
+sameflow &lt;- get_zerotradeflow(same, ano, ido, idd, HS4, comercio)
+
+
+
+
+</code></pre>
+
+
+</div>

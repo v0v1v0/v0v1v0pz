@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zz_format</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Accepted formats from Zamzar</h2>
+
+<h3>Description</h3>
+
+<p>Get dataframe of all the formats accepted by Zamzar. Alternatively, a dataframe of formats
+you can convert an origin to.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zz_format(origin = NULL, usr = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>origin</code></td>
+<td>
+<p>The origin format you want to convert from.
+If a valid argument is passed to <code>origin</code>, <code>zz_format()</code> returns a dataframe of:
+</p>
+
+<ul>
+<li> <p><code>targets</code>: The formats your origin can be converted to.
+</p>
+</li>
+<li> <p><code>costs</code>: The cost for converting between your origin and a given target.
+</p>
+</li>
+</ul>
+<p>See also: <a href="https://developers.zamzar.com/formats">https://developers.zamzar.com/formats</a>
+</p>
+<p>If no argument has been passed to <code>orign</code>, a dataframe containing all
+the accepted formats by the Zamzar API is returned.
+</p>
+<p>See: <a href="https://developers.zamzar.com/formats">https://developers.zamzar.com/formats</a></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>usr</code></td>
+<td>
+<p>The username/API key you are using. If not set, the function
+will check if a key exists as a <code>ZAMZAR_USR</code> variable  in <code>.Renviron</code> and use that.
+</p>
+<p>See: <a href="https://developers.zamzar.com/user">https://developers.zamzar.com/user</a></p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Please note that a Zamzar key passed as argument to <code>usr</code> takes precedence over a
+Zamzar key extracted from an <code>.Renviron</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Either a dataframe of formats that you can convert to, or a
+dataframe of accepted origin formats.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Returns a single column dataframe of all the accepted formats
+# for the origin param.
+zz_format(usr = "key")
+
+# Same as above (assuming a valid key in .Renviron).
+zz_format()
+
+# Returns an error since the origin argument isn't recognized by the Zamzar API.
+zz_format(origin = "invalid_origin")
+
+# Returns a dataframe of targets that origin can be converted to,
+# and of the cost of converting to a given target.
+zz_format(origin = "emf")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

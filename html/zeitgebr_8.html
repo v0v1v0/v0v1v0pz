@@ -1,0 +1,130 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>periodogram_methods</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Methods For Computing Periodograms</h2>
+
+<h3>Description</h3>
+
+<p>These functions provides a series of methods to assess periodicity of circadian processes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ac_periodogram(x, period_range = c(hours(16), hours(32)),
+  sampling_rate = 1/mins(1), alpha = 0.05)
+
+chi_sq_periodogram(x, period_range = c(hours(16), hours(32)),
+  sampling_rate = 1/mins(1), alpha = 0.05,
+  time_resolution = hours(0.1))
+
+cwt_periodogram(x, period_range = c(hours(16), hours(32)),
+  sampling_rate = 1/mins(1), alpha = 0.05, resolution = 1/512,
+  n_sim = 10)
+
+fourier_periodogram(x, period_range = c(hours(16), hours(32)),
+  sampling_rate = 1/mins(1), alpha = 0.05)
+
+ls_periodogram(x, period_range = c(hours(16), hours(32)),
+  sampling_rate = 1/mins(1), alpha = 0.05, oversampling = 8)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>numeric vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>period_range</code></td>
+<td>
+<p>vector of size 2 defining minimal and maximal range of period to study (in seconds)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampling_rate</code></td>
+<td>
+<p>the – implicitly regular – sampling rate of x (in hertz)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>significance level</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_resolution</code></td>
+<td>
+<p>the resolution of periods to scan</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resolution</code></td>
+<td>
+<p>the period resolution of the CWT (i.e. the number of suboctaves)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_sim</code></td>
+<td>
+<p>the number of shuffling simulation to compute p-value (see WaveletComp::analyze.wavelet)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>oversampling</code></td>
+<td>
+<p>the oversampling factor (see lomb::lsp)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.table with the columns:
+</p>
+
+<ul>
+<li> <p><code>period</code> – the period (in s)
+</p>
+</li>
+<li> <p><code>power</code> – the power (or equivalent) for a given period
+</p>
+</li>
+<li> <p><code>p_value</code> – the significance of the power
+</p>
+</li>
+<li> <p><code>signif_threshold</code> – the significance threshold of the power (at alpha)
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://rethomics.github.io/zeitgebr.html">zeitgebr tutorial</a> – the relevant rehtomics tutorial
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul>
+<li> <p>lomb::lsp  – the orginal function for <code>ls_periodogram</code>
+</p>
+</li>
+<li> <p>xsp::chiSqPeriodogram – code modified from
+</p>
+</li>
+<li> <p>stats::acf – the orginal function for <code>ac_periodogram</code>
+</p>
+</li>
+<li> <p>WaveletComp::analyze.wavelet – the orginal function for <code>cwt_periodogram</code>
+</p>
+</li>
+</ul>
+</div>

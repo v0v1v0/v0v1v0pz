@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zz_get</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get file from Zamzar account</h2>
+
+<h3>Description</h3>
+
+<p>Get file from Zamzar account provided a file id.
+Per default ‘zz_get()' assumes that you’re doing development, thus using a 	
+development endpoint. Set prod boolean to 'TRUE' to change this behavior.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zz_get(
+  id = NULL,
+  usr = NULL,
+  name = NULL,
+  extension = NULL,
+  overwrite = FALSE,
+  prod = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>The target id for a previously passed file. Most likely
+returned from 'zz_get_info()'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>usr</code></td>
+<td>
+<p>The username/API key you are using. If not set, the function
+will check if a key exists as a 'ZAMZAR_USR' variable  in '.Renviron' and use that.    
+</p>
+<p>See: <a href="https://developers.zamzar.com/user">https://developers.zamzar.com/user</a></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>The name of the file you are fetching from Zamzar. If a name is
+not assigned to the file, then the id of the file will be used as file name.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extension</code></td>
+<td>
+<p>The extension of the file you are fetching from Zamzar.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overwrite</code></td>
+<td>
+<p>Should 'zz_get()' overwrite if a file with the same name already
+exists in directory. Defaults to 'FALSE'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prod</code></td>
+<td>
+<p>Boolean deciding whether to use a production endpoint or
+a development endpoint. Defaults to FALSE (That is, development endpoint).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>On differences between endpoints, see: <a href="https://developers.zamzar.com/docs#section-Next_steps">https://developers.zamzar.com/docs#section-Next_steps</a> and  <a href="https://developers.zamzar.com/docs#section-Rate_Limits">https://developers.zamzar.com/docs#section-Rate_Limits</a>
+</p>
+<p>Please note that a Zamzar key passed as argument to 'usr' takes precedence over a
+Zamzar key extracted from an '.Renviron'.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A file written to disk.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# An example of zz_get() utilized with hardcoded arguments
+zz_get(id = 12345678, usr = "key", name = "my_avatar", extension = "png")
+
+# An example of zz_get() used in conjunction with zz_get_info()
+# Please note this example assumes a valid key in .Renviron
+response &lt;- zz_get_info(latest = TRUE)
+zz_get(id = response$id, extension = response$extension, prod = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>to_unixtime</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert a Date or Datetime Object to Unix Datetime</h2>
+
+<h3>Description</h3>
+
+<p>This is a general purpose helper function for this
+package useful in converting a time stamp to unix time.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">to_unixtime(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Date or datetime string or object.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function is inspired/borrowed from a github page
+by Neal Richardson who did a similar work to convert the
+general date time format to unix time.
+</p>
+<p>The unix time stamp is a way to track time as a running
+total of seconds. This count starts at the Unix Epoch on
+January 1st, 1970 at UTC. Therefore, the unix time stamp
+is merely the number of seconds between a particular date
+and the Unix Epoch.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Integer vector with unix time stamp.
+</p>
+
+
+</div>

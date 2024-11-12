@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>textSentiment</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Conduct a sentiment analysis on text data</h2>
+
+<h3>Description</h3>
+
+<p>This function takes in the output of the chat and transcript functions. It then
+conducts a sentiment analysis on an identified chunk of text
+and returns the values.
+To use the aws option, you must have an aws account that with privileges for the comprehend service
+However you authenticate for AWS, you should do so before running calling the function
+with this option in sentMethods
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">textSentiment(
+  inputData,
+  idVars,
+  textVar,
+  sentMethods,
+  appendOut = FALSE,
+  languageCodeVar
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputData</code></td>
+<td>
+<p>data.frame that has been output by either the processZoomTranscript or processZoomChat functions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>idVars</code></td>
+<td>
+<p>vector with the name of variables that give the unique identifiers for this piece of text. Usually this will be a the meeting id variable and the text id variable (e.g., utteranceId, messageId)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>textVar</code></td>
+<td>
+<p>name of variable that contains the text</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sentMethods</code></td>
+<td>
+<p>a vector specifying the types of sentiment analysis-currently
+either "aws" or "syuzhet"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>appendOut</code></td>
+<td>
+<p>boolean indicating whether you want the sentiment results
+merged to the inputData in your output</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>languageCodeVar</code></td>
+<td>
+<p>name of variable that contains the language code</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>returns a list containing as data.frames the output of the sentiment analyses
+that were requested in sentMethods. For each output data.frame, the first columns
+are the idVars specified to enable combining back with the original inputData
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">sent.out = textSentiment(inputData=sample_chat_processed,
+idVars=c('batchMeetingId', 'messageId'), 
+textVar='message', sentMethods='syuzhet',appendOut=TRUE,
+languageCodeVar='messageLanguage')
+
+## Not run: 
+sent.out = textSentiment(inputData=sample_transcript_processed, 
+idVars=c('batchMeetingId','utteranceId'), 
+textVar='utteranceMessage', sentMethods=c('aws','syuzhet'), 
+appendOut=TRUE, languageCodeVar='utteranceLanguage')
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

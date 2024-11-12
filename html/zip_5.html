@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unzip_process</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Class for an external unzip process</h2>
+
+<h3>Description</h3>
+
+<p><code>unzip_process()</code> returns an R6 class that represents an unzip process.
+It is implemented as a subclass of processx::process.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unzip_process()
+</code></pre>
+
+
+<h3>Value</h3>
+
+<p>An <code>unzip_process</code> R6 class object, a subclass of
+processx::process.
+</p>
+
+
+<h3>Using the <code>unzip_process</code> class</h3>
+
+<div class="sourceCode"><pre>up &lt;- unzip_process()$new(zipfile, exdir = ".", poll_connection = TRUE,
+                           stderr = tempfile(), ...)
+</pre></div>
+<p>See processx::process for the class methods.
+</p>
+<p>Arguments:
+</p>
+
+<ul>
+<li> <p><code>zipfile</code>: Path to the zip file to uncompress.
+</p>
+</li>
+<li> <p><code>exdir</code>: Directory to uncompress the archive to. If it does not
+exist, it will be created.
+</p>
+</li>
+<li> <p><code>poll_connection</code>: passed to the <code>initialize</code> method of
+processx::process, it allows using <code>processx::poll()</code> or the
+<code>poll_io()</code> method to poll for the completion of the process.
+</p>
+</li>
+<li> <p><code>stderr</code>: passed to the <code>initialize</code> method of processx::process,
+by default the standard error is written to a temporary file.
+This file can be used to diagnose errors if the process failed.
+</p>
+</li>
+<li> <p><code>...</code> passed to the <code>initialize</code> method of processx::process.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">ex &lt;- system.file("example.zip", package = "zip")
+tmp &lt;- tempfile()
+up &lt;- unzip_process()$new(ex, exdir = tmp)
+up$wait()
+up$get_exit_status()
+dir(tmp)
+</code></pre>
+
+
+</div>

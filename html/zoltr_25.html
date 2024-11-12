@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>new_connection</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get a connection to a Zoltar host</h2>
+
+<h3>Description</h3>
+
+<p>Returns a new connection object, which is the starting point for working with the Zoltar API. Once you have the
+connection you can call <code>zoltar_authenticate()</code> on it, and then call <code>projects()</code> to get a list
+of Project objects to start working with.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">new_connection(host = "https://zoltardata.com")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>host</code></td>
+<td>
+<p>The Zoltar site to connect to. Does <em>not</em> include a trailing slash ('/'). Defaults to <a href="https://zoltardata.com">https://zoltardata.com</a></p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>A note on URLs: We require a trailing slash ('/') on all URLs. The only exception is the host arg passed to this
+function. This convention matches Django REST framework one, which is what Zoltar is written in.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>ZoltarConnection</code> object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  conn &lt;- new_connection()
+
+## End(Not run)
+</code></pre>
+
+
+</div>

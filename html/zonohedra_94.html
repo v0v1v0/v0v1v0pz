@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>symmetrize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+symmetrize a zonotope
+</h2>
+
+<h3>Description</h3>
+
+<p>The input is a zonotope whose matroid is simple.
+The function adds new generators that creates a new zonotope
+that is a translate of the original, and has center of symmetry at 0.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonotope'
+symmetrize( x, e0=0, e1=1.e-6, e2=1.e-10, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a zonotope object -  a <b>zonohedron</b>, a <b>zonogon</b>,
+or a <b>zonoseg</b>.
+The matroid of this zonotope must be simple.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e0</code></td>
+<td>
+<p>see <code>zonohedron()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e1</code></td>
+<td>
+<p>see <code>zonohedron()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e2</code></td>
+<td>
+<p>see <code>zonohedron()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Each generator <code>g</code> (a column of the matrix)
+is replace by 2 generators: <code>g/2</code> and <code>-g/2</code>.
+The new set of generators correponds to a <em>star</em> at 0,
+from Sec 2-8 of <b>Coxeter</b>.
+<br>
+The new ground points are obtained by translating the original
+ground points by the their maximum.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns a zonotope that is a translate of the original,
+and has center of symmetry at 0.
+<br>
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Coxeter, H.S.M.
+<b>Regular Polytopes</b>.
+Dover Publications.
+1973.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>zonogon()</code>,
+<code>zonoseg()</code>
+</p>
+
+
+</div>

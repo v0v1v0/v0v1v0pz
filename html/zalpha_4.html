@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>L_plus_R</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Runs the L_plus_R function</h2>
+
+<h3>Description</h3>
+
+<p>Returns the <code class="reqn">{|L| \choose 2} + {|R| \choose 2}</code> value for each SNP location supplied to the function. <code>|L|</code> and <code>|R|</code> are the number of SNPs to the left and right of the current locus within the given window <code>ws</code>.
+For more information about the <code>L_plus_R</code> diversity statistic, please see Jacobs (2016).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">L_plus_R(pos, ws, X = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pos</code></td>
+<td>
+<p>A numeric vector of SNP locations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ws</code></td>
+<td>
+<p>The window size which the <code>L_plus_R</code> statistic will be calculated over. This should be on the same scale as the <code>pos</code> vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Optional. Specify a region of the chromosome to calculate <code>L_plus_R</code> for in the format <code>c(startposition, endposition)</code>. The start position and the end position should be within the extremes of the positions given in the <code>pos</code> vector. If not supplied, the function will calculate L_plus_R for every SNP in the <code>pos</code> vector.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list containing the SNP positions and the <code>L_plus_R </code>values for those SNPs
+</p>
+
+
+<h3>References</h3>
+
+<p>Jacobs, G.S., T.J. Sluckin, and T. Kivisild, <em>Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.</em> Genetics, 2016. <strong>203</strong>(4): p. 1807
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load the snps example dataset
+data(snps)
+## run L_plus_R over all the SNPs with a window size of 3000 bp
+L_plus_R(snps$bp_positions,3000)
+## only return results for SNPs between locations 600 and 1500 bp
+L_plus_R(snps$bp_positions,3000,X=c(600,1500))
+
+</code></pre>
+
+
+</div>

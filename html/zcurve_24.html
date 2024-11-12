@@ -1,0 +1,183 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zcurve</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit a z-curve</h2>
+
+<h3>Description</h3>
+
+<p><code>zcurve</code> is used to fit z-curve models. The function
+takes input of z-statistics or two-sided p-values and returns object of
+class <code>"zcurve"</code> that can be further interrogated by summary and plot
+function. It default to EM model, but different version of z-curves can
+be specified using the <code>method</code> and <code>control</code> arguments. See
+'Examples' and 'Details' for more information.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zcurve(
+  z,
+  z.lb,
+  z.ub,
+  p,
+  p.lb,
+  p.ub,
+  data,
+  method = "EM",
+  bootstrap = 1000,
+  parallel = FALSE,
+  control = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>a vector of z-scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.lb</code></td>
+<td>
+<p>a vector with start of censoring intervals of censored z-scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.ub</code></td>
+<td>
+<p>a vector with end of censoring intervals of censored z-scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>a vector of two-sided p-values, internally transformed to
+z-scores.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.lb</code></td>
+<td>
+<p>a vector with start of censoring intervals of censored two-sided p-values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.ub</code></td>
+<td>
+<p>a vector with end of censoring intervals of censored two-sided p-values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>an object created with <code>zcurve_data()</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>the method to be used for fitting. Possible options are
+Expectation Maximization <code>"EM"</code> and density <code>"density"</code>,
+defaults to <code>"EM"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrap</code></td>
+<td>
+<p>the number of bootstraps for estimating CI. To skip
+bootstrap specify <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>whether the bootstrap should be performed in parallel.
+Defaults to <code>FALSE</code>. The implementation is not completely stable
+and might cause a connection error.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>additional options for the fitting algorithm more details in
+control EM or control density.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function returns the EM method by default and changing
+<code>method = "density"</code> gives the KD2 version of z-curve as outlined in
+Bartoš and Schimmack (2020). For the original z-curve
+(Brunner and Schimmack 2020), referred to as KD1, specify
+<code>'control = "density", control = list(model = "KD1")'</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The fitted z-curve object
+</p>
+
+
+<h3>References</h3>
+
+<p>Bartoš F, Schimmack U (2020).
+“Z-curve. 2.0: Estimating Replication Rates and Discovery Rates.”
+<a href="https://doi.org/10.31219/osf.io/wr93f">doi:10.31219/osf.io/wr93f</a>, submitted for publication.<br><br> Brunner J, Schimmack U (2020).
+“Estimating population mean power under conditions of heterogeneity and selection for significance.”
+<em>Meta-Psychology</em>, <b>4</b>.
+<a href="https://doi.org/10.15626/MP.2018.874">doi:10.15626/MP.2018.874</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>summary.zcurve()</code>, <code>plot.zcurve()</code>, control_EM, control_density
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># load data from OSC 2015 reproducibility project
+OSC.z
+
+# fit an EM z-curve (with disabled bootstrap due to examples times limits)
+m.EM &lt;- zcurve(OSC.z, method = "EM", bootstrap = FALSE)
+# a version with 1000 boostraped samples would looked like:
+m.EM &lt;- zcurve(OSC.z, method = "EM", bootstrap = 1000)
+
+# or KD2 z-curve (use larger bootstrap for real inference)
+m.D &lt;- zcurve(OSC.z, method = "density", bootstrap = FALSE)
+
+# inspect the results
+summary(m.EM)
+summary(m.D)
+# see '?summary.zcurve' for more output options
+
+# plot the results
+plot(m.EM)
+plot(m.D)
+# see '?plot.zcurve' for more plotting options
+
+# to specify more options, set the control arguments
+# ei. increase the maximum number of iterations and change alpha level
+ctr1 &lt;- list(
+  "max_iter" = 9999,
+  "alpha"    = .10
+  )
+## Not run: m1.EM &lt;- zcurve(OSC.z, method = "EM", bootstrap = FALSE, control = ctr1)
+# see '?control_EM' and '?control_density' for more information about different
+# z-curves specifications
+</code></pre>
+
+
+</div>

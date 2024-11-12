@@ -1,0 +1,148 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zalpha_Zscore</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Runs the Zalpha function using the Z score of the r-squared values for the region</h2>
+
+<h3>Description</h3>
+
+<p>Returns a <code class="reqn">Z_{\alpha}^{Zscore}</code> value for each SNP location supplied to the function, based on
+the expected <code class="reqn">r^2</code> values given an LD profile and genetic distances.
+For more information about the <code class="reqn">Z_{\alpha}^{Zscore}</code> statistic, please see Jacobs (2016).
+The <code class="reqn">Z_{\alpha}^{Zscore}</code> statistic is defined as:
+</p>
+<p style="text-align: center;"><code class="reqn">{Z_{\alpha}^{Zscore}}=\frac{{|L| \choose 2}^{-1}\sum_{i,j \in L}\frac{r^2_{i,j}-E[r^2_{i,j}]}{\sigma[r^2_{i,j}]} + {|R| \choose 2}^{-1}\sum_{i,j \in R}\frac{r^2_{i,j}-E[r^2_{i,j}]}{\sigma[r^2_{i,j}]}}{2}</code>
+</p>
+
+<p>where <code>|L|</code> and <code>|R|</code> are the number of SNPs to the left and right of the current locus within the given window <code>ws</code>, <code class="reqn">r^2</code> is equal to
+the squared correlation between a pair of SNPs, <code class="reqn">E[r^2]</code> is equal to the expected squared correlation between a pair of SNPs, given an LD profile, and <code class="reqn">\sigma[r^2]</code> is the standard deviation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zalpha_Zscore(
+  pos,
+  ws,
+  x,
+  dist,
+  LDprofile_bins,
+  LDprofile_rsq,
+  LDprofile_sd,
+  minRandL = 4,
+  minRL = 25,
+  X = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pos</code></td>
+<td>
+<p>A numeric vector of SNP locations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ws</code></td>
+<td>
+<p>The window size which the <code class="reqn">Z_{\alpha}^{Zscore}</code> statistic will be calculated over. This should be on the same scale as the <code>pos</code> vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the <code>pos</code> vector. SNPs should all be biallelic.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>A numeric vector of genetic distances (e.g. cM, LDU). This should be the same length as <code>pos</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>LDprofile_bins</code></td>
+<td>
+<p>A numeric vector containing the lower bound of the bins used in the LD profile. These should be of equal size.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>LDprofile_rsq</code></td>
+<td>
+<p>A numeric vector containing the expected <code class="reqn">r^2</code> values for the corresponding bin in the LD profile. Must be between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>LDprofile_sd</code></td>
+<td>
+<p>A numeric vector containing the standard deviation of the <code class="reqn">r^2</code> values for the corresponding bin in the LD profile.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minRandL</code></td>
+<td>
+<p>Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minRL</code></td>
+<td>
+<p>Minimum value for the product of the set sizes for R and L. Default is 25.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Optional. Specify a region of the chromosome to calculate <code class="reqn">Z_{\alpha}^{Zscore}</code> for in the format <code>c(startposition, endposition)</code>. The start position and the end position should be within the extremes of the positions given in the <code>pos</code> vector. If not supplied, the function will calculate <code class="reqn">Z_{\alpha}^{Zscore}</code> for every SNP in the <code>pos</code> vector.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The LD profile describes the expected correlation between SNPs at a given genetic distance, generated using simulations or
+real data. Care should be taken to utilise an LD profile that is representative of the population in question. The LD
+profile should consist of evenly sized bins of distances (for example 0.0001 cM per bin), where the value given is the (inclusive) lower
+bound of the bin. Ideally, an LD profile would be generated using data from a null population with no selection, however one can be generated
+using this data. See the <code>create_LDprofile</code> function for more information on how to create an LD profile.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A list containing the SNP positions and the <code class="reqn">Z_{\alpha}^{Zscore}</code> values for those SNPs
+</p>
+
+
+<h3>References</h3>
+
+<p>Jacobs, G.S., T.J. Sluckin, and T. Kivisild, <em>Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.</em> Genetics, 2016. <strong>203</strong>(4): p. 1807
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>create_LDprofile</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load the snps and LDprofile example datasets
+data(snps)
+data(LDprofile)
+## run Zalpha_Zscore over all the SNPs with a window size of 3000 bp
+Zalpha_Zscore(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
+ LDprofile$bin,LDprofile$rsq,LDprofile$sd)
+## only return results for SNPs between locations 600 and 1500 bp
+Zalpha_Zscore(snps$bp_positions,3000,as.matrix(snps[,3:12]),snps$cM_distances,
+ LDprofile$bin,LDprofile$rsq,LDprofile$sd,X=c(600,1500))
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>makeTimeWindows</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper function that creates temporal windows in datasets</h2>
+
+<h3>Description</h3>
+
+<p>This creates a set of temporal windows of specified size so that metrics
+can be computed within those windows.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">makeTimeWindows(inputData, timeVar, windowSize)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputData</code></td>
+<td>
+<p>data.frame that has data over time, usually within a single meeting</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timeVar</code></td>
+<td>
+<p>name of a numeric column that contains the time variable you want to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>windowSize</code></td>
+<td>
+<p>numeric value giving the length of time window</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list with two data.frames:
+</p>
+
+<ul>
+<li>
+<p> windowedData - inputData with the temporal window identifying information included
+</p>
+</li>
+<li>
+<p> allWindows - contains the full set of temporal windows and identifying information. This is valuable because inputData may not have records within all of the possible temporal windows
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">win.out = makeTimeWindows(sample_transcript_processed, 
+timeVar="utteranceStartSeconds", windowSize=10)
+</code></pre>
+
+
+</div>

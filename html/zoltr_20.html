@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>job_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get a job's information</h2>
+
+<h3>Description</h3>
+
+<p>Gets a job's information that can be used to track the job's progress. Jobs represent long-running
+asynchronous activities like uploading a file (e.g., a forecast or truth) or running a query.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">job_info(zoltar_connection, job_url)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>job_url</code></td>
+<td>
+<p>URL of a valid job in zoltar_connection</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>list</code> of job information for the passed job_url. it has these names:
+id, url, status, user, created_at, updated_at, failure_message, input_json, output_json
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  the_job_info &lt;- job_info(conn, "http://example.com/api/job/2/")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

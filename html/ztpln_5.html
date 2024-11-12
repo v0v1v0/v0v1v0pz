@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dztplnm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The zero-truncated compund poisson-lognormal distributions mixture</h2>
+
+<h3>Description</h3>
+
+<p>Density function and random generation for Zero-Truncated
+Poisson Lognormal distribution with parameters <code>mu</code>, <code>sig</code>, and <code>theta</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dztplnm(x, mu, sig, theta, log = FALSE, type1 = TRUE)
+
+rztplnm(n, mu, sig, theta, type1 = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>vector of (non-negative integer) quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>vector of mean of lognormal distribution in sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig</code></td>
+<td>
+<p>vector standard deviation of lognormal distribution in sample.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>vector of mixture weights</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log</code></td>
+<td>
+<p>logical; if TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type1</code></td>
+<td>
+<p>logical; if TRUE, Use type 1 ztpln else use type 2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of random values to return.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Type 1 ZTPLN truncates zero based on Poisson-lognormal distribution and
+type 2 ZTPLN truncates zero based on zero-truncated Poisson distribution.
+For mathematical details, please see <code>vignette("ztpln")</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>dztplnm gives the (log) density and rztplnm generates
+random variates.
+function, qpois gives the quantile function, and rpois generates random
+deviates.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>dztpln</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">rztplnm(n = 100, mu = c(0, 5), sig = c(1, 2), theta = c(0.2, 0.8))
+dztplnm(x = 1:100, mu = c(0, 5), sig = c(1, 2), theta = c(0.2, 0.8))
+dztplnm(x = 1:100, mu = c(0, 5), sig = c(1, 2), theta = c(0.2, 0.8), type1 = FALSE)
+</code></pre>
+
+
+</div>

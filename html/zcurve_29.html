@@ -1,0 +1,130 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zcurve_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prepare data for z-curve</h2>
+
+<h3>Description</h3>
+
+<p><code>zcurve_data</code> is used to prepare data for the
+<code>zcurve()</code> function. The function transform strings containing
+reported test statistics <code>"z", "t", "f", "chi", "p"</code> into two-sided
+p-values. Test statistics reported as inequalities are as considered
+to be censored as well as test statistics reported with low accuracy
+(i.e., rounded to too few decimals). See details for more information.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zcurve_data(data, id = NULL, rounded = TRUE, stat_precise = 2, p_precise = 3)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a vector strings containing the test statistics.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>a vector identifying observations from the same cluster.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rounded</code></td>
+<td>
+<p>an optional argument specifying whether de-rounding should be applied.
+Defaults to <code>FALSE</code> to treat all input as exact values or a numeric
+vector with values specifying precision of the input. The other option,
+<code>FALSE</code>, automatically extracts the number of decimals from input
+and treats the input as censored if it does not surpass the <code>stat_precise</code> and
+the <code>p_precise</code> thresholds.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stat_precise</code></td>
+<td>
+<p>an integer specifying the numerical precision of
+<code>"z", "t", "f"</code> statistics treated as exact values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p_precise</code></td>
+<td>
+<p>an integer specifying the numerical precision of
+p-values treated as exact values.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>By default, the function extract the type of test statistic:
+</p>
+
+<dl>
+<dt><code>"F(df1, df2)=x"</code></dt>
+<dd>
+<p>F-statistic with df1 and df2 degrees of freedom,</p>
+</dd>
+<dt><code>"chi(df)=x"</code></dt>
+<dd>
+<p>Chi-square statistic with df degrees of freedom,</p>
+</dd>
+<dt><code>"t(df)=x"</code></dt>
+<dd>
+<p>for t-statistic with df degrees of freedom,</p>
+</dd>
+<dt><code>"z=x"</code></dt>
+<dd>
+<p>for z-statistic,</p>
+</dd>
+<dt><code>"p=x"</code></dt>
+<dd>
+<p>for p-value.</p>
+</dd>
+</dl>
+<p>The input is not case sensitive and automatically removes empty spaces. Furthermore,
+inequalities (<code>"&lt;"</code> and <code>"&gt;"</code>) can be used to denote censoring. I.e., that
+the p-value is lower than <code>"x"</code> or that the test statistic is larger than <code>"x"</code>
+respectively. The automatic de-rounding procedure (if <code>rounded = TRUE</code>) treats
+p-values with less decimal places than specified in <code>p_precise</code> or test statistics
+with less decimal places than specified in <code>stat_precise</code> as censored on an interval
+that could result in a given rounded value. I.e., a <code>"p = 0.03"</code> input would be
+de-rounded as a p-value lower than 0.035 but larger than 0.025.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of type <code>"zcurve_data"</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zcurve()</code>, <code>print.zcurve_data()</code>, <code>head.zcurve_data()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Specify a character vector containing the test statistics
+data &lt;- c("z = 2.1", "t(34) = 2.21", "p &lt; 0.03", "F(2,23) &gt; 10", "p = 0.003")
+
+# Obtain the z-curve data object
+data &lt;- zcurve_data(data)
+
+# inspect the resulting object
+data
+</code></pre>
+
+
+</div>

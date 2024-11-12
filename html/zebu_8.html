@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lassie_get</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return the value of 'lassie' object</h2>
+
+<h3>Description</h3>
+
+<p>Subroutine for <code>lassie</code> methods. Tries to retrieve a value from a <code>lassie</code> object
+and gives an error if value does not exist.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lassie_get(x, what_x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>lassie</code> S3 object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what_x</code></td>
+<td>
+<p>vector specifying values to be returned:
+</p>
+
+<ul>
+<li>
+<p> 'local': local association measure values (default).
+</p>
+</li>
+<li>
+<p> 'obs': observed probabilities.
+</p>
+</li>
+<li>
+<p> 'exp': expected probabilities.
+</p>
+</li>
+<li>
+<p> 'local_p': p-value of local association (after running <code>permtest</code> or <code>chisqtest</code>).
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Corresponding array contained in <code>lassie</code> object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">las &lt;- lassie(trees)
+las_array &lt;- lassie_get(las, 'local')
+
+</code></pre>
+
+
+</div>

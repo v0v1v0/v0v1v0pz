@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ThesaurusManagement</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Thesaurus Management</h2>
+
+<h3>Description</h3>
+
+<p>Functions to modify and check thesauri.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">NewThesaurus(
+  caseSensitive = FALSE,
+  accentSensitive = FALSE,
+  punctuationSensitive = FALSE
+)
+
+AddToThesaurus(thesaurus, newName, category)
+
+RemoveRepeatedNames(thesaurus)
+
+ThesaurusAmbiguity(thesaurus)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>caseSensitive, accentSensitive, punctuationSensitive</code></td>
+<td>
+<p>Logical. They set
+the case, accent, and punctuation sensitivity (<code>FALSE</code> by default) of
+the thesaurus.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurus</code></td>
+<td>
+<p>A thesaurus object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newName</code></td>
+<td>
+<p>Character vector with new names to be added to the thesaurus.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>category</code></td>
+<td>
+<p>Character vector identifying the classes where the
+new names should be included.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>NewThesaurus</code> returns an empty thesaurus. This can then be
+populated by <code>AddToThesaurus</code>.
+</p>
+<p><code>AddToThesaurus</code> returns the input thesaurus complemented with new
+names in the categories identified. If any of the categories is not present
+in the input thesaurus, new categories are added as required.
+</p>
+<p><code>RemoveRepeatedNames</code> returns the input thesaurus pruned of redundant
+names in each category. The redundancy is evaluated in agreement with the
+case and accent sensitivity of the thesaurus.
+</p>
+<p><code>ThesaurusAmbiguity</code> returns FALSE if no ambiguity is present. When any
+ambiguity is found, it returns TRUE with an attribute <code>errmessage</code>
+including the names present in more than one category and the
+the involved categories. This is internally used by
+<code>ReadThesaurus</code> and <code>AddToThesaurus</code> to generate an
+error in case they attempt to read or generate an ambiguous thesaurus.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zoologThesaurus</code> for a description of the thesaurus and
+thesaurus set structure,
+</p>
+<p><code>ReadThesaurus</code>, <code>WriteThesaurus</code>,
+<code>StandardizeNomenclature</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Load an example thesaurus:
+thesaurus &lt;- ReadThesaurus(system.file("extdata", "taxonThesaurus.csv",
+                                       package="zoolog"))
+## with categories
+names(thesaurus) #  "bos taurus"  "ovis aries"  "sus domesticus"
+## Add names to several categories:
+thesaurusExtended &lt;- AddToThesaurus(thesaurus,
+                                    c("Kuh", "Schwein"),
+                                    c("bos taurus","sus domesticus"))
+## This adds the name "Kuh" to the category "bos taurus" and
+## the name "Schwein" to the category "sus domesticus".
+
+## Generate a new thesaurus and populate it with two categories
+## ("red" and "blue"):
+thesaurusNew &lt;- NewThesaurus()
+thesaurusNew &lt;- AddToThesaurus(thesaurusNew,
+                               c("scarlet", "vermilion", "ruby", "cherry",
+                                 "carmine", "wine"),
+                               "red")
+thesaurusNew
+thesaurusNew &lt;- AddToThesaurus(thesaurusNew,
+                                c("sky blue", "azure", "sapphire", "cerulean",
+                                 "navy", "lapis lazuli", "indigo", "cyan"),
+                               "blue")
+thesaurusNew
+
+## Attempt to generate an ambiguous thesaurus
+try(AddToThesaurus(thesaurusNew, "scarlet", "blue"))
+
+## Remove repeated names in the same category:
+thesaurusWithRepetitions &lt;- AddToThesaurus(thesaurusNew,
+                                           c("scarlet", "ruby"), "red")
+thesaurusWithRepetitions
+RemoveRepeatedNames(thesaurusWithRepetitions)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,353 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zeta.msgdm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Multi-site generalised dissimilarity modelling for a set of environmental variables and distances</h2>
+
+<h3>Description</h3>
+
+<p>Computes a regression model of zeta diversity for a given order (number of assemblages or sites) against a set of environmental variables and distances between sites. The different regression models available are generalised linear models, generalised linear models with negative constraints, generalised additive models, shape constrained additive models, and I-splines.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zeta.msgdm(
+  data.spec,
+  data.env,
+  xy = NULL,
+  data.spec.pred = NULL,
+  order = 1,
+  sam = 1000,
+  reg.type = "glm",
+  family = stats::gaussian(),
+  method.glm = "glm.fit.cons",
+  cons = -1,
+  cons.inter = 1,
+  confint.level = 0.95,
+  bs = "mpd",
+  kn = -1,
+  order.ispline = 2,
+  kn.ispline = 1,
+  distance.type = "Euclidean",
+  dist.custom = NULL,
+  rescale = FALSE,
+  rescale.pred = TRUE,
+  method = "mean",
+  normalize = FALSE,
+  silent = FALSE,
+  empty.row = 0,
+  control = list(),
+  glm.init = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data.spec</code></td>
+<td>
+<p>Site-by-species presence-absence data frame, with sites as rows and species as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.env</code></td>
+<td>
+<p>Site-by-variable data frame, with sites as rows and environmental variables as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xy</code></td>
+<td>
+<p>Site coordinates, to account for distances between sites.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.spec.pred</code></td>
+<td>
+<p>Site-by-species presence-absence data frame or list of data frames, with sites as rows and species as columns, for which zeta diversity will be computed and used as a predictor of the zeta diversity of <code>data.spec</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>Specific number of assemblages or sites at which zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sam</code></td>
+<td>
+<p>Number of samples for which the zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reg.type</code></td>
+<td>
+<p>Type of regression used in the multi-site generalised dissimilarity modelling. Options are "<code>glm</code>" for generalised linear models, "<code>ngls</code>" for negative linear models, "<code>gam</code>" for generalised additive models, "<code>scam</code>" for shape constrained additive models (with monotonic decreasing by default), and "<code>ispline</code>" for I-spline models (forcing monotonic decline), as recommended in generalised dissimilarity modelling by Ferrier <em>et al</em>. (2007).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>A description of the error distribution and link function to be used in the <code>glm</code>, <code>gam</code> and <code>scam</code> models (see <code>family</code> for details of family functions).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method.glm</code></td>
+<td>
+<p>Method used in fitting the generalised linear model. The default method <br> "glm.fit.cons" is an adaptation of method <code>glm.fit2</code> from package <code>glm2</code> using a constrained least squares regression (default is negative coefficients) in the reweighted least squares. Another option is "glm.fit2", which calls <code>glm.fit2</code>; see help documentation for glm.fit2 in package <code>glm2</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons</code></td>
+<td>
+<p>type of constraint in the glm if <code>method.glm = "glm.fit.cons"</code>. Default is -1 for negative coefficients on the predictors. The other option is 1 for positive coefficients on the predictors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons.inter</code></td>
+<td>
+<p>type of constraint for the intercept. Default is 1 for positive intercept, suitable for Gaussian family. The other option is -1 for negative intercept, suitable for binomial family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>confint.level</code></td>
+<td>
+<p>Percentage for the confidence intervals of the coefficients from the generalised linear models.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bs</code></td>
+<td>
+<p>A two-letter character string indicating the (penalized) smoothing basis to use in the scam model. Default is "<code>mpd</code>" for monotonic decreasing splines. see <code>smooth.terms</code> for an overview of what is available.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kn</code></td>
+<td>
+<p>Number of knots in the GAM and SCAM. Default is -1 for determining kn automatically using Generalized Cross-validation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.ispline</code></td>
+<td>
+<p>Order of the I-spline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kn.ispline</code></td>
+<td>
+<p>Number of knots in the I-spline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance.type</code></td>
+<td>
+<p>Method to compute distance. Default is "<code>Euclidean</code>", for Euclidean distance. The other options are (i) "<code>ortho</code>" for orthodromic distance, if xy correspond to longitudes and latitudes (orthodromic distance is computed using the <code>geodist</code> function from package <code>geodist</code>); and (ii) "<code>custom</code>", in which case the user must provide a distance matrix for <code>dist.custom</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist.custom</code></td>
+<td>
+<p>Distance matrix provided by the user when <code>distance.type</code> = <code>"custom"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the zeta values should be divided by the total number of species in the dataset, to get a range of values between 0 and 1. Has no effect if <code>normalize</code> != <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale.pred</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the spatial distances and differences in environmental variables should be rescaled between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Name of a function (as a string) indicating how to combine the pairwise differences and distances for more than 3 sites. It can be a basic R-function such as "<code>mean</code>" or "<code>max</code>", but also a custom function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalize</code></td>
+<td>
+<p>Indicates if the zeta values for each sample should be divided by the total number of species for this specific sample (<code>normalize = "Jaccard"</code>), by the average number of species per site for this specific sample (<code>normalize = "Sorensen"</code>), or by the minimum number of species in the sites of this specific sample <br> (<code>normalize = "Simpson"</code>). Default value is <code>FALSE</code>, indicating that no normalization is performed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if warnings must be printed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>empty.row</code></td>
+<td>
+<p>Determines how to handle empty rows, i.e. sites with no species. Such sites can cause underestimations of zeta diversity, and computation errors for the normalized version of zeta due to divisions by 0. Options are "<code>empty</code>" to let the data untreated, "<code>remove</code>" to remove the empty rows, 0 to set the normalized zeta to 0 when zeta is divided by 0 during normalization (sites share no species, so are completely dissimilar), and 1 to set the normalized zeta to 1 when zeta is divided by 0 during normalization (i.e. sites are perfectly similar).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>As for <code>glm</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>glm.init</code></td>
+<td>
+<p>Boolean value, indicating if the initial parameters for fitting the glm with constraint on the coefficients signs for <code>reg.type == "ispline"</code> should be initialised based on the correlation coefficients betwen the zeta values and the environmental difference or distance. <code>glm.init = TRUE</code> helps preventing the error message: <code>error: cannot find valid starting values:</code> <br><code>please specify some</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The environmental variables can be numeric or factorial.
+</p>
+<p>If <code>order = 1</code>, the variables are used as such in the regression, and factorial variables must be dummy for the output of the regression to be interpretable.
+</p>
+<p>For numeric variables, if <code>order&gt;1</code> the pairwise difference between sites is computed and combined according to <code>method</code>. For factorial variables, the distance corresponds to the number of unique values over the number of assemblages of sites specified by <code>order</code>.
+</p>
+<p>If <code>xy = NULL</code>, <code>Zeta.msgdm</code> only uses environmental variables in the regression. Otherwise, it also computes and uses euclidian distance (average or maximum distance between multiple sites, depending on the parameters <code>method</code>) as an explanatory variable.
+</p>
+<p>If <code>rescale.pred = TRUE</code>, zeta is regressed against the differences of values of the environmental variables divided by the maximum difference for each variable, to be rescaled between 0 and 1. If <code>!is.null(xy)</code>, distances between sites are also divided by the maximum distance. If <code>order = 1</code>, the variables are transformed by first subtracting their minimum value, and dividing by the difference of their maximum and minimum values.
+</p>
+<p>If <code>reg.type = "ispline"</code>, the variables are rescaled between 0 and 1 prior to computing the I-splines by subtracting their minimum value, and dividing by the difference of their maximum and minimum values.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>Zeta.msgdm</code> returns a list whose component vary depending on the regression technique. The list can contain the following components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>val</code></td>
+<td>
+<p>Vector of zeta values used in the MS-GDM.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>predictors</code></td>
+<td>
+<p>Data frame of the predictors used in the MS-GDM.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range.min</code></td>
+<td>
+<p>Vector containing the minimum values of the numeric variables, used for rescaling the variables between 0 and 1 for I-splines (see Details).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range.max</code></td>
+<td>
+<p>Vector containing the maximum values of the numeric variables, used for rescaling the variables between 0 and 1 for I-splines (see Details).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale.factor</code></td>
+<td>
+<p>Factor by which the predictors were divided if <code>rescale.pred = TRUE</code> and <code>order&gt;1</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.ispline</code></td>
+<td>
+<p>The value of the original parameter, to be used in <code>Plot.ispline</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kn.ispline</code></td>
+<td>
+<p>The value of the original parameter, to be used in <code>Plot.ispline</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>An object whose class depends on the type of regression (<code>glm</code>, <code>nnnpls</code>, <code>gam</code> or <code>scam</code>; I-splines return and object of class <code>glm</code>), corresponding to the regression over distance for the number of assemblages or sites specified in <code>order</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>confint</code></td>
+<td>
+<p>The confidence intervals for the coefficients from generalised linear models with no constraint. <code>confint</code> is not generated for the other types of regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vif</code></td>
+<td>
+<p>The variance inflation factors for all the variables for the generalised linear regression. <code>vif</code> is not generated for the other types of regression.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Hui C. &amp; McGeoch M.A. (2014). Zeta diversity as a concept and metric that unifies incidence-based biodiversity patterns. <em>The American Naturalist</em>, 184, 684-694.
+</p>
+<p>Ferrier, S., Manion, G., Elith, J., &amp; Richardson, K. (2007). Using generalized dissimilarity modelling to analyse and predict patterns of beta diversity in regional biodiversity assessment. <em>Diversity and Distributions</em>, 13(3), 252-264.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.decline.mc</code>, <code>Zeta.order.mc</code>, <code>Zeta.decline.ex</code>, <code>Zeta.order.ex</code>, <code>Predict.msgdm</code>,
+</p>
+<p><code>Ispline</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::data(bird.spec.coarse)
+xy.bird &lt;- bird.spec.coarse[1:2]
+data.spec.bird &lt;- bird.spec.coarse[3:193]
+utils::data(bird.env.coarse)
+data.env.bird &lt;- bird.env.coarse[,3:9]
+
+zeta.glm &lt;- Zeta.msgdm(data.spec.bird, data.env.bird, sam = 100, order = 3)
+zeta.glm
+dev.new()
+graphics::plot(zeta.glm$model)
+
+zeta.ngls &lt;- Zeta.msgdm(data.spec.bird, data.env.bird, xy.bird, sam = 100, order = 3,
+    reg.type = "ngls", rescale = TRUE)
+zeta.ngls
+
+##########
+
+utils::data(Marion.species)
+xy.marion &lt;- Marion.species[1:2]
+data.spec.marion &lt;- Marion.species[3:33]
+utils::data(Marion.env)
+data.env.marion &lt;- Marion.env[3]
+
+zeta.gam &lt;- Zeta.msgdm(data.spec.marion, data.env.marion, sam = 100, order = 3,
+    reg.type = "gam")
+zeta.gam
+dev.new()
+graphics::plot(zeta.gam$model)
+
+zeta.ispline &lt;- Zeta.msgdm(data.spec.marion, data.env.marion, xy.marion, sam = 100,
+    order = 3, normalize = "Jaccard", reg.type = "ispline")
+zeta.ispline
+
+zeta.ispline.r &lt;- Return.ispline(zeta.ispline, data.env.marion, distance = TRUE)
+zeta.ispline.r
+
+dev.new()
+Plot.ispline(isplines = zeta.ispline.r, distance = TRUE)
+
+dev.new()
+Plot.ispline(msgdm = zeta.ispline, data.env = data.env.marion, distance = TRUE)
+
+</code></pre>
+
+
+</div>

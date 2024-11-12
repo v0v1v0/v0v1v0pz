@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cv_ZIPFA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Cross validation for Zero Inflated Poisson factor analysis
+</h2>
+
+<h3>Description</h3>
+
+<p>To conduct a cross validation for Zero Inflated Poisson factor analysis to find the number of factors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cv_ZIPFA(X, k, fold, tau = 0.1, cut = 0.8, tolLnlikelihood = 5e-4,
+          iter = 20, tol = 1e-4, maxiter = 100, initialtau = 'iteration',
+          Madj = TRUE, display = TRUE, parallel = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>The matrix to be decomposed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>A vector containing the number of factors to try.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fold</code></td>
+<td>
+<p>The number of folds used in cross validation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>Initial tau value to fit. Will be overwritten by the first value in <code>initial</code> argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cut</code></td>
+<td>
+<p>To delete columns that has more than 100('<code>Cut</code>')% zeros. <code>Cut = 1</code>, if no filtering.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tolLnlikelihood</code></td>
+<td>
+<p>The max percentage of log likelihood differences in two iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>Max iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initialtau</code></td>
+<td>
+<p>A character specifying the way to choose the initial value of tau at the beginning of EM iteration. <code>stable</code>: estimate tau from fitted beta in last round; <code>initial</code>: always use the initially assigned tau in <code>tau</code> or <code>initial</code>. Use the default tau = 0.1 if 'initial' is empty. <code>iteration</code>: use fitted tau in last round.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>Percentage of l2 norm change of [tau beta].</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxiter</code></td>
+<td>
+<p>Max iteration number in the zero inflated poisson regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Madj</code></td>
+<td>
+<p>If TRUE then adjust for relative library size M.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>display</code></td>
+<td>
+<p>If TRUE display the fitting procedure.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>Use <code>doParallel</code> and <code>foreach</code> package to accelerate.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function conducts cross validation on the zero-inflated Poisson factor analysis to determine the rank.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns a matrix. Each row the CV likelihood of one fold. Each column is the result of number of factors in <code>k</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tianchen Xu
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+data(X)
+cv_ZIPFA(X, fold = 10, k = c(3,4))
+
+
+</code></pre>
+
+
+</div>

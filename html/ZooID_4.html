@@ -1,0 +1,42 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>unpack_processedDataset</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>unpack_processedDataset</h2>
+
+<h3>Description</h3>
+
+<p>Unpacking the processed zooplankton dataset to a specific directory.
+The result will be a directory named "processedDataset"
+being put the specified save directory, containing all the image files
+from the processed dataset that comes with this package
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">unpack_processedDataset(saveDir)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>saveDir</code></td>
+<td>
+<p>(String) Directory to save the processed dataset to</p>
+</td>
+</tr></table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+saveDir &lt;- 'Users/$(whoami)/Images/ZooplanktonImages/'
+unpack_processedDataset(saveDir)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

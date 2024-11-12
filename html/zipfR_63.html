@@ -1,0 +1,285 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lnre.details</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Technical Details of LNRE Model Objects (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>This manpage describes technical details of LNRE models and parameter
+estimation.  It is intended developers who want to implement new LNRE
+models, improve the parameter estimation algorithms, or work directly
+with the internals of <code>lnre</code> objects.  All information required
+for standard applications of LNRE models can be found on the
+<code>lnre</code> manpage.
+</p>
+
+
+<h3>Details</h3>
+
+<p>Most operations on LNRE models (in particular, computation of expected
+values and variances, distribution function and type distribution,
+random sampling, etc.) are realized as S3 methods, so they are
+automatically dispatched to appropriate implementations for the
+various types of LNRE models (e.g., <code>EV.lnre.zm</code>,
+<code>EV.lnre.fzm</code> and <code>EV.lnre.gigp</code> for the <code>EV</code> method).
+For some methods (e.g. estimated variances <code>VV</code> and <code>VVm</code>),
+a single generic implementation can be used for all model types,
+provided through the base class (<code>VV.lnre</code> and <code>VVm.lnre</code>
+for variances).
+</p>
+<p>If you want to implement new LNRE models, have a look at "Implementing
+LNRE Models" below.
+</p>
+<p><b>Important note:</b> LNRE model parameters can be passed as named
+arguments to the <code>lnre</code> constructor function when they are not
+estimated automatically from an observed frequency spectrum.  For this
+reason, parameter names must be carefully chosen so that they do not
+clash with other arguments of the <code>lnre</code> function.  Note that
+because of <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s argument matching rules, any parameter name that is a
+<em>prefix</em> of a standard argument name will lead to such a clash.
+In particular, single-letter parameters (such as <code class="reqn">b</code> and <code class="reqn">c</code>
+for the GIGP model) should always be written in uppercase (<code>B</code>
+and <code>C</code> in <code>lnre.gigp</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A LNRE model with estimated (or manually specified) parameter values
+is represented by an object belonging to a suitable subclass of
+<code>lnre</code>.  The specific class depends on the type of LNRE model, as
+specified in the <code>type</code> argument to the <code>lnre</code> constructor
+function (e.g. <code>lnre.fzm</code> for a fZM model selected with
+<code>type="fzm"</code>).
+</p>
+<p>All subtypes of <code>lnre</code> object share the same data format, viz. a
+list with the following components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>a character string specifying the class of LNRE model,
+e.g. <code>"fzm"</code> for a finite Zipf-Mandelbrot model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>a character string specifying a human-readable name for
+the LNRE model, e.g. <code>"finite Zipf-Mandelbrot"</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>list of named model parameters, e.g. <code>(alpha=.8,
+      B=.01)</code> for a ZM model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param2</code></td>
+<td>
+<p>a list of "secondary" parameters, i.e. constants that
+can be determined from the model parameters but are frequently used
+in the formulae for expected values, variances, etc.;
+e.g. <code>(C=.5)</code> for the ZM model above</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>S</code></td>
+<td>
+<p>population size, i.e. number of types in the population
+described by the LNRE model (may be <code>Inf</code>, e.g. for a ZM
+model)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exact</code></td>
+<td>
+<p>whether approximations are allowed when calculating
+expectations and variances (<code>FALSE</code>) or not (<code>TRUE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multinomial</code></td>
+<td>
+<p>whether to use equations for multionmial sampling
+(<code>TRUE</code>) or independent Poisson sampling (<code>FALSE</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spc</code></td>
+<td>
+<p>an object of class <code>spc</code>, the observed frequency
+spectrum from which the model parameters have been estimated (only
+if the LNRE model is based on empirical data)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gof</code></td>
+<td>
+<p>an object of class <code>lnre.gof</code> with goodness-of-fit
+information for the estimated LNRE model (only if based on empirical
+data, i.e. if the <code>spc</code> component is also present)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>util</code></td>
+<td>
+<p>a set of utility functions, given as a list with the
+following components:
+</p>
+
+<dl>
+<dt>
+<code>update</code>:</dt>
+<dd>
+<p>function with signature <code>(self, param,
+	transformed=FALSE)</code>, which updates the parameters of the LNRE
+model <code>self</code> with the values in <code>param</code>, checks that
+their values are in the allowed range, and re-calculates
+"secondary" parameters and lexicon size if necessary.  If
+<code>transformed=TRUE</code>, the specified parameters are translated
+back to normal scale before the update (see below).  Of course,
+<code>self</code> should be the object from which the utility function
+was called.  <code>update</code> returns a modified version of the
+object <code>self</code>.</p>
+</dd>
+<dt>
+<code>transform</code>:</dt>
+<dd>
+<p>function with signature <code>(param,
+	inverse=FALSE)</code>, which transform model parameters (given as a
+list in the argument <code>param</code>) to an unbounded range
+centered at 0, and back (with option <code>inverse=TRUE</code>).  The
+transformed model parameters are used for parameter estimation,
+so that unconstrained minimization algorithms can be applied.
+The link function for the transformation depends on the LNRE
+model and the "distribution" of each parameter.  A felicitous
+choice can be crucial for robust and quick parameter estimation,
+especially with Newton-like gradient algorithms.  Note that
+setting all transformed parameters to 0 should provide a
+reasonable starting point for the parameter estimation.</p>
+</dd>
+<dt>
+<code>print</code>:</dt>
+<dd>
+<p>partial print method for this subclass of
+LNRE model, which displays the name of the model, its
+parameters, and optionally some additional information (invoked
+internally by <code>print.lnre</code> and <code>summary.lnre</code>)</p>
+</dd>
+<dt>
+<code>label</code>:</dt>
+<dd>
+<p>returns a string with a short description
+of the LNRE model, including its subclass and approximate values 
+for its parameters (e.g. for use in legend text).</p>
+</dd>
+</dl>
+</td>
+</tr>
+</table>
+<h3>Implementing LNRE Models</h3>
+
+<p>In order to implement a new class of LNRE models, the following steps
+are necessary (illustrated on the example of a lognormal type density
+function, introducing the new LNRE class <code>lnre.lognormal</code>):
+</p>
+
+<ul>
+<li>
+<p> Provide a constructor function for LNRE models of this type
+(here, <code>lnre.lognormal</code>), which must accept the parameters of
+the LNRE model as named arguments with reasonable default values (or
+alternatively as a list passed in the <code>param</code> argument).  The
+constructor must return a partially initialized object of an
+appropriate subclass of <code>lnre</code> (<code>lnre.lognormal</code> in our
+example), and make sure that this object also inherits from the
+<code>lnre</code> class.
+</p>
+</li>
+<li>
+<p> Provide the <code>update</code>, <code>transform</code>, <code>print</code> and <code>label</code>
+utility functions for the LNRE model, which must be returned in the
+<code>util</code> field of the LNRE model object (see "Value" above).
+</p>
+</li>
+<li>
+<p> Add the new type of LNRE model to the <code>type</code> argument of
+the generic <code>lnre</code> constructor, and insert the new constructor
+function (<code>lnre.lognormal</code>) in the <code>switch</code> call in the
+body of <code>lnre</code>.
+</p>
+</li>
+<li>
+<p> As a minimum requirement, implementations of the <code>EV</code> and
+<code>EVm</code> methods must be provided for the new LNRE model (in our
+example, they will be named <code>EV.lnre.lognormal</code> and
+<code>EVm.lnre.lognormal</code>).
+</p>
+</li>
+<li>
+<p> If possible, provide equations for the type density,
+probability density, type distribution, distribution function 
+and posterior distribution of
+the new LNRE model, as implementations of the <code>tdlnre</code>,
+<code>dlnre</code>, <code>tplnre</code>/<code>tqlnre</code>,
+<code>plnre</code>/<code>qlnre</code> and <code>postplnre</code>/<code>postqlnre</code>
+methods for the new LNRE model class.  If
+all these functions are defined, log-scaled densities and random
+number generation are automatically handled by generic
+implementations.
+</p>
+</li>
+<li>
+<p> Optionally, provide a custom function for parameter estimation
+of the new LNRE model, as an implementation of the
+<code>estimate.model</code> method (here,
+<code>estimate.model.lnre.lognormal</code>).  Custom parameter estimation
+can considerably improve convergence and goodness-of-fit if it is
+possible to obtain direct estimates for one or more of the
+parameters, e.g. from the condition <code class="reqn">E[V] = V</code>.  However, the
+default Nelder-Mead algorithm is robust and produces satisfactory
+results, as long as the LNRE model defines an appropriate parameter
+transformation mapping.  It is thus often more profitable to
+optimize the <code>transform</code> utility than to spend a lot of time
+implementing a complicated parameter estimation function.
+</p>
+</li>
+</ul>
+<p>The best way to get started is to take a look at one of the existing
+implementations of LNRE models.  The GIGP model represents a "minimum"
+implementation (without custom parameter estimation and distribution
+functions), whereas ZM and fZM provide good examples of custom
+parameter estimation functions.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>User-level information about LNRE models and parameter estimation can
+be found on the <code>lnre</code> manpage.
+</p>
+<p>Descriptions of the different LNRE models implemented in <code>zipfR</code>
+and their parameters are given on separate manpages
+<code>lnre.zm</code>, <code>lnre.fzm</code> and
+<code>lnre.gigp</code>.  These descriptions are intended for
+interested end users, but are not required for standard applications
+of the models.
+</p>
+<p>The <code>estimate.model</code> manpage explains details of the
+parameter estimation procedure (intended for developers).
+</p>
+<p>See <code>lnre.goodness.of.fit</code> for a description of the
+goodness-of-fit test performed after parameter estimation of an LNRE
+model.  This function can also be used to evaluate the predictions of
+the model on a different data set.
+</p>
+
+
+</div>

@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spc.vector</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create Vector of Spectrum Elements (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>spc.vector</code> returns a selected range of elements from a
+frequency spectrum as a plain numeric vector (which may contain
+entries with <code class="reqn">V_m = 0</code>, unlike the <code>spc</code> object
+itself).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  spc.vector(obj, m.min=1, m.max=15, all=FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>spc</code>, representing an observed or
+expected frequency spectrum</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m.min, m.max</code></td>
+<td>
+<p>determine the range of frequency classes to be returned
+(defaulting to 1 ... 15)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all</code></td>
+<td>
+<p>if <code>TRUE</code>, a vector containing the entire frequency
+spectrum is returned, i.e. <code>m.max</code> is set to <code>max(obj$m)</code>.
+Note that the value of <code>m.min</code> can still be overridden manually
+to return only part of the spectrum.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>spc.vector(obj, a, b)</code> is fully equivalent to <code>Vm(obj,
+  a:b)</code> (and is implemented in this way).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A numeric vector with the selected elements of the frequency spectrum.
+In this vector, empty frequency classes (<code class="reqn">V_m = 0</code>) are
+represented by 0 entries (unlike the <code>spc</code> object, which omits
+all empty classes).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>spc</code> for more information about <code>spc</code> objects and
+links to relevant functions
+</p>
+<p><code>Vm.spc</code> for an alternative way of extracting spectrum
+vectors from a <code>.spc</code> object, and <code>N.spc</code>,
+<code>V.spc</code>, <code>VV.spc</code>, <code>VVm.spc</code> for
+extracting related information
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Brown Noun spectrum
+data(BrownNoun.spc)
+
+## by default, extract first 15 elements
+spc.vector(BrownNoun.spc)
+
+## first five elements
+spc.vector(BrownNoun.spc,1,5)
+
+## just frequencies of spc elements 4 and 5 
+spc.vector(BrownNoun.spc,4,5)
+## same as
+Vm(BrownNoun.spc,4:5)
+
+</code></pre>
+
+
+</div>

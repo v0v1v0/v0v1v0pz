@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfPolylog</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Zipf-Polylog Distribution (Zipf-Polylog).</h2>
+
+<h3>Description</h3>
+
+<p>Probability mass function of the Zipf-Polylog distribution with parameters <code class="reqn">\alpha</code> and <code class="reqn">\beta</code>.
+The support of the Zipf-Polylog distribution are the strictly positive integer numbers large or equal
+than one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dzipfpolylog(x, alpha, beta, log = FALSE, nSum = 1000)
+
+pzipfpolylog(x, alpha, beta, log.p = FALSE, lower.tail = TRUE,
+  nSum = 1000)
+
+qzipfpolylog(p, alpha, beta, log.p = FALSE, lower.tail = TRUE,
+  nSum = 1000)
+
+rzipfpolylog(n, alpha, beta, nSum = 1000)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector of positive integer values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Value of the <code class="reqn">\beta</code> parameter (<code class="reqn">\beta &gt; 0</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>Logical; if TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nSum</code></td>
+<td>
+<p>The number of terms used for computing the Polylogarithm function (Default = 1000).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>Logical; if TRUE (default), probabilities are <code class="reqn">P[X \leq x]</code>, otherwise, <code class="reqn">P[X &gt; x]</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of random values to return.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <em>probability mass function</em> at a positive integer value <code class="reqn">x</code> of the Zipf-Polylog distribution with
+parameters <code class="reqn">\alpha</code> and <code class="reqn">\beta</code> is computed as follows:
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>dzipfpolylog</code> gives the probability mass function
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dzipfpolylog(1:10, 1.61, 0.98)
+pzipfpolylog(1:10, 1.61, 0.98)
+qzipfpolylog(0.8, 1.61, 0.98)
+</code></pre>
+
+
+</div>

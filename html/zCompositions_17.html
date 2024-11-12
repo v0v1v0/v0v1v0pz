@@ -1,0 +1,162 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>splineKM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Display Kaplan-Meier empirical cumulative distribution function and smoothing spline curve fit
+</h2>
+
+<h3>Description</h3>
+
+<p>This function shows the empirical cumulative distribution function (ECDF) for left-censored data as estimated by the Kaplan-Meier (KM) method and a cubic smoothing spline fitted to it (KMSS method, see <code>multKM</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">splineKM(x, label = NULL, dl = NULL, n.knots = NULL,
+            legend.pos = "bottomright",
+            ylab = "ECDF", xlab = "Value",
+            col.km = "black", lty.km = 1, lwd.km = 1,
+            col.sm = "red", lty.sm = 2, lwd.sm = 2, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>Numerical data vector (<code>vector</code> class).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote left-censored values in <code>x</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dl</code></td>
+<td>
+
+<p>Numeric vector of detection limits/thresholds for each element of <code>x</code> (same length as <code>x</code>). These must be given on the same scale as <code>x</code> (use e.g. 0 for detected data). 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.knots</code></td>
+<td>
+<p>Integer or function giving the number of knots used for fitting a cubic smoothing spline to the KM ECDF (see <code>smooth.spline</code> for default value).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend.pos</code></td>
+<td>
+
+<p>Location of the graph legend. Choose one amongst <code>"bottomleft"</code>, <code>"bottomright"</code> (default), <code>"topleft"</code> or <code>"topright"</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ylab</code></td>
+<td>
+
+<p>Title for y-axis.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab</code></td>
+<td>
+
+<p>Title for x-axis.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.km</code></td>
+<td>
+
+<p>Plotting color for KM ECDF (see base graphical parameters <code>par</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lty.km</code></td>
+<td>
+
+<p>Line type for KM ECDF (see base graphical parameters <code>par</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd.km</code></td>
+<td>
+
+<p>Line width for KM ECDF (see base graphical parameters <code>par</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col.sm</code></td>
+<td>
+
+<p>Plotting color for smoothing spline curve.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lty.sm</code></td>
+<td>
+
+<p>Line style for smoothing spline curve.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd.sm</code></td>
+<td>
+
+<p>Line width for smoothing spline curve.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Other graphical parameters.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Graphical output.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Water)
+data(mdl)
+
+# Examine default spline smoothed KM ECDF fit for Potassium and Sulphate
+splineKM(Water[,1],label=0,mdl[,1])
+splineKM(Water[,4],label=0,mdl[,4],xlim=c(28,41))
+
+# Reduce to 5 knots for Potassium
+splineKM(Water[,1],label=0,mdl[,1],n.knots=5)
+</code></pre>
+
+
+</div>

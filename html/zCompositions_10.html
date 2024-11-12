@@ -1,0 +1,185 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lrSVDplus</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Log-ratio SVD algorithm (plus) 
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements an extended version of the log-ratio SVD algorithm (<code>lrSVD</code> function) to simultaneously deal with both zeros (i.e. data below detection limit, rounded zeros) and missing data in compositional data sets.
+</p>
+<p>Note: zeros and missing data must be labelled using 0 and <code>NA</code> respectively to use this function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lrSVDplus(X, dl = NULL, frac = 0.65,
+             ncp = 2, beta = 0.5, method = c("ridge", "EM"), row.w = NULL,
+             coeff.ridge = 1, threshold = 1e-04, seed = NULL, nb.init = 1,
+             max.iter = 1000, z.warning = 0.8, z.delete = TRUE,
+             ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Compositional data set (<code>matrix</code> or <code>data.frame</code> class).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dl</code></td>
+<td>
+<p>Numeric vector or matrix of detection limits/thresholds. These must be given on the same scale as <code>X</code>. If <code>NULL</code> the column minima are used as thresholds.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>frac</code></td>
+<td>
+<p>Parameter for initial multiplicative simple replacement of left-censored data (see <code>multRepl</code>) (default = 0.65).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncp</code></td>
+<td>
+<p>Number of components in low-rank matrix approximation (default = 2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Weighting parameter, balance between the two conditions in objective function (default = 0.5).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Parameter estimation method for the iterative algorithm (<code>method = "ridge"</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>row.w</code></td>
+<td>
+<p>row weights (default = NULL, a vector of 1 for uniform row weights).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coeff.ridge</code></td>
+<td>
+<p>Used when <code>method = "ridge"</code> (default = 1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold</code></td>
+<td>
+<p>Threshold for assessing convergence (default = 1e-04).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>Seed for random initialisation of the algorithm (default <code>seed = NULL</code>, unobserved values initially imputed by the column mean).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nb.init</code></td>
+<td>
+<p>Number of random initialisations (default = 1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.iter</code></td>
+<td>
+<p>Maximum number of iterations for the algorithm (default = 1000).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.warning</code></td>
+<td>
+<p>Threshold used to identify individual rows or columns including an excess of zeros/unobserved values (to be specify in proportions, default <code>z.warning=0.8</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.delete</code></td>
+<td>
+<p>Logical value. If set to <code>TRUE</code>, rows/columns identified by <code>z.warning</code> are omitted in the imputed data set. Otherwise, the function stops in error when rows/columns are identified by <code>z.warning</code> (default <code>z.delete=TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The procedure starts with an initial imputation of zeros (using simple replacement with <code>frac*dl</code>) and missing values (using geometric mean imputation from observed data). Subsequently, the iterative algorithm is run until convergence (see <code>?lrSVD</code> for more details).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> object containing the imputed compositional data set expressed in the original scale.
+</p>
+
+
+<h3>References</h3>
+
+<p>Palarea-Albaladejo, J, Antoni Martín-Fernández, J, Ruiz-Gazen, A, Thomas-Agnan, C. lrSVD: An efficient imputation algorithm for incomplete high-throughput compositional data. Journal of Chemometrics 2022; 36: e3459.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code>, <code>lrSVD</code>, <code>lrDA</code>, <code>multRepl</code>, <code>multLN</code>, <code>multKM</code>, <code>cmultRepl</code>, <code>lrSVD</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Data set closed to 100 (percentages, common dl = 1%)
+# (Note that zeros and missing in the same row or column are allowed)
+X &lt;- matrix(c(26.91,8.08,12.59,31.58,6.45,14.39,
+              39.73,41.42,0.00,NA,6.80,12.05,
+              NA,35.13,7.96,14.28,35.12,7.51,
+              10.85,46.40,31.89,10.86,0.00,0.00,
+              10.85,16.27,NA,9.16,19.57,44.15,
+              38.09,7.62,23.68,9.70,20.91,0.00,
+              NA,9.89,18.04,44.30,9.04,18.73,
+              44.41,15.04,7.95,0.00,10.82,21.78,
+              11.50,30.33,6.85,13.92,30.82,6.58,
+              19.04,42.59,0.00,38.37,0.00,0.00),byrow=TRUE,ncol=6)
+              
+X_lrSVDplus &lt;- lrSVDplus(X,dl=rep(1,6))
+
+# Multiple limits of detection by component
+mdl &lt;- matrix(0,ncol=6,nrow=10)
+mdl[2,] &lt;- rep(1,6)
+mdl[4,] &lt;- rep(0.75,6)
+mdl[6,] &lt;- rep(0.5,6)
+mdl[8,] &lt;- rep(0.5,6)
+mdl[10,] &lt;- c(0,0,1,0,0.8,0.7)
+
+X_lrSVDplus2 &lt;- lrSVDplus(X,dl=mdl)
+
+# Non-closed compositional data set
+data(LPdataZM) # (in ppm; 0 is nondetect and NA is missing data)
+
+dl &lt;- c(2,1,0,0,2,0,6,1,0.6,1,1,0,0,632,10) # limits of detection (0 for no limit)
+LPdataZM2 &lt;- subset(LPdataZM,select=-c(Cu,Ni,La))  # select a subset for illustration purposes
+dl2 &lt;- dl[-c(5,7,10)]
+
+LPdataZM2_lrSVDplus &lt;- lrSVDplus(LPdataZM2,dl=dl2)
+</code></pre>
+
+
+</div>

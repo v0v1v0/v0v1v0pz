@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compress_chunk</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compress a Chunk of Data</h2>
+
+<h3>Description</h3>
+
+<p>Compresses a given chunk of raw binary data using a pre-existing compressor object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compress_chunk(compressorPtr, input_chunk)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>compressorPtr</code></td>
+<td>
+<p>An external pointer to an existing compressor object.
+This object is usually initialized by calling a different function like <code>create_compressor()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input_chunk</code></td>
+<td>
+<p>A raw vector containing the uncompressed data that needs to be compressed.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is primarily designed for use with a compressor object created by <code>create_compressor()</code>.
+It takes a chunk of raw data and compresses it, returning a raw vector of the compressed data.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A raw vector containing the compressed data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Create a new compressor object for zlib -&gt; wbts = 15
+zlib_compressor &lt;- create_compressor(wbits=31)
+compressed_data &lt;- compress_chunk(zlib_compressor, charToRaw("Hello, World"))
+compressed_data &lt;- c(compressed_data, flush_compressor_buffer(zlib_compressor))
+decompressed_data &lt;- memDecompress(compressed_data, type = "gzip")
+cat(rawToChar(decompressed_data))
+</code></pre>
+
+
+</div>

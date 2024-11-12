@@ -1,0 +1,185 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zglm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Run a glm model in a pipe</h2>
+
+<h3>Description</h3>
+
+<p>These functions are wrappers for the glm function. The <code>zglm</code> function can
+be used to estimate any generalized linear model in a pipe. The <code>zlogit</code>,
+<code>zprobit</code>, and <code>zpoisson</code> functions can be used to estimate specific models.
+All of these functions rely on the <code>glm</code> function for the actual estimation,
+they simply pass the corresponding values to the <code>family</code> parameter of the
+<code>glm</code> function.
+</p>
+<p>Usage of these functions is very similar to the zlm function (a wrapper
+for lm), for detailed examples, check out the entry for that function.
+</p>
+<p>The <code>zlogit</code> function calls <code>zglm</code>, specifying <code>family=binomial(link="logit")</code>.
+</p>
+<p>The <code>zprobit</code> function calls <code>zglm</code>, specifying <code>family=binomial(link="probit")</code>.
+</p>
+<p>The <code>zpoisson</code> function calls <code>zglm</code>, specifying <code>family="poisson"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zglm(
+  data,
+  formula,
+  family = gaussian,
+  weights,
+  subset,
+  na.action,
+  start = NULL,
+  etastart,
+  mustart,
+  offset,
+  control = list(...),
+  model = TRUE,
+  method = "glm.fit",
+  x = FALSE,
+  y = TRUE,
+  singular.ok = TRUE,
+  contrasts = NULL,
+  ...
+)
+
+zlogit(data, formula, ...)
+
+zprobit(data, formula, ...)
+
+zpoisson(data, formula, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A <code>data.frame</code> containing the model data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>The <code>formula</code> to be fitted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subset</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.action</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>etastart</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mustart</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>singular.ok</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>contrasts</code></td>
+<td>
+<p>See the <code>glm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments to be passed to the <code>glm</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A fitted model.
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul><li> <p>zlm is the wrapper for lm, probably the most common fitting
+function. The help file for zlm function includes several usage examples.
+</p>
+</li></ul>
+</div>

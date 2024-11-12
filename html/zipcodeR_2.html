@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>geocode_zip</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns that lat / lon pair of the centroid of a given ZIP code</h2>
+
+<h3>Description</h3>
+
+<p>Returns that lat / lon pair of the centroid of a given ZIP code
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">geocode_zip(zip_code)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zip_code</code></td>
+<td>
+<p>A 5-digit U.S. ZIP code</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>tibble of lat lon coordinates
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">geocode_zip("07762")
+geocode_zip("90210")
+geocode_zip("90210")$lat
+geocode_zip("90210")$lng
+</code></pre>
+
+
+</div>

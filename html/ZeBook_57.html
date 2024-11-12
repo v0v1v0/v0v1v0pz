@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mm.LN.fct</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Leaf number function for Muchow et al. (1990) Maize model</h2>
+
+<h3>Description</h3>
+
+<p>Leaf number as a function of thermal time
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mm.LN.fct(TT1, TTE, b1 = 2.5, b2 = 0.00225, TLN = 20)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>TT1</code></td>
+<td>
+<p>: Thermal time from sowing (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TTE</code></td>
+<td>
+<p>: Thermal units from sowing to emergence/leaf growth (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b1</code></td>
+<td>
+<p>: coefficient of the statistical relation (default : 2.5)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b2</code></td>
+<td>
+<p>: coefficient of the statistical relation (default : 0.00225)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TLN</code></td>
+<td>
+<p>: total number of leaves initiated (-)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Leaf number
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>maize.muchow.model</code>, <code>mm.A.fct</code>, <code>mm.FAS.fct</code>, <code>maize.multisy</code>,
+<code>mm.HI.fct</code>,<code>maize.muchow.graph</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(1:1000,mm.LN.fct(1:1000,TTE=87))
+</code></pre>
+
+
+</div>

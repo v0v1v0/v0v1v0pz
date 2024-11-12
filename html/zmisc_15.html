@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>wrap_error</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Utility function to output an error</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to capture errors, typically inside a <code>tryCatch()</code>
+statement and output them in a clean and readable way. The function provides
+line-wrapping, with a configurable width. When printing the error message, it
+prefixes the text with "<code style="white-space: pre;">⁠#E&gt; ⁠</code>" to make it easier to look for the error.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">wrap_error(e, wrap = 50)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>e</code></td>
+<td>
+<p>The error to wrap.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wrap</code></td>
+<td>
+<p>How many characters per line before wrapping.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The original error is returned invisibly.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tryCatch(stop("This is an error"), error=wrap_error)
+
+</code></pre>
+
+
+</div>

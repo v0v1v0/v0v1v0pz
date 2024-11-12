@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>importZoomRosetta</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper function to add unique identifiers to processed Zoom downloads</h2>
+
+<h3>Description</h3>
+
+<p>Import an edited zoomRosetta file that tells how to
+link up Zoom display names to some unique individual
+identifier
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">importZoomRosetta(zoomOutput, zoomRosetta, meetingId)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoomOutput</code></td>
+<td>
+<p>the output of batchProcessZoomOutput</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zoomRosetta</code></td>
+<td>
+<p>the path to an edited zoomRosetta xlsx</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>meetingId</code></td>
+<td>
+<p>the name of the meetingId you want to use</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>returns zoomOutput with identifiers in zoomRosetta
+merged to any available data.frames in the zoomOutput file
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">batchOutIds = importZoomRosetta(zoomOutput=
+batchProcessZoomOutput(batchInput=system.file('extdata', 
+'myMeetingsBatch.xlsx', package = 'zoomGroupStats')), 
+zoomRosetta=system.file('extdata', 
+'myMeetingsBatch_rosetta_edited.xlsx', package = 'zoomGroupStats'), 
+meetingId="batchMeetingId")
+
+## Not run: 
+batchOutIds = importZoomRosetta(zoomOutput=batchOut, zoomRosetta="myEditedRosetta.xlsx", 
+meetingId="batchMeetingId")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

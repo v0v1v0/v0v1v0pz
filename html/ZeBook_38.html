@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>maize.data_MetaModelling</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>dataset of simulation for maize final biomass</h2>
+
+<h3>Description</h3>
+
+<p>Simulation data for several site and year (site-year) in Europe.
+This data are from run of the original maize crop model with the R function maize.model for the
+30 French sites and 17 years included in the dataset weather_FranceWest of the package ZeBook.
+Our training dataset includes 510 (30 sites * 17 years) simulated biomass values and the 510 corresponding series of input values.
+The input values are the three average temperatures T1, T2, T3 and
+the three average radiations RAD1, RAD2, RAD3 computed on 3 periods of the growing season.
+Period 1 : from day 1 to dat 50 (day of the year), period 2: from day 51 to day 100, period 3 : from day 101 to day 150.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">maize.data_EuropeEU
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>a <code>RangedData</code> instance, 1 row per simulation. Site, Year, T1, T2, T3, RAD1, RAD2, RAD3, B</p>
+
+
+<h3>Source</h3>
+
+<p>NA
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>maize.model</code>, <code>weather_FranceWest</code>
+</p>
+
+
+</div>

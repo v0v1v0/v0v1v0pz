@@ -1,0 +1,184 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonohedron-plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+plot a zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>Plot a <b>zonohedron</b> object in 3D, with many options.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonohedron'
+plot( x, type='e', pcol=NULL, ecol=NULL, ewd=3, etcol=NA,
+        fcol=NULL, falpha=1, normals=FALSE, bgcol="gray40", both=TRUE, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+
+<p>a string of letter with what parts to draw.
+If <code>type</code> contains an <code>'p'</code>, then draw a point at the center
+of each facet.
+If <code>type</code> contains an <code>'e'</code>, then draw the edges.
+If <code>type</code> contains an <code>'f'</code>, then draw filled facets.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pcol</code></td>
+<td>
+
+<p>The color to use when drawing points.
+It can be a vector of 2 colors, and then when <code>both</code> is <code>TRUE</code>,
+the first color is used for one half,
+and the second color is used for the antipodal half.
+When <code>pcol</code> is <code>NULL</code>,
+it is set to <code>c('black','red')</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ecol</code></td>
+<td>
+
+<p>A vector of colors to use when drawing the edges.
+Let N be the number of <em>simplified</em> generators of the zonohedron.
+Each edge is parallel to exactly one of the generators,
+so this divides the edges into N <em>zones</em>, or <em>belts</em>.
+<code>ecol</code> can be a vector of N colors, one for each zone.
+If <code>ecol</code> is shorter than N, it is extended to length N using the last color.
+If <code>ecol</code> is longer than N, the extra colors are ignored.
+If <code>ecol</code> is <code>NULL</code>, it is set to <code>rainbow(N)</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ewd</code></td>
+<td>
+
+<p>width of the edges, in pixels
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>etcol</code></td>
+<td>
+
+<p>color of the <em>tiling edges</em>, for the standard tiling
+of the facets by parallelograms.
+This only applies to facets that are <em>not</em> parallelograms.
+The default <code>etol=NA</code> means do not draw these edges.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fcol</code></td>
+<td>
+
+<p>A vector of colors to use when drawing the facets.
+The 1st color is used for parallelograms,
+the next color for hexagons, etc.
+For facets with more edges than colors available, the last color is used.
+If <code>fcol</code> is <code>NULL</code>, it is set to
+<code>c( 'blue', 'red', 'yellow', 'green', 'orange', 'purple' )</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>falpha</code></td>
+<td>
+
+<p>opacity of the facets
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normals</code></td>
+<td>
+
+<p>if <code>TRUE</code> then draw an outward-pointing unit normal from each facet
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bgcol</code></td>
+<td>
+
+<p>the background color
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>both</code></td>
+<td>
+
+<p>if <code>FALSE</code> then draw only one half of the centrally symmetric boundary.
+Otherwise draw both halves.
+This affects points, edges, and facets.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Points are drawn with <code>rgl::points3d()</code>.
+Edges are drawn with <code>rgl::segments3d()</code>.
+Edges of the tiles are drawn with <code>rgl::quads3d()</code>.
+Facets are drawn with <code>rgl::quads3d()</code>;
+facets with more than 4 edges are split into trapezoids.
+Facet normals are drawn with <code>rgl::arrow3d()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns <code>TRUE</code>; or <code>FALSE</code> in case of error.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The package <span class="pkg">rgl</span> is required for 3D plots.
+A large black point is drawn at 0, 
+a 50% gray point at the center,
+and a large white point at the "white point" (which is 2*center).
+</p>
+<p>A line from the black point to the white point is also drawn.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>spherize.zonotope()</code>
+</p>
+
+
+</div>

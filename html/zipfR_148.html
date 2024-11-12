@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>VV-Vm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variances of the Expected Frequency Spectrum (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>VV</code> and <code>VVm</code> are generic methods that can (and should) be
+used to compute the variance of the vocabulary size and the variances
+of spectrum elements according to an LNRE model (i.e. an object of
+class <code>lnre</code>).  These methods are also used to access variance
+information stored in some objects of class <code>spc</code> and <code>vgc</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  VV(obj, N=NA, ...)
+  VVm(obj, m, N=NA, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>lnre</code> (LNRE model), <code>spc</code>
+(frequency spectrum) or <code>vgc</code> (vocabulary growth curve).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>positive integer value determining the frequency class
+<code class="reqn">m</code> for which variances are returned (or a vector of such values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>sample size <code class="reqn">N</code> for which variances are calculated
+(<code>lnre</code> objects only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on to the method implementation
+(see respective manpages for details)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>spc</code> and <code>vgc</code> objects must represent an expected or
+interpolated frequency spectrum or VGC, and must include variance
+data.
+</p>
+<p>For <code>vgc</code> objects, the <code>VVm</code> method allows only a single
+value <code>m</code> to be specified.
+</p>
+<p>The argument <code>N</code> is only allowed for LNRE models and will trigger
+an error message otherwise.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For a LNRE model (class <code>lnre</code>), <code>VV</code> computes the variance
+of the random variable <code class="reqn">V(N)</code> (vocabulary size),  and <code>VVm</code>
+computes the variance of the random variables <code class="reqn">V_m(N)</code> (spectrum
+elements), for a sample of specified size <code class="reqn">N</code>.
+</p>
+<p>For an observed or interpolated frequency spectrum (class <code>spc</code>),
+<code>VV</code> returns the variance of the expected vocabulary size, and
+<code>VVm</code> returns variances of the spectrum elements.  These methods
+are only applicable if the <code>spc</code> object includes variance
+information.
+</p>
+<p>For an expected or interpolated vocabulary growth curve (class
+<code>vgc</code>), <code>VV</code> returns the variance vector of the expected
+vocabulary sizes <code class="reqn">V</code>, and <code>VVm</code> the corresponding vector for
+<code class="reqn">V_m</code>.  These methods are only applicable if the <code>vgc</code> object
+includes variance information.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>For details on the implementations of these methods, see <code>VV.spc</code>, <code>VV.vgc</code>, etc.
+</p>
+<p>Expected vocabulary size and frequency spectrum for a sample of size
+<code class="reqn">N</code> according to a LNRE model can be computed with the analogous
+methods <code>EV</code> and <code>EVm</code>.  For <code>spc</code> and
+<code>vgc</code> objects, <code class="reqn">V</code> and <code class="reqn">V_m</code> are always accessed with the
+methods <code>V</code> and <code>Vm</code>, even if they represent
+expected or interpolated values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## see lnre documentation for examples
+
+</code></pre>
+
+
+</div>

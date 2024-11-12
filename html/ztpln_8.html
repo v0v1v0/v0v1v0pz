@@ -1,0 +1,153 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ztplnmMLE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>MLE for the Zero-truncated Poisson Lognormal mixture distribtuion</h2>
+
+<h3>Description</h3>
+
+<p><code>ztplnmMLE</code> fits the Zero-truncated Poisson lognormal mixture distribution
+to data and estimates parameters mean <code>mu</code>, standard deviation <code>sig</code> and
+mixture weight <code>theta</code> in the lognormal distribution.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ztplnmMLE(
+  n,
+  K = 2,
+  lower_mu = rep(0, K),
+  upper_mu = rep(log(max(n)), K),
+  lower_sig = rep(0.001, K),
+  upper_sig = rep(10, K),
+  lower_theta = rep(0.001, K),
+  upper_theta = rep(0.999, K),
+  type1 = TRUE,
+  message = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>a vector of counts</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p>number of components</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower_mu, upper_mu</code></td>
+<td>
+<p>numeric values of lower and upper bounds for mean of
+the variables's natural logarithm.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower_sig, upper_sig</code></td>
+<td>
+<p>numeric values of lower and upper bounds for
+standard deviation of the variables's natural logarithm</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower_theta, upper_theta</code></td>
+<td>
+<p>numeric values of lower and upper bounds for
+mixture weights.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type1</code></td>
+<td>
+<p>logical; if TRUE, Use type 1 ztpln else use type 2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>message</code></td>
+<td>
+<p>mean of lognormal distribution in sample 3.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function searches the maximum likelihood estimators of mean vector <code>mu</code>,
+standard deviation vector <code>sig</code> and mixture weight vector <code>theta</code> using the
+optimization procedures in <code>nlminb</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>convergence</code></td>
+<td>
+<p>An integer code. 0 indicates successful
+convergence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iterations</code></td>
+<td>
+<p>Number of iterations performed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>message</code></td>
+<td>
+<p>A character string giving any additional information
+returned by the optimizer, or NULL. For details, see PORT documentation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>evaluation</code></td>
+<td>
+<p>Number of objective function and gradient function
+evaluations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>Maximum likelihood estimates of mu</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig</code></td>
+<td>
+<p>Maximum likelihood estimates of sig</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta</code></td>
+<td>
+<p>Maximum likelihood estimates of theta</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>loglik</code></td>
+<td>
+<p>loglikelihood</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">y &lt;- rztplnm(100, c(1, 10), c(2, 1), c(0.2, 0.8))
+ztplnmMLE(y)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.spc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Printing Frequency Spectra (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Implementations of the <code>print</code> and <code>summary</code>
+methods for frequency spectrum objects (of class <code>spc</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'spc'
+print(x, all=FALSE, ...)
+
+  ## S3 method for class 'spc'
+summary(object, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, object</code></td>
+<td>
+<p>an object of class <code>spc</code>, representing a
+frequency spectrum</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all</code></td>
+<td>
+<p>if <code>FALSE</code>, only the first ten non-empty frequency
+classes will be shown (default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments passed on from generic method will be ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><b>NB:</b> implementation details and format of the summary are subject to
+change in future releases
+</p>
+<p><code>print.spc</code> works similar to the standard <code>print</code> method for
+data frames, but provides additional information about <code class="reqn">N</code> and
+<code class="reqn">V</code>.  Unless <code>all</code> is set to <code>TRUE</code>, only the first ten
+non-zero spectrum elements will be shown.
+</p>
+<p><code>summary.spc</code> gives a concise summary of the most important
+information about the frequency spectrum.  In addition to <code class="reqn">N</code>
+<code class="reqn">V</code>, the first spectrum elements are shown.  The summary will also
+indicate whether the spectrum is incomplete, an expected spectrum, or
+has variances (but does not show the variances).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>NULL</code>
+</p>
+<p>Unlike other implementations of the <code>summary</code> method,
+<code>summary.spc</code> only prints a summary on screen and does not return
+a special "summary" object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the <code>spc</code> manpage for details on <code>spc</code> objects.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## load Brown verbs dataset
+data(BrownVer.spc)
+
+## look at summary and print BrownVer.spc
+summary(BrownVer.spc)
+print(BrownVer.spc)
+
+## print all non-zero spectrum elements
+print(BrownVer.spc,all=TRUE)
+
+## estimate zm model and construct expected spectrum with
+## variances
+zm &lt;- lnre("zm",BrownVer.spc)
+zm.spc &lt;- lnre.spc(zm,N(zm),variances=TRUE)
+
+## summary and print for the expected spectrum
+summary(zm.spc)
+print(zm.spc)
+
+</code></pre>
+
+
+</div>

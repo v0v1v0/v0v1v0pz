@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>impute_df</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Imputation</h2>
+
+<h3>Description</h3>
+
+<p>Impute <code>NA</code> values with the logmean, mean, minimal or maximum reference value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">impute_df(x, limits, method = c("logmean", "mean", "min", "max"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>data.frame</code>, with the columns: "age", <code>numeric</code>, "sex", <code>factor</code>
+and more user defined <code>numeric</code> columns that should be imputed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limits</code></td>
+<td>
+<p><code>data.frame</code>, reference table, has to have the columns:
+"age", <code>numeric</code> (same units as in <code>age</code>, e.g. days or years, age of <code>0</code>
+matches all ages),
+"sex", <code>factor</code> (same levels for male and female as <code>sex</code> and a special level
+<code>"both"</code>), "param", <code>character</code> with the laboratory parameter name that have
+to match the column name in <code>x</code>, "lower" and "upper", <code>numeric</code> for the
+lower and upper reference limits.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p><code>character</code>, imputation method. <code>method = "logmean"</code> (default)
+replaces all <code>NA</code> with its corresponding logged mean values for the reference
+table <code>limits</code> (for subsequent use of the <em>zlog</em> score,
+use <code style="white-space: pre;">⁠method = "mean" for *z* score calculation). For ⁠</code>method = "min"<code>or</code>method = "max"' the lower or the upper limits are
+used.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>data.frame</code>, the same as <code>x</code> but missing values are replaced by
+the corresponding logmean, mean, minimal or maximal reference values
+depending on the chosen <code>method</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Imputation should be done prior to <code>z()</code>/<code>zlog()</code> transformation.
+Afterwards the <code>NA</code> could replaced by zero (for mean-imputation) via
+<code>d[is.na(d)] &lt;- 0</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Sebastian Gibb
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">l &lt;- data.frame(
+    param = c("alb", "bili"),
+    age = c(0, 0),
+    sex = c("both", "both"),
+    units = c("mg/l", "µmol/l"),
+    lower = c(35, 2),
+    upper = c(52, 21)
+)
+x &lt;- data.frame(
+    age = 40:48,
+    sex = rep(c("female", "male"), c(5, 4)),
+    # from Hoffmann et al. 2017
+    alb = c(42, NA, 38, NA, 50, 42, 27, 31, 24),
+    bili = c(11, 9, NA, NA, 22, 42, NA, 200, 20)
+)
+impute_df(x, l)
+impute_df(x, l, method = "min")
+zlog_df(impute_df(x, l), l)
+</code></pre>
+
+
+</div>

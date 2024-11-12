@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zz_get_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get info from Zamzar</h2>
+
+<h3>Description</h3>
+
+<p>Get info on files submitted to Zamzar by account.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zz_get_info(usr = NULL, latest = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>usr</code></td>
+<td>
+<p>The username/API key you are using. If not set, the function
+will check if a key exists as a <code>ZAMZAR_USR</code> variable  in <code>.Renviron</code> and use that.
+</p>
+<p>See: <a href="https://developers.zamzar.com/user">https://developers.zamzar.com/user</a></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>latest</code></td>
+<td>
+<p>Boolean deciding whether or not metadata on all files that
+have been submitted within a reasonable time frame should be returned.
+</p>
+<p>If switched to <code>FALSE</code>, metadata on all files that have been submitted to
+the Zamzar API within a reasonable time frame will be returned.
+</p>
+<p>Defaults to <code>TRUE</code>.
+</p>
+<p>The returned dataframe contains the following columns:
+</p>
+
+<ul>
+<li> <p><code>id</code>: The unique file identifier assigned to a file by Zamzar.
+</p>
+</li>
+<li> <p><code>extension</code>: The extension representing the format of the file you can download.
+</p>
+</li>
+<li> <p><code>created_at</code>: The time at which the file was created at the Zamzar servers.
+</p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Per default <code>zz_get_info()</code> assumes you want information for the last
+submitted file. To get information on all the files that have been submitted
+within a reasonable time frame, set parameter <code>latest</code> to <code>FALSE</code>.
+</p>
+<p>Please note: objects returned from <code>zz_get_info()</code> doesn't differentiate
+between development or production endpoint. You have to keep track of
+this yourself.
+</p>
+<p>Please note that a Zamzar key passed as argument to <code>usr</code> takes precedence over a
+Zamzar key extracted from an <code>.Renviron</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Provided a valid token in .Renvirion, a dataframe of metadata for the last 
+# submitted file will be returned.
+zz_get_info()
+
+# Same as above, we're just passing the key in a variable.
+zz_get_info(usr = "key")
+ 
+# Provided a valid token, will return metadata for all files
+# submitted to the API within a reasonable time frame.
+zz_get_info(usr = "key", latest = FALSE)
+
+# Same as above, we're just utilizing .Renviron.
+zz_get_info(latest = FALSE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

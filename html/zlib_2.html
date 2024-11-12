@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>compress</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Single-step compression of raw data</h2>
+
+<h3>Description</h3>
+
+<p>Compresses the provided raw data in a single step.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">compress(
+  data,
+  level = -1,
+  method = zlib$DEFLATED,
+  wbits = zlib$MAX_WBITS,
+  memLevel = zlib$DEF_MEM_LEVEL,
+  strategy = zlib$Z_DEFAULT_STRATEGY,
+  zdict = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Raw data to be compressed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Compression level, default is -1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Compression method, default is <code>zlib$DEFLATED</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wbits</code></td>
+<td>
+<p>Window bits, default is <code>zlib$MAX_WBITS</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>memLevel</code></td>
+<td>
+<p>Memory level, default is <code>zlib$DEF_MEM_LEVEL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strategy</code></td>
+<td>
+<p>Compression strategy, default is <code>zlib$Z_DEFAULT_STRATEGY</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zdict</code></td>
+<td>
+<p>Optional predefined compression dictionary as a raw vector.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>compress</code> function simplifies the compression process by encapsulating
+the creation of a compression object, compressing the data, and flushing the buffer
+all within a single call. This is particularly useful for scenarios where the user
+wants to quickly compress data without dealing with the intricacies of compression
+objects and buffer management. The function leverages the <code>compressobj</code> function
+to handle the underlying compression mechanics.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A raw vector containing the compressed data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">compressed_data &lt;- compress(charToRaw("some data"))
+
+</code></pre>
+
+
+</div>

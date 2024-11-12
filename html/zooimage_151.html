@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Manipulate .zis files (ZooImage Samples description) </h2>
+
+<h3>Description</h3>
+
+<p>Additional data concerning the samples are collected together in .zis files.
+These functions manipulate such .zis files.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zisCreate(zisfile, template = NULL, edit = TRUE, editor =
+    getOption("fileEditor"), wait = FALSE)
+zisEdit(zisfile, editor = getOption("fileEditor"), wait = FALSE, ...)
+zisRead(zisfile = "Description.zis", expected.sections =
+    c("Description", "Series", "Cruises", "Stations", "Samples"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zisfile</code></td>
+<td>
+<p> the name of the .zis file to manipulate (usually,
+"Description.zis"). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>template</code></td>
+<td>
+<p> a .zis template to start with, if the .zis file does not
+exist yet. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>edit</code></td>
+<td>
+<p> do we edit the .zis file after its creation? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>editor</code></td>
+<td>
+<p> the program to use to edit the .zis file. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wait</code></td>
+<td>
+<p> do we wait that edition of file is done? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expected.sections</code></td>
+<td>
+<p> list of the sections that must be present in the
+.zis file. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> further arguments to pass to <code>fileEdit()</code>. </p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>zisRead()</code> returns a 'ZIDesc' object containing all the data in the .zis
+file, or, in case of fealure (detailed in a warning), it returns <code>NULL</code>.
+The two other functions return <code>TRUE</code> or <code>FALSE</code> invisibly,
+depending if the .zis file could be created/edited or not.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>zidCompress</code>, <code>fileEdit</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Read content of the example zis file
+zisFile &lt;- system.file("examples", "Description.zis", package = "zooimage")
+zisData &lt;- zisRead(zisFile)
+zisData  # These are data for samples
+attr(zisData, "metadata")  # Further data (for the series) here
+
+## Create a new .zis file in tempdir using the example .zis file as template
+zisNew &lt;- file.path(tempdir(), "Description.zis")
+zisCreate(zisNew, template = zisFile, edit = FALSE)  # One can edit it here too
+
+## Edit the new file, and wait edition is completed
+zisEdit(zisNew, wait = TRUE)
+## It contains:
+if (interactive()) file.show(zisNew, title = basename(zisNew), delete.file = TRUE)
+
+## Clean up
+rm(zisFile, zisData, zisNew)
+</code></pre>
+
+
+</div>

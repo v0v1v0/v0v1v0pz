@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>aggSentiment</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper function to aggregate sentiment variables</h2>
+
+<h3>Description</h3>
+
+<p>Used to aggregate the sentiment variables to the individual
+and meeting levels
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">aggSentiment(inputData, meetingId = NULL, speakerId = NULL, sentMethod)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputData</code></td>
+<td>
+<p>data.frame that has been output from textSentiment function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>meetingId</code></td>
+<td>
+<p>string that indicates the name of the variable containing the meeting ID</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>speakerId</code></td>
+<td>
+<p>string that indicates the name of the variable containing the speaker identity</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sentMethod</code></td>
+<td>
+<p>string that indicates what type of
+sentiment analysis to aggregate–must be either 'aws' or 'syuzhet'</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data.frame giving the sentiment metrics aggregated to the requested level. If only meetingId
+is specified, metrics are aggregated to that level. If only speakerId is specified, metrics
+are aggregated to the individual level across any meetings. If both meetingId and speakerId
+are specified, metrics are aggregated to the level of the individual within meeting.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">agg.out = aggSentiment(inputData=sample_transcript_sentiment_aws, 
+meetingId="batchMeetingId", speakerId = "userId", sentMethod="aws")
+
+agg.out = aggSentiment(inputData=sample_chat_sentiment_syu, 
+meetingId="batchMeetingId", speakerId = "userName", sentMethod="syuzhet")
+</code></pre>
+
+
+</div>

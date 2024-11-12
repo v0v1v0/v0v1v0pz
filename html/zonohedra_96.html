@@ -1,0 +1,199 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simplify</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+simplify and unsimplify
+</h2>
+
+<h3>Description</h3>
+
+<p>A <em>simple matroid</em> has no loops and no multiple groups.
+Simplification is the process of removing all loops,
+and every point except one from each multiple group.
+The result is a simple matroid.
+<br>
+The functions below simplify a matroid, or an explicit list of hyperplanes.
+<br>
+The hyperplanes can be <em>unsimplified</em> if the original loops
+and multiple groups are known.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'matroid'
+getsimplified( x, ... )
+
+## S3 method for class 'list'
+simplify( x, ground=NULL, ... )
+
+## S3 method for class 'list'
+unsimplify( x, loop=NULL, multiple=NULL, ground=NULL, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>x</code> can be a matroid object, as returned from the constructor <code>matroid()</code>
+<br><code>x</code> can also be a list of vectors of positive integers,
+which are thought of as sets.
+All must be subsets of <code>ground</code>. 
+They do not have to satisfy the matroid hyperplane axioms.
+For a definition of <em>loop</em> and <em>multiple group</em> in this case,
+see <b>Details</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ground</code></td>
+<td>
+
+<p>The <em>ground set</em> of the sets in <code>x</code>
+(both <code>simplify()</code> and <code>unsimplify()</code>).
+It must be a vector of positive integers in strictly increasing order
+(not verified).
+If <code>ground</code> is <code>NULL</code>, it is set to the union of
+the sets in <code>x</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>loop</code></td>
+<td>
+
+<p>a vector of positive integers, the loops, to add to the list <code>x</code>;
+<code>loop</code> must be disjoint from <code>ground</code> (verified).
+If <code>loop</code> is <code>NULL</code>, the function looks for <code>loop</code>
+in the attribute data <code>attr(x,'lmdata')</code>.
+If there is no such attribute, <code>loop</code> is set to the empty set.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multiple</code></td>
+<td>
+
+<p>a list of vectors of positive integers, the multiple groups,
+to add to the list <code>x</code>;
+these groups must be pairwise disjoint and disjoint from <code>loop</code> (not verified).
+Each group must intersect the ground set in exactly one point (verified).
+If <code>multiple</code> is <code>NULL</code>, the function looks for <code>multiple</code>
+in the attribute data <code>attr(x,'lmdata')</code>.
+If there is no such attribute, <code>multiple</code> is set to the empty list.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>First consider the case when <code>x</code> is a list of vectors of positive integers.
+Each vector represents a subset of the ground set.
+They are not required to satisfy the hyperplane axioms,
+but by abuse of language we will call them hyperplanes in this paragraph.
+A <em>loop</em> is a point (an integer in the ground set)
+that is in every hyperplane.
+Imagine now that all loops have been removed.
+Say that two points <code class="reqn">p</code> and <code class="reqn">q</code> are <em>multiples</em> iff
+for every hyperplane <code class="reqn">H</code>, <code class="reqn">p \in H</code> iff <code class="reqn">q \in H</code>.
+This is an equivalence relation, and the <em>multiple groups</em> are the
+equivalence classes with more than one point.
+For computation it is convenient to think of a boolean <em>incidence matrix</em>.
+There is a column for each point in the ground set,
+and a row for each hyperplane.
+An entry is <code>TRUE</code> iff the point is in the hyperplane.
+A <em>loop</em> is then a column of all <code>TRUE</code>s.
+A <em>multiple group</em> is a maximal set of duplicate columns.
+This is basically how <code>simplify()</code> is implemented,
+except with optimizations that avoid computing the very large incidence matrix.
+<br><br>
+Now consider the case when <code>x</code> is a matroid object.
+When <code>x</code> was constructed, the simplification of <code>x</code> was
+computed (with help from the *previous* <code>simplify()</code>) and stored
+as a member of <code>x</code> (unless <code>x</code> was already simple).
+So in this case <code>getsimplified(x)</code> does not do any real work
+and only takes microseconds.
+<br><br>
+These functions are accelerated with C/C++.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>x</code> is a matroid, <code>getsimplified(x)</code> returns <code>x</code>
+when <code>x</code> is simple, and a member of <code>x</code> when <code>x</code> is not simple.
+It does not do any real work.
+<br><br>
+If <code>x</code> is a list, <code>simplify(x)</code> returns a list
+of the same length, but with all loops removed,
+and every point except one from each multiple group removed.
+The integer that remains is the smallest one in the group.
+The order of the sets is preserved.
+It also sets the <code>'lmdata'</code> attribute of the returned list
+to a list of 2 objects -
+the loop and multiple group data found in <code>x</code>.
+<br><br>
+If <code>x</code> is a list, <code>unsimplify(x)</code> returns a list
+of the same length, but with the loops and multiples added back.
+The order of the sets is preserved.
+<br><br>
+In case of error, e.g. invalid <code>x</code> etc.,
+the function prints an error message and returns <code>NULL</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Matroid - Wikipedia.
+<a href="https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057">https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rank()</code>, 
+<code>matroid()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># an example using simplify.list() and unsimplify.list()
+# get the matrix for CIE XYZ at 5 nm step size
+mat3x81 = colorimetry.genlist[[1]]
+
+# create the matroid
+mat5 = matroid( mat3x81 )
+
+#  test for simplicity
+is_simple(mat5)
+##  [1] FALSE
+
+# get the list of hyperplanes, and simplify
+hyper = gethyperplane( mat5 )
+hypersimple = simplify( hyper )
+
+# print the loop and multiple data found
+attr(hypersimple,'lmdata')
+
+# unsimplify and compare to the originals
+# the list attr(hypersimple,'lmdata') is 'secretly' used in unsimplify()
+identical( unsimplify(hypersimple), hyper )
+##  [1] TRUE
+</code></pre>
+
+
+</div>

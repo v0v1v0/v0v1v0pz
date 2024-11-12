@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>upload_truth</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Upload truth data</h2>
+
+<h3>Description</h3>
+
+<p>Uploads the data in truth_csv_file to the project identified by project_url.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">upload_truth(zoltar_connection, project_url, truth_csv_file, issued_at = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>project_url</code></td>
+<td>
+<p>URL of a project in zoltar_connection's projects</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>truth_csv_file</code></td>
+<td>
+<p>A CSV file as documented at https://docs.zoltardata.com/fileformats/#truth-data-format-csv</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>issued_at</code></td>
+<td>
+<p>optional datetime to use for the uploaded truth forecasts' issued_at value in ISO 8601 format. NB:
+it must include timezone information. (the default issued_at is the time of upload.) the value must obey the
+constraints documented at https://docs.zoltardata.com/forecastversions/#forecast-version-rules</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A Job URL for the upload
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  job_url &lt;- upload_truth(conn, "http://www.zoltardata.com/api/project/1/", "truth.csv")
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

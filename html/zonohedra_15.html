@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>matroid-getters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+matroid get functions
+</h2>
+
+<h3>Description</h3>
+
+<p>get some important members of a matrix
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'matroid'
+getground( x )
+
+## S3 method for class 'matroid'
+gethyperplane( x )
+
+## S3 method for class 'matroid'
+getmatrix( x )
+
+## S3 method for class 'matroid'
+getloop( x )
+
+## S3 method for class 'matroid'
+getmultiple( x )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a matroid object, as returned from the constructor
+<code>matroid()</code>
+</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>getground()</code> returns an vector of positive integers in strictly
+increasing order = the ground set of the matroid <code>x</code>.
+<br><br><code>gethyperplane()</code> returns a list of vectors of positive integers 
+= the hyperplanes of the matroid.
+<br>
+If <code>x</code> is the simplification of an "original matroid",
+the <code>"lmdata"</code> attribute of the returned list is set to the
+<em>loop</em> and <em>multiple group</em> data of the "original hyperplanes".
+These hyperplanes can be recovered using <code>unsimplify()</code>.
+<br>
+If <code>x</code> was constructed from a matrix,
+these hyperplanes are sorted in decreasing order by length.
+The non-trivial hyperplanes come first, followed by the trivial hyperplanes.
+A hyperplane is <em>trivial</em> iff it is independent in the matroid.
+For a matroid of rank 3, a hyperplane is trivial iff it has 2 points.
+<br><br><code>getmatrix()</code> returns the matrix passed to the
+<code>matroid.matrix()</code> constructor,
+or <code>NULL</code> if the list constructor was used.
+The column names are labeled with the ground set.
+<br><br><code>getloop()</code> returns an integer vector with the loops of <code>x</code>.
+If <code>x</code> is simple, it is the empty vector.
+<br><br><code>getmultiple()</code> returns a list of integer vectors - the
+multiple groups of <code>x</code>.
+If <code>x</code> is simple, it is the empty list.
+</p>
+
+
+<h3>References</h3>
+
+<p>Matroid - Wikipedia.
+<a href="https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057">https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rank()</code>, 
+<code>simplify()</code>,
+<code>unsimplify()</code>,
+<code>getsimplified()</code>,
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># construct a classic matroid with 7 points, but assign an unusual ground set
+mat = matroid( classics.genlist[['TRD']], ground=11:17 )
+
+getmatrix( mat )
+
+##       11 12 13 14       15       16       17
+##  [1,]  1  1  1  1 1.732051 0.000000 0.000000
+##  [2,]  1  1 -1 -1 0.000000 1.732051 0.000000
+##  [3,]  1 -1  1 -1 0.000000 0.000000 1.732051
+</code></pre>
+
+
+</div>

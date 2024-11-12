@@ -1,0 +1,215 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zoeppritz</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zoeppritz Equations</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the P and S-wave scattering amplitudes for a plane
+wave at an interface.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zoeppritz(icoef, vp1, vp2, vs1, vs2, rho1, rho2, incw)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>icoef</code></td>
+<td>
+<p>type of out put Amplitude=1, Potential=2, Energy=3 </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vp1</code></td>
+<td>
+<p>P-wave Velocity of Upper Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vp2</code></td>
+<td>
+<p>P-wave Velocity of Lower Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vs1</code></td>
+<td>
+<p>S-wave Velocity of Upper Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vs2</code></td>
+<td>
+<p>S-wave Velocity of Lower Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho1</code></td>
+<td>
+<p>Density of Upper Layer, kg/m3</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho2</code></td>
+<td>
+<p>Density of Lower Layer, kg/m3</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>incw</code></td>
+<td>
+<p>integer,Incident Wave: P=1, S=2 </p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Coeficiants are calculated at angles from 0-90 degrees.  Zero is
+returned where coefficients are imaginary. 
+</p>
+
+
+<h3>Value</h3>
+
+<p>List:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>angle</code></td>
+<td>
+<p>Incident angles (degrees)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rmat</code></td>
+<td>
+<p>Matrix of 4 by n reflection coefficients for each angle</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rra</code></td>
+<td>
+<p>Matrix of 4 by n real part of scattering matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rra</code></td>
+<td>
+<p>Matrix of 4 by n imaginary part of scattering matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ang</code></td>
+<td>
+<p>Matrix of 4 by n phase angle</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>incw</code></td>
+<td>
+<p>integer, from input parameter </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>icoef</code></td>
+<td>
+<p>integer, from input parameter </p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>Based on the fortran algorithm in Young and Braile.
+Uses a linear approximation by Aki and Richards.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jonathan M. Lees&lt;jonathan.lees@unc.edu&gt;</p>
+
+
+<h3>References</h3>
+
+<p>Young, G.B., Braile, L. W. 1976. A computer program for the application
+of Zoeppritz's amplitude equations and Knott's energy equations,
+<em> Bulletin of the Seismological Society of America</em>, vol.66,
+no.6,1881-1885.
+</p>
+<p>K. Aki and P.G. Richards.<em>Quantitative seismology</em>.
+University Science Books, Sausalito, Calif., 2nd edition, 2002.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>pzoeppritz, plotzoeppritz</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+#########  set up 2-layer model
+ 
+ 
+ alpha1 = 4.98
+  beta1 =  2.9
+   rho1 = 2.667
+
+  alpha2 = 8.0
+   beta2 = 4.6
+   rho2 = 3.38
+###################  P-wave incident = 1
+     incw=1;
+   icoef=1
+
+A =  zoeppritz(icoef, alpha1, alpha2, beta1, beta2, rho1,rho2,   incw)
+
+plot(A$angle, A$rmat[,1], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="P-wave incident/P-wave Reflected" )
+
+plot(A$angle, A$rmat[,2], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="P-wave incident/S-wave Reflected" )
+
+plot(A$angle, A$rmat[,3], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="P-wave incident/P-wave Refracted" )
+
+plot(A$angle, A$rmat[,4], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="P-wave incident/S-wave Refracted" )
+
+###################  S-wave incident = 2
+     incw=2
+   icoef=1
+
+A =  zoeppritz(icoef, alpha1, alpha2, beta1, beta2, rho1,rho2,   incw)
+
+plot(A$angle, A$rmat[,1], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="S-wave incident/P-wave Reflected" )
+
+plot(A$angle, A$rmat[,2], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="S-wave incident/S-wave Reflected" )
+
+plot(A$angle, A$rmat[,3], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="S-wave incident/P-wave Refracted" )
+
+plot(A$angle, A$rmat[,4], xlab="Incident Angle", ylab="Ratio of Amplitudes",
+main="S-wave incident/S-wave Refracted" )
+
+
+
+
+
+</code></pre>
+
+
+</div>

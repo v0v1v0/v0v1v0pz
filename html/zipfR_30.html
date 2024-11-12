@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Dickens</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dickens' Frequency Data (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Objects of classes <code>spc</code> and <code>vgc</code> that
+contain frequency data for a collection of Dickens's works from
+Project Gutenberg, and for 3 novels (Oliver Twist, Great
+Expectations and Our Mutual Friends).
+</p>
+
+
+<h3>Details</h3>
+
+<p><code>Dickens.spc</code> has a frequency spectrum derived from a
+collection of Dickens' works downloaded from the Gutenberg archive
+(A Christmas Carol, David Copperfield, Dombey and Son, Great
+Expectations, Hard Times, Master Humphrey's Clock, Nicholas
+Nickleby, Oliver Twist, Our Mutual Friend, Sketches by BOZ, A Tale
+of Two Cities, The Old Curiosity Shop, The Pickwick Papers, Three
+Ghost Stories). <code>Dickens.emp.vgc</code> contains the corresponding
+observed vocabulary growth (<code>V</code> and <code>V(1)</code>).
+</p>
+<p><code>DickensOliverTwist.spc</code> and <code>DickensOliverTwist.emp.vgc</code>
+contain spectrum and observed growth curve (<code>V</code> and <code>V(1)</code>
+of the early novel Oliver Twist (1837-1839).
+</p>
+<p><code>DickensGreatExpectations.spc</code> and
+<code>DickensGreatExpectations.emp.vgc</code> contain spectrum and
+observed growth curve (<code>V</code> and <code>V(1)</code>) of the late novel
+Great Expectations (1860-1861).
+</p>
+<p><code>DickensOurMutualFriend.spc</code> and
+<code>DickensOurMutualFriend.emp.vgc</code> contain spectrum and observed
+growth curve (<code>V</code> and <code>V(1)</code>) of Our Mutual Friend, the
+last novel completed by Dickens (1864-1865).
+</p>
+<p>Notice that we removed numbers and other forms of non-linguistic
+material before collecting the frequency data.
+</p>
+
+
+<h3>References</h3>
+
+<p>Project Gutenberg: <a href="https://www.gutenberg.org/">https://www.gutenberg.org/</a>
+</p>
+<p>Charles Dickens on Wikipedia: <a href="https://en.wikipedia.org/wiki/Charles_Dickens">https://en.wikipedia.org/wiki/Charles_Dickens</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+  data(Dickens.spc)
+  summary(Dickens.spc)
+
+  data(Dickens.emp.vgc)
+  summary(Dickens.emp.vgc)
+
+  data(DickensOliverTwist.spc)
+  summary(DickensOliverTwist.spc)
+
+  data(DickensOliverTwist.emp.vgc)
+  summary(DickensOliverTwist.emp.vgc)
+
+</code></pre>
+
+
+</div>

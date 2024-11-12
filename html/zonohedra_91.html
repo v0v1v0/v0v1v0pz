@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>support</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+the support function for a zonotope
+</h2>
+
+<h3>Description</h3>
+
+<p>Compute the classical support function for a zonotope.
+It also computes a point on the boundary where the linear functional
+is maximized, and the dimension of the face where the supporting
+hyperplane intersects the zonotope.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonotope'
+support( x, direction, tol=5.e-15 )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a zonotope object -  a <b>zonohedron</b>, a <b>zonogon</b>,
+or a <b>zonoseg</b>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+
+<p>an NxM matrix with N directions in the rows.
+If <code>x</code> is a <b>zonohedron</b>, M must be 3.
+If <code>x</code> is a <b>zonogon</b>, M must be 2.
+If <code>x</code> is a <b>zonoseg</b>, M must be 1.
+<code>direction</code> can also be a vector that can be converted to
+such a matrix, by row.
+The direction is normal to the supporting hyperplane
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+
+<p>the tolerance for determining whether the supporting hyperplane
+intersects a face with positive dimension.
+This does not affect the value of the support function.
+For a <b>zonoseg</b>, <code>tol</code> is ignored.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The function returns a <code>data.frame</code> with N rows and these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+<p>the given direction</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>the value of the support function of <code>x</code>, in the given direction</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>argmax</code></td>
+<td>
+<p>a point on the boundary of <code>x</code> where the functional max is taken.  This point is the center of the face where the supporting hyperplane intersects the zonotope.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dimension</code></td>
+<td>
+<p>of the face where the supporting hyperplane intersects the zonotope. 0 means a vertex, 1 means an edge, and 2 means a 2-face.</p>
+</td>
+</tr>
+</table>
+<p>If <code>direction</code> is 0, the other columns are <code>NA</code>.
+If the rownames of <code>direction</code> are unique,
+they are copied to the row names of the output.
+<br>
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p><b>Wikipedia - Support function</b><br><a href="https://en.wikipedia.org/wiki/Support_function">https://en.wikipedia.org/wiki/Support_function</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonoseg()</code>
+</p>
+
+
+</div>

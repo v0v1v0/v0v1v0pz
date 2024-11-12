@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simul_zinarp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sample Generator for ZINAR(p)</h2>
+
+<h3>Description</h3>
+
+<p>This function generates a realization of a ZINAR(p) process.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simul_zinarp(n, alpha, lambda, pii = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>The length of the simulated chain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>The p-dimensional vector (in which p is the process order) of alpha values, the probabilities of an element remaining in the process.All alpha elements must be in [0,1] and their sum must be smaller than 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>The Poisson rate parameter. Must be greater than zero.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pii</code></td>
+<td>
+<p>The probability of a structural zero (i.e., ignoring the Poisson distribution) under ZIP innovation sequences. Defaults to 0, following a standard Poisson.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a numeric vector representing a realization of an INAR/ZINAR(p) process.
+</p>
+
+
+<h3>References</h3>
+
+<p>Garay, Aldo M., Francyelle L. Medina, Celso RB Cabral, and Tsung-I. Lin. "Bayesian analysis of the p-order integer-valued AR process with zero-inflated Poisson innovations." Journal of Statistical Computation and Simulation 90, no. 11 (2020): 1943-1964.
+</p>
+<p>Garay, Aldo M. ; Medina, Francyelle L. ; Jales, Isaac C. ; Bertail, Patrice. First-order integer valued AR processes with zero-inflated innovations. Cyclostationarity: Theory and Methods, Springer Verlag - 2021, v. 1, p. 19-40.
+</p>
+
+
+</div>

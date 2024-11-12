@@ -1,0 +1,82 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>publicEval</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evaluate Expression with Public and Private Environments</h2>
+
+<h3>Description</h3>
+
+<p><code>publicEval</code> creates an environment hierarchy consisting of
+public, self, and private environments. The expression <code>expr</code> is
+evaluated within these nested environments, allowing for controlled
+variable scope and encapsulation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">publicEval(expr, parentEnv = parent.frame(), name = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>expr</code></td>
+<td>
+<p>An expression to evaluate within the constructed environment hierarchy.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parentEnv</code></td>
+<td>
+<p>The parent environment for the new 'public' environment. Default is the parent frame.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>Optional name attribute to set for the public environment.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns an invisible reference to the public environment.
+</p>
+
+
+<h3>Environments</h3>
+
+
+<ul>
+<li>
+<p> Public: Variables in this environment are externally accessible.
+</p>
+</li>
+<li>
+<p> Self: Inherits from Public and also contains Private and Public as children.
+</p>
+</li>
+<li>
+<p> Private: Variables are encapsulated and are not externally accessible.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">publicEnv &lt;- publicEval({
+  private$hidden_var &lt;- "I am hidden"
+  public_var &lt;- "I am public"
+}, parentEnv = parent.frame(), name = "MyEnvironment")
+
+print(exists("public_var", envir = publicEnv))  # Should return TRUE
+print(exists("hidden_var", envir = publicEnv))  # Should return FALSE
+
+</code></pre>
+
+
+</div>

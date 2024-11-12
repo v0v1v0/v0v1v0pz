@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>quantile_data_frame_from_forecast_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converts forecast data from Zoltar's native <code>list</code> format to a quantile <code>data.frame</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>Converts forecast data from Zoltar's native <code>list</code> format to a quantile <code>data.frame</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">quantile_data_frame_from_forecast_data(forecast_data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>forecast_data</code></td>
+<td>
+<p>Forecast data as a <code>list</code> in the Zoltar standard format</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> from forecast_data that's the same as <code>data_frame_from_forecast_data()</code> does except
+only includes point and quantile rows, and with this header: 'location', 'target', 'type', 'quantile',
+'value', i.e., 'unit' -&gt; 'location' and 'class' -&gt; 'type'
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  forecast_data &lt;- jsonlite::read_json("docs-predictions.json")
+  data_frame &lt;- quantile_data_frame_from_forecast_data(forecast_data)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

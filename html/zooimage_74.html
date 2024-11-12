@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIRes</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Various function to calculate results ('ZIRes' object) </h2>
+
+<h3>Description</h3>
+
+<p>Having classified items in a 'ZIDat' object, these function calculate various
+statistic descriptors of whole samples (abundances, biomasses, size spectra)
+and they collect them together in a 'ZIRes' object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">processSample(x, sample, keep = NULL,
+    detail = NULL, classes = "both", header = c("Abd", "Bio"),
+    cells = NULL, biomass = NULL, breaks = NULL)
+processSampleAll(path = ".", zidbfiles, ZIClass = NULL, keep = NULL,
+    detail = NULL, classes = "both", header = c("Abd", "Bio"),
+    cells = NULL, biomass = NULL, breaks = NULL)
+
+## S3 method for class 'ZIRes'
+print(x, ...)
+## S3 method for class 'ZIRes'
+rbind(..., deparse.level = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> a 'ZIDat' object or similar data frame for <code>processSample()</code>, or
+a 'ZIRes' object for the other functions. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample</code></td>
+<td>
+<p> the sample 'Id' to use for selecting items of one sample only,
+in case the object contains data for several samples. It should not be the
+case for 'ZIDat' objects, and you do not have to provide this argument then. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>keep</code></td>
+<td>
+<p> a character vector with names of the levels to keep in the
+analysis for the classes, or <code>NULL</code> to keep them all. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>detail</code></td>
+<td>
+<p> a character vector with names of classes for which to calculate
+separate statistics. The special levels <code>[other]</code> and <code>[total]</code>
+are also added. If <code>NULL</code>, only the total for the sample is returned. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>classes</code></td>
+<td>
+<p> a character string with <code>"Class"</code> to use the manual
+classification for splitting particles in the sample, or <code>"Predicted"</code>
+to use automatic classification, or <code>"both"</code> (default) to use Class in
+priority, but falling back to Predicted for particles whose Class is not
+defined. One can also specify the name of another factor variable in <code>x</code>. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>header</code></td>
+<td>
+<p> a character vector with one or two strings to use as headers for,
+respectively, abundances and biomasses. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cells</code></td>
+<td>
+<p> the path to an .rds file containing cells counting models, as used
+by <code>cellCompute()</code>. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>biomass</code></td>
+<td>
+<p> a specification for biomass conversion. Can be <code>NULL</code> (by
+default) for turning off biomass calculation, or a numeric vector of three
+values P1, P2 and P3 (same biomass for all classes with Bio = P1 * ECD^P3 + P2),
+or a data frame with the name of classes in first column, P1, P2 and P3 in
+columns 2 to 4. You must also provide one line with class <code>"[other]"</code> that
+is used for biomass claculation for classes not otherwise specified. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>breaks</code></td>
+<td>
+<p> either <code>NULL</code> (default) to turn off size spectra calculations
+or a numeric vector for ECD classes breaks. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p> the path containing your ZIDB or ZID files to use for samples processing. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zidbfiles</code></td>
+<td>
+<p> a list of ZIDB or ZID files to process in batch. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ZIClass</code></td>
+<td>
+<p> a 'ZIClass' object to use to classify particles during the
+process of your samples. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> further arguments passed to the methods </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>deparse.level</code></td>
+<td>
+<p> integer controlling the way labels are constructed for
+non-matrix-like arguments (defined in the generic, but not used here). </p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &amp; Kevin Denis </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>ZIClass</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">##TODO...
+</code></pre>
+
+
+</div>

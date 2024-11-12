@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_tickets_comments</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get tickets comments/replies</h2>
+
+<h3>Description</h3>
+
+<p>This function takes your email ID, authentication token, sub-domain,
+and specific ticket ID to fetch all comments/replies to this wanted ticket.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_tickets_comments(
+  email_id,
+  token,
+  subdomain,
+  ticket_id,
+  add_cols = NULL,
+  metadata = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>email_id</code></td>
+<td>
+<p>Zendesk Email ID (username).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>token</code></td>
+<td>
+<p>Zendesk API token.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subdomain</code></td>
+<td>
+<p>Your organization's Zendesk sub-domain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ticket_id</code></td>
+<td>
+<p>The ticket ID number. A numeric value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add_cols</code></td>
+<td>
+<p>Vector of column names to select in addition to the default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>metadata</code></td>
+<td>
+<p>Logical value (TRUE or FALSE). If TRUE, metadata columns will
+be included. This is set to FALSE by default.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>By default only these columns are returned: "id", "type", "author_id",
+"body", "created_at", "have_attachments". You can add other variables using
+the 'add_cols' parameter. The variables that can be inserted are described in
+the Zendesk API documentation: https://developer.zendesk.com/api-reference/
+ticketing/tickets/ticket_comments/.
+</p>
+<p>The meaning of the default columns included are described in the previous
+link, except "have-attachments" which is a boolean field that will be "Yes"
+if the comment has an attachment or "No" if it does not. The attachment
+itself cannot be returned.
+</p>
+<p>If you request the 'metadata' sensitive data (location, lat, long,
+IP address, etc.) will be included. This data should be handled with care and
+only stored and used per your organization's policies and applicable
+privacy regulations.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a Data Frame containing all comments/replies for a single ticket.
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/">https://developer.zendesk.com/api-reference/ticketing/tickets/ticket_comments/</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## Extracting comments with default columns and without sensitive data
+comments_ticket_id &lt;- get_tickets_comments(email_id, token, subdomain,
+ticket_id, add_cols = NULL, metadata = FALSE)
+
+## Extracting comments with additional columns and sensitive data
+comments_ticket_id &lt;- get_tickets_comments(email_id, token, subdomain,
+ticket_id, add_cols = c("html_body", "attachments"), metadata = TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

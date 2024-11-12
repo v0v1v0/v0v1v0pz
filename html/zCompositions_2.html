@@ -1,0 +1,165 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cmultRepl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Bayesian-Multiplicative replacement of count zeros
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements methods for imputing zeros in compositional count data sets based on a Bayesian-multiplicative replacement.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cmultRepl(X, label = 0,
+             method = c("GBM","SQ","BL","CZM","user"), output = c("prop","p-counts"),
+             frac = 0.65, threshold = 0.5, adjust = TRUE, t = NULL, s = NULL,
+             z.warning = 0.8, z.delete = TRUE, suppress.print = FALSE,
+             delta = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+
+<p>Count data set (<code>matrix</code> or <code>data.frame</code> class).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote count zeros in <code>X</code> (default <code>label=0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+
+<p>Geometric Bayesian multiplicative (<code>GBM</code>, default); square root BM (<code>SQ</code>); Bayes-Laplace BM (<code>BL</code>); count zero multiplicative (<code>CZM</code>); user-specified hyper-parameters (<code>user</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>Output format: imputed proportions (<code>prop</code>, default) or <em>pseudo</em>-counts (<code>p-counts</code>). 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>frac</code></td>
+<td>
+
+<p>If <code>method="CZM"</code>, fraction of the upper threshold used to impute zeros (default <code>frac=0.65</code>). Also, fraction of the lowest estimated probability used to adjust imputed proportions falling above it (when <code>adjust=TRUE</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold</code></td>
+<td>
+
+<p>For a vector of counts, factor applied to the quotient 1 over the number of trials (sum of the counts) used to produce an upper limit for replacing zero counts by the <code>CZM</code> method (default <code>threshold=0.5</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adjust</code></td>
+<td>
+
+<p>Logical vector setting whether imputed proportions falling above the lowest estimated probability for a multinomial part must be adjusted or not (default <code>adjust=TRUE</code>).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t</code></td>
+<td>
+
+<p>If <code>method="user"</code>, user-specified <em>t</em> hyper-parameter of the Dirichlet prior distribution for each count vector (row) in <code>X</code>. It must be a matrix of the same dimensions as <code>X</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s</code></td>
+<td>
+<p>If <code>method="user"</code>, user-specified <em>s</em> hyper-parameter of the Dirichlet prior distribution for each count vector (row) in <code>X</code>. It must be a vector of length equal to the number of rows of <code>X</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.warning</code></td>
+<td>
+<p>Threshold used to identify individual rows or columns including an excess of zeros/unobserved values (to be specify in proportions, default <code>z.warning=0.8</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.delete</code></td>
+<td>
+<p>Logical value. If set to <code>TRUE</code>, rows/columns identified by <code>z.warning</code> are omitted in the imputed data set. Otherwise, the function stops in error when rows/columns are identified by <code>z.warning</code> (default <code>z.delete=TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppress.print</code></td>
+<td>
+
+<p>Suppress printed feedback (<code>suppress.print=FALSE</code>, default).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delta</code></td>
+<td>
+<p>This argument has been deprecated and replaced by <code>frac</code> (see package's NEWS for details).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Zero counts, assumed to be due to under-reporting or limited sampling, are imputed under a Bayesian paradigm (<code>GBM</code>, <code>SQ</code> or <code>BL</code> method) by posterior estimates of the multinomial probabilities generating the counts, assuming a Dirichlet prior distribution. The argument <code>method</code> sets the Dirichlet hyper-parameters <code>t</code> (priori estimates of multinomial probabilities) and <code>s</code> (<em>strength</em>). The user can specify their own by setting <code>method="user"</code> and entering them as <code>t</code> and <code>s</code> arguments. Note that, under certain circumstances (see references for details), these methods can generate imputed proportions falling above the lowest estimated probability  of a multinomial part (<em>c</em>/<em>n</em>, where <em>c</em> is the count and <em>n</em> is the number of trials). In such cases, the imputation is adjusted by using a fraction (<code>frac</code>) of the minimum <em>c</em>/<em>n</em> for that part. Lastly, the non-zero parts are multiplicatively adjusted according to their compositional nature.
+</p>
+<p>On the other hand, <code>method="CZM"</code> uses multiplicative simple replacement (<code>multRepl</code>) on the matrix of estimated probabilities. The upper limit and the fraction used are specified by, respectively, the arguments <code>threshold</code> and <code>frac</code>. Suggested values are <code>threshold=0.5</code> (so the upper limit for a multinomial probability turns out to be 0.5/<em>n</em>), and <code>frac=0.65</code> (so the imputed proportion is 65% of the upper limit).
+</p>
+
+
+<h3>Value</h3>
+
+<p>By default (<code>output="prop"</code>) the function returns an imputed data set (<code>data.frame</code> class) in proportions (estimated probabilities). Alternatively, these proportions are re-scaled to produce a compositionally-equivalent matrix of <em>pseudo</em>-counts (<code>output="p-counts"</code>) which preserves the ratios between parts.
+</p>
+<p>When <code>adjust=TRUE</code> and <code>verbose=TRUE</code>, the number of times, if any, an imputed proportion was adjusted to fall below the minimum estimated multinomial probability is printed.
+</p>
+
+
+<h3>References</h3>
+
+<p>Martin-Fernandez, J.A., Hron, K., Templ, M., Filzmoser, P., Palarea-Albaladejo, J. Bayesian-multiplicative treatment of count zeros in compositional data sets. Statistical Modelling 2015; 15: 134-158.
+</p>
+<p>Palarea-Albaladejo J. and Martin-Fernandez JA. zCompositions – R package for multivariate imputation of
+left-censored data under a compositional approach. Chemometrics and Intelligence Laboratory Systems 2015; 143: 85-96.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Pigs)
+
+# GBM method and matrix of estimated probabilities
+Pigs.GBM &lt;- cmultRepl(Pigs)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>timezero_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get information about a timezero</h2>
+
+<h3>Description</h3>
+
+<p>Get information about a timezero
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">timezero_info(zoltar_connection, timezero_url)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timezero_url</code></td>
+<td>
+<p>URL of a timezero in zoltar_connection's timezeros</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>list</code> of timezero information for the passed timezero_url
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  the_timezero_info &lt;- timezero_info(conn, "https://www.zoltardata.com/api/timezero/3/")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

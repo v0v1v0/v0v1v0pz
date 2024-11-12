@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mm.A.fct</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Expanded leaf area function for Muchow et al. (1990) Maize model</h2>
+
+<h3>Description</h3>
+
+<p>Compute fully expanded area by leaf number (A, cm2)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mm.A.fct(LN, AM, LNM, a1 = -0.0344, a2 = 0.000731)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>LN</code></td>
+<td>
+<p>: Leaf number</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>AM</code></td>
+<td>
+<p>: area of the largest leaf (cm2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>LNM</code></td>
+<td>
+<p>: leaf number having the largest area (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a1</code></td>
+<td>
+<p>: coefficient of the statistical relation (default : -0.0344)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a2</code></td>
+<td>
+<p>: coefficient of the statistical relation (default : 0.000731)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>vector of Expanded leaf area
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>maize.muchow.model</code>, <code>mm.LN.fct</code>, <code>mm.FAS.fct</code>, <code>maize.multisy</code>,
+<code>mm.HI.fct</code>,<code>maize.muchow.graph</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">barplot(mm.A.fct(LN=1:20, AM=750, LNM=12),names.arg=1:20,
+horiz=TRUE,xlab="leaf area (cm2)",ylab="leaf number")
+</code></pre>
+
+
+</div>

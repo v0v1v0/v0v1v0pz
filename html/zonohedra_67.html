@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plotpolygon</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+plot the <em>generator polygon</em> associated with a pointed zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>A zonohedron is <em>pointed</em> iff there is a vector <b>n</b>
+so the inner product of all the zonohedron generators with <b>n</b> is positive.
+In other terminology, it is <em>pointed</em> iff there is an open halfspace
+that contains all the generators.
+<br>
+When <b>n</b> exists, a neighborhood of 0 can be cut by a plane
+orthogonal to <b>n</b> and the intersection is a polygon.
+Since <b>n</b> is not unique, the polygon is only unique up
+to a 2D projective transformation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plotpolygon( x, normal=NULL, points=TRUE, labels=TRUE )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>.
+It must be pointed.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normal</code></td>
+<td>
+
+<p>the vector <b>n</b> to use - a non-zero numeric vector of length 3.
+If it is given, the validity is checked and if invalid it is an error.
+<br>
+If it is <code>NULL</code>, a few canonical normals are first tested for validity.
+If they are invalid, then a valid one is computed.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>points</code></td>
+<td>
+
+<p>If <code>TRUE</code> then draw the vertices of the polygon
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+
+<p>If <code>TRUE</code> then draw labels,
+taken from the ground set of the simplified matroid, near the vertices
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The selected normal vector <b>n</b> is added to the title of the plot.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns <code>TRUE</code>; or <code>FALSE</code> in case of error.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>plot.zonohedron()</code>
+</p>
+
+
+</div>

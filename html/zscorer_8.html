@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getCohortWGS</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate z-scores for WHZ, HAZ, WAZ using the WHO Growth Reference (2006)
+for a cohort or sample of children.</h2>
+
+<h3>Description</h3>
+
+<p>Calculate z-scores for WHZ, HAZ, WAZ using the WHO Growth Reference (2006)
+for a cohort or sample of children.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getCohortWGS(data, FUN = getWGS, sexObserved, firstPart, secondPart,
+  index)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data frame containing the variables needed for calculation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FUN</code></td>
+<td>
+<p>Function to apply; default to <code>getWGS()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sexObserved</code></td>
+<td>
+<p>Sex of child (1 = Male; 2 = Female)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>firstPart</code></td>
+<td>
+<p>Weight (kg; for WHZ and WAZ) or height (cm; for HAZ)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>secondPart</code></td>
+<td>
+<p>Age (months; for HAZ and WAZ) or height (cm; for WHZ)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>index</code></td>
+<td>
+<p>One of "wfh", "hfa", "wfa" (specifies the required index)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Numeric vector of <code>z-scores</code> of the anthropometric index selected
+</p>
+<p>The function fails messily when <code>secondPart</code> is outside of the range
+given in the WGS reference (i.e. 45 to 120 cm for height and 0 to 60 months
+for age). It is up to you to check the ranges of your data.
+</p>
+<p>The reference data for W/H assumes supine length is used for children with a
+standing height below 85cm
+</p>
+<p>Heights should be specified in cm to the nearest mm (i.e. to 1 d.p.)
+</p>
+<p>Ages should be specified in whole months
+</p>
+<p>Weights should be specified in kg to available precision
+</p>
+<p>The function requires reference data <code>wgsData</code> included in this package
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">  # apply getWGS to first child in sample data anthro1
+  wazAll &lt;- getCohortWGS(data = anthro1,
+                         sexObserved = "sex",
+                         firstPart = "weight",
+                         secondPart = "age",
+                         index = "wfa")
+  wazAll
+
+  hazAll &lt;- getCohortWGS(data = anthro1,
+                         sexObserved = "sex",
+                         firstPart = "height",
+                         secondPart = "age",
+                         index = "hfa")
+  hazAll
+
+  whzAll &lt;- getCohortWGS(data = anthro1,
+                         sexObserved = "sex",
+                         firstPart = "weight",
+                         secondPart = "height",
+                         index = "wfh")
+  whzAll
+</code></pre>
+
+
+</div>

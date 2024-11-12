@@ -1,0 +1,135 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfpe</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Zipf-Poisson Extreme Distribution (Zipf-PE).</h2>
+
+<h3>Description</h3>
+
+<p>Probability mass function, cumulative distribution function, quantile function and random number
+generation for the Zipf-PE distribution with parameters <code class="reqn">\alpha</code> and <code class="reqn">\beta</code>. The support of the Zipf-PE
+distribution are the strictly positive integer numbers large or equal than one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dzipfpe(x, alpha, beta, log = FALSE)
+
+pzipfpe(q, alpha, beta, log.p = FALSE, lower.tail = TRUE)
+
+qzipfpe(p, alpha, beta, log.p = FALSE, lower.tail = TRUE)
+
+rzipfpe(n, alpha, beta)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>Vector of positive integer values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Value of the <code class="reqn">\beta</code> parameter (<code class="reqn">\beta\in (-\infty, +\infty)</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>Logical; if TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>Logical; if TRUE (default), probabilities are <code class="reqn">P[X \leq x]</code>, otherwise, <code class="reqn">P[X &gt; x]</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of random values to return.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <em>probability mass function</em> of the Zipf-PE distribution with parameters <code class="reqn">\alpha</code> and <code class="reqn">\beta</code>
+at a positive integer value <code class="reqn">x</code> is computed as follows:
+</p>
+<p style="text-align: center;"><code class="reqn">p(x | \alpha, \beta) = \frac{e^{\beta (1 - \frac{\zeta(\alpha, x)}{\zeta(\alpha)})} (e^{\beta \frac{x^{-\alpha}}{\zeta(\alpha)}} - 1)}
+{e^{\beta} - 1},\, x= 1,2,...,\, \alpha &gt; 1,\, -\infty &lt; \beta &lt; +\infty,</code>
+</p>
+
+<p>where <code class="reqn">\zeta(\alpha)</code> is the Riemann-zeta function at <code class="reqn">\alpha</code>, and <code class="reqn">\zeta(\alpha, x)</code>
+is the Hurtwitz zeta function with arguments <code class="reqn">\alpha</code> and x.
+</p>
+<p>The <em>cumulative distribution function</em> at a given positive
+integer value <code class="reqn">x</code>, <code class="reqn">F(x)</code>, is equal to:
+</p>
+<p style="text-align: center;"><code class="reqn">F(x) = \frac{e^{\beta (1 - \frac{\zeta(\alpha, x + 1)}{\zeta(\alpha)})} - 1}{e^{\beta} -1}</code>
+</p>
+
+<p>The quantile of the Zipf-PE<code class="reqn">(\alpha, \beta)</code> distribution of a given probability value p
+is equal to the quantile of the Zipf<code class="reqn">(\alpha)</code> distribution at the value:
+</p>
+<p style="text-align: center;"><code class="reqn">p\prime = \frac{log(p\, (e^{\beta} - 1) + 1)}{\beta}</code>
+</p>
+
+<p>The quantiles of the Zipf<code class="reqn">(\alpha)</code> distribution are computed by means of the <em>tolerance</em>
+package.
+</p>
+<p>To generate random data from a Zipf-PE one applies the <em>quantile</em> function over <em>n</em> values randomly generated
+from an Uniform distribution in the interval (0, 1).
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>dzipfpe</code> gives the probability mass function,
+<code>pzipfpe</code> gives the cumulative function,
+<code>qzipfpe</code> gives the quantile function, and
+<code>rzipfpe</code> generates random values from a Zipf-PE distribution.  
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Young, D. S. (2010). <em>Tolerance: an R package for estimating tolerance intervals</em>. Journal of Statistical Software, 36(5), 1-39.
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dzipfpe(1:10, 2.5, -1.5)
+pzipfpe(1:10, 2.5, -1.5)
+qzipfpe(0.56, 2.5, 1.3)
+rzipfpe(10, 2.5, 1.3)
+
+</code></pre>
+
+
+</div>

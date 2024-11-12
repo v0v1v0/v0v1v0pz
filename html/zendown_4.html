@@ -1,0 +1,44 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>list_deposit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get a list of files available at a Zenodo deposit</h2>
+
+<h3>Description</h3>
+
+<p>Get a list of files available at a Zenodo deposit
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">list_deposit(deposit_id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>deposit_id</code></td>
+<td>
+<p>numeric. The Zenodo deposit id.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a tibble.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# https://zenodo.org/records/10959197
+list_deposit(deposit_id = 10959197)
+
+</code></pre>
+
+
+</div>

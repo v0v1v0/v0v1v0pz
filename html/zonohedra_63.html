@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonogon-plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+plot a zonogon
+</h2>
+
+<h3>Description</h3>
+
+<p>Plot a <b>zonogon</b> object, with many options.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonogon'
+plot( x, orientation=TRUE, normals=FALSE, elabels=FALSE, 
+                            tiling=FALSE,  tlabels=FALSE,
+                            trans2=FALSE, trans2type='both', ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonogon</b> object as returned by the constructor <code>zonogon()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>orientation</code></td>
+<td>
+
+<p>if <code>TRUE</code> then draw the edges with orientation arrows.
+Otherwise just draw unoriented line segments.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normals</code></td>
+<td>
+
+<p>if <code>TRUE</code> then draw an outward-pointing unit normal on each edge
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>elabels</code></td>
+<td>
+
+<p>if <code>TRUE</code> then label each edge with its generator
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tiling</code></td>
+<td>
+
+<p>if <code>TRUE</code> then draw the standard tiling of the zonogon by parallelograms
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tlabels</code></td>
+<td>
+
+<p>if <code>TRUE</code> then label each parallelogram in the tiling with
+its generators.  
+If <code>tiling</code> is <code>FALSE</code> then this is ignored.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trans2</code></td>
+<td>
+
+<p>if <code>TRUE</code> then draw the image of the 2-transition subcomplex
+of the unit cube <code class="reqn">[0,1]^n</code>, in the color blue.
+<br><code>trans2</code> can also be an integer 2-vector defining a range
+of levels of the subcomplex, where the <em>level</em> of a vertex
+of the <code class="reqn">n</code>-cube is the number of 1s.
+Both integers should be between <code class="reqn">0</code> and <code class="reqn">n</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trans2type</code></td>
+<td>
+
+<p>which part of the 2-transition subcomplex to draw.
+It can be <code>'BP'</code> for <em>bandpass</em> (aka Type 1),
+<code>'BS'</code> for <em>bandstop</em> (aka Type 2),
+or <code>'both'</code> for both.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A white dot is plotted at the center of the zonogon.
+A suitable is title is added above the plot.
+If the zonogon was returned from <code>spherize.zonotope()</code>
+the string <code>"[spherized]"</code> is added to the title.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns <code>TRUE</code>; or <code>FALSE</code> in case of error.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonogon()</code>,
+<code>spherize.zonotope()</code>
+</p>
+
+
+</div>

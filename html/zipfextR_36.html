@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>moezipfVariance</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variance of the MOEZipf distribution.</h2>
+
+<h3>Description</h3>
+
+<p>Computes the variance of the MOEZipf distribution for given values of <code class="reqn">\alpha</code> and <code class="reqn">\beta</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">moezipfVariance(alpha, beta, tolerance = 10^(-4))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 3</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Value of the <code class="reqn">\beta</code> parameter (<code class="reqn">\beta &gt; 0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tolerance</code></td>
+<td>
+<p>Tolerance used in the calculations. (default = <code class="reqn">10^{-4}</code>)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The variance of the distribution only exists for <code class="reqn">\alpha</code> strictly greater than 3.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A positive real value corresponding to the variance of the distribution.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>moezipfMoments</code>, <code>moezipfMean</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">moezipfVariance(3.5, 1.3)
+</code></pre>
+
+
+</div>

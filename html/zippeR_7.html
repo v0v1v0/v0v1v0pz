@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_list_zctas</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>List ZCTA GEOIDs for States</h2>
+
+<h3>Description</h3>
+
+<p>This function returns a vector of GEOIDs that represent ZCTAs
+in and around states, depending on the method selected. The two methods
+included described in Details below.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_list_zctas(year, state, method)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>year</code></td>
+<td>
+<p>A four-digit numeric scalar for year. <code>zippeR</code> currently
+supports data between 2010 and 2021.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>state</code></td>
+<td>
+<p>A scalar or vector with state abbreviations (e.x. <code>"MO"</code>)
+or FIPS codes (e.x. <code>29</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>A character scalar - either <code>"intersect"</code> or <code>"centroid"</code>.
+See Details below.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Since ZCTAs cross state lines, two methods are used to create these
+vectors. The <code>"intersect"</code> method will return ZCTAs that border
+the state selected. In most cases, this will result in more ZCTAs
+being returned than are actually within the states(s) named in the
+<code>state</code> argument. Conversely, the <code>"centroid"</code> method will
+return only ZCTAs whose centroids (geographical centers) lie within the
+states named. In most cases, this will return fewer ZCTAs than
+actually lie within the state selected. Users will need to review
+their data carefully and, when using other <code>zipperR</code> functions,
+will likely need to use the <code>include</code> and <code>exclude</code> arguments
+to finalize the geographies returned.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector of GEOIDs representing ZCTAs in and around the state selected.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Missouri ZCTAs, intersect method
+## return list
+mo_zctas &lt;- zi_list_zctas(year = 2021, state = "MO", method = "intersect")
+
+## preview ZCTAs
+mo_zctas[1:10]
+
+# Missouri ZCTAs, centroid method
+## return list
+mo_zctas &lt;- zi_list_zctas(year = 2021, state = "MO", method = "centroid")
+
+## preview ZCTAs
+mo_zctas[1:10]
+
+</code></pre>
+
+
+</div>

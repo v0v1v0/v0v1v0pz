@@ -1,0 +1,229 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zvcv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ZV-CV for general expectations</h2>
+
+<h3>Description</h3>
+
+<p>The function <code>zvcv</code> is used to perform (regularised) ZV-CV given a set of samples, derivatives and function evaluations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zvcv(
+  integrand,
+  samples,
+  derivatives,
+  log_weights,
+  integrand_logged = FALSE,
+  est_inds,
+  options = list(polyorder = 2, regul_reg = TRUE, alpha_elnet = 1, nfolds = 10, apriori
+    = (1:NCOL(samples)), intercept = TRUE, polyorder_max = Inf),
+  folds = 5
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>integrand</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">k</code> matrix of integrands (evaluations of the functions of interest)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of samples from the target</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>derivatives</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of derivatives of the log target with respect to the parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log_weights</code></td>
+<td>
+<p>(optional) A vector of length <code class="reqn">N</code> containing log weights of the samples. The default is equal weights.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>integrand_logged</code></td>
+<td>
+<p>(optional) Sometimes it is better to input the integrand on the logged scale for stability. If the actual integrand is the exponential of <code>integrand</code>, then <code>integrand_logged = TRUE</code>. Otherwise, the default of <code>integrand_logged = FALSE</code> should be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>est_inds</code></td>
+<td>
+<p>(optional) A vector of indices for the estimation-only samples. The default when <code>est_inds</code> is missing or <code>NULL</code> is to perform both estimation of the control variates and evaluation of the integral using all samples. Otherwise, the samples from <code>est_inds</code> are used in estimating the control variates and the remainder are used in evaluating the integral. Splitting the indices in this way can be used to reduce bias from adaption and to make computation feasible for very large sample sizes (small <code>est_inds</code> is faster), but in general in will increase the variance of the estimator.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>options</code></td>
+<td>
+<p>A list of control variate specifications. This can be a single list containing the elements below (the defaults are used for elements which are not specified). Alternatively, it can be a list of lists containing any or all of the elements below. Where the latter is used, the function <code>zvcv</code> automatically selects the best performing option based on cross-validation. 
+</p>
+
+<ul>
+<li> <p><code>polyorder</code>:   The order of the polynomial, with a default of 2. A value of <code>Inf</code> will get the cross-validation method to choose between orders.
+</p>
+</li>
+<li> <p><code>regul_reg</code>:   A flag for whether regularised regression is to be used. The default is TRUE, i.e. regularised regression is used.
+</p>
+</li>
+<li> <p><code>alpha_elnet</code>:   The alpha parameter for elastic net. The default is 1, which correponds to LASSO. A value of 0 would correspond to ridge regression.
+</p>
+</li>
+<li> <p><code>nfolds</code>:   The number of folds used in cross-validation to select lambda for LASSO or elastic net. The default is 10.
+</p>
+</li>
+<li> <p><code>apriori</code>:   A vector containing the subset of parameter indices to use in the polynomial. Typically this argument would only be used if the dimension of the problem is very large or if prior information about parameter dependencies is known. The default is to use all parameters <code class="reqn">1:d</code> where <code class="reqn">d</code> is the dimension of the target. In <code>zvcv</code>, this is equivalent to using only the relevant columns in <code>samples</code> and <code>derivatives</code>).
+</p>
+</li>
+<li> <p><code>intercept</code>:   A flag for whether the intercept should be estimated or fixed to the empirical mean of the integrand in the estimation set. The default is to include an intercept (<code>intercept = TRUE</code>) as this tends to lead to better variance reductions. Note that an <code>intercept = TRUE</code> flag may be changed to <code>intercept = FALSE</code> within the function if <code>integrand_logged = TRUE</code> and a <code>NaN</code> is encountered. See South et al. (2018) for further details.
+</p>
+</li>
+<li> <p><code>polyorder_max</code>:   The maximum allowable polynomial order. This may be used to prevent memory issues in the case that the polynomial order is selected automatically. A default maximum polynomial order based on the regression design matrix having no more than ten million elements will be selected if the <code>polyorder</code> is infinite and in this case a warning will be given. Recall that setting your default R settings to <code>options(warn=1)</code> will ensure that you receive these warnings in real time. Optimal polynomial order selection may go to at most this maximum value, or it may stop earlier. 
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>folds</code></td>
+<td>
+<p>The number of folds used in k-fold cross-validation for selecting the optimal control variate. Depending on the <code>options</code>, this may include selection of the optimal polynomial order, regression type and subset of parameters in the polynomial. The default is five.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list is returned, containing the following components:
+</p>
+
+<ul>
+<li> <p><code>expectation</code>: The estimates of the expectations.
+</p>
+</li>
+<li> <p><code>num_select</code>: The number of non-zero coefficients in the polynomial.
+</p>
+</li>
+<li> <p><code>mse</code>: The mean square error for the evaluation set.
+</p>
+</li>
+<li> <p><code>coefs</code>: The estimated coefficients for the regression (columns are for the different integrands).
+</p>
+</li>
+<li> <p><code>integrand_logged</code>: The <code>integrand_logged</code> input stored for reference.
+</p>
+</li>
+<li> <p><code>est_inds</code>: The <code>est_inds</code> input stored for reference.
+</p>
+</li>
+<li> <p><code>polyorder</code>: The <code>polyorder</code> value used in the final estimate.
+</p>
+</li>
+<li> <p><code>regul_reg</code>: The <code>regul_reg</code> flag used in the final estimate.
+</p>
+</li>
+<li> <p><code>alpha_elnet</code>: The <code>alpha_elnet</code> value used in the final estimate.
+</p>
+</li>
+<li> <p><code>nfolds</code>: The <code>nfolds</code> value used in the final estimate.
+</p>
+</li>
+<li> <p><code>apriori</code>:  The <code>apriori</code> vector used in the final estimate.
+</p>
+</li>
+<li> <p><code>intercept</code>: The <code>intercept</code> flag used in the final estimate.
+</p>
+</li>
+<li> <p><code>polyorder_max</code>: The <code>polyorder_max</code> flag used in the final estimate, if multiple <code>options</code> are specified.
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Leah F. South
+</p>
+
+
+<h3>References</h3>
+
+<p>Mira, A., Solgi, R., &amp; Imparato, D. (2013). Zero variance Markov chain Monte Carlo for Bayesian estimators. Statistics and Computing, 23(5), 653-662.
+</p>
+<p>South, L. F., Oates, C. J., Mira, A., &amp; Drovandi, C. (2019). Regularised zero variance control variates for high-dimensional variance reduction. <a href="https://arxiv.org/abs/1811.05073">https://arxiv.org/abs/1811.05073</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See ZVCV and <code>VDP</code> for additional examples. See <code>evidence</code> for functions which use <code>zvcv</code> to estimate the normalising constant of the posterior.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># An example where ZV-CV can result in zero-variance estimators
+
+# Estimating some expectations when theta is bivariate normally distributed with:
+mymean &lt;- c(-1.5,1.5)
+mycov &lt;- matrix(c(1,0.5,0.5,2),nrow=2)
+
+# Perfect draws from the target distribution (could be replaced with
+# approximate draws from e.g. MCMC or SMC)
+N &lt;- 30
+require(mvtnorm)
+set.seed(1)
+samples &lt;- rmvnorm(N, mean = mymean, sigma = mycov)
+# derivatives of Gaussian wrt x
+derivatives &lt;- t( apply(samples,1,function(x) -solve(mycov)%*%(x - mymean)) )
+
+# The integrands are the marginal posterior means of theta, the variances and the
+# covariance (true values are c(-1.5,1.5,1,2,0.5))
+integrand &lt;- cbind(samples[,1],samples[,2],(samples[,1] - mymean[1])^2,
+    (samples[,2] - mymean[2])^2, (samples[,1] - mymean[1])*(samples[,2] - mymean[2]))
+
+# Estimates without ZV-CV (i.e. vanilla Monte Carlo integration)
+# Vanilla Monte Carlo
+sprintf("%.15f",colMeans(integrand))
+
+# ZV-CV with fixed specifications
+# For this example, polyorder = 1 with OLS is exact for the first two integrands and
+# polyorder = 2 with OLS is exact for the last three integrands
+
+# ZV-CV with 2nd order polynomial, OLS and a polynomial based on only x_1.
+# For diagonal mycov, this would be exact for the first and third expectations.
+sprintf("%.15f",zvcv(integrand, samples, derivatives,
+    options = list(polyorder = 2, regul_reg = FALSE, apriori = 1))$expectation)
+
+# ZV-CV with 1st order polynomial and OLS (exact for the first two integrands)
+sprintf("%.15f",zvcv(integrand, samples, derivatives,
+    options = list(polyorder = 1, regul_reg = FALSE))$expectation)
+
+# ZV-CV with 2nd order polynomial and OLS (exact for all)
+sprintf("%.15f",zvcv(integrand, samples, derivatives,
+    options = list(polyorder = 2, regul_reg = FALSE))$expectation) 
+
+# ZV-CV with cross validation
+myopts &lt;- list(list(polyorder = Inf, regul_reg = FALSE),list(polyorder = Inf, nfolds = 4)) 
+temp &lt;- zvcv(integrand,samples,derivatives,options = myopts, folds = 2) 
+temp$polyorder # The chosen control variate order
+temp$regul_reg # Flag for if the chosen control variate uses regularisation
+# Cross-val ZV-CV to choose the polynomial order and whether to perform OLS or LASSO
+sprintf("%.15f",temp$expectation) # Estimate based on the chosen control variate
+
+
+</code></pre>
+
+
+</div>

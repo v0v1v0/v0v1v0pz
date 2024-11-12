@@ -1,0 +1,105 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>processZoomTranscript</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Process Zoom transcript file</h2>
+
+<h3>Description</h3>
+
+<p>Process Zoom transcript file
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">processZoomTranscript(
+  fname,
+  recordingStartDateTime = "1970-01-01 00:00:00",
+  languageCode = "en"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fname</code></td>
+<td>
+<p>String that is the path to the exported Zoom .vtt transcript chat file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>recordingStartDateTime</code></td>
+<td>
+<p>String that is the timestamp when the recording was started in YYYY-MM-DD HH:MM:SS</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>languageCode</code></td>
+<td>
+<p>String denoting the language</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame where each record is an utterance in the transcript, with columns:
+</p>
+
+<ul>
+<li>
+<p> utteranceId - Numeric identifier for each utterance in the transcript
+</p>
+</li>
+<li>
+<p> utteranceStartSeconds - number of seconds from the start of the recording when utterance began
+</p>
+</li>
+<li>
+<p> utteranceStartTime - POSIXct timestamp of the start of the utterance, using recordingStartDateTime as the zero
+</p>
+</li>
+<li>
+<p> utteranceEndSeconds - number of seconds from the start of the recording when utterance ended
+</p>
+</li>
+<li>
+<p> utteranceEndTime - POSIXct timestamp of the end of the utterance, using recordingStartDateTime as the zero
+</p>
+</li>
+<li>
+<p> utteranceTimeWindow - number of seconds that this utterance lasted
+</p>
+</li>
+<li>
+<p> userName - Zoom display name of the person who spoke this utterance
+</p>
+</li>
+<li>
+<p> utteranceMessage - transcribed spoken words of this utterance
+</p>
+</li>
+<li>
+<p> utteranceLanguage - language code for this utterance
+</p>
+</li>
+</ul>
+<h3>Zoom Recording Transcript File Processing</h3>
+
+<p>This function parses the data from the transcript file (.vtt) that is downloaded from the Zoom website.
+NOTE: This is the file that accompanies a recording to the cloud.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">tr.out = processZoomTranscript(
+fname=system.file('extdata', 'meeting001_transcript.vtt', package = 'zoomGroupStats'), 
+recordingStartDateTime = '2020-04-20 13:30:00', languageCode = 'en')
+</code></pre>
+
+
+</div>

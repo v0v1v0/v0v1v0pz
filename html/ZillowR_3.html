@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetComps</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make request to Zillow API GetComps Web Service</h2>
+
+<h3>Description</h3>
+
+<p>The GetComps API returns a list of comparable recent sales for a specified
+property. The result set returned contains the address, Zillow property
+identifier, and Zestimate for the comparable properties and the principal
+property for which the comparables are being retrieved.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetComps(
+  zpid = NULL,
+  count = NULL,
+  rentzestimate = FALSE,
+  zws_id = getOption("ZillowR-zws_id"),
+  url = "http://www.zillow.com/webservice/GetComps.htm"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zpid</code></td>
+<td>
+<p>The Zillow Property ID for the property for which to obtain
+information. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>count</code></td>
+<td>
+<p>The number of comparable recent sales to obtain (between 1 and
+25)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rentzestimate</code></td>
+<td>
+<p>Return Rent Zestimate information if available (logical,
+default: false).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zws_id</code></td>
+<td>
+<p>The Zillow Web Service Identifier. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>URL for the GetComps Web Service. Required.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A named list with the following elements:
+</p>
+
+<dl>
+<dt><strong>request</strong></dt>
+<dd>
+<p>a list with the request parameters</p>
+</dd>
+<dt><strong>message</strong></dt>
+<dd>
+<p>a list of status code(s) and message(s)
+returned by the API</p>
+</dd>
+<dt><strong>response</strong></dt>
+<dd>
+<p>an XMLNode with the API-specific response
+values. At this time, no further coercion is performed, so you
+may have to use functions from the <code>XML</code> package to extract
+the desired output.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+GetComps(zpid = 48749425, count = 5)
+GetComps(zpid = 48749425, count = 5, rentzestimate = TRUE)
+## End(Not run)
+</code></pre>
+
+
+</div>

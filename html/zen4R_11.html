@@ -1,0 +1,4443 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZenodoRecord</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ZenodoRecord</h2>
+
+<h3>Description</h3>
+
+<p>ZenodoRecord
+</p>
+<p>ZenodoRecord
+</p>
+
+
+<h3>Format</h3>
+
+<p><code>R6Class</code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of <code>R6Class</code> for modelling an ZenodoRecord
+</p>
+
+
+<h3>Super class</h3>
+
+<p><code>zen4R::zen4RLogger</code> -&gt; <code>ZenodoRecord</code>
+</p>
+
+
+<h3>Public fields</h3>
+
+<div class="r6-fields">
+
+<dl>
+<dt><code>created</code></dt>
+<dd>
+<p>record creation date</p>
+</dd>
+<dt><code>updated</code></dt>
+<dd>
+<p>record update date</p>
+</dd>
+<dt><code>revision_id</code></dt>
+<dd>
+<p>revision id</p>
+</dd>
+<dt><code>is_draft</code></dt>
+<dd>
+<p>is draft</p>
+</dd>
+<dt><code>is_published</code></dt>
+<dd>
+<p>is published</p>
+</dd>
+<dt><code>status</code></dt>
+<dd>
+<p>record status</p>
+</dd>
+<dt><code>versions</code></dt>
+<dd>
+<p>versions</p>
+</dd>
+<dt><code>access</code></dt>
+<dd>
+<p>access policies</p>
+</dd>
+<dt><code>files</code></dt>
+<dd>
+<p>list of files associated to the record</p>
+</dd>
+<dt><code>id</code></dt>
+<dd>
+<p>record id</p>
+</dd>
+<dt><code>links</code></dt>
+<dd>
+<p>list of links associated to the record</p>
+</dd>
+<dt><code>metadata</code></dt>
+<dd>
+<p>metadata elements associated to the record</p>
+</dd>
+<dt><code>parent</code></dt>
+<dd>
+<p>parent record</p>
+</dd>
+<dt><code>pids</code></dt>
+<dd>
+<p>pids</p>
+</dd>
+<dt><code>stats</code></dt>
+<dd>
+<p>stats</p>
+</dd>
+</dl>
+</div>
+
+
+<h3>Methods</h3>
+
+
+
+<h4>Public methods</h4>
+
+
+<ul>
+<li> <p><a href="#method-ZenodoRecord-new"><code>ZenodoRecord$new()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getStats"><code>ZenodoRecord$getStats()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getId"><code>ZenodoRecord$getId()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getParentId"><code>ZenodoRecord$getParentId()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getConceptId"><code>ZenodoRecord$getConceptId()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setDOI"><code>ZenodoRecord$setDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getDOI"><code>ZenodoRecord$getDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getConceptDOI"><code>ZenodoRecord$getConceptDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setAccessPolicyRecord"><code>ZenodoRecord$setAccessPolicyRecord()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setAccessPolicyFiles"><code>ZenodoRecord$setAccessPolicyFiles()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setAccessPolicyEmbargo"><code>ZenodoRecord$setAccessPolicyEmbargo()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setResourceType"><code>ZenodoRecord$setResourceType()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setUploadType"><code>ZenodoRecord$setUploadType()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setPublicationType"><code>ZenodoRecord$setPublicationType()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setImageType"><code>ZenodoRecord$setImageType()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setPublisher"><code>ZenodoRecord$setPublisher()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setPublicationDate"><code>ZenodoRecord$setPublicationDate()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addDate"><code>ZenodoRecord$addDate()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeDate"><code>ZenodoRecord$removeDate()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setTitle"><code>ZenodoRecord$setTitle()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addAdditionalTitle"><code>ZenodoRecord$addAdditionalTitle()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeAdditionalTitle"><code>ZenodoRecord$removeAdditionalTitle()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setDescription"><code>ZenodoRecord$setDescription()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addAdditionalDescription"><code>ZenodoRecord$addAdditionalDescription()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeAdditionalDescription"><code>ZenodoRecord$removeAdditionalDescription()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addPersonOrOrg"><code>ZenodoRecord$addPersonOrOrg()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removePersonOrOrg"><code>ZenodoRecord$removePersonOrOrg()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addCreator"><code>ZenodoRecord$addCreator()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeCreatorByName"><code>ZenodoRecord$removeCreatorByName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeCreatorByAffiliation"><code>ZenodoRecord$removeCreatorByAffiliation()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeCreatorByORCID"><code>ZenodoRecord$removeCreatorByORCID()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeCreatorByGND"><code>ZenodoRecord$removeCreatorByGND()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeCreatorByISNI"><code>ZenodoRecord$removeCreatorByISNI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeCreatorByROR"><code>ZenodoRecord$removeCreatorByROR()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addContributor"><code>ZenodoRecord$addContributor()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeContributorByName"><code>ZenodoRecord$removeContributorByName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeContributorByAffiliation"><code>ZenodoRecord$removeContributorByAffiliation()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeContributorByORCID"><code>ZenodoRecord$removeContributorByORCID()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeContributorByGND"><code>ZenodoRecord$removeContributorByGND()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeContributorByISNI"><code>ZenodoRecord$removeContributorByISNI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeContributorByROR"><code>ZenodoRecord$removeContributorByROR()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addRight"><code>ZenodoRecord$addRight()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setLicense"><code>ZenodoRecord$setLicense()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setVersion"><code>ZenodoRecord$setVersion()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addLanguage"><code>ZenodoRecord$addLanguage()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setLanguage"><code>ZenodoRecord$setLanguage()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addRelatedIdentifier"><code>ZenodoRecord$addRelatedIdentifier()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeRelatedIdentifier"><code>ZenodoRecord$removeRelatedIdentifier()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setReferences"><code>ZenodoRecord$setReferences()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addReference"><code>ZenodoRecord$addReference()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeReference"><code>ZenodoRecord$removeReference()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setSubjects"><code>ZenodoRecord$setSubjects()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setKeywords"><code>ZenodoRecord$setKeywords()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addSubject"><code>ZenodoRecord$addSubject()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addKeyword"><code>ZenodoRecord$addKeyword()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeSubject"><code>ZenodoRecord$removeSubject()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeKeyword"><code>ZenodoRecord$removeKeyword()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setNotes"><code>ZenodoRecord$setNotes()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addFunding"><code>ZenodoRecord$addFunding()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addGrant"><code>ZenodoRecord$addGrant()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setGrants"><code>ZenodoRecord$setGrants()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeGrant"><code>ZenodoRecord$removeGrant()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setJournalTitle"><code>ZenodoRecord$setJournalTitle()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setJournalVolume"><code>ZenodoRecord$setJournalVolume()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setJournalIssue"><code>ZenodoRecord$setJournalIssue()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setJournalPages"><code>ZenodoRecord$setJournalPages()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setConferenceTitle"><code>ZenodoRecord$setConferenceTitle()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setConferenceAcronym"><code>ZenodoRecord$setConferenceAcronym()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setConferenceDates"><code>ZenodoRecord$setConferenceDates()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setConferencePlace"><code>ZenodoRecord$setConferencePlace()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setConferenceUrl"><code>ZenodoRecord$setConferenceUrl()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setConferenceSession"><code>ZenodoRecord$setConferenceSession()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setConferenceSessionPart"><code>ZenodoRecord$setConferenceSessionPart()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setImprintPublisher"><code>ZenodoRecord$setImprintPublisher()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setImprintISBN"><code>ZenodoRecord$setImprintISBN()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setImprintPlace"><code>ZenodoRecord$setImprintPlace()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setPartofTitle"><code>ZenodoRecord$setPartofTitle()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setPartofPages"><code>ZenodoRecord$setPartofPages()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-setThesisUniversity"><code>ZenodoRecord$setThesisUniversity()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addThesisSupervisor"><code>ZenodoRecord$addThesisSupervisor()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeThesisSupervisor"><code>ZenodoRecord$removeThesisSupervisor()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeThesisSupervisorByName"><code>ZenodoRecord$removeThesisSupervisorByName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeThesisSupervisorByAffiliation"><code>ZenodoRecord$removeThesisSupervisorByAffiliation()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeThesisSupervisorByORCID"><code>ZenodoRecord$removeThesisSupervisorByORCID()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeThesisSupervisorByGND"><code>ZenodoRecord$removeThesisSupervisorByGND()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-addLocation"><code>ZenodoRecord$addLocation()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-removeLocation"><code>ZenodoRecord$removeLocation()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAs"><code>ZenodoRecord$exportAs()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsBibTeX"><code>ZenodoRecord$exportAsBibTeX()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsCSL"><code>ZenodoRecord$exportAsCSL()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsDataCite"><code>ZenodoRecord$exportAsDataCite()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsDublinCore"><code>ZenodoRecord$exportAsDublinCore()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsDCAT"><code>ZenodoRecord$exportAsDCAT()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsJSON"><code>ZenodoRecord$exportAsJSON()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsJSONLD"><code>ZenodoRecord$exportAsJSONLD()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsGeoJSON"><code>ZenodoRecord$exportAsGeoJSON()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsMARCXML"><code>ZenodoRecord$exportAsMARCXML()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-exportAsAllFormats"><code>ZenodoRecord$exportAsAllFormats()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-listFiles"><code>ZenodoRecord$listFiles()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-downloadFiles"><code>ZenodoRecord$downloadFiles()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-print"><code>ZenodoRecord$print()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-toDCEntry"><code>ZenodoRecord$toDCEntry()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getFirstDOI"><code>ZenodoRecord$getFirstDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getLastDOI"><code>ZenodoRecord$getLastDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-getVersions"><code>ZenodoRecord$getVersions()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRecord-clone"><code>ZenodoRecord$clone()</code></a>
+</p>
+</li>
+</ul>
+<details><summary>Inherited methods</summary><ul>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR"><code>zen4R::zen4RLogger$ERROR()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO"><code>zen4R::zen4RLogger$INFO()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN"><code>zen4R::zen4RLogger$WARN()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass"><code>zen4R::zen4RLogger$getClass()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName"><code>zen4R::zen4RLogger$getClassName()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger"><code>zen4R::zen4RLogger$logger()</code></a></span></li>
+</ul></details><hr>
+<a id="method-ZenodoRecord-new"></a>
+
+
+
+<h4>Method <code>new()</code>
+</h4>
+
+<p>method is used to instantiate a <code>ZenodoRecord</code>
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$new(obj = NULL, logger = "INFO")</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>obj</code></dt>
+<dd>
+<p>an optional list object to create the record</p>
+</dd>
+<dt><code>logger</code></dt>
+<dd>
+<p>a logger to print log messages. It can be either NULL, "INFO" (with minimum logs), 
+or "DEBUG" (for complete curl http calls logs)</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-getStats"></a>
+
+
+
+<h4>Method <code>getStats()</code>
+</h4>
+
+<p>Get record statistics
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getStats()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>statistics as <code>data.frame</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-getId"></a>
+
+
+
+<h4>Method <code>getId()</code>
+</h4>
+
+<p>Get the record Id
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getId()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the Id, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-getParentId"></a>
+
+
+
+<h4>Method <code>getParentId()</code>
+</h4>
+
+<p>Get the parent record Id
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getParentId()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the parent Id, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-getConceptId"></a>
+
+
+
+<h4>Method <code>getConceptId()</code>
+</h4>
+
+<p>Get the concept record Id
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getConceptId()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the concept Id, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setDOI"></a>
+
+
+
+<h4>Method <code>setDOI()</code>
+</h4>
+
+<p>Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setDOI(doi, provider = NULL, client = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>doi</code></dt>
+<dd>
+<p>DOI to set for the record</p>
+</dd>
+<dt><code>provider</code></dt>
+<dd>
+<p>DOI provider</p>
+</dd>
+<dt><code>client</code></dt>
+<dd>
+<p>DOI client</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-getDOI"></a>
+
+
+
+<h4>Method <code>getDOI()</code>
+</h4>
+
+<p>Get the record DOI.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getDOI()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the DOI, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-getConceptDOI"></a>
+
+
+
+<h4>Method <code>getConceptDOI()</code>
+</h4>
+
+<p>Get the concept (generic) DOI. The concept DOI is a generic DOI 
+common to all versions of a Zenodo record.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getConceptDOI()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the concept DOI, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setAccessPolicyRecord"></a>
+
+
+
+<h4>Method <code>setAccessPolicyRecord()</code>
+</h4>
+
+<p>Set the access policy for record, among values "public" (default) or "restricted"
+In Zenodo, in principle, the access policy 'restricted' is not available for records.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setAccessPolicyRecord(access = c("public", "restricted"))</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>access</code></dt>
+<dd>
+<p>access policy ('public' or 'restricted')</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setAccessPolicyFiles"></a>
+
+
+
+<h4>Method <code>setAccessPolicyFiles()</code>
+</h4>
+
+<p>Set the access policy for files, among values "public" (default) or "restricted"
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setAccessPolicyFiles(access = c("public", "restricted"))</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>access</code></dt>
+<dd>
+<p>access policy ('public' or 'restricted')</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setAccessPolicyEmbargo"></a>
+
+
+
+<h4>Method <code>setAccessPolicyEmbargo()</code>
+</h4>
+
+<p>Set access policy embargo options
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setAccessPolicyEmbargo(active = FALSE, until = NULL, reason = "")</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>active</code></dt>
+<dd>
+<p>whether embargo is active or not. Default is <code>FALSE</code></p>
+</dd>
+<dt><code>until</code></dt>
+<dd>
+<p>embargo date, object of class <code>Date</code>. Default is <code>NULL</code>. Must be provided if embargo is active</p>
+</dd>
+<dt><code>reason</code></dt>
+<dd>
+<p>embargo reason, object of class <code>character</code>. Default is an empty string</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setResourceType"></a>
+
+
+
+<h4>Method <code>setResourceType()</code>
+</h4>
+
+<p>Set the resource type (mandatory).
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setResourceType(resourceType)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>resourceType</code></dt>
+<dd>
+<p>record resource type</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setUploadType"></a>
+
+
+
+<h4>Method <code>setUploadType()</code>
+</h4>
+
+<p>Set the upload type (mandatory). Deprecated since zen4R 1.0
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setUploadType(uploadType)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>uploadType</code></dt>
+<dd>
+<p>record upload type among the following values: 'publication', 'poster', 
+'presentation', 'dataset', 'image', 'video', 'software', 'lesson', 'physicalobject', 'other'</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setPublicationType"></a>
+
+
+
+<h4>Method <code>setPublicationType()</code>
+</h4>
+
+<p>Set the publication type (mandatory if upload type is 'publication'). Deprecated since zen4R 1.0
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setPublicationType(publicationType)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>publicationType</code></dt>
+<dd>
+<p>record publication type among the following values: 'annotationcollection', 'book', 
+'section', 'conferencepaper', 'datamanagementplan', 'article', 'patent', 'preprint', 'deliverable', 'milestone', 
+'proposal', 'report', 'softwaredocumentation', 'taxonomictreatment', 'technicalnote', 'thesis', 'workingpaper', 
+'other'</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setImageType"></a>
+
+
+
+<h4>Method <code>setImageType()</code>
+</h4>
+
+<p>Set the image type (mandatory if image type is 'image'). Deprecated since zen4R 1.0
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setImageType(imageType)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>imageType</code></dt>
+<dd>
+<p>record publication type among the following values: 'figure','plot',
+'drawing','diagram','photo', or 'other'</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setPublisher"></a>
+
+
+
+<h4>Method <code>setPublisher()</code>
+</h4>
+
+<p>Set the publisher
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setPublisher(publisher)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>publisher</code></dt>
+<dd>
+<p>publisher object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setPublicationDate"></a>
+
+
+
+<h4>Method <code>setPublicationDate()</code>
+</h4>
+
+<p>Set the publication date. For more information on the accepted format,
+please check https://inveniordm.docs.cern.ch/reference/metadata/#publication-date-1
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setPublicationDate(publicationDate)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>publicationDate</code></dt>
+<dd>
+<p>object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addDate"></a>
+
+
+
+<h4>Method <code>addDate()</code>
+</h4>
+
+<p>Add date
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addDate(date, type, description = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>date</code></dt>
+<dd>
+<p>date</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>type of date, among following values: 'accepted', 'available', 'collected', 'copyrighted', 
+'created', 'issued', 'other', 'submitted', 'updated', 'valid', 'withdrawn'</p>
+</dd>
+<dt><code>description</code></dt>
+<dd>
+<p>free text, specific information about the date</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeDate"></a>
+
+
+
+<h4>Method <code>removeDate()</code>
+</h4>
+
+<p>Remove a date
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeDate(date, type)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>date</code></dt>
+<dd>
+<p>the date to remove</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>the date type of the date to be removed</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setTitle"></a>
+
+
+
+<h4>Method <code>setTitle()</code>
+</h4>
+
+<p>Set the record title.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setTitle(title)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>title</code></dt>
+<dd>
+<p>object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addAdditionalTitle"></a>
+
+
+
+<h4>Method <code>addAdditionalTitle()</code>
+</h4>
+
+<p>Add additional record title
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addAdditionalTitle(title, type, lang = "eng")</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>title</code></dt>
+<dd>
+<p>title free text</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>type of title, among following values: alternative-title, subtitle, translated-title, other</p>
+</dd>
+<dt><code>lang</code></dt>
+<dd>
+<p>language id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeAdditionalTitle"></a>
+
+
+
+<h4>Method <code>removeAdditionalTitle()</code>
+</h4>
+
+<p>Removes additional record title.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeAdditionalTitle(title, type, lang = "eng")</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>title</code></dt>
+<dd>
+<p>title free text</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>type of title, among following values: abstract, methods, 
+series-information, table-of-contents, technical-info, other</p>
+</dd>
+<dt><code>lang</code></dt>
+<dd>
+<p>language id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setDescription"></a>
+
+
+
+<h4>Method <code>setDescription()</code>
+</h4>
+
+<p>Set the record description
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setDescription(description)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>description</code></dt>
+<dd>
+<p>object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addAdditionalDescription"></a>
+
+
+
+<h4>Method <code>addAdditionalDescription()</code>
+</h4>
+
+<p>Add additional record description
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addAdditionalDescription(description, type, lang = "eng")</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>description</code></dt>
+<dd>
+<p>description free text</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>type of description, among following values: abstract, methods, 
+series-information, table-of-contents, technical-info, other</p>
+</dd>
+<dt><code>lang</code></dt>
+<dd>
+<p>language id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeAdditionalDescription"></a>
+
+
+
+<h4>Method <code>removeAdditionalDescription()</code>
+</h4>
+
+<p>Removes additional record description
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeAdditionalDescription(description, type, lang = "eng")</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>description</code></dt>
+<dd>
+<p>description free text</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>type of description, among following values: abstract, methods, 
+series-information, table-of-contents, technical-info, other</p>
+</dd>
+<dt><code>lang</code></dt>
+<dd>
+<p>language id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-addPersonOrOrg"></a>
+
+
+
+<h4>Method <code>addPersonOrOrg()</code>
+</h4>
+
+<p>Add a person or organization for the record. For persons, the approach is to use the <code>firstname</code> and
+<code>lastname</code> arguments, that by default will be concatenated for Zenodo as <code>lastname, firstname</code>.
+For organizations, use the <code>name</code> argument.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addPersonOrOrg(
+  firstname = NULL,
+  lastname = NULL,
+  name = paste(lastname, firstname, sep = ", "),
+  orcid = NULL,
+  gnd = NULL,
+  isni = NULL,
+  ror = NULL,
+  role = NULL,
+  affiliations = NULL,
+  sandbox = FALSE,
+  type
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>firstname</code></dt>
+<dd>
+<p>person first name</p>
+</dd>
+<dt><code>lastname</code></dt>
+<dd>
+<p>person last name</p>
+</dd>
+<dt><code>name</code></dt>
+<dd>
+<p>organization name</p>
+</dd>
+<dt><code>orcid</code></dt>
+<dd>
+<p>person or organization ORCID (optional)</p>
+</dd>
+<dt><code>gnd</code></dt>
+<dd>
+<p>person or organization GND (optional)</p>
+</dd>
+<dt><code>isni</code></dt>
+<dd>
+<p>person or organization ISNI (optional)</p>
+</dd>
+<dt><code>ror</code></dt>
+<dd>
+<p>person or organization ROR (optional)</p>
+</dd>
+<dt><code>role</code></dt>
+<dd>
+<p>role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other</p>
+</dd>
+<dt><code>affiliations</code></dt>
+<dd>
+<p>person or organization affiliations (optional)</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is <code>FALSE</code></p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>type of person or org (creators/contributors)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removePersonOrOrg"></a>
+
+
+
+<h4>Method <code>removePersonOrOrg()</code>
+</h4>
+
+<p>Removes a person or organization by a property. The <code>by</code> parameter should be the name
+of the person or organization property ('name', 'affiliation','orcid','gnd','isni','ror').
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removePersonOrOrg(by, property, type)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>by</code></dt>
+<dd>
+<p>property used as criterion to remove the person or organization</p>
+</dd>
+<dt><code>property</code></dt>
+<dd>
+<p>property value used to remove the person or organization</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>type of person or org (creators / contributors)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-addCreator"></a>
+
+
+
+<h4>Method <code>addCreator()</code>
+</h4>
+
+<p>Add a creator for the record. For persons, the approach is to use the <code>firstname</code> and
+<code>lastname</code> arguments, that by default will be concatenated for Zenodo as <code>lastname, firstname</code>.
+For organizations, use the <code>name</code> argument.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addCreator(
+  firstname = NULL,
+  lastname = NULL,
+  name = paste(lastname, firstname, sep = ", "),
+  orcid = NULL,
+  gnd = NULL,
+  isni = NULL,
+  ror = NULL,
+  role = NULL,
+  affiliations = NULL,
+  sandbox = FALSE
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>firstname</code></dt>
+<dd>
+<p>person first name</p>
+</dd>
+<dt><code>lastname</code></dt>
+<dd>
+<p>person last name</p>
+</dd>
+<dt><code>name</code></dt>
+<dd>
+<p>organization name</p>
+</dd>
+<dt><code>orcid</code></dt>
+<dd>
+<p>creator ORCID (optional)</p>
+</dd>
+<dt><code>gnd</code></dt>
+<dd>
+<p>creator GND (optional)</p>
+</dd>
+<dt><code>isni</code></dt>
+<dd>
+<p>creator ISNI (optional)</p>
+</dd>
+<dt><code>ror</code></dt>
+<dd>
+<p>creator ROR (optional)</p>
+</dd>
+<dt><code>role</code></dt>
+<dd>
+<p>role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other</p>
+</dd>
+<dt><code>affiliations</code></dt>
+<dd>
+<p>creator affiliations (optional)</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeCreatorByName"></a>
+
+
+
+<h4>Method <code>removeCreatorByName()</code>
+</h4>
+
+<p>Removes a creator by name.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeCreatorByName(name)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>creator name</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeCreatorByAffiliation"></a>
+
+
+
+<h4>Method <code>removeCreatorByAffiliation()</code>
+</h4>
+
+<p>Removes a creator by affiliation.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeCreatorByAffiliation(affiliation)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>affiliation</code></dt>
+<dd>
+<p>creator affiliation</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeCreatorByORCID"></a>
+
+
+
+<h4>Method <code>removeCreatorByORCID()</code>
+</h4>
+
+<p>Removes a creator by ORCID.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeCreatorByORCID(orcid)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>orcid</code></dt>
+<dd>
+<p>creator ORCID</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeCreatorByGND"></a>
+
+
+
+<h4>Method <code>removeCreatorByGND()</code>
+</h4>
+
+<p>Removes a creator by GND.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeCreatorByGND(gnd)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>gnd</code></dt>
+<dd>
+<p>creator GND</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeCreatorByISNI"></a>
+
+
+
+<h4>Method <code>removeCreatorByISNI()</code>
+</h4>
+
+<p>Removes a creator by ISNI.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeCreatorByISNI(isni)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>isni</code></dt>
+<dd>
+<p>creator ISNI</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeCreatorByROR"></a>
+
+
+
+<h4>Method <code>removeCreatorByROR()</code>
+</h4>
+
+<p>Removes a creator by ROR.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeCreatorByROR(ror)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>ror</code></dt>
+<dd>
+<p>creator ROR</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-addContributor"></a>
+
+
+
+<h4>Method <code>addContributor()</code>
+</h4>
+
+<p>Add a contributor for the record. For persons, the approach is to use the <code>firstname</code> and
+<code>lastname</code> arguments, that by default will be concatenated for Zenodo as <code>lastname, firstname</code>.
+For organizations, use the <code>name</code> argument.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addContributor(
+  firstname = NULL,
+  lastname = NULL,
+  name = paste(lastname, firstname, sep = ", "),
+  orcid = NULL,
+  gnd = NULL,
+  isni = NULL,
+  ror = NULL,
+  role = NULL,
+  affiliations = NULL,
+  sandbox = FALSE
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>firstname</code></dt>
+<dd>
+<p>person first name</p>
+</dd>
+<dt><code>lastname</code></dt>
+<dd>
+<p>person last name</p>
+</dd>
+<dt><code>name</code></dt>
+<dd>
+<p>organization name</p>
+</dd>
+<dt><code>orcid</code></dt>
+<dd>
+<p>contributor ORCID (optional)</p>
+</dd>
+<dt><code>gnd</code></dt>
+<dd>
+<p>contributor GND (optional)</p>
+</dd>
+<dt><code>isni</code></dt>
+<dd>
+<p>contributor ISNI (optional)</p>
+</dd>
+<dt><code>ror</code></dt>
+<dd>
+<p>contributor ROR (optional)</p>
+</dd>
+<dt><code>role</code></dt>
+<dd>
+<p>role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other</p>
+</dd>
+<dt><code>affiliations</code></dt>
+<dd>
+<p>contributor affiliations (optional)</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeContributorByName"></a>
+
+
+
+<h4>Method <code>removeContributorByName()</code>
+</h4>
+
+<p>Removes a contributor by name.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeContributorByName(name)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>contributor name</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeContributorByAffiliation"></a>
+
+
+
+<h4>Method <code>removeContributorByAffiliation()</code>
+</h4>
+
+<p>Removes a contributor by affiliation.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeContributorByAffiliation(affiliation)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>affiliation</code></dt>
+<dd>
+<p>contributor affiliation</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeContributorByORCID"></a>
+
+
+
+<h4>Method <code>removeContributorByORCID()</code>
+</h4>
+
+<p>Removes a contributor by ORCID.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeContributorByORCID(orcid)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>orcid</code></dt>
+<dd>
+<p>contributor ORCID</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeContributorByGND"></a>
+
+
+
+<h4>Method <code>removeContributorByGND()</code>
+</h4>
+
+<p>Removes a contributor by GND.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeContributorByGND(gnd)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>gnd</code></dt>
+<dd>
+<p>contributor GND</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeContributorByISNI"></a>
+
+
+
+<h4>Method <code>removeContributorByISNI()</code>
+</h4>
+
+<p>Removes a contributor by ISNI.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeContributorByISNI(isni)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>isni</code></dt>
+<dd>
+<p>contributor ISNI</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeContributorByROR"></a>
+
+
+
+<h4>Method <code>removeContributorByROR()</code>
+</h4>
+
+<p>Removes a contributor by ROR.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeContributorByROR(ror)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>ror</code></dt>
+<dd>
+<p>contributor ROR</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-addRight"></a>
+
+
+
+<h4>Method <code>addRight()</code>
+</h4>
+
+<p>Add right/license. Please see https://inveniordm.docs.cern.ch/reference/metadata/#rights-licenses-0-n
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addRight(
+  id = NULL,
+  title = NULL,
+  description = NULL,
+  link = NULL,
+  sandbox = FALSE
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>license id</p>
+</dd>
+<dt><code>title</code></dt>
+<dd>
+<p>license title</p>
+</dd>
+<dt><code>description</code></dt>
+<dd>
+<p>a multi-lingual list</p>
+</dd>
+<dt><code>link</code></dt>
+<dd>
+<p>license link</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setLicense"></a>
+
+
+
+<h4>Method <code>setLicense()</code>
+</h4>
+
+<p>Set license. The license should be set with the Zenodo id of the license. If not
+recognized by Zenodo, the function will return an error. The list of licenses can
+fetched with the <code>ZenodoManager</code> and the function <code>$getLicenses()</code>.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setLicense(licenseId, sandbox = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>licenseId</code></dt>
+<dd>
+<p>a license Id</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if set, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setVersion"></a>
+
+
+
+<h4>Method <code>setVersion()</code>
+</h4>
+
+<p>Set record version.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setVersion(version)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>version</code></dt>
+<dd>
+<p>the record version to set</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addLanguage"></a>
+
+
+
+<h4>Method <code>addLanguage()</code>
+</h4>
+
+<p>Adds a language.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addLanguage(language)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>language</code></dt>
+<dd>
+<p>ISO 639-2 or 639-3 code</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setLanguage"></a>
+
+
+
+<h4>Method <code>setLanguage()</code>
+</h4>
+
+<p>Set the language
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setLanguage(language)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>language</code></dt>
+<dd>
+<p>ISO 639-2 or 639-3 code</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addRelatedIdentifier"></a>
+
+
+
+<h4>Method <code>addRelatedIdentifier()</code>
+</h4>
+
+<p>Adds a related identifier with a given scheme and relation type.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addRelatedIdentifier(
+  identifier,
+  scheme,
+  relation_type,
+  resource_type = NULL
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>identifier</code></dt>
+<dd>
+<p>identifier</p>
+</dd>
+<dt><code>scheme</code></dt>
+<dd>
+<p>scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+lsid, pubmed id, purl, upc, url, urn, w3id</p>
+</dd>
+<dt><code>relation_type</code></dt>
+<dd>
+<p>relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes</p>
+</dd>
+<dt><code>resource_type</code></dt>
+<dd>
+<p>optional resource type</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeRelatedIdentifier"></a>
+
+
+
+<h4>Method <code>removeRelatedIdentifier()</code>
+</h4>
+
+<p>Removes a related identifier with a given scheme/relation_type
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeRelatedIdentifier(identifier, scheme, relation_type)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>identifier</code></dt>
+<dd>
+<p>identifier</p>
+</dd>
+<dt><code>scheme</code></dt>
+<dd>
+<p>scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+lsid, pubmed id, purl, upc, url, urn, w3id</p>
+</dd>
+<dt><code>relation_type</code></dt>
+<dd>
+<p>relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setReferences"></a>
+
+
+
+<h4>Method <code>setReferences()</code>
+</h4>
+
+<p>Set references
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setReferences(references)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>references</code></dt>
+<dd>
+<p>a vector or list of references to set for the record</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addReference"></a>
+
+
+
+<h4>Method <code>addReference()</code>
+</h4>
+
+<p>Add a reference
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addReference(reference)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>reference</code></dt>
+<dd>
+<p>the reference to add</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeReference"></a>
+
+
+
+<h4>Method <code>removeReference()</code>
+</h4>
+
+<p>Remove a reference
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeReference(reference)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>reference</code></dt>
+<dd>
+<p>the reference to remove</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setSubjects"></a>
+
+
+
+<h4>Method <code>setSubjects()</code>
+</h4>
+
+<p>Set subjects
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setSubjects(subjects)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>subjects</code></dt>
+<dd>
+<p>a vector or list of subjects to set for the record</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setKeywords"></a>
+
+
+
+<h4>Method <code>setKeywords()</code>
+</h4>
+
+<p>Set keywords
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setKeywords(keywords)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>keywords</code></dt>
+<dd>
+<p>a vector or list of keywords to set for the record</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addSubject"></a>
+
+
+
+<h4>Method <code>addSubject()</code>
+</h4>
+
+<p>Add a subject
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addSubject(subject)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>subject</code></dt>
+<dd>
+<p>the subject to add</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-addKeyword"></a>
+
+
+
+<h4>Method <code>addKeyword()</code>
+</h4>
+
+<p>Add a keyword
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addKeyword(keyword)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>keyword</code></dt>
+<dd>
+<p>the keyword to add</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeSubject"></a>
+
+
+
+<h4>Method <code>removeSubject()</code>
+</h4>
+
+<p>Remove a subject
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeSubject(subject)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>subject</code></dt>
+<dd>
+<p>the subject to remove</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeKeyword"></a>
+
+
+
+<h4>Method <code>removeKeyword()</code>
+</h4>
+
+<p>Remove a keyword
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeKeyword(keyword)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>keyword</code></dt>
+<dd>
+<p>the keyword to remove</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setNotes"></a>
+
+
+
+<h4>Method <code>setNotes()</code>
+</h4>
+
+<p>Set notes. HTML is not allowed
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setNotes(notes)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>notes</code></dt>
+<dd>
+<p>object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addFunding"></a>
+
+
+
+<h4>Method <code>addFunding()</code>
+</h4>
+
+<p>Adds funding. Used internally, prefer using <code>addGrant</code> instead.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addFunding(funder = NULL, grant = NULL, sandbox = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>funder</code></dt>
+<dd>
+<p>funder id or name</p>
+</dd>
+<dt><code>grant</code></dt>
+<dd>
+<p>grant id or title</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available grants. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addGrant"></a>
+
+
+
+<h4>Method <code>addGrant()</code>
+</h4>
+
+<p>Adds a grant to the record metadata.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addGrant(grant, sandbox = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>grant</code></dt>
+<dd>
+<p>grant to add. The grant should be set with the id of the grant. If not
+recognized by Zenodo, the function will return an warning only. The list of grants can
+fetched with the <code>ZenodoManager</code> and the function <code>$getAwards()</code>.</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available grants. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setGrants"></a>
+
+
+
+<h4>Method <code>setGrants()</code>
+</h4>
+
+<p>Set a vector of character strings identifying grants
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setGrants(grants, sandbox = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>grants</code></dt>
+<dd>
+<p>a vector or list of grants Values should among known grants The list of grants can
+fetched with the <code>ZenodoManager</code> and the function <code>$getAwards()</code>. Each grant should be set with 
+the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Use the Zenodo sandbox infrastructure as basis to control available grants. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeGrant"></a>
+
+
+
+<h4>Method <code>removeGrant()</code>
+</h4>
+
+<p>Removes a grant from the record metadata.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeGrant(grant)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>grant</code></dt>
+<dd>
+<p>grant to remove. The grant should be set with the Zenodo id of the grant</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-setJournalTitle"></a>
+
+
+
+<h4>Method <code>setJournalTitle()</code>
+</h4>
+
+<p>Set Journal title to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setJournalTitle(title)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>title</code></dt>
+<dd>
+<p>a title, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setJournalVolume"></a>
+
+
+
+<h4>Method <code>setJournalVolume()</code>
+</h4>
+
+<p>Set Journal volume to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setJournalVolume(volume)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>volume</code></dt>
+<dd>
+<p>a volume</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setJournalIssue"></a>
+
+
+
+<h4>Method <code>setJournalIssue()</code>
+</h4>
+
+<p>Set Journal issue to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setJournalIssue(issue)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>issue</code></dt>
+<dd>
+<p>an issue</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setJournalPages"></a>
+
+
+
+<h4>Method <code>setJournalPages()</code>
+</h4>
+
+<p>Set Journal pages to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setJournalPages(pages)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>pages</code></dt>
+<dd>
+<p>number of pages</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setConferenceTitle"></a>
+
+
+
+<h4>Method <code>setConferenceTitle()</code>
+</h4>
+
+<p>Set conference title to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setConferenceTitle(title)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>title</code></dt>
+<dd>
+<p>conference title, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setConferenceAcronym"></a>
+
+
+
+<h4>Method <code>setConferenceAcronym()</code>
+</h4>
+
+<p>Set conference acronym to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setConferenceAcronym(acronym)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>acronym</code></dt>
+<dd>
+<p>conference acronym, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setConferenceDates"></a>
+
+
+
+<h4>Method <code>setConferenceDates()</code>
+</h4>
+
+<p>Set conference dates to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setConferenceDates(dates)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>dates</code></dt>
+<dd>
+<p>conference dates, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setConferencePlace"></a>
+
+
+
+<h4>Method <code>setConferencePlace()</code>
+</h4>
+
+<p>Set conference place to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setConferencePlace(place)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>place</code></dt>
+<dd>
+<p>conference place, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setConferenceUrl"></a>
+
+
+
+<h4>Method <code>setConferenceUrl()</code>
+</h4>
+
+<p>Set conference url to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setConferenceUrl(url)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>url</code></dt>
+<dd>
+<p>conference url, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setConferenceSession"></a>
+
+
+
+<h4>Method <code>setConferenceSession()</code>
+</h4>
+
+<p>Set conference session to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setConferenceSession(session)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>session</code></dt>
+<dd>
+<p>conference session, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setConferenceSessionPart"></a>
+
+
+
+<h4>Method <code>setConferenceSessionPart()</code>
+</h4>
+
+<p>Set conference session part to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setConferenceSessionPart(part)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>part</code></dt>
+<dd>
+<p>conference session part, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setImprintPublisher"></a>
+
+
+
+<h4>Method <code>setImprintPublisher()</code>
+</h4>
+
+<p>Set imprint publisher to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setImprintPublisher(publisher)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>publisher</code></dt>
+<dd>
+<p>the publisher, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setImprintISBN"></a>
+
+
+
+<h4>Method <code>setImprintISBN()</code>
+</h4>
+
+<p>Set imprint ISBN to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setImprintISBN(isbn)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>isbn</code></dt>
+<dd>
+<p>the ISBN, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setImprintPlace"></a>
+
+
+
+<h4>Method <code>setImprintPlace()</code>
+</h4>
+
+<p>Set imprint place to the record metadata
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setImprintPlace(place)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>place</code></dt>
+<dd>
+<p>the place, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setPartofTitle"></a>
+
+
+
+<h4>Method <code>setPartofTitle()</code>
+</h4>
+
+<p>Set title to which record is part of
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setPartofTitle(title)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>title</code></dt>
+<dd>
+<p>the title, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setPartofPages"></a>
+
+
+
+<h4>Method <code>setPartofPages()</code>
+</h4>
+
+<p>Set pages to which record is part of
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setPartofPages(pages)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>pages</code></dt>
+<dd>
+<p>the pages, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-setThesisUniversity"></a>
+
+
+
+<h4>Method <code>setThesisUniversity()</code>
+</h4>
+
+<p>Set thesis university
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$setThesisUniversity(university)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>university</code></dt>
+<dd>
+<p>the university, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-addThesisSupervisor"></a>
+
+
+
+<h4>Method <code>addThesisSupervisor()</code>
+</h4>
+
+<p>Adds thesis supervisor
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addThesisSupervisor(
+  firstname,
+  lastname,
+  affiliation = NULL,
+  orcid = NULL,
+  gnd = NULL
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>firstname</code></dt>
+<dd>
+<p>supervisor first name</p>
+</dd>
+<dt><code>lastname</code></dt>
+<dd>
+<p>supervisor last name</p>
+</dd>
+<dt><code>affiliation</code></dt>
+<dd>
+<p>supervisor affiliation (optional)</p>
+</dd>
+<dt><code>orcid</code></dt>
+<dd>
+<p>supervisor ORCID (optional)</p>
+</dd>
+<dt><code>gnd</code></dt>
+<dd>
+<p>supervisor GND (optional)</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeThesisSupervisor"></a>
+
+
+
+<h4>Method <code>removeThesisSupervisor()</code>
+</h4>
+
+<p>Removes a thesis supervisor by a property. The <code>by</code> parameter should be the name
+of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
+'orcid' or 'gnd').
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeThesisSupervisor(by, property)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>by</code></dt>
+<dd>
+<p>property used as criterion to remove the thesis supervisor</p>
+</dd>
+<dt><code>property</code></dt>
+<dd>
+<p>property value used to remove the thesis supervisor</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeThesisSupervisorByName"></a>
+
+
+
+<h4>Method <code>removeThesisSupervisorByName()</code>
+</h4>
+
+<p>Removes a thesis supervisor by name.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeThesisSupervisorByName(name)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>thesis supervisor name</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeThesisSupervisorByAffiliation"></a>
+
+
+
+<h4>Method <code>removeThesisSupervisorByAffiliation()</code>
+</h4>
+
+<p>Removes a thesis supervisor by affiliation
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeThesisSupervisorByAffiliation(affiliation)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>affiliation</code></dt>
+<dd>
+<p>thesis supervisor affiliation</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeThesisSupervisorByORCID"></a>
+
+
+
+<h4>Method <code>removeThesisSupervisorByORCID()</code>
+</h4>
+
+<p>Removes a thesis supervisor by ORCID
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeThesisSupervisorByORCID(orcid)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>orcid</code></dt>
+<dd>
+<p>thesis supervisor ORCID</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeThesisSupervisorByGND"></a>
+
+
+
+<h4>Method <code>removeThesisSupervisorByGND()</code>
+</h4>
+
+<p>Removes a thesis supervisor by GND
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeThesisSupervisorByGND(gnd)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>gnd</code></dt>
+<dd>
+<p>thesis supervisor GND</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-addLocation"></a>
+
+
+
+<h4>Method <code>addLocation()</code>
+</h4>
+
+<p>Adds a location to the record metadata.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$addLocation(place, description = NULL, lat = NULL, lon = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>place</code></dt>
+<dd>
+<p>place (required)</p>
+</dd>
+<dt><code>description</code></dt>
+<dd>
+<p>description</p>
+</dd>
+<dt><code>lat</code></dt>
+<dd>
+<p>latitude</p>
+</dd>
+<dt><code>lon</code></dt>
+<dd>
+<p>longitude</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-removeLocation"></a>
+
+
+
+<h4>Method <code>removeLocation()</code>
+</h4>
+
+<p>Removes a grant from the record metadata.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$removeLocation(place)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>place</code></dt>
+<dd>
+<p>place (required)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAs"></a>
+
+
+
+<h4>Method <code>exportAs()</code>
+</h4>
+
+<p>Exports record to a file by format.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAs(format, filename, append_format = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>format</code></dt>
+<dd>
+<p>the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
+JSON, JSON-LD, GeoJSON, MARCXML</p>
+</dd>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+<dt><code>append_format</code></dt>
+<dd>
+<p>wether format name has to be appended to the filename. Default is <code>TRUE</code> (for
+backward compatibility reasons). Set it to <code>FALSE</code> if you want to use only the <code>filename</code>.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsBibTeX"></a>
+
+
+
+<h4>Method <code>exportAsBibTeX()</code>
+</h4>
+
+<p>Exports record as BibTeX
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsBibTeX(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsCSL"></a>
+
+
+
+<h4>Method <code>exportAsCSL()</code>
+</h4>
+
+<p>Exports record as CSL
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsCSL(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsDataCite"></a>
+
+
+
+<h4>Method <code>exportAsDataCite()</code>
+</h4>
+
+<p>Exports record as DataCite
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsDataCite(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsDublinCore"></a>
+
+
+
+<h4>Method <code>exportAsDublinCore()</code>
+</h4>
+
+<p>Exports record as DublinCore
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsDublinCore(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsDCAT"></a>
+
+
+
+<h4>Method <code>exportAsDCAT()</code>
+</h4>
+
+<p>Exports record as DCAT
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsDCAT(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsJSON"></a>
+
+
+
+<h4>Method <code>exportAsJSON()</code>
+</h4>
+
+<p>Exports record as JSON
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsJSON(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsJSONLD"></a>
+
+
+
+<h4>Method <code>exportAsJSONLD()</code>
+</h4>
+
+<p>Exports record as JSONLD
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsJSONLD(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsGeoJSON"></a>
+
+
+
+<h4>Method <code>exportAsGeoJSON()</code>
+</h4>
+
+<p>Exports record as GeoJSON
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsGeoJSON(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsMARCXML"></a>
+
+
+
+<h4>Method <code>exportAsMARCXML()</code>
+</h4>
+
+<p>Exports record as MARCXML
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsMARCXML(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the writen file name (with extension)
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-exportAsAllFormats"></a>
+
+
+
+<h4>Method <code>exportAsAllFormats()</code>
+</h4>
+
+<p>Exports record in all Zenodo record export formats. This function will
+create one file per Zenodo metadata formats.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$exportAsAllFormats(filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>filename</code></dt>
+<dd>
+<p>the target filename (without extension)</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-listFiles"></a>
+
+
+
+<h4>Method <code>listFiles()</code>
+</h4>
+
+<p>list files attached to the record
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$listFiles(pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>pretty</code></dt>
+<dd>
+<p>whether a pretty output (<code>data.frame</code>) should be returned (default <code>TRUE</code>), otherwise
+the raw list of files is returned.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the files, as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-downloadFiles"></a>
+
+
+
+<h4>Method <code>downloadFiles()</code>
+</h4>
+
+<p>Downloads files attached to the record
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$downloadFiles(
+  path = ".",
+  files = list(),
+  parallel = FALSE,
+  parallel_handler = NULL,
+  cl = NULL,
+  quiet = FALSE,
+  overwrite = TRUE,
+  timeout = 60,
+  ...
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>path</code></dt>
+<dd>
+<p>target download path (by default it will be the current working directory)</p>
+</dd>
+<dt><code>files</code></dt>
+<dd>
+<p>(list of) file(s) to download. If not specified, by default all files will be downloaded.</p>
+</dd>
+<dt><code>parallel</code></dt>
+<dd>
+<p>whether download has to be done in parallel using the chosen <code>parallel_handler</code>. Default is <code>FALSE</code></p>
+</dd>
+<dt><code>parallel_handler</code></dt>
+<dd>
+<p>The parallel handler to use eg. <code>mclapply</code>. To use a different parallel handler (such as eg 
+<code>parLapply</code> or <code>parSapply</code>), specify its function in <code>parallel_handler</code> argument. For cluster-based parallel 
+download, this is the way to proceed. In that case, the cluster should be created earlier by the user with  <code>makeCluster</code>
+and passed as <code>cl</code> argument. After downloading all files, the cluster will be stopped automatically.</p>
+</dd>
+<dt><code>cl</code></dt>
+<dd>
+<p>an optional cluster for cluster-based parallel handlers</p>
+</dd>
+<dt><code>quiet</code></dt>
+<dd>
+<p>(default is <code>FALSE</code>) can be set to suppress informative messages (not warnings).</p>
+</dd>
+<dt><code>overwrite</code></dt>
+<dd>
+<p>(default is <code>TRUE</code>) can be set to FALSE to avoid re-downloading existing files.</p>
+</dd>
+<dt><code>timeout</code></dt>
+<dd>
+<p>(default is 60s) see <code>download.file</code>.</p>
+</dd>
+<dt><code>...</code></dt>
+<dd>
+<p>arguments inherited from <code>parallel::mclapply</code> or the custom <code>parallel_handler</code>
+can be added (eg. <code>mc.cores</code> for <code>mclapply</code>)</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-print"></a>
+
+
+
+<h4>Method <code>print()</code>
+</h4>
+
+<p>Prints a ZenodoRecord
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$print(..., format = "internal", depth = 1)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>...</code></dt>
+<dd>
+<p>any other parameter. Not used</p>
+</dd>
+<dt><code>format</code></dt>
+<dd>
+<p>format to use for printing. By default, <code>internal</code> uses an <span class="pkg">zen4R</span> internal
+printing method. Other methods available are those supported by Zenodo for record export, and can be used 
+only if the record has already been published (with a DOI). Attemps to print using a Zenodo export format
+for a record will raise a warning message and revert to "internal" format</p>
+</dd>
+<dt><code>depth</code></dt>
+<dd>
+<p>an internal depth parameter for indentation of print statements, in case of listing or recursive use of print</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRecord-toDCEntry"></a>
+
+
+
+<h4>Method <code>toDCEntry()</code>
+</h4>
+
+<p>Maps to an <span class="pkg">atom4R</span> DCEntry. Note: applies only to published records.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$toDCEntry()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>DCEntry</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-getFirstDOI"></a>
+
+
+
+<h4>Method <code>getFirstDOI()</code>
+</h4>
+
+<p>Get DOI of the first record version.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getFirstDOI()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the first DOI, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-getLastDOI"></a>
+
+
+
+<h4>Method <code>getLastDOI()</code>
+</h4>
+
+<p>Get DOI of the latest record version.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getLastDOI()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the last DOI, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-getVersions"></a>
+
+
+
+<h4>Method <code>getVersions()</code>
+</h4>
+
+<p>Get record versions with creation/publication date, 
+version (ordering number) and DOI.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$getVersions()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>a <code>data.frame</code> with the record versions
+</p>
+
+
+<hr>
+<a id="method-ZenodoRecord-clone"></a>
+
+
+
+<h4>Method <code>clone()</code>
+</h4>
+
+<p>The objects of this class are cloneable with this method.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRecord$clone(deep = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>deep</code></dt>
+<dd>
+<p>Whether to make a deep clone.</p>
+</dd>
+</dl>
+</div>
+
+
+
+
+<h3>Note</h3>
+
+<p>Internal method. Prefer using <code>addCreator</code> or <code>addContributor</code>
+</p>
+<p>Internal method. Prefer using <code>removeCreator</code> or <code>removeContributor</code>
+</p>
+<p>See examples in <code>download_zenodo</code> utility function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Emmanuel Blondel &lt;emmanuel.blondel1@gmail.com&gt;
+</p>
+
+
+</div>

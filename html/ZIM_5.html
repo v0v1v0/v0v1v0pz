@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dzim.filter</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Particle Filtering for DZIM</h2>
+
+<h3>Description</h3>
+
+<p>Function to implement the particle filtering method proposed by Gordsill et al. (1993).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dzim.filter(y, X, w, para, control)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>response variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>design matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>w</code></td>
+<td>
+<p><code>log(w)</code> is used as an offset variable in the linear predictor.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>para</code></td>
+<td>
+<p>model parameters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>control arguments.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Gordon, N. J., Salmond, D. J., and Smith, A. F. M. (1993). Novel approach to nonlinear/non-Gaussian 
+Bayesian state estimation. <em>IEEE Proceedings</em>, <b>140</b>, 107-113.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>dzim</code>,
+<code>dzim.fit</code>, 
+<code>dzim.smooth</code>,
+<code>dzim.control</code>,
+<code>dzim.sim</code>,
+<code>dzim.plot</code>
+</p>
+
+
+</div>

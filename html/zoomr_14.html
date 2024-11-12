@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zoom_api_request</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Send httr requests to Zoom API</h2>
+
+<h3>Description</h3>
+
+<p>This is based on the function of the same name in the qualtRics package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zoom_api_request(
+  verb = c("GET", "POST"),
+  url = url,
+  body = NULL,
+  as = c("parsed", "raw"),
+  token,
+  query_params = query_params,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>verb</code></td>
+<td>
+<p>Type of request to be sent (@seealso [httr::VERB()])</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>Zoom endpoint URL created by [generate_url()] functions</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>arguments passed to httr::content when parsing</p>
+</td>
+</tr>
+</table>
+</div>

@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Motzkin</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Motzkin numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A001006">A001006</a>, a <em>Motzkin</em> number for a given <em>n</em> is the number
+of ways for drawing non-intersecting chords among <em>n</em> points on a circle,
+where the first 7 entries are 1, 1, 2, 4, 9, 21, 51.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Motzkin(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 30 Motzkin numbers
+print(Motzkin(30))
+
+</code></pre>
+
+
+</div>

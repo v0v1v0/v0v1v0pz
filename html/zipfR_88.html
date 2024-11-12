@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LNRE_posterior</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Posterior Distribution of LNRE Model (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Posterior distribution over the type probability space of a LNRE
+model, given the observed frequency <code class="reqn">m</code> in a sample. Posterior
+density (<code>postdlnre</code>) and log-transformed density
+(<code>postldlnre</code>) can be computed for all LNRE models. The
+distribution function (<code>postplnre</code>) and quantiles
+(<code>postqlnre</code>) are only available for selected types of models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+postdlnre(model, x, m, N, ...)
+postldlnre(model, x, m, N, base=10, log.x=FALSE, ...)
+postplnre(model, q, m, N, lower.tail=FALSE, ...)
+postqlnre(model, p, m, N, lower.tail=FALSE, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an object belonging to a subclass of <code>lnre</code>,
+representing an LNRE model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>frequency <code class="reqn">m</code> of a type in the observed sample</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>sample size <code class="reqn">N</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>vector of type probabilities <code class="reqn">pi</code> for which the posterior
+density function is evaluated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>vector of type probability quantiles, i.e. threshold values
+<code class="reqn">\rho</code> on the type probability axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of tail probabilities</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>positive number, the base <code class="reqn">a</code> with respect to which the
+log-transformation is peformed (see "Details" below)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log.x</code></td>
+<td>
+<p>if <code>TRUE</code>, the values passed in the argument
+<code>x</code> are assumed to be logarithmic, i.e. <code class="reqn">\log_a \pi</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>if <code>TRUE</code>, lower tail probabilities or type
+counts are returned / expected in the <code>p</code> argument.  Note that
+the defaults differ for distribution function and type distribution,
+and see "Details" below.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments are passed through to the method
+implementations (currently unused)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector of non-negative numbers of the same length as the second
+argument (<code>x</code>, <code>p</code> or <code>q</code>).
+</p>
+<p><code>postdlnre</code> returns the posterior type density <code class="reqn">P(\pi | f = m)</code>
+for the values of <code class="reqn">\pi</code> specified in the vector <code>x</code>.
+<code>postplnre</code> computes the posterior type distribution function
+<code class="reqn">P(\pi \geq \rho | f = m)</code> (default) or its complement
+<code class="reqn">P(\pi \leq \rho | f = m)</code>  (if <code>lower.tail=TRUE</code>).
+These correspond to <code class="reqn">E[V_{m, &gt;\rho}]</code> and <code class="reqn">E[V_{m, \rho}]</code>, respectively (Evert 2004, p. 123).
+<code>postqlnre</code> returns quantiles, i.e. the inverse of the posterior
+type distribution function.
+</p>
+<p><code>postldlnre</code> computes a logarithmically transformed version of
+the posterior type density, taking logarithms with respect to the
+base <code class="reqn">a</code> specified in the <code>base</code> argument (default: <code class="reqn">a=10</code>).
+Such log-transformed densities are useful for visualizing distributions,
+see <code>ldlnre</code> for more information.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>lnre</code> for more information about LNRE models and how to
+initialize them, <code>LNRE</code> for type density and distribution
+functions (which represent the prior distribution).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## TODO
+  
+</code></pre>
+
+
+</div>

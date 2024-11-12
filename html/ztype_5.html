@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>level</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>level</h2>
+
+<h3>Description</h3>
+
+<p>generates a collection of words to build a ZType game level
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">level(set_of_words, quantity, difficulty)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>set_of_words</code></td>
+<td>
+<p>a sorted vector of the collection of words to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quantity</code></td>
+<td>
+<p>an integer the number of words to pick in</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>difficulty</code></td>
+<td>
+<p>an integer reflecting the level's difficulty</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(ztype)
+require(magrittr)
+c("dplyr","ggplot2","lubridate") %&gt;% gen_set_of_words() %&gt;% level(10,50)
+</code></pre>
+
+
+</div>

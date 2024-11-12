@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EvertLuedeling2001</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Samples of German Word Formation Affixes (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Corpus data for measuring the productivity of German word formation affixes
+<em>-bar</em>, <em>-lich</em>, <em>-sam</em>, <em>-ös</em>, <em>-tum</em>,
+<em>Klein-</em>, <em>-chen</em> and <em>-lein</em> (Evert &amp; Lüdeling 2001).
+Data were extracted from two volumes of the German daily newspaper
+<em>Stuttgarter Zeitung</em>, then manually cleaned and normalized.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+EvertLuedeling2001
+
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A list of 8 character vectors for the different affixes, with names
+<code>klein</code> (<em>Klein-</em>), <code>bar</code> (<em>-bar</em>),
+<code>chen</code> (<em>-chen</em>), <code>lein</code> (<em>-lein</em>),
+<code>lich</code> (<em>-lich</em>), <code>oes</code> (<em>-ös</em>),
+<code>sam</code> (<em>-sam</em>), <code>tum</code> (<em>-tum</em>).
+</p>
+<p>Each vector contains all relevant tokens from the corpus in their
+original (chronological) ordering, so vocabulary growth curves can
+be determined from the vectors in addition to type frequency lists
+and frequency spectra.
+</p>
+
+
+<h3>References</h3>
+
+<p>Evert, Stefan and Lüdeling, Anke (2001).
+Measuring morphological productivity: Is automatic preprocessing sufficient?
+In <em>Proceedings of the Corpus Linguistics 2001 Conference</em>, pages 167–175, Lancaster, UK.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+str(EvertLuedeling2001)
+
+# tokens and type counts for the different affixes
+sapply(EvertLuedeling2001, function (x) {
+  y &lt;- vec2tfl(x)
+  c(N=N(y), V=V(y))
+})
+
+</code></pre>
+
+
+</div>

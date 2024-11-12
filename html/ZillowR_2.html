@@ -1,0 +1,120 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetChart</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make request to Zillow API GetChart Web Service</h2>
+
+<h3>Description</h3>
+
+<p>The GetChart API generates a URL for an image file that displays historical
+Zestimates for a specific property. The API accepts as input the Zillow
+Property ID as well as a chart type: either percentage or dollar value
+change. Optionally, the API accepts width and height parameters that
+constrain the size of the image. The historical data can be for the past 1
+year, 5 years or 10 years.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetChart(
+  zpid = NULL,
+  unit_type = c("percent", "dollar"),
+  width = NULL,
+  height = NULL,
+  chartDuration = c("1year", "5years", "10years"),
+  zws_id = getOption("ZillowR-zws_id"),
+  url = "http://www.zillow.com/webservice/GetChart.htm"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zpid</code></td>
+<td>
+<p>The Zillow Property ID for the property for which to obtain
+information. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>unit_type</code></td>
+<td>
+<p>A string value that specifies whether to show the percent
+change (unit_type = 'percent') or dollar change (unit_type = 'dollar').
+Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width</code></td>
+<td>
+<p>An integer value that specifies the width of the generated
+image; the value must be between 200 and 600, inclusive.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height</code></td>
+<td>
+<p>An integer value that specifies the height of the generated
+image; the value must be between 100 and 300, inclusive.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chartDuration</code></td>
+<td>
+<p>The duration of past data that needs to be shown in the
+chart. Valid values are '1year', '5years' and '10years'. If unspecified,
+the value defaults to '1year'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zws_id</code></td>
+<td>
+<p>The Zillow Web Service Identifier. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>URL for the GetChart Web Service. Required.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A named list with the following elements:
+</p>
+
+<dl>
+<dt><strong>request</strong></dt>
+<dd>
+<p>a list with the request parameters</p>
+</dd>
+<dt><strong>message</strong></dt>
+<dd>
+<p>a list of status code(s) and message(s)
+returned by the API</p>
+</dd>
+<dt><strong>response</strong></dt>
+<dd>
+<p>an XMLNode with the API-specific response
+values. At this time, no further coercion is performed, so you
+may have to use functions from the <code>XML</code> package to extract
+the desired output.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+GetChart(zpid = 48749425)
+GetChart(zpid = 48749425, unit_type = 'dollar', width = 600, height = 300,
+         chartDuration = '10years')
+## End(Not run)
+</code></pre>
+
+
+</div>

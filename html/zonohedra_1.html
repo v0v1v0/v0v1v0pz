@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonohedra-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>zonhedra package</h2>
+
+<h3>Description</h3>
+
+<p>This package deals with <em>zonohedra</em>, which are zonotopes of dimension 3.
+It also handles <em>zonogons</em> (2D zonotopes)
+and <em>zonosegs</em> (1D zonotopes).
+</p>
+<p>The term <em>zonoseg</em> ("zonotope" + "segment") is my own personal term;
+I could not find an alternative term.
+It is a linear image of the unit cube <code class="reqn">[0,1]^n</code> in the real numbers,
+and a compact segment of reals.
+</p>
+
+
+<h3>S3 classes</h3>
+
+
+<table>
+<tr>
+<td style="text-align: center;">
+<code>Z</code>   </td>
+<td style="text-align: center;"> <code>class(Z)</code>  </td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<b>zonohedron</b> </td>
+<td style="text-align: center;"> <code>"zonohedron" "zonotope" "list"</code>  </td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<b>zonogon</b>    </td>
+<td style="text-align: center;"> <code>"zonogon" "zonotope" "list"</code>  </td>
+</tr>
+<tr>
+<td style="text-align: center;">
+<b>zonoseg</b>    </td>
+<td style="text-align: center;"> <code>"zonoseg" "zonotope" "list"</code>  </td>
+</tr>
+<tr>
+<td style="text-align: center;">
+</td>
+</tr>
+</table>
+<p>For example, the <code>section()</code> returns very diffferent things
+for a zonohedron and a zonogon, and so
+<code>section.zonohedron()</code> and <code>section.zonogon()</code>
+are coded and documented separately.
+A section for a zonoseg does not make sense,
+so <code>section.zonoseg()</code> is undefined.
+</p>
+
+
+<h3>Terminology</h3>
+
+<p>For a convex polytope, a <em>supporting hyperplane</em> is a hyperplane
+that intersect the polytope's boundary but <em>not</em> its interior.
+<br>
+A zonotope is a convex polytope.
+A zonohedron has supporting planes,
+and a zonogon has supporting lines.
+<br><br>
+In the package <span class="pkg">zonohedra</span>,
+a <em>zonotope</em> mean a zonotope of dimension 3, 2, or 1.
+<br><br>
+A <em>face</em> of a zonotope is the intersection of the boundary
+of the zonotope with some supporting hyperplane.
+A <em>d-face</em> is a face of dimension <em>d</em>.
+So a <em>0-face</em> is a <em>vertex</em>,
+and a <em>1-face</em> is an <em>edge</em>.
+<br><br>
+A <em>facet</em> of a zonotope is a face whose dimension is
+1 less than the dimension of the zonotope.
+A facet is a maximal proper face.
+<br><br>
+A zonohedron has 0-faces (vertices), 1-faces (edges),
+and 2-faces (facets).
+<br><br>
+A zonogon has 0-faces (vertices) and 1-faces (edges).
+Since the dimension of an edge is 1 less than the
+dimension of the zonogon, an edge of a zonogon is also a facet
+of a zonogon.
+</p>
+
+
+</div>

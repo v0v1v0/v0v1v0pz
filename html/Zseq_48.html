@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Evil</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Evil numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A001969">A001969</a>, an <em>Evil</em> number has an even number of 1's in its binary expansion.
+First 6 Evil numbers are  	0, 3, 5, 6, 9, 10.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Evil(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Odious</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 20 Evil numbers
+print(Evil(20))
+
+</code></pre>
+
+
+</div>

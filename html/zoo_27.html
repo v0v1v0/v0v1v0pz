@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>as.zoo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Coercion from and to zoo</h2>
+
+<h3>Description</h3>
+
+<p>Methods for coercing <code>"zoo"</code> objects to other classes and
+a generic function <code>as.zoo</code> for coercing objects to class <code>"zoo"</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">as.zoo(x, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object,</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to <code>zoo</code> when the return
+object is created.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>as.zoo</code> currently has a default method and methods for <code>ts</code>,
+<code>fts</code> (currently archived on CRAN), <code>irts</code>,
+<code>mcmc</code>, <code>tis</code>, <code>xts</code> 
+objects (and <code>zoo</code> objects themselves).
+</p>
+<p>Methods for coercing objects of class <code>"zoo"</code> to other classes
+currently include: <code>as.ts</code>, <code>as.matrix</code>, <code>as.vector</code>,
+<code>as.data.frame</code>, <code>as.list</code> (the latter also being available
+for <code>"ts"</code> objects). Furthermore, <code>fortify.zoo</code> can transform <code>"zoo"</code>
+series to <code>"data.frame"</code> including the time index and optionally melting a wide series
+into a long data frame.
+</p>
+<p>In the conversion between <code>zoo</code> and <code>ts</code>, the <code>zooreg</code> class is
+always used.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>as.zoo</code> returns a <code>zoo</code> object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zoo</code>, <code>fortify.zoo</code>,
+<code>zooreg</code>, <code>ts</code>, <code>irts</code>, 
+<code>tis</code>, <code>mcmc</code>,
+<code>xts</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">suppressWarnings(RNGversion("3.5.0"))
+set.seed(1)
+
+## coercion to zoo:
+## default method
+as.zoo(rnorm(5))
+## method for "ts" objects
+as.zoo(ts(rnorm(5), start = 1981, freq = 12))
+
+## coercion from zoo:
+x.date &lt;- as.POSIXct(paste("2003-", rep(1:4, 4:1), "-", sample(1:28, 10, replace = TRUE), sep = ""))
+x &lt;- zoo(matrix(rnorm(24), ncol = 2), x.date)
+as.matrix(x)
+as.vector(x)
+as.data.frame(x)
+as.list(x)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>generate_url</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate URL for specific API query by type and (if appropriate) ID</h2>
+
+<h3>Description</h3>
+
+<p>This is based on the function of the same name in the qualtRics package.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">generate_url(query, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>query</code></td>
+<td>
+<p>string.  The specific API query desired.  Generally named the
+same as associated functions but without underscores, so the request for
+'getwebinardetails()' would be be "getwebinardetails".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Named elements of URL for specific query desired, such as
+'webinar_id'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Endpoint URL to be passed to querying tools
+</p>
+
+
+</div>

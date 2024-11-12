@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZRA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dynamic Plots for Time Series Forecasting</h2>
+
+<h3>Description</h3>
+
+<p>Dynamic Plots for Time Series Forecasting
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZRA(data, FP = 10, SL = c(0.8, 0.95), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>(ts) Time series data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FP</code></td>
+<td>
+<p>(numeric) Forecast period.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SL</code></td>
+<td>
+<p>(numeric) significance levels.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to the forecast-function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An Object of class "ZRA".
+</p>
+
+
+<h3>See Also</h3>
+
+<p>forecast, dygraphs
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zra &lt;- ZRA(fdeaths)
+plot(zra, zero = TRUE)
+</code></pre>
+
+
+</div>

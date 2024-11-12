@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>weed.update</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Weed model - calculate change for one year</h2>
+
+<h3>Description</h3>
+
+<p>The Weed model - calculate change for one year
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">weed.update(d, S, SSBa, DSBa, Soil, Crop, Herb, param)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>d</code></td>
+<td>
+<p>: weed density at seed emergence (plants/m2) - value for year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>S</code></td>
+<td>
+<p>: seed production per m2 - value for year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>SSBa</code></td>
+<td>
+<p>: surface seedbank after tillage (grains/m2) - value for year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DSBa</code></td>
+<td>
+<p>: deep seedbank after tillage (grains/m2) - value for year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Soil</code></td>
+<td>
+<p>: value for soil decision (1 or 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Crop</code></td>
+<td>
+<p>: value for crop decision (1 or 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Herb</code></td>
+<td>
+<p>: value for herbicide treatment decision (1 or 0)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>: vector of the 16 parameters</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector with values of state variables for year+1
+</p>
+
+
+</div>

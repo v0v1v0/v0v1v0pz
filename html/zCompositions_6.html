@@ -1,0 +1,207 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lrDA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Log-ratio DA algorithm
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements a simulation-based Data Augmentation (DA) algorithm to impute left-censored values (e.g. values below detection limit, rounded zeros) via coordinates representation of compositional data sets which incorporate the information of the relative covariance structure. Alternatively, this function can be used to impute missing data. Multiple imputation estimates can be also obtained from the output.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lrDA(X, label = NULL, dl = NULL,
+        ini.cov=c("lrEM","complete.obs","multRepl"), frac = 0.65,
+        imp.missing = FALSE, n.iters = 1000, m = 1, store.mi = FALSE, closure = NULL,
+        z.warning = 0.8, z.delete = TRUE, delta = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+
+<p>Compositional data set (<code>matrix</code> or <code>data.frame</code> class).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote zeros/unobserved values in <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dl</code></td>
+<td>
+
+<p>Numeric vector or matrix of detection limits/thresholds. These must be given on the same scale as <code>X</code>. If <code>NULL</code> the column minima are used as thresholds.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ini.cov</code></td>
+<td>
+<p>Initial estimation of the log-ratio covariance matrix. It can be based on lrEM estimation (<code>"lrEM"</code>, default), complete observations (<code>"complete.obs"</code>)  or multiplicative simple replacement (<code>"multRepl"</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>frac</code></td>
+<td>
+
+<p>If <code>ini.cov="multRepl"</code>, parameter for initial multiplicative simple replacement (<code>multRepl</code>) (default = 0.65).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imp.missing</code></td>
+<td>
+<p>If <code>TRUE</code> then unobserved data identified by <code>label</code> are treated as missing data (default = <code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.iters</code></td>
+<td>
+
+<p>Number of iterations for the DA algorithm (default = 1000).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+
+<p>Number of multiple imputations (default = 1).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>store.mi</code></td>
+<td>
+
+<p>Logical value. If <code>m&gt;1</code> creates a list with <code>m</code> imputed data matrices. (<code>store.mi=FALSE</code>, default).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>closure</code></td>
+<td>
+<p>Closure value used to add a residual part if needed when multiplicative simple replacement is used to initiate the DA algorithm, either directly (<code>ini.cov="multRepl"</code>) or as part of lrEM estimation (<code>ini.cov="lrEM"</code>) (see <code>?multRepl</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.warning</code></td>
+<td>
+<p>Threshold used to identify individual rows or columns including an excess of zeros/unobserved values (to be specify in proportions, default <code>z.warning=0.8</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.delete</code></td>
+<td>
+<p>Logical value. If set to <code>TRUE</code>, rows/columns identified by <code>z.warning</code> are omitted in the imputed data set. Otherwise, the function stops in error when rows/columns are identified by <code>z.warning</code> (default <code>z.delete=TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delta</code></td>
+<td>
+<p>This argument has been deprecated and replaced by <code>frac</code> (see package's NEWS for details).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>After convergence of the Markov chain Monte Carlo (MCMC) iterative process to its steady state, this function imputes unobserved compositional parts by simulated values from their posterior predictive distributions through coordinates representation, given the information from the observed data. For left-censoring problems, it allows for either single (<code>vector</code> form) or multiple (<code>matrix</code> form, same size as <code>X</code>) limits of detection by component. Any threshold value can be set for non-censored elements (e.g. use 0 if no threshold for a particular column or element of the data matrix).
+</p>
+<p>It produces imputed data sets on the same scale as the input data set. If <code>X</code> is not closed to a constant sum, then the results are adjusted to provide a compositionally equivalent data set, expressed in the original scale, which leaves the absolute values of the observed components unaltered.
+</p>
+<p>The common conjugate normal inverted-Wishart distribution with non-informative Jeffreys prior has been assumed for the model parameters in the coordinates space. Under this setting, convergence is expected to be fast (<code>n.iters</code> set to 1000 by default). Besides, considering EM parameter estimates as initial point for the DA algorithm (<code>ini.cov="lrEM"</code>) assures faster convergence by starting near the centre of the posterior distribution. Note that the estimation of the covariance matrix requires a regular data set, i.e. having more observations than variables in the data.
+</p>
+<p>By setting <code>m</code> greater than 1, the procedure also allows for multiple imputations of the censored values drawn at regular intervals after convergence. In this case, in addition to the burn-in period for convergence, <code>n.iters</code> determines the gap, large enough to prevent from correlated values, between successive imputations. The total number of iterations is then <code>n.iters*m</code>. By default, a single imputed data set results from averaging the <code>m</code> imputations in the space of coordinates. If <code>store.mi=TRUE</code>, a list with <code>m</code> imputed data sets is generated instead.
+</p>
+<p>In the case of censoring patterns involving samples containing only one observed component, these are imputed by multiplicative simple replacement (<code>multRepl</code>) and a warning message identifying them is printed.
+</p>
+
+<p><em>Missing data imputation</em>
+</p>
+<p>This function can be employed to impute missing data by setting <code>imp.missing = TRUE</code>. For this case, the argument <code>label</code> indicates the unique label for missing values. The argument <code>dl</code> is ignored as it is meaningless here.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> object containing the imputed compositional data set expressed in the original scale, or a <code>list</code> of imputed data sets if multiple imputation is carried out (<code>m&gt;1</code>) and <code>store.mi=TRUE</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Palarea-Albaladejo J, Martin-Fernandez JA, Olea, RA. A bootstrap estimation scheme for chemical compositional data with nondetects. Journal of Chemometrics 2014; 28: 585-599.
+</p>
+<p>Palarea-Albaladejo J. and Martin-Fernandez JA. zCompositions – R package for multivariate imputation of left-censored data under a compositional approach. Chemometrics and Intelligence Laboratory Systems 2015; 143: 85-96.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code>, <code>lrEM</code>, <code>lrSVD</code>, <code>multRepl</code>, <code>multLN</code>, <code>multKM</code>, <code>cmultRepl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Data set closed to 100 (percentages, common dl = 1%)
+X &lt;- matrix(c(26.91,8.08,12.59,31.58,6.45,14.39,
+              39.73,26.20,0.00,15.22,6.80,12.05,
+              10.76,31.36,7.10,12.74,31.34,6.70,
+              10.85,46.40,31.89,10.86,0.00,0.00,
+              7.57,11.35,30.24,6.39,13.65,30.80,
+              38.09,7.62,23.68,9.70,20.91,0.00,
+              27.67,7.15,13.05,32.04,6.54,13.55,
+              44.41,15.04,7.95,0.00,10.82,21.78,
+              11.50,30.33,6.85,13.92,30.82,6.58,
+              19.04,42.59,0.00,38.37,0.00,0.00),byrow=TRUE,ncol=6)
+
+# Imputation by single simulated values
+X_lrDA &lt;- lrDA(X,label=0,dl=rep(1,6),ini.cov="multRepl",n.iters=150)
+
+# Imputation by multiple imputation (m = 5, one imputation every 150 iterations)
+X_milrDA &lt;- lrDA(X,label=0,dl=rep(1,6),ini.cov="multRepl",m=5,n.iters=150)
+
+# Multiple limits of detection by component
+mdl &lt;- matrix(0,ncol=6,nrow=10)
+mdl[2,] &lt;- rep(1,6)
+mdl[4,] &lt;- rep(0.75,6)
+mdl[6,] &lt;- rep(0.5,6)
+mdl[8,] &lt;- rep(0.5,6)
+mdl[10,] &lt;- c(0,0,1,0,0.8,0.7)
+
+X_lrDA2 &lt;- lrDA(X,label=0,dl=mdl,ini.cov="multRepl",n.iters=150)
+
+# Non-closed compositional data set
+data(LPdata) # data (ppm/micrograms per gram)
+dl &lt;- c(2,1,0,0,2,0,6,1,0.6,1,1,0,0,632,10) # limits of detection (0 for no limit)
+LPdata2 &lt;- subset(LPdata,select=-c(Cu,Ni,La))  # select a subset for illustration purposes
+dl2 &lt;- dl[-c(5,7,10)]
+
+## Not run:  # May take a little while
+LPdata2_lrDA &lt;- lrDA(LPdata2,label=0,dl=dl2)
+## End(Not run)
+
+## Not run:  # May take a little while
+# Treating zeros as missing data for illustration purposes only
+LPdata2_lrDAmiss &lt;- lrDA(LPdata2,label=0,imp.missing=TRUE,closure=10^6)
+## End(Not run)
+
+</code></pre>
+
+
+</div>

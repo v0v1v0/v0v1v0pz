@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Expand_Temperatures</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Adjusting the temperature schedule</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to adjust the temperature schedule so that it is more (or less) strict than the original.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Expand_Temperatures(
+  temperatures,
+  loglike,
+  rho,
+  bisec_tol = .Machine$double.eps^0.25
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>temperatures</code></td>
+<td>
+<p>A vector of length <code class="reqn">T</code> temperatures for the power posterior temperatures.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>loglike</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">T</code> matrix of log likelihood values corresponding to the samples.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho</code></td>
+<td>
+<p>The tolerance for the new temperatures. Temperatures are selected so that the conditional effective sample size (CESS) at each temperature is <code class="reqn">\rho*N</code> where <code class="reqn">N</code> is the population size.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bisec_tol</code></td>
+<td>
+<p>The tolerance for the bisection method used in selecting temperatures. The default is <code>.Machine$double.eps^0.25</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list is returned, containing the following components:
+</p>
+
+<ul>
+<li> <p><code>temperatures_all</code>: The new set of temperatures of length <code class="reqn">tau</code>.
+</p>
+</li>
+<li> <p><code>relevant_samples</code>: A vector of length <code class="reqn">tau</code> containing indices to show which particle sets the new temperatures are based on.
+</p>
+</li>
+<li> <p><code>logw</code>: An <code class="reqn">N</code> by <code class="reqn">tau</code> matrix of log normalised weights of the particles
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Leah F. South
+</p>
+
+
+<h3>References</h3>
+
+<p>South, L. F., Oates, C. J., Mira, A., &amp; Drovandi, C. (2019). Regularised zero variance control variates for high-dimensional variance reduction. <a href="https://arxiv.org/abs/1811.05073">https://arxiv.org/abs/1811.05073</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code>evidence</code> for functions to estimate the evidence, <code>VDP</code> for an example and ZVCV for more package details.
+</p>
+
+
+</div>

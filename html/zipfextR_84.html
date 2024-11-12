@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_zipfpss</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Zero Inflated Zipf-Poisson Stop Sum Distribution (ZI Zipf-PSS).</h2>
+
+<h3>Description</h3>
+
+<p>Probability mass function for the zero inflated Zipf-PSS distribution with parameters <code class="reqn">\alpha</code>, <code class="reqn">\lambda</code> and <code class="reqn">w</code>.
+The support of thezero inflated Zipf-PSS distribution are the positive integer numbers including the zero value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">d_zi_zipfpss(x, alpha, lambda, w, log = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector of positive integer values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Value of the <code class="reqn">\lambda</code> parameter (<code class="reqn">\lambda &gt; 0</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>w</code></td>
+<td>
+<p>Value of the <code class="reqn">w</code> parameter (0 &lt; <code class="reqn">w &lt; 1</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log</code></td>
+<td>
+<p>Logical; if TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The support of the <code class="reqn">\lambda</code> parameter increases when the distribution is truncated at zero being
+<code class="reqn">\lambda \geq 0</code>. It has been proved that when <code class="reqn">\lambda = 0</code> one has the degenerated version of the distribution at one.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Panjer, H. H. (1981). Recursive evaluation of a family of compound
+distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 22-26.
+</p>
+<p>Sundt, B., &amp; Jewell, W. S. (1981). Further results on recursive evaluation of
+compound distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 27-39.
+
+</p>
+
+
+</div>

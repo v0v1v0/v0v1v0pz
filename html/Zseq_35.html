@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Thabit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Thabit numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A055010">A055010</a>, the <em>n</em>th <em>Thabit</em> number is given as
+</p>
+<p style="text-align: center;"><code class="reqn">A_n = 3*2^{n-1}-1</code>
+</p>
+
+<p>where the first 6 entries are  	0, 2, 5, 11, 23, 47 with <code class="reqn">A_0 = 0.</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Thabit(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 30 Thabit numbers
+print(Thabit(30))
+
+</code></pre>
+
+
+</div>

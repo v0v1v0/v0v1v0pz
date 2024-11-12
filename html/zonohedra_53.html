@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>matroid-props</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+matroid properties
+</h2>
+
+<h3>Description</h3>
+
+<p>get some important boolean properties of a matrix,
+see <b>Matroid - Wikipedia</b> for the definitions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'matroid'
+is_simple( x )
+
+## S3 method for class 'matroid'
+is_uniform( x )
+
+## S3 method for class 'matroid'
+is_paving( x )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a matroid object, as returned from the constructor <code>matroid()</code>
+</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>is_simple()</code> returns a logical.
+A matroid is <em>simple</em> iff it has no loops and no multiple groups.
+<br><br><code>is_uniform()</code> returns a logical.
+A matroid is <em>uniform</em> iff all the hyperplanes have the same size,
+which is the rank-1.
+<br><br><code>is_paving()</code> returns a logical.
+For the definition of <em>paving</em> see <b>Paving Matroid - Wikipedia</b>.
+This property is important because the hyperplane axioms
+are fairly easy to check.
+</p>
+
+
+<h3>References</h3>
+
+<p>Matroid - Wikipedia.
+<a href="https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057">https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057</a>
+</p>
+<p>Paving Matroid - Wikipedia.
+<a href="https://en.wikipedia.org/w/index.php?title=Paving_matroid&amp;oldid=1021966244">https://en.wikipedia.org/w/index.php?title=Paving_matroid&amp;oldid=1021966244</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>matroid()</code>
+</p>
+
+
+</div>

@@ -1,0 +1,38 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>standardize_lookup_table</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper function to standardize the <code>lookup_table</code>.</h2>
+
+<h3>Description</h3>
+
+<p>Preprocessing the lookup table to convert it to a list can take some time, so
+when possible, we want to do it only once. Therefore we offload it to a
+helper function
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">standardize_lookup_table(lookup_table)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>lookup_table</code></td>
+<td>
+<p>The unstandardized lookup table (must still be one of the
+formats specified for the <code>lookup()</code> function).</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The lookup table as a list.
+</p>
+
+
+</div>

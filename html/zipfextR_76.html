@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfpolylogMean</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Expected value of the ZipfPolylog distribution.</h2>
+
+<h3>Description</h3>
+
+<p>Computes the expected value of the ZipfPolylog distribution for given values of parameters
+<code class="reqn">\alpha</code> and <code class="reqn">\beta</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zipfpolylogMean(alpha, beta, tolerance = 10^(-4))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 2</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Value of the <code class="reqn">\beta</code> parameter (<code class="reqn">\beta \in (-\infty, +\infty)</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tolerance</code></td>
+<td>
+<p>Tolerance used in the calculations (default = <code class="reqn">10^{-4}</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A positive real value corresponding to the mean value of the ZipfPolylog distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zipfpolylogMean(0.5, 0.8)
+zipfpolylogMean(2.5, 0.8, 10^(-3))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_mo_usps</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Missouri USPS Three-digit ZIP Code Labels, August 2024</h2>
+
+<h3>Description</h3>
+
+<p>A tibble containing the USPS Three-digit ZIP Code labels for
+August 2024.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(zi_mo_usps)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 37 rows and 3 variables:
+</p>
+
+<dl>
+<dt>zip3</dt>
+<dd>
+<p>three-digit United States Postal Service ZIP Code</p>
+</dd>
+<dt>label_area</dt>
+<dd>
+<p>area associated with the three-digit ZIP Code</p>
+</dd>
+<dt>label_state</dt>
+<dd>
+<p>state associated with the three-digit ZIP Code</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The data included in <code>zi_mo_usps</code> can be replicated with the
+following code: <code>zi_load_labels(type = "zip3", source = "USPS",
+  vintage = 202408)</code>. After downloading the data, subset to
+<code>label_state == "MO"</code>.
+</p>
+
+
+<h3>Source</h3>
+
+<p>U.S. Postal Service Facility Access and Shipment Tracking (FAST) Database
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::str(zi_mo_usps)
+utils::head(zi_mo_usps)
+
+</code></pre>
+
+
+</div>

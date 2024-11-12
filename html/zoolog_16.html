@@ -1,0 +1,130 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>StandardizeNomenclature</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Standardize Nomenclature</h2>
+
+<h3>Description</h3>
+
+<p>Functions to map the user provided nomenclature into a standard one
+as defined in a thesaurus.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">StandardizeNomenclature(x, thesaurus, mark.unknown = FALSE)
+
+StandardizeDataSet(data, thesaurusSet = zoologThesaurus)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Character vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurus</code></td>
+<td>
+<p>A thesaurus object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mark.unknown</code></td>
+<td>
+<p>Logical. If <code>FALSE</code> (default) the strings not found in the
+thesaurus are kept without change. If <code>TRUE</code> the strings not in the
+thesaurus are set to <code>NA</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A data frame.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurusSet</code></td>
+<td>
+<p>A thesaurus set.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>StandardizeNomenclature</code> standardizes a character vector
+according to a given thesaurus.
+</p>
+<p><code>StandardizeDataSet</code> standardizes column names and values of
+a data frame according to a thesaurus set.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>StandardizeNomenclature</code> returns a vector of the same length as the
+input vector <code>x</code>. The names present in the thesaurus are set to their
+corresponding category. The names not in the thesaurus are kept unchanged if
+<code>mark.unknown=FALSE</code> (default) and set to <code>NA</code> if
+<code>mark.unknown=TRUE</code>.
+</p>
+<p><code>StandardizeDataSet</code> returns a data frame with the same structure as
+the input <code>data</code>, but standardizing its nomenclature according to a thesaurus set
+including appropriate thesauri for its column names and for the values of
+a set of columns.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zoologThesaurus</code> for a description of the thesaurus and
+thesaurus set structure,
+</p>
+<p><code>ThesaurusReaderWriter</code>, <code>ThesaurusManagement</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Select the thesaurus for taxa present in the thesaurus set
+## zoolog::zoologThesaurus:
+thesaurus &lt;- zoologThesaurus$taxon
+thesaurus
+## Standardize an heterodox vector of taxa:
+StandardizeNomenclature(c("bota", "giraffe", "pig", "cattle"),
+                        thesaurus)
+## Observe that "giraffe" is kept unchanged since it is not included in
+## any thesaurus category.
+## But if mark.unknown is set to TRUE, it is marked as NA:
+StandardizeNomenclature(c("bota", "giraffe", "pig", "cattle"),
+                        thesaurus, mark.unknown = TRUE)
+
+## This thesaurus is not case sensitive:
+attr(thesaurus, "caseSensitive") #  == FALSE
+## Thus, names are recognized independently of their case:
+StandardizeNomenclature(c("bota", "BOTA", "Bota", "boTa"),
+                        thesaurus)
+
+## Load an example data frame:
+dataFile &lt;- system.file("extdata", "dataValenzuelaLamas2008.csv.gz",
+                        package = "zoolog")
+dataExample &lt;- utils::read.csv2(dataFile,
+                                na.strings = "",
+                                encoding = "UTF-8")
+## Observe mainly the first columns:
+head(dataExample[,1:5])
+## Stadardize the dataset:
+dataStandardized &lt;- StandardizeDataSet(dataExample, zoologThesaurus)
+head(dataStandardized[,1:5])
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>search_city</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Search ZIP codes for a given city within a state</h2>
+
+<h3>Description</h3>
+
+<p>Search ZIP codes for a given city within a state
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">search_city(city_name, state_abb)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>city_name</code></td>
+<td>
+<p>Name of major city to search</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>state_abb</code></td>
+<td>
+<p>Two-digit code for a U.S. state</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>tibble of all ZIP code data found for given city
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">search_city("Spring Lake", "NJ")
+search_city("Chappaqua", "NY")
+</code></pre>
+
+
+</div>

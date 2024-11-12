@@ -1,0 +1,83 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>in.zoom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Direct access to zoom functionalities.</h2>
+
+<h3>Description</h3>
+
+<p>Direct selection of a zoom method of the "session" type.
+Possibly of use in scripts?
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">in.zoom(...)
+
+move.to.click.zoom(...)
+
+inout.zoom(...)
+
+out.zoom(...)
+
+set.zoom(...)
+
+sq.zoom(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Extra arguments to zoomplot.zoom.</p>
+</td>
+</tr></table>
+<h3>Note</h3>
+
+<p>Each function starts a different interactive sequence
+</p>
+
+<ul>
+<li>
+<p>inout.zoom(): left click within bounds zooms in, outside bounds zoom out
+</p>
+</li>
+<li>
+<p>move.to.click.zoom(): center plot arround left click
+</p>
+</li>
+<li>
+<p>in.zoom(): each left click zooms in
+</p>
+</li>
+<li>
+<p>out.zoom(): each left click zooms out
+</p>
+</li>
+<li>
+<p>set.zoom(): ask for a magnification factor
+</p>
+</li>
+<li>
+<p>sq.zoom(): allow to click on the two corners of the desired region to zoom on
+</p>
+</li>
+</ul>
+<h3>Author(s)</h3>
+
+<p>Corentin M. Barbu
+</p>
+
+
+<h3>See Also</h3>
+
+<p>zm(), session.zoom().
+</p>
+
+
+</div>

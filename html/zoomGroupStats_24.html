@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>windowedTextConversationAnalysis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Run a windowed analysis on either a Zoom transcript or chat
+This function conducts a temporal window analysis on the conversation in
+either a Zoom transcript or chat. It replicates the textConversationAnalysis
+function across a set of windows at a window size specified by the user.</h2>
+
+<h3>Description</h3>
+
+<p>Run a windowed analysis on either a Zoom transcript or chat
+This function conducts a temporal window analysis on the conversation in
+either a Zoom transcript or chat. It replicates the textConversationAnalysis
+function across a set of windows at a window size specified by the user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">windowedTextConversationAnalysis(
+  inputData,
+  inputType,
+  meetingId,
+  speakerId,
+  sentMethod = "none",
+  timeVar = "automatic",
+  windowSize
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputData</code></td>
+<td>
+<p>data.frame output of either processZoomTranscript or processZoomChat</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inputType</code></td>
+<td>
+<p>string of either 'chat' or 'transcript'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>meetingId</code></td>
+<td>
+<p>string giving the column with the meeting identifier</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>speakerId</code></td>
+<td>
+<p>string giving the name of the identifier for the individual who made this contribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sentMethod</code></td>
+<td>
+<p>string giving the type of sentiment analysis to include, either 'aws' or 'syuzhet'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timeVar</code></td>
+<td>
+<p>name of variable giving the time marker to be used.
+For transcript, either use 'utteranceStartSeconds' or 'utteranceEndSeconds';
+for chat use 'messageTime'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>windowSize</code></td>
+<td>
+<p>integer value of the duration of the window in number of seconds</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list with two data.frames. In the first (windowlevel), each row is a temporal window.
+In the second (speakerlevel), each row is a user's metrics within a given temporal window.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">win.text.out = windowedTextConversationAnalysis(inputData=sample_transcript_sentiment_aws, 
+inputType="transcript", meetingId="batchMeetingId", speakerId="userName", sentMethod="aws", 
+timeVar="utteranceStartSeconds", windowSize=600)
+</code></pre>
+
+
+</div>

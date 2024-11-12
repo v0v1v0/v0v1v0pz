@@ -1,0 +1,162 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonohedron-section</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+compute the intersection of a plane and the boundary of a zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>Generically, a plane intersects the boundary of a
+zonohedron in a convex polygon.
+Computing that polygon is the chief goal of this function.
+<br>
+For a supporting plane, the intersection is a face of the zonohedron,
+but in this function only one point of intersection is computed and returned.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonohedron'
+section( x, normal, beta, tol=1.e-10, plot=FALSE, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normal</code></td>
+<td>
+
+<p>a non-zero numeric 3-vector - the normal of all the planes
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+
+<p>a numeric M-vector of line-constants.  
+The equation of the k'th plane k is: <code>&lt;x,normal&gt; = beta[k]</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+
+<p>a small positive number, used as the tolerance for the plane
+being considered a supporting plane
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+
+<p>if <code>TRUE</code>, the polygons formed by the the intersection 
+of the planes and the boundary of the zonohedron are
+<em>added</em> to an existing 3D plot of the zonohedron <code>x</code>,
+see <code>plot.zonohedron()</code>.
+The polygons are drawn in red.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Given a plane, the function finds all the facets of the zonohedron
+that intersect the plane.
+For each such facet it computes a single point of intersection
+on the boundary of the facet.
+For the parallelograms, the computation is done in a C function;
+and for zonogon facets with 3 or more generators,
+the computation is done in <code>section.zonogon()</code>.
+Orientation is handled carefully so that no point appears twice.
+The facets are not processed in order around the boundary,
+so these points are in no particular order.
+They are put in polygon order by sorting them by angle
+around a suitable "diameter" of the zonohedron.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>section.zonohedron()</code> returns a list of length M
+(=<code>length(beta)</code>),
+and the i'th item in the list is a data frame with these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>point</code></td>
+<td>
+
+<p>a Px3 matrix with the P points of the i'th polygon in the rows.
+If the plane does not intersect the zonohedron, then P=0
+and the matrix has 0 rows.
+If the plane is a supporting plane, the polygon is degenerate
+and P=1 and the matrix has 1 row.
+The row names of <code>section</code> are the indexes of the facets
+that contain the vertices of the polygon; see <b>Details</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hyperidx</code></td>
+<td>
+
+<p>index of a hyperplane that contains the given point
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sign</code></td>
+<td>
+
+<p>The sign specifying which of the 2 facets (selected or antipodal)
+contains the given point. The value is +1 or -1.
+</p>
+</td>
+</tr>
+</table>
+<p>The names of the list are readable strings that contain
+<code>normal</code> and <code>beta[i]</code>.
+</p>
+<p>In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The package <span class="pkg">rgl</span> is required for 3D plotting.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>plot.zonohedron()</code>,
+<code>section.zonogon()</code>
+</p>
+
+
+</div>

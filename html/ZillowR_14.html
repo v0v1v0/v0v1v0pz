@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zillow_web_service_id</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get/Set Zillow Web Service ID</h2>
+
+<h3>Description</h3>
+
+<p>Convenience functions to set your Zillow Web Service ID as a global option
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_zillow_web_service_id()
+
+set_zillow_web_service_id(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A character string of length 1 with your Zillow Web Service ID.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Each subscriber to Zillow Web Services is uniquely identified by an ID
+sequence, and every request to Web Services requires this ID. You may pass
+your ID to each ZillowR function explicitly, but by default each function
+uses the value saved in the global 'ZillowR-zws_id' option. The
+<code>get_zillow_web_service_id</code> and <code>set_zillow_web_service_id</code>
+functions make it easy to manipulate this option.
+</p>
+<p>Visit the following URL to register for your own Zillow Web Service ID: <br>
+http://www.zillow.com/webservice/Registration.htm
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>get_zillow_web_service_id</code> returns a character value with the current
+'ZillowR-zws_id' option, or <code>NULL</code> if unset.
+</p>
+<p><code>set_zillow_web_service_id</code> invisibly returns <code>NULL</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set_zillow_web_service_id('ZWSID')
+get_zillow_web_service_id()
+
+</code></pre>
+
+
+</div>

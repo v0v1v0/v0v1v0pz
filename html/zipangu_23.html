@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>label_kansuji</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Label numbers in Kansuji format</h2>
+
+<h3>Description</h3>
+
+<p>Automatically scales and labels with the Kansuji Myriad Scale (e.g. "Man",
+"Oku", etc).
+Use <code>label_kansuji()</code> converts the label value to either Kansuji value or a
+mixture of Arabic numerals and the Kansuji Scales for ten thousands,
+billions, and ten quadrillions.
+Use <code>label_kansuji_suffix()</code> converts the label value to an Arabic numeral
+followed by the Kansuji Scale with the suffix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">label_kansuji(
+  unit = NULL,
+  sep = "",
+  prefix = "",
+  big.mark = "",
+  number = c("arabic", "kansuji"),
+  ...
+)
+
+label_kansuji_suffix(
+  accuracy = 1,
+  unit = NULL,
+  sep = NULL,
+  prefix = "",
+  big.mark = "",
+  significant.digits = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>unit</code></td>
+<td>
+<p>Optional units specifier.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sep</code></td>
+<td>
+<p>Separator between number and Kansuji unit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>Symbols to display before value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>big.mark</code></td>
+<td>
+<p>Character used between every 3 digits to separate thousands.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>number</code></td>
+<td>
+<p>If Number is arabic, it will return a mixture of Arabic and the
+Kansuji Myriad Scale; if Kansuji, it will return only Kansuji numerals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments passed on to <code>base::prettyNum()</code>, <code>scales::label_number()</code> or
+<code>arabic2kansuji::arabic2kansuji_all()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>accuracy</code></td>
+<td>
+<p>A number to round to. Use (e.g.) 0.01 to show 2 decimal
+places of precision.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>significant.digits</code></td>
+<td>
+<p>Determines whether or not the value of accurary is
+valid as a significant figure with a decimal point. The default is FALSE, in
+which case if accurary is 2 and the value is 1.10, 1.1 will be displayed,
+but if TRUE and installed 'scales' package, 1.10 will be displayed.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>All <code>label_()</code> functions return a "labelling" function, i.e. a function
+that takes a vector x and returns a character vector of length(x) giving a
+label for each input value.
+</p>
+
+
+<h3>Examples</h3>
+
+<div class="sourceCode r"><pre>library("scales")
+demo_continuous(c(1, 1e9), label = label_kansuji())
+demo_continuous(c(1, 1e9), label = label_kansuji_suffix())
+</pre></div>
+
+
+</div>

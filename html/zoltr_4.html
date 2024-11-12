@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a model</h2>
+
+<h3>Description</h3>
+
+<p>Creates the model in the passed project using the passed list. Fails if a model with the passed name already exists.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_model(zoltar_connection, project_url, model_config)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>project_url</code></td>
+<td>
+<p>url of a project in zoltar_connection's projects. this is the project the new model will be created
+in</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model_config</code></td>
+<td>
+<p>A <code>list</code> containing a Zoltar model configuration. An example: example-model-config.json .
+Full documentation at <a href="https://docs.zoltardata.com/">https://docs.zoltardata.com/</a>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>model_url of the newly-created model
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  new_model_url &lt;- create_model(conn, "https://www.zoltardata.com/api/project/9/",
+                     jsonlite::read_json("example-model-config.json"))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

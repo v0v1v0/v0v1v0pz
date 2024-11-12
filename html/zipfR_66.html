@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lnre.goodness.of.fit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Goodness-of-fit Evaluation of LNRE Models (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>This function measures the goodness-of-fit of a LNRE model compared to
+an observed frequency spectrum, using a multivariate chi-squared test
+(Baayen 2001, p. 119ff).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  lnre.goodness.of.fit(model, spc, n.estimated=0, m.max=15)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an LNRE model object, belonging to a suitable subclass of
+<code>lnre</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spc</code></td>
+<td>
+<p>an observed frequency spectrum, i.e. an object of class
+<code>spc</code>.  This can either be the spectrum on which the model
+parameters have been estimated, or a different, independent spectrum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.estimated</code></td>
+<td>
+<p>number of parameters of the LNRE model that have
+been estimated on <code>spc</code>.  This number is automatically
+subtracted from the degrees of freedom of the resulting chi-squared
+statistic.  When <code>spc</code> is an independent spectrum,
+<code>n.estimated</code> should always be set to the default value of 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m.max</code></td>
+<td>
+<p>number of spectrum elements that will be used to compute
+the chi-squared statistic.  The default value of 15 is also used by
+Baayen (2001).  For small samples, it may be sensible to
+use fewer spectrum elements, e.g. by setting <code>m.max=10</code> or
+<code>m.max=5</code>.  Depending on how many degrees of freedom have to be
+subtracted, <code>m.max</code> should not be chosen too low.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>By default, the number of spectrum elements included in the
+calculation of the chi-squared statistic may be reduced automatically
+in order to ensure that it is not dominated by the sampling error of
+spectrum elements with very small expected frequencies (which are
+scaled up due to the small variance of these random variables).  As an
+ad-hoc rule of thumb, spectrum elements <code class="reqn">V_m</code> with variance less
+than 5 are excluded, since the normal approximation to their discrete
+distribution is likely to be inaccurate in this case.
+</p>
+<p>Automatic reduction is disabled when the parameter <code>m.max</code> is
+specified explicitly (use <code>m.max=15</code> to disable automatic
+reduction without changing the default value).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame with one row and the following variables:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>X2</code></td>
+<td>
+<p>value of the multivariate chi-squared statistic <code class="reqn">X^2</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>number of degrees of freedom of <code class="reqn">X^2</code>, corrected for the
+number of parameters that have been estimated on <code>spc</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>p-value corresponding to <code class="reqn">X^2</code></p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Baayen, R. Harald (2001). <em>Word Frequency Distributions.</em> Kluwer,
+Dordrecht.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>lnre</code> for more information about LNRE models
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## load spectrum of first 100k Brown tokens
+data(Brown100k.spc)
+
+## use this spectrum to compute zm and gigp
+## models
+zm &lt;- lnre("zm",Brown100k.spc)
+gigp &lt;- lnre("gigp",Brown100k.spc)
+
+## lnre.goodness.of.fit with appropriate
+## n.estimated value produces the same multivariate
+## chi-squared test that is reported in a model
+## summary
+
+## compare:
+zm
+lnre.goodness.of.fit(zm,Brown100k.spc,n.estimated=2)
+
+gigp
+lnre.goodness.of.fit(gigp,Brown100k.spc,n.estimated=3)
+
+## goodness of fit of the 100k models calculated on the
+## whole Brown spectrum (although this is superset of
+## 100k spectrum, let's pretend it is an independent
+## spectrum, and set n.estimated to 0)
+
+data(Brown.spc)
+
+lnre.goodness.of.fit(zm,Brown.spc,n.estimated=0)
+lnre.goodness.of.fit(gigp,Brown.spc,n.estimated=0)
+
+
+</code></pre>
+
+
+</div>

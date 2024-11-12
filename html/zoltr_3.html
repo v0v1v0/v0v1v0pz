@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>busy_poll_job</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Poll job's status</h2>
+
+<h3>Description</h3>
+
+<p>A convenience function that polls the passed Job's status waiting for either FAILED, TIMEOUT, or SUCCESS.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">busy_poll_job(zoltar_connection, job_url, verbose = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>job_url</code></td>
+<td>
+<p>URL of a valid job in zoltar_connection</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>if TRUE, print messages on job status poll</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  busy_poll_job(conn, "http://example.com/api/job/2/")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

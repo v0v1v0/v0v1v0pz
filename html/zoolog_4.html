@@ -1,0 +1,158 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dataValenzuelaLamas2008</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Example dataset</h2>
+
+<h3>Description</h3>
+
+<p>The dataset provided as an example originates from
+(Valenzuela-Lamas 2008). The dataset is written in
+Catalan, with the exception of some headings to facilitate understanding of
+its contents.
+</p>
+
+
+<h3>Format</h3>
+
+<p>The dataset is provided in the <span class="pkg">zoolog</span> <code>extdata</code> folder as a file
+in semicolon-separated values format but compressed with
+gzip to reduce its size:
+</p>
+
+<dl>
+<dt><code>dataValenzuelaLamas2008.csv.gz</code></dt>
+<dd></dd>
+</dl>
+<p>The file is provided in UTF-8 encoding. The file encoding is relevant
+because the dataset contains accents and special characters that needs to be
+correctly displayed. It can
+be directly open by <code>utils::read.csv2</code>, provided that the correct
+encoding is set (see examples below).
+</p>
+<p>Every row of the data.frame refers to one individual bone fragment unless
+otherwise stated in the <em>Observations</em> field ("Observacions").
+</p>
+<p>All the measurements are expressed in millimetres and were obtained with a
+manual calliper.
+</p>
+<p>The main headings in the database are:
+</p>
+
+<dl>
+<dt>Site</dt>
+<dd>
+<p>The faunal remains from three Iron Age archaeological sites were recorded
+(ALP = Alorda Park, TFC = Turó de la Font de la Canya, OLD = Olèrdola).</p>
+</dd>
+<dt>N inv	</dt>
+<dd>
+<p>A correlative number for each fragment.</p>
+</dd>
+<dt>UE</dt>
+<dd>
+<p>Refers to the Stratigraphic Unit (SU in English).</p>
+</dd>
+<dt>Especie</dt>
+<dd>
+<p>Refers to the species.</p>
+</dd>
+<dt>Os</dt>
+<dd>
+<p>Refers to the skeletal element.</p>
+</dd>
+<dt>Fragment</dt>
+<dd>
+<p>Refers to the preserved part in the vertical axis (distal, proximal, diaphysis,
+etc.).</p>
+</dd>
+<dt>Lat</dt>
+<dd>
+<p>Bone laterality: right (d) or left (e).</p>
+</dd>
+<dt>Vora</dt>
+<dd>
+<p>Refers to the preserved part in relation to the circumference (c), or a vertically,
+transversally and obliquely fragmented (sto).</p>
+</dd>
+<dt>Fract</dt>
+<dd>
+<p>Refers to fracture during field excavation or lab work.</p>
+</dd>
+<dt>Tafo</dt>
+<dd>
+<p>Refers to anthropic and post-depositional alterations.</p>
+</dd>
+<dt>Grau</dt>
+<dd>
+<p>Refers to degree of bone alteration in a scale from 0 (no alteration) to 4 (diaphysis completely altered).</p>
+</dd>
+<dt>Epif</dt>
+<dd>
+<p>Degree of fusion: s= fused, ns= unfused, ec = fusion visible. Also tooth wear is recorded here following (Gardeisen 1997).</p>
+</dd>
+<dt>Sexe</dt>
+<dd>
+<p>Sex: male (masc) / female (fem).</p>
+</dd>
+<dt>Traces</dt>
+<dd>
+<p>Refers to butchery marks. It may also include other observations.</p>
+</dd>
+<dt>Observacions</dt>
+<dd>
+<p>Observations.</p>
+</dd>
+<dt>Recinte</dt>
+<dd>
+<p>Refers to the number of silo structure (e.g. SJ8) or the room (e.g. AB)
+from which the material originates.</p>
+</dd>
+<dt>TPQ</dt>
+<dd>
+<p>Absolute chronology in Terminus Post Quem.</p>
+</dd>
+<dt>TAQ</dt>
+<dd>
+<p>Absolute chronology in Terminus Ante Quem.</p>
+</dd>
+<dt>Period</dt>
+<dd>
+<p>Chronological phasing.</p>
+</dd>
+<dt>Capsa</dt>
+<dd>
+<p>Box number that contains the item.</p>
+</dd>
+<dt>Measurement codes </dt>
+<dd>
+<p>The nomenclature follows (Von den Driesch 1976).</p>
+</dd>
+</dl>
+<h3>References</h3>
+
+<p>Gardeisen A (1997).
+“Exploitation des prélèvements et fichiers de spécialité (PRL, FAUNE, OS).”
+<em>Lattara</em>, <b>10</b>, 251–278.<br><br> Valenzuela-Lamas S (2008).
+<em>Alimentació i ramaderia al Penedès durant la protohistòria (segles VII-III aC)</em>.
+Societat Catalana d'Arqueologia (Premi d’Arqueologia - Memorial Josep Barber\‘a i Farr\'as, 5a edici\’o).
+<a href="http://www.scarqueologia.com/?page_id=10">http://www.scarqueologia.com/?page_id=10</a>.<br><br> Von den Driesch A (1976).
+<em>A guide to the measurement of animal bones from archaeological sites: as developed by the Institut für Palaeoanatomie, Domestikationsforschung und Geschichte der Tiermedizin of the University of Munich</em>, volume 1.
+Peabody Museum Press.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dataFile &lt;- system.file("extdata", "dataValenzuelaLamas2008.csv.gz",
+                        package="zoolog")
+dataExample &lt;- utils::read.csv2(dataFile,
+                                na.strings = "",
+                                encoding = "UTF-8")
+
+</code></pre>
+
+
+</div>

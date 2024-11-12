@@ -1,0 +1,126 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonoseg-invert</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+invert points in a zonoseg
+</h2>
+
+<h3>Description</h3>
+
+<p>For points in a zonoseg, find points in the unit cube that map to those points.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonoseg'
+invert( x, z, tol=0, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <code>zonoseg</code> object as returned by the constructor <code>zonoseg()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>a numeric M-vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>points that are within <code>tol</code> of a boundary point are
+taken to be that point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For a point in the interior of the zonoseg,
+there are infinitely many points in the cube that map to it.
+This function tries to find one with the fewest number of non-zero
+components.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>invert.zonoseg()</code> returns a <code>data.frame</code> with M rows and these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>the given point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pcube</code></td>
+<td>
+<p>a point in the unit cube that maps to <code>z</code>. For the 2 boundary points, <code>pcube</code> is a vertex. If <code>z</code> is outside the zonoseg, <code>pcube</code> is all <code>NA</code>, and a warning message is printed</p>
+</td>
+</tr>
+</table>
+<p>If the names of <code>z</code> are unique,
+they are copied to the row names of the output.
+The column names are copied from the ground set of the associated matroid.
+<br><br>
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonoseg()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zono1 = zonoseg( c(1,-2,3,0,-3,-4) )
+zono1
+# generators:        6 -- 3 negative, 2 positive, and 1 loops.
+# 
+# segment:                   [-9,4]
+#      value pcube.1 pcube.2 pcube.3 pcube.4 pcube.5 pcube.6
+# zmin    -9       0       1       0       0       1       1
+# zmax     4       1       0       1       0       0       0
+# 
+# 2-transition subsegment:   [-8,3]
+#             value source.1 source.2 source.3 source.4 source.5 source.6
+# tmin-2trans    -8        1        1        0        0        1        1
+# tmax-2trans     3        0        0        1        1        0        0
+
+
+z = c( 0, -3*pi, pi, 2*pi, getsegment(zono1) )
+
+invert( zono1, z )
+#           z   pcube.1   pcube.2   pcube.3   pcube.4   pcube.5   pcube.6
+# 1  0.000000 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000 0.0000000
+# 2 -9.424778        NA        NA        NA        NA        NA        NA
+# 3  3.141593 1.0000000 0.0000000 0.7138642 0.0000000 0.0000000 0.0000000
+# 4  6.283185        NA        NA        NA        NA        NA        NA
+# 5 -9.000000 0.0000000 1.0000000 0.0000000 0.0000000 1.0000000 1.0000000
+# 6  4.000000 1.0000000 0.0000000 1.0000000 0.0000000 0.0000000 0.0000000
+</code></pre>
+
+
+</div>

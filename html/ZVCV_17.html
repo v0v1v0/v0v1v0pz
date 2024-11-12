@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Phi_fn</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Phi matrix calculation</h2>
+
+<h3>Description</h3>
+
+<p>This function calculates the <code class="reqn">\Phi</code> matrix, which is a second order Stein operator applied
+to a polynomial. See South et al (2020) for further details. This function is not required for
+estimation but may be useful when evaluation samples are not initially available since
+estimators using heldout samples are of the form <code class="reqn">mean(f - f_hat) + b[1]</code> where <code class="reqn">f_hat = K0*a + Phi*b</code> for heldout K0 and Phi matrices.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Phi_fn(samples, derivatives, polyorder = NULL, apriori = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of samples from the target</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>derivatives</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of derivatives of the log target with respect to the parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>polyorder</code></td>
+<td>
+<p>(optional)        The order of the polynomial to be used in the parametric component, with a default of <code class="reqn">1</code>. We recommend keeping this value low (e.g. only 1-2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>apriori</code></td>
+<td>
+<p>(optional) A vector containing the subset of parameter indices to use in the polynomial. Typically this argument would only be used if the dimension of the problem is very large or if prior information about parameter dependencies is known. The default is to use all parameters <code class="reqn">1:d</code> where <code class="reqn">d</code> is the dimension of the target.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An <code class="reqn">N</code> by <code class="reqn">Q</code> matrix (where Q is determined by the polynomial order and the apriori).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Leah F. South
+</p>
+
+
+<h3>References</h3>
+
+<p>South, L. F., Karvonen, T., Nemeth, C., Girolami, M. and Oates, C. J. (2020). Semi-Exact Control Functionals From Sard's Method.  <a href="https://arxiv.org/abs/2002.00033">https://arxiv.org/abs/2002.00033</a>
+</p>
+
+
+</div>

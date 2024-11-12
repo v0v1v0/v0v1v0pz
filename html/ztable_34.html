@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>makeHeatmap</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Add gradient background color to ztable</h2>
+
+<h3>Description</h3>
+
+<p>Add gradient background color to ztable
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">makeHeatmap(
+  z,
+  palette = "Reds",
+  mycolor = NULL,
+  rows = NULL,
+  cols = NULL,
+  changeColor = TRUE,
+  reverse = FALSE,
+  margin = 0
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An object of class ztable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>palette</code></td>
+<td>
+<p>Name of color palette</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mycolor</code></td>
+<td>
+<p>user defined color vectors</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rows</code></td>
+<td>
+<p>columns to make heatmap</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cols</code></td>
+<td>
+<p>columns to make heatmap</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>changeColor</code></td>
+<td>
+<p>Logical. Whether of not change font color automatically</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reverse</code></td>
+<td>
+<p>If true, reverse the font color</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>margin</code></td>
+<td>
+<p>An integer. Choices are one of 0,1 and 2. 0(default), heatmap for all numeric data.
+1 ; rowwise heatmap, 2: columnwise heatmap.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(magrittr)
+ztable(head(mtcars)) %&gt;% makeHeatmap()
+## Not run: 
+ztable(head(mtcars)) %&gt;% makeHeatmap(palette="YlOrRd",cols=c(1,4,6),margin=2)
+ztable(head(mtcars)) %&gt;% makeHeatmap(rows=c(1,3,5),margin=1)
+require(moonBook)
+x=table(acs$smoking,acs$Dx)
+ztable(x) %&gt;% makeHeatmap
+ztable(x) %&gt;% makeHeatmap(palette="Blues")
+ztable(x) %&gt;% makeHeatmap(mycolor=gradientColor(low="yellow",mid="orange",high="red"))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

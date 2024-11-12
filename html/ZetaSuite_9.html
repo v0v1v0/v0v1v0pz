@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>SVM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Find a SVM curve to separate positive and negative controls.</h2>
+
+<h3>Description</h3>
+
+<p>Radical kernel SVM is constructed to maximally separate positive controls from negative controls in the prior defined Z range using e1071 packages of R, and therefore, the SVM curve is generated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">SVM(ECdataList)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>ECdataList</code></td>
+<td>
+<p>data list of output EventCoverage, names of list shoule be 'EC_N_D', 'EC_P_D', 'EC_N_I', 'EC_P_I' and 'ZseqList'</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A list of data.frame, including 'cutOffD' and 'cutOffI'.cutOffD and cutOffI are the deduced SVM.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yajing Hao, Shuyang Zhang, Junhui Li, Guofeng Zhao, Xiang-Dong Fu
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(countMat)
+data(negGene)
+data(posGene)
+ZscoreVal &lt;- Zscore(countMat,negGene)
+ECdataList &lt;- EventCoverage(ZscoreVal,negGene,posGene,binNum=10,combine=TRUE)
+SVM(ECdataList)
+
+</code></pre>
+
+
+</div>

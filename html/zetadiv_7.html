@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Ispline</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Transform data using I-splines</h2>
+
+<h3>Description</h3>
+
+<p>Evaluates the I-splines for all variables of a data frame, as performed in <code>Zeta.msgdm</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Ispline(dat, order.ispline = 2, kn.ispline = 1, rescale = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dat</code></td>
+<td>
+<p>A data frame whose columns are variables to be transformed using I-splines.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.ispline</code></td>
+<td>
+<p>Order of the I-spline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kn.ispline</code></td>
+<td>
+<p>Number of knots in the I-spline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale</code></td>
+<td>
+<p>Indicates how to rescale the values between 0 and 1. Default is 0, which divides the data by the maximum value. Any other value corresponds to setting the minimum value to 0.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>Ispline</code> returns a data frame with the same number of rows as dat and
+</p>
+<p><code>ncol(dat)</code> * <code>(order.ispline</code> + <code>kn.ispline)</code> columns.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ramsay, J. O. (1988). Monotone regression splines in action. <em>Statistical Science</em>, 425-441.
+</p>
+<p>Ferrier, S., Manion, G., Elith, J., &amp; Richardson, K. (2007). Using generalized dissimilarity modelling to analyse and predict patterns of beta diversity in regional biodiversity assessment. <em>Diversity and Distributions</em>, 13(3), 252-264.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.msgdm</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::data(bird.env.coarse)
+data.env &lt;- bird.env.coarse[,3:9]
+data.env.splines &lt;- Ispline(data.env)
+</code></pre>
+
+
+</div>

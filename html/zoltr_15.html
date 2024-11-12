@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>forecast_data_from_cdc_csv_file</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Loads and converts a CDC CSV file to Zoltar's native <code>list</code> format</h2>
+
+<h3>Description</h3>
+
+<p>Loads and converts a CDC CSV file to Zoltar's native <code>list</code> format
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">forecast_data_from_cdc_csv_file(season_start_year, cdc_csv_file)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>season_start_year</code></td>
+<td>
+<p>An integer specifying the "season" that cdc_csv_file is in. Used to convert EWs to
+YYYY_MM_DD_DATE_FORMAT. <span class="pkg">zoltr</span> uses week 30 as the season breakpoint, e.g. the "2016/2017 season" starts with</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cdc_csv_file</code></td>
+<td>
+<p>A CDC CSV file</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>cdc_csv_file's data as Zoltar's native <code>list</code> format, but only the "predictions" item, and not "meta"
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  forecast_data &lt;- forecast_data_from_cdc_csv_file(2016, "my_forecast.cdc.csv")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

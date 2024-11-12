@@ -1,0 +1,233 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>aSECF</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Approximate semi-exact control functionals (aSECF)</h2>
+
+<h3>Description</h3>
+
+<p>This function performs approximate semi-exact control functionals as described in South et al (2020). It uses a nystrom approximation and conjugate gradient to speed up SECF.
+This is faster than <code>SECF</code> for large <code class="reqn">N</code>. If you would like to choose
+between different kernels using cross-validation, then you can use <code>aSECF_crossval</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">aSECF(
+  integrands,
+  samples,
+  derivatives,
+  polyorder = NULL,
+  steinOrder = NULL,
+  kernel_function = NULL,
+  sigma = NULL,
+  K0 = NULL,
+  nystrom_inds = NULL,
+  est_inds = NULL,
+  apriori = NULL,
+  conjugate_gradient = TRUE,
+  reltol = 0.01,
+  diagnostics = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>integrands</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">k</code> matrix of integrands (evaluations of the function of interest)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of samples from the target</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>derivatives</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of derivatives of the log target with respect to the parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>polyorder</code></td>
+<td>
+<p>(optional)        The order of the polynomial to be used in the parametric component, with a default of <code class="reqn">1</code>. We recommend keeping this value low (e.g. only 1-2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>steinOrder</code></td>
+<td>
+<p>(optional)    This is the order of the Stein operator. The default is <code>1</code> in the control functionals paper (Oates et al, 2017) and <code>2</code> in the semi-exact control functionals paper (South et al, 2020).  The following values are currently available: <code>1</code> for all kernels and <code>2</code> for "gaussian", "matern" and "RQ". See below for further details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kernel_function</code></td>
+<td>
+<p>(optional)        Choose between "gaussian", "matern", "RQ", "product" or "prodsim". See below for further details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>(optional)            The tuning parameters of the specified kernel. This involves a single length-scale parameter in "gaussian" and "RQ", a length-scale and a smoothness parameter in "matern" and two parameters in "product" and "prodsim". See below for further details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K0</code></td>
+<td>
+<p>(optional) The kernel matrix. One can specify either this or all of <code>sigma</code>, <code>steinOrder</code> and <code>kernel_function</code>. The former involves pre-computing the kernel matrix using <code>K0_fn</code> and is more efficient when using multiple estimators out of <code>CF</code>, <code>SECF</code> and  <code>aSECF</code> or when using the cross-validation functions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nystrom_inds</code></td>
+<td>
+<p>(optional) The sample indices to be used in the Nystrom approximation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>est_inds</code></td>
+<td>
+<p>(optional) A vector of indices for the estimation-only samples. The default when <code>est_inds</code> is missing or <code>NULL</code> is to perform both estimation of the control variates and evaluation of the integral using all samples. Otherwise, the samples from <code>est_inds</code> are used in estimating the control variates and the remainder are used in evaluating the integral. Splitting the indices in this way can be used to reduce bias from adaption and to make computation feasible for very large sample sizes (small <code>est_inds</code> is faster), but in general in will increase the variance of the estimator.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>apriori</code></td>
+<td>
+<p>(optional) A vector containing the subset of parameter indices to use in the polynomial. Typically this argument would only be used if the dimension of the problem is very large or if prior information about parameter dependencies is known. The default is to use all parameters <code class="reqn">1:d</code> where <code class="reqn">d</code> is the dimension of the target.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conjugate_gradient</code></td>
+<td>
+<p>(optional) A flag for whether to perform conjugate gradient to further speed up the nystrom approximation (the default is true).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reltol</code></td>
+<td>
+<p>(optional) The relative tolerance for choosing when the stop conjugate gradient iterations (the default is 1e-02).
+using <code>squareNorm</code>, as long as the <code>nystrom_inds</code> are <code>NULL</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diagnostics</code></td>
+<td>
+<p>(optional) A flag for whether to return the necessary outputs for plotting or estimating using the fitted model. The default is <code>false</code> since this requires some additional computation when <code>est_inds</code> is <code>NULL</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list with the following elements:
+</p>
+
+<ul>
+<li> <p><code>expectation</code>: The estimate(s) of the (<code class="reqn">k</code>) expectations(s).
+</p>
+</li>
+<li> <p><code>cond_no</code>: (Only if <code>conjugate_gradient</code> = <code>TRUE</code>) The condition number of the matrix being solved using conjugate gradient.
+</p>
+</li>
+<li> <p><code>iter</code>: (Only if <code>conjugate_gradient</code> = <code>TRUE</code>) The number of conjugate gradient iterations
+</p>
+</li>
+<li> <p><code>f_true</code>: (Only if <code>est_inds</code> is not <code>NULL</code>) The integrands for the evaluation set. This should be the same as integrands[setdiff(1:N,est_inds),].
+</p>
+</li>
+<li> <p><code>f_hat</code>: (Only if <code>est_inds</code> is not <code>NULL</code>) The fitted values for the integrands in the evaluation set. This can be used to help assess the performance of the Gaussian process model.
+</p>
+</li>
+<li> <p><code>a</code>: (Only if <code>diagnostics</code> = <code>TRUE</code>) The value of <code class="reqn">a</code> as described in South et al (2020), where predictions are of the form <code class="reqn">f_hat = K0*a + Phi*b</code> for heldout K0 and Phi matrices and estimators using heldout samples are of the form <code class="reqn">mean(f - f_hat) + b[1]</code>.
+</p>
+</li>
+<li> <p><code>b</code>: (Only if <code>diagnostics</code> = <code>TRUE</code>) The value of <code class="reqn">b</code> as described in South et al (2020), where predictions are of the form <code class="reqn">f_hat = K0*a + Phi*b</code> for heldout K0 and Phi matrices and estimators using heldout samples are of the form <code class="reqn">mean(f - f_hat) + b[1]</code>.
+</p>
+</li>
+<li> <p><code>ny_inds</code>: (Only if <code>diagnostics</code> = <code>TRUE</code>) The indices of the samples used in the nystrom approximation (this will match nystrom_inds if this argument was not <code>NULL</code>).
+</p>
+</li>
+</ul>
+<h3>On the choice of <code class="reqn">\sigma</code>, the kernel and the Stein order</h3>
+
+<p>The kernel in Stein-based kernel methods is <code class="reqn">L_x L_y k(x,y)</code> where <code class="reqn">L_x</code> is a first or second order Stein operator in <code class="reqn">x</code> and <code class="reqn">k(x,y)</code> is some generic kernel to be specified.
+</p>
+<p>The Stein operators for distribution <code class="reqn">p(x)</code> are defined as:
+</p>
+
+<ul>
+<li> <p><strong><code>steinOrder=1</code></strong>: <code class="reqn">L_x g(x) = \nabla_x^T g(x) + \nabla_x \log p(x)^T g(x)</code> (see e.g. Oates el al (2017))
+</p>
+</li>
+<li> <p><strong><code>steinOrder=2</code></strong>: <code class="reqn">L_x g(x) = \Delta_x g(x) + \nabla_x log p(x)^T \nabla_x g(x)</code> (see e.g. South el al (2020))
+</p>
+</li>
+</ul>
+<p>Here <code class="reqn">\nabla_x</code> is the first order derivative wrt <code class="reqn">x</code> and <code class="reqn">\Delta_x = \nabla_x^T \nabla_x</code> is the Laplacian operator.
+</p>
+<p>The generic kernels which are implemented in this package are listed below.  Note that the input parameter <strong><code>sigma</code></strong> defines the kernel parameters <code class="reqn">\sigma</code>. 
+</p>
+
+<ul>
+<li> <p><strong><code>"gaussian"</code></strong>: A Gaussian kernel,
+</p>
+<p style="text-align: center;"><code class="reqn">k(x,y) = exp(-z(x,y)/\sigma^2)</code>
+</p>
+
+</li>
+<li> <p><strong><code>"matern"</code></strong>: A Matern kernel with <code class="reqn">\sigma = (\lambda,\nu)</code>,
+</p>
+<p style="text-align: center;"><code class="reqn">k(x,y) = bc^{\nu}z(x,y)^{\nu/2}K_{\nu}(c z(x,y)^{0.5})</code>
+</p>
+<p> where <code class="reqn">b=2^{1-\nu}(\Gamma(\nu))^{-1}</code>, <code class="reqn">c=(2\nu)^{0.5}\lambda^{-1}</code> and <code class="reqn">K_{\nu}(x)</code> is the modified Bessel function of the second kind. Note that <code class="reqn">\lambda</code> is the length-scale parameter and <code class="reqn">\nu</code> is the smoothness parameter (which defaults to 2.5 for <code class="reqn">steinOrder=1</code> and 4.5 for <code class="reqn">steinOrder=2</code>).
+</p>
+</li>
+<li> <p><strong><code>"RQ"</code></strong>: A rational quadratic kernel,
+</p>
+<p style="text-align: center;"><code class="reqn">k(x,y) = (1+\sigma^{-2}z(x,y))^{-1}</code>
+</p>
+
+</li>
+<li> <p><strong><code>"product"</code></strong>: The product kernel that appears in Oates et al (2017) with <code class="reqn">\sigma = (a,b)</code>
+</p>
+<p style="text-align: center;"><code class="reqn">k(x,y) = (1+a z(x) + a z(y))^{-1} exp(-0.5 b^{-2} z(x,y)) </code>
+</p>
+
+</li>
+<li> <p><strong><code>"prodsim"</code></strong>: A slightly different product kernel with <code class="reqn">\sigma = (a,b)</code> (see e.g. <a href="https://www.imperial.ac.uk/inference-group/projects/monte-carlo-methods/control-functionals/">https://www.imperial.ac.uk/inference-group/projects/monte-carlo-methods/control-functionals/</a>),
+</p>
+<p style="text-align: center;"><code class="reqn">k(x,y) = (1+a z(x))^{-1}(1 + a z(y))^{-1} exp(-0.5 b^{-2} z(x,y)) </code>
+</p>
+
+</li>
+</ul>
+<p>In the above equations, <code class="reqn">z(x) = \sum_j x[j]^2</code> and <code class="reqn">z(x,y) = \sum_j (x[j] - y[j])^2</code>. For the last two kernels, the code only has implementations for <code>steinOrder</code>=<code>1</code>. Each combination of <code>steinOrder</code> and <code>kernel_function</code> above is currently hard-coded but it may be possible to extend this to other kernels in future versions using autodiff. The calculations for the first three kernels above are detailed in South et al (2020).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Leah F. South
+</p>
+
+
+<h3>References</h3>
+
+<p>South, L. F., Karvonen, T., Nemeth, C., Girolami, M. and Oates, C. J. (2020). Semi-Exact Control Functionals From Sard's Method.  <a href="https://arxiv.org/abs/2002.00033">https://arxiv.org/abs/2002.00033</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See ZVCV for examples and related functions. See <code>aSECF_crossval</code> for a function to choose between different kernels for this estimator.
+</p>
+
+
+</div>

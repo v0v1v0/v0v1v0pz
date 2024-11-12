@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zcurve_clustered</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit a z-curve to clustered data</h2>
+
+<h3>Description</h3>
+
+<p><code>zcurve_clustered</code> is used to fit z-curve models to
+clustered data. The function requires a data object created with the
+<code>zcurve_data()</code> function as the input (where id denotes clusters).
+Two different methods that account for clustering ar implemented via
+the EM model: <code>"w"</code> for down weighting the likelihood of the test
+statistics proportionately to the number of repetitions in the clusters,
+and <code>"b"</code> for a nested bootstrap where only a single study from each
+bootstrap is selected for model fitting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zcurve_clustered(
+  data,
+  method = "b",
+  bootstrap = 1000,
+  parallel = FALSE,
+  control = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>an object created with <code>zcurve_data()</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>the method to be used for fitting. Possible options are
+down weighting <code>"w"</code> and nested bootstrap <code>"b"</code>.
+Defaults to <code>"w"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrap</code></td>
+<td>
+<p>the number of bootstraps for estimating CI. To skip
+bootstrap specify <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>whether the bootstrap should be performed in parallel.
+Defaults to <code>FALSE</code>. The implementation is not completely stable
+and might cause a connection error.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>additional options for the fitting algorithm more details in
+control EM.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The fitted z-curve object
+</p>
+
+
+<h3>References</h3>
+
+<p>There are no references for Rd macro <code style="white-space: pre;">⁠\insertAllCites⁠</code> on this help page.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zcurve()</code>, <code>summary.zcurve()</code>, <code>plot.zcurve()</code>, control_EM, control_density
+</p>
+
+
+</div>

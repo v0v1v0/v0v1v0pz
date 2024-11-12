@@ -1,0 +1,147 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>maize.muchow.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Maize model, with harvest index and yield from Muchow et al. (1990)</h2>
+
+<h3>Description</h3>
+
+<p>Maize model, with harvest index and yield.
+from Muchow RC, Sinclair TR, and Bennett JM (1990). Temperature and Solar Radiation
+Effects on Potential Maize Yield across Locations AGRONOMY JOURNAL, VOL. 82, MARCH-APRIL 1990
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">maize.muchow.model(Tbase1 = 8, TTE = 87, TTS = 67, Tbase2 = 0,
+  TTRUE = 500, TTM = 1150, TLN = 20, AM = 596, RUE1 = 1.6,
+  RUE2 = 1.2, K = 0.4, HImax = 0.5, Population = 7, sdate = 100,
+  ldate = 365, weather)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Tbase1</code></td>
+<td>
+<p>: base temperature before silking(degC)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TTE</code></td>
+<td>
+<p>: Thermal units from sowing to emergence/leaf growth (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TTS</code></td>
+<td>
+<p>: Thermal units from end of leaf growth to silking (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Tbase2</code></td>
+<td>
+<p>: base temperature after silking (degC)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TTRUE</code></td>
+<td>
+<p>: Thermal units from silking for RUE change (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TTM</code></td>
+<td>
+<p>: Thermal units from silking to physiological maturity (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TLN</code></td>
+<td>
+<p>: total number of leaves initiated (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>AM</code></td>
+<td>
+<p>: area of the largest leaf (cm2)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RUE1</code></td>
+<td>
+<p>: radiation use efficiency (g.MJ-1) from crop emergence until 500 thermal units (base 0 "C) after silking</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RUE2</code></td>
+<td>
+<p>: radiation use efficiency (g.MJ-1) from 500 thermal units (base 0 "C) after silking</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p>: radiation extinction coefficient (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>HImax</code></td>
+<td>
+<p>: maximum harvest index - genetic potential (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Population</code></td>
+<td>
+<p>: number of plant per square meter (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sdate</code></td>
+<td>
+<p>: sowing date (day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ldate</code></td>
+<td>
+<p>: end of simulation (day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weather</code></td>
+<td>
+<p>: daily weather dataframe</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with TT1, TT2, STADE, LN, LAI, B, HI, YIELD
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>mm.A.fct</code>, <code>mm.LN.fct</code>, <code>mm.FAS.fct</code>, <code>maize.multisy</code>,
+<code>mm.HI.fct</code>,<code>maize.muchow.graph</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># not run in package test
+# res = maize.muchow.model(weather=maize.weather(working.year=2010, working.site=1))
+#res$FinalYield
+</code></pre>
+
+
+</div>

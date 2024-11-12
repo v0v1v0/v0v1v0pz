@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>job_info_forecast_url</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get a new forecast upload's url</h2>
+
+<h3>Description</h3>
+
+<p>A helper function for jobs representing file uploads. Returns the URL of a newly-uploaded forecast
+from job_info.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">job_info_forecast_url(zoltar_connection, the_job_info)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>the_job_info</code></td>
+<td>
+<p>a <code>list</code> object as returned by <code>job_info()</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A URL of the new forecast
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  new_forecast_url &lt;- job_info_forecast_url(conn, "http://example.com/api/job/2/")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

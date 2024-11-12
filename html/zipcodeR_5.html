@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>is_zcta</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns true if the given ZIP code is also a ZIP code tabulation area (ZCTA)</h2>
+
+<h3>Description</h3>
+
+<p>Returns true if the given ZIP code is also a ZIP code tabulation area (ZCTA)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">is_zcta(zip_code)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zip_code</code></td>
+<td>
+<p>A 5-digit U.S. ZIP code</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>Boolean TRUE or FALSE based upon whether provided ZIP code is a ZCTA by testing whether it exists in the U.S. Census crosswalk data
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">is_zcta("90210")
+is_zcta("99999")
+is_zcta("07762")
+</code></pre>
+
+
+</div>

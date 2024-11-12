@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_compressor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a new compressor object</h2>
+
+<h3>Description</h3>
+
+<p>Initialize a new compressor object for zlib-based compression with specified settings.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_compressor(
+  level = -1L,
+  method = 8L,
+  wbits = 15L,
+  memLevel = 8L,
+  strategy = 0L,
+  zdict = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Compression level, integer between 0 and 9, or -1 for default.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Compression method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wbits</code></td>
+<td>
+<p>Window size bits.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>memLevel</code></td>
+<td>
+<p>Memory level for internal compression state.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>strategy</code></td>
+<td>
+<p>Compression strategy.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zdict</code></td>
+<td>
+<p>Optional predefined compression dictionary as a raw vector.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A SEXP pointer to the new compressor object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">compressor &lt;- create_compressor(level = 6, memLevel = 8)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>seedweight.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The SeedWeight model</h2>
+
+<h3>Description</h3>
+
+<p>The SeedWeight model is a logistic model of grain weight over time in wheat. The model was proposed by Darroch &amp; Baker (1990) in a study of grain filling in three spring wheat genotypes.
+This model has a single input variable, degree days after anthesis noted DD, and three parameters, noted W, B and C.
+Parameters are estimated from observations.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">seedweight.model(DD, W, B, C)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>DD</code></td>
+<td>
+<p>: degree days after anthesis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+<p>: parameter of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>B</code></td>
+<td>
+<p>: parameter of the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>C</code></td>
+<td>
+<p>: parameter of the model</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Seed Weight for each TT
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(1:500,seedweight.model(1:500, W=30,B=4,C=0.020),type="l",
+   xlab="degree days after anthesis", ylab="grain weight")
+</code></pre>
+
+
+</div>

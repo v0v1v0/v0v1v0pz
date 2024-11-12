@@ -1,0 +1,198 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>correctError</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> The ZooImage error correction (manual validation) tools </h2>
+
+<h3>Description</h3>
+
+<p>Open a web page for manual validation and error correction of predicted abundances in samples.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">correctError(zidb, classifier, data = zidbDatRead(zidb), mode = "validation",
+fraction = 0.05, sample.min = 100, sample.max = 200, grp.min = 2,
+random.sample = 0.1, algorithm = "rf", diff.max = 0.2, prop.bio = NULL,
+reset = TRUE, result = NULL)
+
+addItemsToTrain(train, CtxSmp, add.mode = "SV+NSV", threshold = NA,
+    dropItemsToTrain = dropItemsToTrain)
+dropItemsToTrain(train, cl, drop.nb)
+
+activeLearning(train, add.mode = "SV+NSV", threshold = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zidb</code></td>
+<td>
+<p> Path to a Zidb file. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>classifier</code></td>
+<td>
+<p> A ZIClass object appropriate for this sample and the desired classification. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p> A ZIDat or a ZITest object matching that sample (by default, it is the ZIDat object contained in the zidb file). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mode</code></td>
+<td>
+<p> The mode to use for error correction. By default, <code>mode = "validation"</code>,
+where particles are manually validated. <code>mode = "demo"</code> is the same one, but it sorts particles
+according to the Class variable in data, ignoring changes made in the user interface (so that one
+can explain the logic of the process without care about how particles are manually resorted).
+Finally, <code>mode = "stat"</code> do not display the user interface at all and calculates all steps
+directly to show gain from the process from 0 to 100% of the particles validated. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fraction</code></td>
+<td>
+<p> The fraction of items to validate at each step (1/20th by default). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample.min</code></td>
+<td>
+<p> Minimal number of items to take at each step. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sample.max</code></td>
+<td>
+<p> Maximal number of items to take at each step. In case the
+sample contains a very large number of items, the number of particles that
+are validated at each step are constrained by this parameter, and consequently,
+the total number of steps becomes large than 1/fraction, but usually, error
+correction allows to stop earlier. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grp.min</code></td>
+<td>
+<p> Minimal number of items to take for each group, on average. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>random.sample</code></td>
+<td>
+<p> Fraction of random sample considered, when validating suspect items. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>algorithm</code></td>
+<td>
+<p> Machine learning algorithm used to detect suspect items. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>diff.max</code></td>
+<td>
+<p> Maximum difference allowed between probabilities in first and second class before considering the item is suspect. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prop.bio</code></td>
+<td>
+<p> Weight to apply to the groups for considering them as suspects (use biological or external considerations to build this). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reset</code></td>
+<td>
+<p> Do we reset analysis in the case a temporary file already exists for that sample (recommended). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>result</code></td>
+<td>
+<p> Name of the object in the calling environment where the results will be stored (ZITest object).
+If not provided or <code>NULL</code>, it is the basename of the zidb file without extension plus
+<code>_valid</code>. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>train</code></td>
+<td>
+<p> the training set to complete. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CtxSmp</code></td>
+<td>
+<p> the contextual samples containing validated items.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add.mode</code></td>
+<td>
+<p> the mode for adding items, <code>"SV"</code>: Validated Suspects,
+<code>"NSV"</code>: Validated Non-Suspects, or <code>"SV+NSV"</code>: both (by default)). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold</code></td>
+<td>
+<p> the maximal number of items in each class of training set.
+This is used to decide when to drop items for the reworked training set. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dropItemsToTrain</code></td>
+<td>
+<p> the function to use to drop items in the training set
+(depending on threshold). By default, it is <code>dropItemsToTrain()</code>, but it
+could also be a custom function that has the same arguments. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cl</code></td>
+<td>
+<p> the class to consider. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop.nb</code></td>
+<td>
+<p> the number of items to drop. </p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>correctError()</code> returns nothing. It is called for its side-effect to install a web interface
+for manual validation of samples.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>zidbDatRead</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># TODO...
+</code></pre>
+
+
+</div>

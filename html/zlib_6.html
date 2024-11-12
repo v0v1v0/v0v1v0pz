@@ -1,0 +1,41 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_decompressor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a new decompressor object</h2>
+
+<h3>Description</h3>
+
+<p>Initialize a new decompressor object for zlib-based decompression.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_decompressor(wbits = 0L)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>wbits</code></td>
+<td>
+<p>The window size bits parameter. Default is 0.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A SEXP pointer to the new decompressor object.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">decompressor &lt;- create_decompressor()
+</code></pre>
+
+
+</div>

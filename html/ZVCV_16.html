@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>nearPD</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Nearest symmetric positive definite matrix</h2>
+
+<h3>Description</h3>
+
+<p>This function finds the nearest symmetric positive definite matrix to the given matrix.
+It is used throughout the package to handle numerical issues in matrix inverses
+and cholesky decompositions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">nearPD(K0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>K0</code></td>
+<td>
+<p>A square matrix</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The closest symmetric positive definite matrix to K0.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Adapted from Matlab code by John D'Errico
+</p>
+
+
+<h3>References</h3>
+
+<p>Higham, N. J. (1988). Computing a nearest symmetric positive semidefinite matrix. Linear Algebra and its Applications, 103, 103-118.
+</p>
+<p>D'Errico, J. (2013). nearestSPD Matlab function. <a href="https://uk.mathworks.com/matlabcentral/fileexchange/42885-nearestspd">https://uk.mathworks.com/matlabcentral/fileexchange/42885-nearestspd</a>.
+</p>
+
+
+</div>

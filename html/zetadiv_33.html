@@ -1,0 +1,161 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zeta.varpart</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variation partitioning for zeta diversity</h2>
+
+<h3>Description</h3>
+
+<p>Variation partitioning of zeta diversity for a specific order (number of assemblages or sites) over distance and environmental variables.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zeta.varpart(
+  msgdm.mod,
+  num.part = 2,
+  reg.type = "glm",
+  family = stats::gaussian(),
+  method.glm = "glm.fit.cons",
+  cons = -1,
+  cons.inter = 1,
+  kn = -1,
+  bs = "mpd"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>msgdm.mod</code></td>
+<td>
+<p>An object return by function <code>Zeta.msgdm</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>num.part</code></td>
+<td>
+<p>Number of partitions of zeta diversity. Can be 2 or 3.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reg.type</code></td>
+<td>
+<p>Type of regression for the multi-site generalised dissimilarity modelling. Options are "glm" for generalised linear models, "ngls" for negative linear models, "gam" for generalised additive models, "scam" for shape constrained additive models, and "ispline" for I-spline models, as recommended in generalised dissimilarity modelling by Ferrier <em>et al</em>. (2007).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>A description of the error distribution and link function to be used in the <code>glm</code>, <code>gam</code> and <code>scam</code> models (see <code>family</code> for details of family functions).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method.glm</code></td>
+<td>
+<p>Method used in fitting the generalised linear model. The default method <br> "glm.fit.cons" is an adaptation of method <code>glm.fit2</code> from package <code>glm2</code> using a negative least squares regression in the reweighted least squares. Another option is "glm.fit2", which corresponds to method <code>glm.fit2</code>; see help documentation for <code>glm.fit2</code> in package <code>glm</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons</code></td>
+<td>
+<p>type of constraint in the glm if <code>method.glm = "glm.fit.cons"</code>. Default is -1 for negative coefficients on the predictors. The other option is 1 for positive coefficients on the predictors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons.inter</code></td>
+<td>
+<p>type of constraint for the intercept. Default is 1 for positive intercept, suitable for Gaussian family. The other option is -1 for negative intercept, suitable for binomial family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kn</code></td>
+<td>
+<p>Number of knots in the GAM and SCAM. Default is -1 for determining kn automatically using Generalized Cross-validation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bs</code></td>
+<td>
+<p>A two-letter character string indicating the (penalized) smoothing basis to use in the scam model. Default is "<code>mpd</code>" for monotonic decreasing splines. see <code>smooth.terms</code> for an overview of what is available.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that, for a given regression, the variation explained is computed as 1-(RSS/TSS)*(v-1)/(v-p-1), where RSS is the residual sum of squares and TSS is the total sum of squares, v is the number of variables used in the regression (which is greater than the original number of variables for I-splines) and p is the number of samples. 1-(RSS/TSS) corresponds to the classical R-squared for linear regression only, and results for non-linear regressions should be interpreted with caution.
+</p>
+<p>The environmental variables can be numeric or factorial, and <code>order</code> must be greater than 1.
+</p>
+<p>For numeric variables, the pairwise difference between sites is computed and combined according to <code>method</code>. For factorial variables, the distance corresponds to the number of unique values over the number of assemblages of sites specified by <code>order</code>.
+</p>
+<p>Zeta is regressed against the differences of values of the environmental variables divided by the maximum difference for each variable, to be rescaled between 0 and 1. If <code>!is.null(xy)</code>, distances between sites are also divided by the maximum distance.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>Zeta.varpart</code> returns a data frame with one column containing the variation explained by each component <code>a</code> (the variation explained by distance alone), <code>b</code> (the variation explained by either distance or the environment), <code>c</code> (the variation explained by the environment alone) and <code>d</code> (the unexplained variation).
+</p>
+
+
+<h3>References</h3>
+
+<p>Hui C. &amp; McGeoch M.A. (2014). Zeta diversity as a concept and metric that unifies incidence-based biodiversity patterns. <em>The American Naturalist</em>, 184, 684-694.
+</p>
+<p>Borcard, D., Legendre, P. &amp; Drapeau, P. (1992). Partialling out the spatial component of ecological variation. <em>Ecology</em> 73, 1045-1055.
+</p>
+<p>Legendre, P. &amp;  Legendre, L.F. (2012). <em>Numerical ecology</em>, 3rd English edition. Elsevier Science BV, Amsterdam.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.decline.mc</code>, <code>Zeta.order.mc</code>, <code>Zeta.decline.ex</code>, <code>Zeta.order.ex</code>, <code>Zeta.msgdm</code>, <code>pie.neg</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::data(bird.spec.coarse)
+xy.bird &lt;- bird.spec.coarse[,1:2]
+data.spec.bird &lt;- bird.spec.coarse[,3:193]
+utils::data(bird.env.coarse)
+data.env.bird &lt;- bird.env.coarse[,3:9]
+
+zeta.bird &lt;- Zeta.msgdm(data.spec.bird, data.env.bird, xy.bird, sam = 100, order = 3)
+zeta.varpart.bird &lt;- Zeta.varpart(zeta.bird, method.glm = "glm.fit2")
+zeta.varpart.bird
+dev.new()
+pie.neg(zeta.varpart.bird[4:7,1], density = c(4, 0, 8, -1),
+    angle = c(90, 0, 0, 0),
+    labels = c("distance", "undistinguishable", "environment", "unexplained"),
+    radius = 0.9)
+
+##########
+
+utils::data(Marion.species)
+xy.marion &lt;- Marion.species[,1:2]
+data.spec.marion &lt;- Marion.species[,3:33]
+utils::data(Marion.env)
+data.env.marion &lt;- Marion.env[3:4]
+
+zeta.marion &lt;- Zeta.msgdm(data.spec.marion, data.env.marion, xy.marion, sam = 100,
+    order = 3, normalize = "Jaccard")
+zeta.varpart.marion &lt;- Zeta.varpart(zeta.marion, method.glm = "glm.fit2")
+zeta.varpart.marion
+dev.new()
+pie.neg(zeta.varpart.marion[4:7,1], density = c(4, 0, 8, -1),
+    angle = c(90, 0, 0, 0),
+    labels = c("distance", "undistinguishable", "environment", "unexplained"),
+    radius = 0.9)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>fit_zero_inflated_beta_random_effect</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit zero inflated beta random effect</h2>
+
+<h3>Description</h3>
+
+<p>Fit zero inflated beta random effect
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">fit_zero_inflated_beta_random_effect(
+  X = X,
+  Z = Z,
+  Y = Y,
+  subject_ind = subject_ind,
+  time_ind = time_ind,
+  component_wise_test = TRUE,
+  joint_test = TRUE,
+  quad_n = 30,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subject_ind</code></td>
+<td>
+<p>the subject index</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_ind</code></td>
+<td>
+<p>the time index</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>component_wise_test</code></td>
+<td>
+<p>boolean to run component-wise test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>joint_test</code></td>
+<td>
+<p>boolean to run joint test</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quad_n</code></td>
+<td>
+<p>number of points in gaussian quadrature</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>a boolean to enable more output</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a named list
+</p>
+
+<ul>
+<li>
+<p> logistic_est_table
+</p>
+</li>
+<li>
+<p> logistic_s1_est
+</p>
+</li>
+<li>
+<p> beta_est_table
+</p>
+</li>
+<li>
+<p> beta_s2_est
+</p>
+</li>
+<li>
+<p> beta_v_est
+</p>
+</li>
+<li>
+<p> loglikelihood
+</p>
+</li>
+<li>
+<p> joint_p
+</p>
+</li>
+</ul>
+</div>

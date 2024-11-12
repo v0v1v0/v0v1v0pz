@@ -1,0 +1,114 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_tickets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Zendesk Tickets</h2>
+
+<h3>Description</h3>
+
+<p>This function takes your Email Id, authentication token,
+sub-domain and start time as parameters and gets all the
+tickets which have been updated on or after the start
+time parameter. By default each page returns 1000 unique
+tickets and an "after_cursor" value which stores a
+pointer to the next page. After getting the first page
+it uses the pointer to fetch the subsequent pages.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_tickets(email_id, token, subdomain, start_time, remove_cols = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>email_id</code></td>
+<td>
+<p>Zendesk Email Id (username).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>token</code></td>
+<td>
+<p>Zendesk API token.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subdomain</code></td>
+<td>
+<p>Your organization's Zendesk sub-domain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start_time</code></td>
+<td>
+<p>String with a date or datetime to get all
+tickets modified after that date.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove_cols</code></td>
+<td>
+<p>Vector of column names to remove from the results.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The start time parameter should be in 'UTC' format as
+Zendesk uses the 'UTC' time zone when retrieving tickets
+after the start time. For example, the US Eastern Time Zone
+is currently four hours being UTC. If one wanted to get tickets
+starting on August 1 at 12 am, you would need to enter
+"2020-08-01 04:00:00". The user must do proper adjustment
+to accommodate the time zone difference, if desired. A
+date can be provided, it will retrieve results as of 12 am
+in the UTC time zone.
+</p>
+<p>Start and end times can be entered with or without the time
+component. End time cannot be in the future, but should work
+for values up to one minute prior to the current time.
+</p>
+<p>It's not a good practice to write down these authentication
+parameters in your code. There are various methods and
+packages available that are more secure; this package
+doesn't require you to use any one in particular.
+</p>
+<p>The remove_cols parameter allows the removal of custom fields causing errors.
+Errors occurred when a field was sometimes blank and assigned a logical type
+and then appended to non-blank, non-logical inside of purrr::map_dfr.
+See issue #1 on GH.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a Data Frame containing all tickets after the
+start time.
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://developer.zendesk.com/rest_api/docs/support/incremental_export#start_time">https://developer.zendesk.com/rest_api/docs/support/incremental_export#start_time</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+all_tickets &lt;- get_tickets(email_id, token, subdomain,
+  start_time = "2021-01-31 00:00:00", end_time = "2021-01-31 23:59:59"
+)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

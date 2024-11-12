@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Predict.msgdm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Predict zeta values for new environmental and distance data</h2>
+
+<h3>Description</h3>
+
+<p>Predict the zeta values for new environmental and distance data from the models returned by <code>Zeta.msgdm</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Predict.msgdm(model.msgdm, reg.type, newdata, type = "response")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model.msgdm</code></td>
+<td>
+<p>A model returned by <code>Zeta.msgdm</code>. The class of the model depends on the type of regression used in <code>Zeta.msgdm</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reg.type</code></td>
+<td>
+<p>Type of regression used in <code>Zeta.msgdm</code>. Options are "<code>glm</code>" for generalised linear models, "<code>ngls</code>" for negative linear models, "<code>gam</code>" for generalised additive models, "<code>scam</code>" for shape constrained additive models (with monotonic decreasing by default), and "<code>ispline</code>" for I-spline models (forcing monotonic decreasing), as recommended in generalised dissimilarity modelling by Ferrier <em>et al</em>. (2007).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p>A data frame with the new environmental and distance data. The names of the columns must be the same as the names used in the data frame used in <code>Zeta.msgdm</code>. For I-splines, the data frame must be generated beforehand from the original data by the function <code>Ispline</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>The type of prediction required, as for <code>predict.glm</code>. The default is on the scale of the response variable; the alternative "link" is on the scale of the linear predictors.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>Predict.msgdm</code> returns a vector of predicted zeta values.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ramsay, J. O. (1988). Monotone regression splines in action. <em>Statistical Science</em>, 425-441.
+</p>
+<p>Ferrier, S., Manion, G., Elith, J., &amp; Richardson, K. (2007). Using generalized dissimilarity modelling to analyse and predict patterns of beta diversity in regional biodiversity assessment. <em>Diversity and Distributions</em>, 13(3), 252-264.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.msgdm</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::data(bird.spec.fine)
+xy.bird &lt;- bird.spec.fine[1:500,1:2]
+data.spec.bird &lt;- bird.spec.fine[1:500,3:192]
+utils::data(bird.env.fine)
+data.env.bird &lt;- bird.env.fine[1:500,3:9]
+
+zeta.glm &lt;- Zeta.msgdm(data.spec.bird, data.env.bird, sam = 100, order = 3)
+newdata &lt;- data.frame(matrix(NA,100,ncol(data.env.bird)))
+names(newdata) &lt;- names(data.env.bird)
+for(z in 1:100){
+  samp &lt;- sample(1:104, 3, replace = FALSE)
+  newdata[z,] &lt;- apply(apply(bird.env.fine[501:604,3:9][samp,], 2,
+     stats::dist), 2, mean)
+}
+##rescale the data like during MS-GDM
+newdata &lt;- newdata/matrix(rep(zeta.glm$rescale.factor,100),
+   100,length(zeta.glm$rescale.factor),byrow=TRUE)
+new.zeta.glm &lt;- Predict.msgdm(model.msgdm = zeta.glm$model, reg.type = "glm",
+   newdata = newdata)
+
+
+
+zeta.ngls &lt;- Zeta.msgdm(data.spec.bird, data.env.bird, sam = 100, order = 3,
+   reg.type = "ngls", normalize = "Jaccard")
+newdata &lt;- data.frame(matrix(NA,100,ncol(data.env.bird)))
+names(newdata) &lt;- names(data.env.bird)
+for(z in 1:100){
+  samp &lt;- sample(1:104, 3, replace = FALSE)
+  newdata[z,] &lt;- apply(apply(bird.env.fine[501:604,3:9][samp,], 2, stats::dist),
+     2, mean)
+}
+##rescale the data like during MS-GDM
+newdata &lt;- newdata/matrix(rep(zeta.ngls$rescale.factor,100),
+   100,length(zeta.ngls$rescale.factor),byrow=TRUE)
+new.zeta.ngls &lt;- Predict.msgdm(model.msgdm = zeta.ngls$model, reg.type = "ngls",
+   newdata = newdata)
+</code></pre>
+
+
+</div>

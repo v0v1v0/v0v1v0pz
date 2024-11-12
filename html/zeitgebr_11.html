@@ -1,0 +1,127 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spectrogram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes spectrogram</h2>
+
+<h3>Description</h3>
+
+<p>This function builds spectrogram, using CWT, for each individual of a behavr table
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">spectrogram(var, data, period_range = c(hours(16), hours(32)),
+  resample_rate = 1/mins(15), FUN = cwt_spectrogram, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>var</code></td>
+<td>
+<p>variable to analyse</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>behavr table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>period_range</code></td>
+<td>
+<p>vector of size 2 defining minimal and maximal range of period to study (in seconds)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resample_rate</code></td>
+<td>
+<p>frequency to resample (up or down) the data at (in hertz)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FUN</code></td>
+<td>
+<p>function used to compute spectrograms (so far, only CWT is implemented via cwt_spectrogram)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments to be passed to FUN</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A spectrogram is a estimation of the local periodicity of a signal at a given time.
+In the context of circadian rhythm, it can be useful to understand how infradian rhythms change along the day or,
+for instance, how circadian rhythm change ver the course of an multi-day experiment.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A behavr::behavr table.
+In addition to the metadata, it contains data that encodes a spectrogram (i.e. power vs period).
+The data contains the columns:
+</p>
+
+<ul>
+<li> <p><code>t</code> – the time (in s) (same range the input time)
+</p>
+</li>
+<li> <p><code>period</code> – the period at which the <code>power</code> is computed, for a given <code>t</code> (in s)
+</p>
+</li>
+<li> <p><code>power</code> – the power the or equivalent (according to <code>FUN</code>)
+</p>
+</li>
+<li> <p><code>ridge</code> – a logical defining whether the point (<code>t</code> and <code>period</code>) is a ridge
+</p>
+</li>
+</ul>
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://rethomics.github.io/ggetho.html#spectrograms">spectrogram tutorial</a> – the relevant rehtomics tutorial
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul>
+<li> <p>periodogram – to compute periodogram instead
+</p>
+</li>
+<li> <p>cwt_spectrogram – The dunction use to compute individual spectrograms
+</p>
+</li>
+<li> <p>ggetho::ggspectro – to plot spectrograms
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(dams_sample)
+dt &lt;- dams_sample[id %in% dams_sample[meta=TRUE, ,id[1:5]]]
+spect_dt &lt;- spectrogram(activity, dt)
+
+
+require(ggetho)
+ggspectro(spect_dt) +
+        stat_tile_etho() +
+        scale_y_log10() +
+        facet_wrap(~ id)
+
+</code></pre>
+
+
+</div>

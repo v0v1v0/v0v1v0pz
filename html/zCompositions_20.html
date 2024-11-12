@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zVarArray</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variation array for grouped data</h2>
+
+<h3>Description</h3>
+
+<p>This function returns overall and separate variation arrays for groups
+in a compositional data set. Groups can be defined by either zero/unobserved data patterns or
+by a grouping factor in fully observed zero-free data sets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zVarArray(X, label = 0, groups = NULL, suppress.print = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Compositional data set (<code>matrix</code> or <code>data.frame</code> class).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote zeros/unobserved data in <code>X</code> (<code>label = 0</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>groups</code></td>
+<td>
+<p>Grouping factor in fully observed zero-free data sets (<code>groups = NULL</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>suppress.print</code></td>
+<td>
+<p>Suppress printed feedback (<code>suppress.print = FALSE</code>, default).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is mainly aimed to investigate heterogeneous relative variation
+structures in compositional data sets containing zeros or unobserved values. For each pattern of zero or unobserved values,
+log-ratio variances (upper triangle of variation matrix) and means (lower triangle of variation matrix) are computed from the
+available data. Note that (1) NAs are produced for log-ratio variances and means in groups containing less than two observations,
+and (2) at least two components must be available in each group to compute log-ratios.
+</p>
+<p>The overall estimate is obtained across groups by pairwise deletion. Note that, unlike the ordinary <code>var</code>
+function, maximum likelihood estimates of the variances are computed. That is,
+the observed sum of squares is divided by the corresponding number of observations n and not by n-1.
+</p>
+<p>Group-wise variation arrays can be obtained from fully observed zero-free data by setting a grouping factor
+using the argument <code>groups</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>List of variation arrays by pattern/group and overall.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Water)
+zPatterns(Water, label = 0)
+zVarArray(Water)
+
+# From a completed data set
+
+data(mdl) # matrix of limits of detection for Water
+Water_multKM &lt;- multKM(Water,label=0,dl=mdl) # nondetects imputation
+
+# Results split by two ficticious groups A and B
+zVarArray(Water_multKM,groups=rep(c("A","B"),each=50))
+</code></pre>
+
+
+</div>

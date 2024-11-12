@@ -1,0 +1,71 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zz_delete</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Delete file from Zamzar account</h2>
+
+<h3>Description</h3>
+
+<p>Delete file from Zamzar account provided a file id.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zz_delete(id = NULL, usr = NULL, verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>id</code></td>
+<td>
+<p>The target id for a file you wish to delete. Most likely returned from ‘zz get info()‘.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>usr</code></td>
+<td>
+<p>The username/API key you are using. If not set, the function
+will check if a key exists as a 'ZAMZAR_USR' variable  in '.Renviron' and use that.    
+</p>
+<p>See: <a href="https://developers.zamzar.com/user">https://developers.zamzar.com/user</a></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Boolean deciding whether or not verbose status messages
+should be returned. Defaults to 'FALSE'.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Please note that a Zamzar key passed as argument to 'usr' takes precedence over a
+Zamzar key extracted from an '.Renviron'.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A status message indicating either success or failure.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# An example of zz_delete() with a hardcoded file id
+
+zz_get(id = 12345678)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

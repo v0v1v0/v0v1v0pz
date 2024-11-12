@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.lassie</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print a lassie object</h2>
+
+<h3>Description</h3>
+
+<p>Print a <code>lassie</code> object as an array or a data.frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'lassie'
+print(x, type, what_x, range, what_range, what_sort, decreasing, na.rm, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>lassie</code> S3 object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>print style: 'array' for array or 'df' for data.frame.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what_x</code></td>
+<td>
+<p>vector specifying values to be returned:
+</p>
+
+<ul>
+<li>
+<p> 'local': local association measure values (default).
+</p>
+</li>
+<li>
+<p> 'obs': observed probabilities.
+</p>
+</li>
+<li>
+<p> 'exp': expected probabilities.
+</p>
+</li>
+<li>
+<p> 'local_p': p-value of local association (after running <code>permtest</code> or <code>chisqtest</code>).
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>range</code></td>
+<td>
+<p>range of values to be retained (vector of two numeric values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what_range</code></td>
+<td>
+<p>character specifying what value <code>range</code> refers to
+(same options as <code>what_x</code>).
+By default, takes the first value in <code>what_x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what_sort</code></td>
+<td>
+<p>character specifying according to which values should <code>x</code> be sorted
+(same options as <code>what_x</code>).
+By default, takes the first value in <code>what_x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decreasing</code></td>
+<td>
+<p>logical value specifying sort order.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>logical value indicating whether NA values should be stripped.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments passed on to methods. Not currently used.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>lassie</code>, <code>permtest</code>, <code>chisqtest</code>
+</p>
+
+
+</div>

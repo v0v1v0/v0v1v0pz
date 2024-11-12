@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>read_zipcode</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Read Japan post's zip-code file</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">read_zipcode(path, type = c("oogaki", "kogaki", "roman", "jigyosyo"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>local file path or zip file URL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Input file type, one of "oogaki", "kogaki", "roman", "jigyosyo"</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Reads zip-code data in csv format provided by japan post group and parse it as a data.frame.
+Corresponds to the available "oogaki", "kogaki", "roman" and "jigyosyo" types.
+These file types must be specified by the argument.
+</p>
+
+
+<h3>Value</h3>
+
+<p>tibble
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://www.post.japanpost.jp/zipcode/dl/readme.html">https://www.post.japanpost.jp/zipcode/dl/readme.html</a>,
+<a href="https://www.post.japanpost.jp/zipcode/dl/jigyosyo/readme.html">https://www.post.japanpost.jp/zipcode/dl/jigyosyo/readme.html</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Input sources
+read_zipcode(path = system.file("zipcode_dummy/13TOKYO_oogaki.CSV", package = "zipangu"),
+             type = "oogaki")
+read_zipcode(system.file("zipcode_dummy/13TOKYO_kogaki.CSV", package = "zipangu"),
+             "oogaki")
+read_zipcode(system.file("zipcode_dummy/KEN_ALL_ROME.CSV", package = "zipangu"),
+             "roman")
+read_zipcode(system.file("zipcode_dummy/JIGYOSYO.CSV", package = "zipangu"),
+             "jigyosyo")
+## Not run: 
+# Or directly from a URL
+read_zipcode("https://www.post.japanpost.jp/zipcode/dl/jigyosyo/zip/jigyosyo.zip")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

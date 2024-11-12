@@ -1,0 +1,65 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zscore</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Z-transformation for input matrix.</h2>
+
+<h3>Description</h3>
+
+<p>In this step, the input matrix is transformed to Z-score matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zscore(countMat, negGene)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>countMat</code></td>
+<td>
+<p>input data set. The siRNA/gene x readouts matrix from HTS2 or large-scale RNAi screens.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>negGene</code></td>
+<td>
+<p>negative control dataset, the siRNAs/genes used as negative controls in screening. Z-transfromation according to thses negative control siRNAs/genes for each readout.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The initial input matrix is arranged in N x M dimension, where each row contains individual functional readouts against a siRNA pool and each column corresponds to individually siRNA pools tested on a given functional readout. Readouts in each column may be thus considered as the data from one-dimensional screen (many-to-one), and thus, the typical Z statistic can be used to evaluate the relative function of individual genes in such column. The conversion is repeated on all columns, thereby converting the raw activity matrix into a matrix. Suppose Nij are the values in the original matrix i (1 &lt;= i &lt;= N siRNA pool) row and j ( 1 &lt;= j &lt;= M readout) column, then Zij = (Nij - uj) / sigma(j), where uj and sigma(j) are the mean and standard deviation of negative control samples in column j.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A Z-transformated matrix, where each row represents each knocking-down condition and each column is a specific readout (AS event). The values in the matrix are the normalized values(Z-scores).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yajing Hao, Shuyang Zhang, Junhui Li, Guofeng Zhao, Xiang-Dong Fu
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(countMat)
+data(negGene)
+ZscoreVal &lt;- Zscore(countMat,negGene)
+ZscoreVal[1:5,1:5]
+
+</code></pre>
+
+
+</div>

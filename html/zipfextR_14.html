@@ -1,0 +1,158 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfpssFit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zipf-PSS parameters estimation.</h2>
+
+<h3>Description</h3>
+
+<p>For a given sample of strictly positive integer numbers,  usually of the type of ranking data or
+frequencies of frequencies data, estimates the parameters of the Zipf-PSS distribution by means of
+the maximum likelihood method. The input data should be provided as a frequency matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zipfpssFit(data, init_alpha = NULL, init_lambda = NULL, level = 0.95,
+  isTruncated = FALSE, ...)
+
+## S3 method for class 'zipfpssR'
+residuals(object, isTruncated = FALSE, ...)
+
+## S3 method for class 'zipfpssR'
+fitted(object, isTruncated = FALSE, ...)
+
+## S3 method for class 'zipfpssR'
+coef(object, ...)
+
+## S3 method for class 'zipfpssR'
+plot(x, isTruncated = FALSE, ...)
+
+## S3 method for class 'zipfpssR'
+print(x, ...)
+
+## S3 method for class 'zipfpssR'
+summary(object, isTruncated = FALSE, ...)
+
+## S3 method for class 'zipfpssR'
+logLik(object, ...)
+
+## S3 method for class 'zipfpssR'
+AIC(object, ...)
+
+## S3 method for class 'zipfpssR'
+BIC(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Matrix of count data in form of table of frequencies.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_alpha</code></td>
+<td>
+<p>Initial value of <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_lambda</code></td>
+<td>
+<p>Initial value of <code class="reqn">\lambda</code> parameter (<code class="reqn">\lambda &gt; 0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Confidence level used to calculate the confidence intervals (default 0.95).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>isTruncated</code></td>
+<td>
+<p>Logical; if TRUE, the truncated version of the distribution is returned.(default = FALSE)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments to the generic functions. The extra arguments are passing
+to the <em>optim</em> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>An object from class "zpssR" (output of <em>zipfpssFit</em> function).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object from class "zpssR" (output of <em>zipfpssFit</em> function).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The argument <code>data</code> is a two column matrix with the first column containing the observations and
+the second column containing their frequencies.
+</p>
+<p>The log-likelihood function is equal to:
+</p>
+<p style="text-align: center;"><code class="reqn">l(\alpha, \lambda, x) = \sum_{i =1} ^{m} f_a(x_i)\, log(P(Y = x_i)),</code>
+</p>
+
+<p>where <code class="reqn">m</code> is the number of different values in the sample, being <code class="reqn">f_{a}(x_i)</code> is the absolute
+frequency of <code class="reqn">x_i</code>.The probabilities are calculated applying the Panjer recursion.
+By default the initial values of the parameters are computed using the function <code>getInitialValues</code>.
+The function <em>optim</em> is used to estimate the parameters.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a <em>zpssR</em> object composed by the maximum likelihood parameter estimations jointly
+with their standard deviation and confidence intervals and the value of the log-likelihood at the
+maximum likelihood estimator.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Panjer, H. H. (1981). Recursive evaluation of a family of compound
+distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 22-26.
+</p>
+<p>Sundt, B., &amp; Jewell, W. S. (1981). Further results on recursive evaluation of
+compound distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 27-39.
+
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>getInitialValues</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data &lt;- rzipfpss(100, 2.5, 1.3)
+data &lt;- as.data.frame(table(data))
+data[,1] &lt;- as.numeric(as.character(data[,1]))
+data[,2] &lt;- as.numeric(as.character(data[,2]))
+initValues &lt;- getInitialValues(data, model='zipfpss')
+obj &lt;- zipfpssFit(data, init_alpha = initValues$init_alpha, init_lambda = initValues$init_lambda)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,185 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Reg.ispline</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perform an I-spline regression</h2>
+
+<h3>Description</h3>
+
+<p>Evaluates the I-splines for all variables of a data frame of predictor variables, and perform a generalised linear regression with constraint on the parameters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Reg.ispline(
+  response,
+  predictor,
+  order.ispline = 2,
+  kn.ispline = 1,
+  family = stats::gaussian(),
+  method.glm = "glm.fit.cons",
+  cons = 1,
+  cons.inter = 1,
+  control = list(),
+  Plot = TRUE,
+  lty = NULL,
+  lwd = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>response</code></td>
+<td>
+<p>A vector of numeric values representing the response variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>predictor</code></td>
+<td>
+<p>A data frame of numeric variables representing the predictors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order.ispline</code></td>
+<td>
+<p>Order of the I-spline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kn.ispline</code></td>
+<td>
+<p>Number of knots in the I-spline.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>A description of the error distribution and link function to be used in the <code>glm</code> model (see <code>family</code> for details of family functions).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method.glm</code></td>
+<td>
+<p>Method used in fitting the generalised linear model. The default method <br> "glm.fit.cons" is an adaptation of method <code>glm.fit2</code> from package <code>glm2</code> using a constrained least squares regression in the reweighted least squares. Another option is "glm.fit2", which calls <code>glm.fit2</code>; see help documentation for glm.fit2 in package <code>glm2</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons</code></td>
+<td>
+<p>type of constraint in the glm if <code>method.glm = "glm.fit.cons"</code>. Default is 1 for positive coefficients on the predictors. The other option is -1 for negative coefficients on the predictors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons.inter</code></td>
+<td>
+<p>type of constraint for the intercept. Default is 1 for positive intercept, suitable for Gaussian family. The other option is -1 for negative intercept, suitable for binomial family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>As for <code>glm</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Plot</code></td>
+<td>
+<p>Boolean value indicating if the I-splines must be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lty</code></td>
+<td>
+<p>Line types to be used in the plotting. If nothing is provided, <code>lty</code> is a sequence of integers from 1 to the number of variables used for the computation of <code>msgdm</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lwd</code></td>
+<td>
+<p>Line width.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>Reg.ispline</code> performs a non-linear regression using a combination of GLM and I-splines. It can, for example, be used to compare regression outputs when using MS-GDM with I-splines on environmental variables and biotic variables as in <code>Zetya.msgdm</code> to the same regression approach without environmental variables.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>Reg.ispline</code> returns a list of the following elements:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>splines</code></td>
+<td>
+<p>A data frame in which each columns contains the value resulting from the transformation of the predictors into individual I-splines. The number of columns of <code>splines</code> is the number of predictors times the number of splines (determined as the sum of <code>order.ispline</code> and <code>kn.ispline</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spline</code></td>
+<td>
+<p>A data frame in which each columns contains the value resulting from the combinations of the individual I-splines. This combination is obtained by multiplying the coefficients of <code>model</code> and the values of the individual I-splines <code>splines</code></p>
+</td>
+</tr>
+</table>
+<p>.
+</p>
+<table><tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A <code>glm</code> model using <code>response</code> as the response variable, and <code>splines</code> as the predictors</p>
+</td>
+</tr></table>
+<p>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ramsay, J. O. (1988). Monotone regression splines in action. <em>Statistical Science</em>, 425-441.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.msgdm</code>,<code>Ispline</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::data(Marion.species)
+xy.marion &lt;- Marion.species[1:2]
+
+data.spec.marion &lt;- Marion.species[3:33]
+
+##random other communities
+data.spec.marion2a &lt;- data.spec.marion
+data.spec.marion2a[which(data.spec.marion2a==1,arr.ind=TRUE)] &lt;- 0
+for(i in 1:ncol(data.spec.marion2a))
+  data.spec.marion2a[sample(nrow(data.spec.marion2a),8),i] &lt;- 1
+data.spec.marion2b &lt;- data.spec.marion
+data.spec.marion2b[which(data.spec.marion2b==1,arr.ind=TRUE)] &lt;- 0
+for(i in 1:ncol(data.spec.marion2b))
+data.spec.marion2b[sample(nrow(data.spec.marion2b),8),i] &lt;- 1
+
+dat.spec.tot &lt;- list(data.spec.marion,data.spec.marion2a,data.spec.marion2b)
+zeta.tot &lt;- Zeta.order.mc.mult(data.spec=dat.spec.tot,order=3,sam=200)
+zeta.splines &lt;- Ispline(zeta.tot$zeta.val[,2:3])
+data.tot &lt;- data.frame(zeta.val=zeta.tot$zeta.val[,1],zeta.splines$splines)
+
+dev.new()
+Reg.ispline(response = zeta.tot$zeta.val[,1], predictor = zeta.tot$zeta.val[,2:3], lwd=2, cons=1)
+</code></pre>
+
+
+</div>

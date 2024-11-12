@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>power_to_z</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute z-score corresponding to a power</h2>
+
+<h3>Description</h3>
+
+<p>A function for computing z-scores of two-sided tests
+corresponding to power <code>power</code> for a given significance level
+alpha <code>alpha</code> (or corresponding cut-off z-statistic <code>a</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">power_to_z(
+  power,
+  alpha = 0.05,
+  a = stats::qnorm(alpha/2, lower.tail = FALSE),
+  two.sided = TRUE,
+  nleqslv_control = list(xtol = 1e-15, maxit = 300, stepmax = 0.5)
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>power</code></td>
+<td>
+<p>A vector of powers</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Level of significance alpha</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>Or, alternatively a z-score corresponding to <code>alpha</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>two.sided</code></td>
+<td>
+<p>Whether directionality of the effect size should be taken into account.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nleqslv_control</code></td>
+<td>
+<p>A named list of control parameters passed to the
+nleqslv function used for solving the inverse of
+z_to_power function.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># z-scores corresponding to the (aproximate) power of components of EM2
+power_to_z(c(0.05, 0.20, 0.40, 0.60, 0.80, 0.974, 0.999), alpha = .05)
+</code></pre>
+
+
+</div>

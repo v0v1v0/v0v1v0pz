@@ -1,0 +1,138 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.lassie</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot a lassie object</h2>
+
+<h3>Description</h3>
+
+<p>Plots a <code>lassie</code> object as a tile plot using
+the ggplot2 package. Only available for bivariate association.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'lassie'
+plot(
+  x,
+  what_x = "local",
+  digits = 3,
+  low = "royalblue",
+  mid = "gainsboro",
+  high = "firebrick",
+  na = "purple",
+  text_colour = "black",
+  text_size,
+  limits,
+  midpoint,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>lassie</code> S3 object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what_x</code></td>
+<td>
+<p>vector specifying values to be returned:
+</p>
+
+<ul>
+<li>
+<p> 'local': local association measure values (default).
+</p>
+</li>
+<li>
+<p> 'obs': observed probabilities.
+</p>
+</li>
+<li>
+<p> 'exp': expected probabilities.
+</p>
+</li>
+<li>
+<p> 'local_p': p-value of local association (after running <code>permtest</code> or <code>chisqtest</code>).
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>integer indicating the number of decimal places.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>low</code></td>
+<td>
+<p>colour for low end of the gradient.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mid</code></td>
+<td>
+<p>colour for midpoint of the gradient.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>high</code></td>
+<td>
+<p>colour for high end of the gradient.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na</code></td>
+<td>
+<p>colour for NA values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>text_colour</code></td>
+<td>
+<p>colour of text inside cells.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>text_size</code></td>
+<td>
+<p>integer indicating text size inside cells.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limits</code></td>
+<td>
+<p>limits of gradient.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>midpoint</code></td>
+<td>
+<p>midpoint of gradient.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments passed on to methods. Not currently used.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>lassie</code>
+</p>
+
+
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>turnTaking</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simple conversational turn-taking analysis</h2>
+
+<h3>Description</h3>
+
+<p>Generate a very basic analysis of the conversational turntaking in
+either a Zoom transcript or a Zoom chat file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">turnTaking(inputData, inputType, meetingId, speakerId)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputData</code></td>
+<td>
+<p>data.frame output from either processZoomChat or processZoomTranscript</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inputType</code></td>
+<td>
+<p>string of either 'chat' or 'transcript'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>meetingId</code></td>
+<td>
+<p>string giving the name of the meeting identifier</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>speakerId</code></td>
+<td>
+<p>string giving the name of the variable with the identity of the speaker</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>list of four data.frames giving different levels of analysis for turn taking:
+</p>
+
+<ul>
+<li>
+<p> rawTurn - This data.frame gives a dataset with a
+lagged column so that you could calculate custom metrics
+</p>
+</li>
+<li>
+<p> aggTurnsDyad - This gives a dyad-level dataset so that
+you know whose speech patterns came before whose
+</p>
+</li>
+<li>
+<p> aggTurnsSpeaker - This gives a speaker-level dataset
+with metrics that you could use to assess each given
+person's influence on the conversation
+</p>
+</li>
+<li>
+<p> aggTurnsSpeaker_noself - This is a replication of
+the aggTurnsSpeaker dataset, but it excludes turns where
+a speaker self-follows (i.e., Speaker A =&gt; Speaker A)
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">turn.out = turnTaking(inputData=sample_transcript_processed, 
+inputType='transcript', meetingId='batchMeetingId', 
+speakerId='userName')
+
+turn.out = turnTaking(inputData=sample_chat_processed, 
+inputType='chat', meetingId='batchMeetingId', 
+speakerId='userName')
+
+</code></pre>
+
+
+</div>

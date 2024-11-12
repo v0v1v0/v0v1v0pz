@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_zenodo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>get_zenodo</h2>
+
+<h3>Description</h3>
+
+<p><code>get_zenodo</code> allows to get a Zenodo record, identified by 
+its DOI or concept DOI.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_zenodo(doi, sandbox = FALSE, logger = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>doi</code></td>
+<td>
+<p>a Zenodo DOI or concept DOI</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sandbox</code></td>
+<td>
+<p>Use the sandbox infrastructure. Default is <code>FALSE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logger</code></td>
+<td>
+<p>a logger to print messages. The logger can be either NULL, 
+"INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>an object of class <code>data.frame</code> giving the record versions
+including date, version number and version-specific DOI.
+</p>
+<p>object of class <code>ZenodoRecord</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ get_zenodo("10.5281/zenodo.2547036")
+
+## End(Not run)
+                
+</code></pre>
+
+
+</div>

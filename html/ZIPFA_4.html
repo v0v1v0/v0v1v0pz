@@ -1,0 +1,162 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIPFA</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zero Inflated Poisson factor analysis
+</h2>
+
+<h3>Description</h3>
+
+<p>To conduct a Zero Inflated Poisson factor analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIPFA(X, k, tau = 0.1, cut = 0.8, tolLnlikelihood = 5e-4,
+        iter = 20, tol = 1e-4, maxiter = 100, initialtau = 'iteration',
+        Madj = TRUE, display = TRUE, missing = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>The matrix to be decomposed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>The number of factors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>Initial tau value to fit. Will be overwritten by the first value in <code>initial</code> argument.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cut</code></td>
+<td>
+<p>To delete columns that has more than 100('<code>Cut</code>')% zeros. <code>Cut = 1</code>, if no filtering.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tolLnlikelihood</code></td>
+<td>
+<p>The max percentage of log likelihood differences in two iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>Max iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>initialtau</code></td>
+<td>
+<p>A character specifying the way to choose the initial value of tau at the beginning of EM iteration. <code>stable</code>: estimate tau from fitted beta in last round; <code>initial</code>: always use the initially assigned tau in <code>tau</code> or <code>initial</code>. Use the default tau = 0.1 if 'initial' is empty. <code>iteration</code>: use fitted tau in last round.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>Percentage of l2 norm change of [tau beta].</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxiter</code></td>
+<td>
+<p>Max iteration number in the zero inflated poisson regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Madj</code></td>
+<td>
+<p>If TRUE then adjust for relative library size M.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>display</code></td>
+<td>
+<p>If TRUE display the fitting procedure.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>missing</code></td>
+<td>
+<p>Reserved for <code>cv_ZIPFA</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function conducts a zero-inflated Poisson factor analysis where the underlying Poisson rate is negatively associated with true zero probability.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>Fitted tau value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ufit</code></td>
+<td>
+<p>A list containing fitted U matrix in each iteration. The last one is the final fit. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Vfit</code></td>
+<td>
+<p>A list containing fitted V matrix in each iteration. The last one is the final fit. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>itr</code></td>
+<td>
+<p>Number of iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Likelihood</code></td>
+<td>
+<p>The likelihood for the training data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CVLikelihood</code></td>
+<td>
+<p>The likelihood for the testing data (if applicable)</p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p>Tianchen Xu
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+data(X)
+ZIPFA(X, k = 3)
+
+</code></pre>
+
+
+</div>

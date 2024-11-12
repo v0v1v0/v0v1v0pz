@@ -1,0 +1,123 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EV-EVm.spc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Binomial Interpolation (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Compute the expected vocabulary size <code class="reqn">E[V(N)]</code> (with function
+<code>EV.spc</code>) or expected frequency spectrum <code class="reqn">E[V_m(N)]</code> (with
+function <code>EVm.spc</code>) for a random sample of size <code class="reqn">N</code> from a
+given frequency spectrum (i.e., an object of class <code>spc</code>).  The
+expectations are calculated by binomial interpolation (following
+Baayen 2001, pp. 64-69).
+</p>
+<p>Note that these functions are not user-visible.  They can be called
+implicitly through the generic methods <code>EV</code> and <code>EVm</code>,
+applied to an object of type <code>spc</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'spc'
+EV(obj, N, allow.extrapolation=FALSE, ...)
+
+  ## S3 method for class 'spc'
+EVm(obj, m, N, allow.extrapolation=FALSE, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>spc</code>, representing a frequency
+spectrum</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>positive integer value determining the frequency class
+<code class="reqn">m</code> for which <code class="reqn">E[V_m(N)]</code> be returned (or a vector of such
+values)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>sample size <code class="reqn">N</code> for which the expected vocabulary size
+or frequency spectrum are calculated (or a vector of sample sizes)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>allow.extrapolation</code></td>
+<td>
+<p>if <code>TRUE</code>, the requested sample size
+<code class="reqn">N</code> may be larger than the sample size of the frequency spectrum
+<code>obj</code>, for binomial <em>extrapolation</em>.  This obtion should
+be used with great caution (see "Details" below).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on from generic methods will be
+ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>These functions are naive implementations of binomial interpolation,
+using Equations (2.41) and (2.43) from Baayen (2001).  No guarantees
+are made concerning their numerical accuracy, especially for extreme
+values of <code class="reqn">m</code> and <code class="reqn">N</code>.
+</p>
+<p>According to Baayen (2001), pp. 69-73., the same equations can also be
+used for binomial <em>extrapolation</em> of a given frequency spectrum
+to larger sample sizes.  However, they become numerically unstable in
+this case and will typically break down when extrapolating to more
+than twice the size of the observed sample (Baayen 2001, p. 75).
+Therefore, extrapolation has to be enabled explicitly with the option
+<code>allow.extrapolation=TRUE</code> and should be used with great caution.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>EV</code> returns the expected vocabulary size <code class="reqn">E[V(N)]</code> for a
+random sample of <code class="reqn">N</code> tokens from the frequency spectrum
+<code>obj</code>, and <code>EVm</code> returns the expected spectrum elements
+<code class="reqn">E[V_m(N)]</code> for a random sample of <code class="reqn">N</code> tokens from <code>obj</code>,
+calculated by binomial interpolation.
+</p>
+
+
+<h3>References</h3>
+
+<p>Baayen, R. Harald (2001). <em>Word Frequency Distributions.</em>
+Kluwer, Dordrecht.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>EV</code> and <code>EVm</code> for the generic methods and
+links to other implementations
+</p>
+<p><code>spc.interp</code> and <code>vgc.interp</code> are convenience
+functions that compute an expected frequency spectrum or vocabulary
+growth curve by binomial interpolation
+</p>
+
+
+</div>

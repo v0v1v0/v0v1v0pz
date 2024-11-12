@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>download_zenodo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>download_zenodo</h2>
+
+<h3>Description</h3>
+
+<p><code>download_zenodo</code> allows to download archives attached to a Zenodo
+record, identified by its DOI or concept DOI.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">download_zenodo(
+  doi,
+  path = ".",
+  files = list(),
+  sandbox = FALSE,
+  logger = NULL,
+  quiet = FALSE,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>doi</code></td>
+<td>
+<p>a Zenodo DOI or concept DOI</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>the target directory where to download files</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>files</code></td>
+<td>
+<p>subset of filenames to restrain to download. If ignored, all files will be downloaded.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sandbox</code></td>
+<td>
+<p>Use the sandbox infrastructure. Default is <code>FALSE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logger</code></td>
+<td>
+<p>a logger to print Zenodo API-related messages. The logger can be either NULL, 
+"INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>Logical (<code>FALSE</code> by default).
+Do you want to suppress informative messages (not warnings)?</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>any other arguments for parallel downloading (more information at
+ZenodoRecord, <code>downloadFiles()</code> documentation)</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ #simple download (sequential)   
+ download_zenodo("10.5281/zenodo.2547036")
+ 
+ library(parallel)
+ #download files as parallel using a cluster approach (for both Unix/Win systems)
+ download_zenodo("10.5281/zenodo.2547036", 
+   parallel = TRUE, parallel_handler = parLapply, cl = makeCluster(2))
+ 
+ #download files as parallel using mclapply (for Unix systems)
+ download_zenodo("10.5281/zenodo.2547036",
+   parallel = TRUE, parallel_handler = mclapply, mc.cores = 2)
+
+## End(Not run)
+                
+</code></pre>
+
+
+</div>

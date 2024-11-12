@@ -1,0 +1,245 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LogRatios</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Log Ratios of Measurements</h2>
+
+<h3>Description</h3>
+
+<p>Function to compute the (base 10) log ratios of the measurements
+relative to standard reference values.
+The default reference and several alternative references are provided with the
+package. But the user can use their own references if desired.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">LogRatios(
+  data,
+  ref = reference$Combi,
+  identifiers = c("Taxon", "Element"),
+  refMeasuresName = "Measure",
+  refValuesName = "Standard",
+  thesaurusSet = zoologThesaurus,
+  taxonomy = zoologTaxonomy,
+  joinCategories = NULL,
+  mergedMeasures = NULL,
+  useGenusIfUnambiguous = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A dataframe with the input measurements.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ref</code></td>
+<td>
+<p>A dataframe including the measurement values used as references.
+The default <code>ref = reference$Combi</code> and other reference sets are
+provided with the package <span class="pkg">zoolog</span>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>identifiers</code></td>
+<td>
+<p>A vector of column names in <code>ref</code> identifying
+a type of bone. By default <code>identifiers = c("Taxon", "Element")</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>refMeasuresName</code></td>
+<td>
+<p>The column name in <code>ref</code> identifying the type of
+bone measurement.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>refValuesName</code></td>
+<td>
+<p>The column name in <code>ref</code> giving the measurement
+value.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurusSet</code></td>
+<td>
+<p>A thesaurus allowing datasets with different nomenclatures
+to be merged. By default <code>thesaurusSet = zoologThesaurus</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taxonomy</code></td>
+<td>
+<p>A taxonomy allowing the automatic detection of data and
+reference sharing the same genus (or higher taxonomic rank), although of
+different species. By default <code>taxonomy = zoologTaxonomy</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>joinCategories</code></td>
+<td>
+<p>A list of named character vectors. Each vector is named
+by a category in the reference and includes a set of categories in the data
+for which to compute the log ratios with respect to that reference.
+When <code>NULL</code> (default) no grouping is considered.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mergedMeasures</code></td>
+<td>
+<p>A list of character vectors or a single character vector.
+Each vector identifies a set of measures that the data presents merged in the
+same column, named as any of them. This practice only makes sense if only one
+of the measures can appear in each bone element.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>useGenusIfUnambiguous</code></td>
+<td>
+<p>Boolean. If <code>TRUE</code> (default), data cases
+are matched to reference sharing the same genus, instead of sharing the same
+species.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Each log ratio is defined as the decimal logarithm of the ratio of the
+variable of interest to a corresponding reference value.
+</p>
+<p>The <code>identifiers</code> are expected to determine corresponding
+columns in both data and reference. Each value in these columns identifies
+the type of bone. By default this is determined by a taxon and a bone
+element. For any case in the data, the log ratios are computed with respect
+to the reference values in the same bone type. If the reference does not
+include that bone type, the corresponding log ratios are set to <code>NA</code>.
+</p>
+<p>The taxonomy allows the matching of data and reference by genus, instead
+of by species. This is the default behaviour with
+<code>useGenusIfUnambiguous = TRUE</code>, unless there is some ambiguity:
+reference including more than one species for the same genus. For instance,
+<code>reference$Combi</code> includes a reference for <em>Sus scrofa</em>.
+If the data includes cases of <em>Sus domesticus</em>, their
+log ratios will be computed with respect to the provided reference for
+<em>Sus scrofa</em>.
+However, a warning is given to inform the user of this assumption, and let
+they know that this can be prevented by setting
+<code>useGenusIfUnambiguous = FALSE</code>.
+</p>
+<p>For some applications it can be interesting to group some set of bone types
+into the same reference category to compute the log ratios. The parameter
+<code>joinCategories</code> allows this grouping. <code>joinCategories</code> must be a
+list of named vectors, each including the set of categories in the data
+which should be mapped to the reference category given by its name.
+</p>
+<p>This can be applied to group different species into a single
+reference species. For instance <em>sheep</em>, <em>capra</em>, and doubtful
+cases between both (<em>sheep/goat</em>), can be grouped and matched to the
+same reference for <em>sheep</em>, by setting
+<code>joinCategories = list(sheep = c("sheep", "goat", "oc"))</code>.
+Indeed, the zoologTaxonomy can be used for that purpose using the function
+<code>SubtaxonomySet</code> as
+<code>joinCategories = list(sheep = SubtaxonomySet("Caprini"))</code>.
+Similarly, <code>joinCategories</code> can be applied to group
+different bone elements into a single reference (see the example below for
+undetermined phalanges).
+</p>
+<p>Note that the <code>joinCategories</code> option does not remove the distinction
+between the different bone types in the data, just indicates that for any
+of them the log ratios must be computed from the same reference.
+</p>
+<p>Using the taxonomy, the presence of cases identified by higher taxonomic
+ranks are also automatically detected. For instance, if some partially
+identified cases have been recorded as "Ovis/Capra", this is recognized
+to denote the tribe <em>Caprini</em>, which includes several possible species.
+Then a warning is given informing the user of the detection of these cases
+and of the option to use any of the corresponding species in the reference by
+using the argument <code>joinCategories</code> (unless this has been already done).
+</p>
+<p>There are some measures that, for most usual taxa, are restricted to a subset
+of bones. For instance, for <em>Bos</em>, <em>Ovis</em>, <em>Capra</em>, and <em>Sus</em>, the measure
+<em>GLl</em> is only relevant for the <em>astragalus</em>, while <em>GL</em> is not
+applicable to it.
+Thus, there cannot be any ambiguity between both measures since they can
+be identified by the bone element. This justifies that some users have
+simplified datasets where a single column records indistinctly <em>GL</em> or
+<em>GLl</em>. The optional parameter <code>mergedMeasures</code> facilitates the
+processing of this type of simplified dataset. For the alluded example,
+<code>mergedMeasures = list(c("GL", "GLl"))</code> automatically selects, for each
+bone element, the corresponding measure present in the reference.
+</p>
+<p>Observe that if <code>mergedMeasures</code> is set to non mutually exclusive
+measures, the behaviour is unpredictable.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe including the input dataframe and additional columns, one
+for each extracted log ratio for each relevant measurement in the reference.
+The name of the added columns are constructed by prefixing each measurement by
+the internal variable <code>logPrefix</code>.
+</p>
+<p>If the input dataframe includes additional S3 classes (such as "tbl_df"),
+they are also passed to the output.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Read an example dataset:
+dataFile &lt;- system.file("extdata", "dataValenzuelaLamas2008.csv.gz",
+                        package="zoolog")
+dataExample &lt;- utils::read.csv2(dataFile,
+                                na.strings = "",
+                                encoding = "UTF-8")
+## For illustration purposes we keep now only a subset of cases to make
+## the example run sufficiently fast.
+## Avoid this step if you want to process the full example dataset.
+dataExample &lt;- dataExample[1:400, ]
+## We can observe the first lines (excluding some columns for visibility):
+head(dataExample)[, -c(6:20,32:64)]
+
+## Compute the log-ratios with respect to the default reference in the
+## package zoolog:
+dataExampleWithLogs &lt;- LogRatios(dataExample)
+## The output data frame include new columns with the log-ratios of the
+## present measurements, in both data and reference, with a "log" prefix:
+head(dataExampleWithLogs)[, -c(6:20,32:64)]
+
+## Compute the log-ratios with respect to a different reference:
+dataExampleWithLogs2 &lt;- LogRatios(dataExample, ref = reference$Basel)
+head(dataExampleWithLogs2)[, -c(6:20,32:64)]
+
+## Define an altenative reference combining differently the references'
+## database:
+refComb &lt;- list(cattle = "Nieto", sheep = "Davis", Goat = "Clutton",
+                pig = "Albarella", redDeer = "Basel")
+userReference &lt;- AssembleReference(refComb)
+## Compute the log-ratios with respect to this alternative reference:
+dataExampleWithLogs3 &lt;- LogRatios(dataExample, ref = userReference)
+
+## We can be interested in including the first and second phalanges without
+## anterior-posterior identification ("phal 1" and "phal 2"), by computing
+## their log ratios with respect to the reference of the corresponding
+## anterior phalanges ("phal 1 ant" and "phal 2 ant", respectively).
+## For this we use the optional argument joinCategories:
+categoriesPhalAnt &lt;- list('phal 1 ant' = c("phal 1 ant", "phal 1"),
+                          'phal 2 ant' = c("phal 2 ant", "phal 2"))
+dataExampleWithLogs4 &lt;- LogRatios(dataExample,
+                                  joinCategories = categoriesPhalAnt)
+head(dataExampleWithLogs4)[, -c(6:20,32:64)]
+</code></pre>
+
+
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zb_color</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate colors for zones</h2>
+
+<h3>Description</h3>
+
+<p>This function generates colors for zones.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zb_color(z, palette = c("rings", "hcl", "dartboard"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An 'sf' object containing zones covering the region</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>palette</code></td>
+<td>
+<p>Palette type, one of <code>"hcl"</code> (a palette based on the HCL color space), <code>"rings"</code> (a palette which colors the rings using the YlOrBr color brewer palette), <code>"dartboard"</code> (a palette which resembles a dartboard)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A vector of colors
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">z = zb_zone(london_c(), london_a())
+zb_color(z)
+plot(z[, "circle_id"], col = zb_color(z))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zingle</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return the single (unique) value found in a vector</h2>
+
+<h3>Description</h3>
+
+<p>The <code>zingle()</code> function returns the first element in a vector, but only if
+all the other elements are identical to the first one (the vector only has a
+<code>zingle</code> value). If the elements are not all identical, it throws an error.
+The vector must contain at least one non-<code>NA</code> value, or the function errors
+out as well. This is especially useful in aggregations, when all values in a
+given group should be identical, but you want to make sure.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zingle(x, na.rm = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Vector of elements that should all be identical</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p>Should <code>NA</code> elements be removed prior to comparison</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Optionally takes a <code>na.rm</code> parameter, similarly to sum, mean and other
+aggregate functions. If <code>TRUE</code>, <code>NA</code> values will be removed prior to
+comparing the elements, so the function will accept input values that contain
+a combination of the single value and any <code>NA</code> values (but at least one
+non-<code>NA</code> value is required).
+</p>
+<p>Only values are tested for equality. Any names are simply ignored, and the
+result is an unnamed value. This is in line with how other aggregation
+functions handle names.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The <code>zingle</code> element in the vector
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># If all elements are identical, all is good.
+# The value of the element is returned.
+zingle(c("Alpha", "Alpha", "Alpha"))
+
+# If any elements differ, an error is thrown
+tryCatch(zingle(c("Alpha", "Beta", "Alpha")), error=wrap_error)
+
+if (require("dplyr", quietly=TRUE, warn.conflicts=FALSE)) {
+  d &lt;- tibble::tribble(
+    ~id, ~name, ~fouls,
+    1, "James", 3,
+    2, "Jack",  2,
+    1, "James", 4
+  )
+
+  # If the data is of the correct format, all is good
+  d %&gt;%
+    dplyr::group_by(id) %&gt;%
+    dplyr::summarise(name=zingle(name), total_fouls=sum(fouls))
+ }
+
+if (require("dplyr", quietly=TRUE, warn.conflicts=FALSE)) {
+  # If a name does not match its ID, we should get an error
+  d[1,"name"] &lt;- "Jammes"
+  tryCatch({
+    d %&gt;%
+      dplyr::group_by(id) %&gt;%
+      dplyr::summarise(name=zingle(name), total_fouls=sum(fouls))
+  }, error=wrap_error)
+}
+</code></pre>
+
+
+</div>

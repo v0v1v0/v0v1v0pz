@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ztplnMLE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>MLE for the Zero-truncated Poisson Lognormal distribution</h2>
+
+<h3>Description</h3>
+
+<p><code>ztplnMLE</code> fits the Zero-truncated Poisson lognormal distribution to data and
+estimates parameters mean <code>mu</code> and standard deviation <code>sig</code> in the lognormal
+distribution
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ztplnMLE(
+  n,
+  lower_mu = 0,
+  upper_mu = log(max(n)),
+  lower_sig = 0.001,
+  upper_sig = 10,
+  type1 = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>a integer vector of counts</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower_mu, upper_mu</code></td>
+<td>
+<p>numeric values of lower and upper bounds for mean of
+the variables's natrual logarithm.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower_sig, upper_sig</code></td>
+<td>
+<p>numeric values of lower and upper bounds for
+standard deviatoin of the variables's natrual logarithm</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type1</code></td>
+<td>
+<p>logical; if TRUE, Use type 1 ztpln else use type 2.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function searches the maximum likelihood estimates of mean <code>mu</code> and
+standard deviation <code>sig</code> using the optimization procedures in
+<code>nlminb</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>convergence</code></td>
+<td>
+<p>An integer code. 0 indicates successful
+convergence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iterations</code></td>
+<td>
+<p>Number of iterations performed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>message</code></td>
+<td>
+<p>A character string giving any additional information
+returned by the optimizer, or NULL. For details, see PORT documentation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>evaluation</code></td>
+<td>
+<p>Number of objective function and gradient function
+evaluations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>Maximum likelihood estimates of mu</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig</code></td>
+<td>
+<p>Maximum likelihood estimates of sig</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>loglik</code></td>
+<td>
+<p>loglikelihood</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">y &lt;- rztpln(100, 3, 2)
+ztplnMLE(y)
+</code></pre>
+
+
+</div>

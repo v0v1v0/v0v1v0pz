@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Equidigital</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Equidigital numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A046758">A046758</a>, an <em>Equidigital</em> number has equal digits
+as the number of digits in its prime factorization including exponents. First 6 Equidigital numbers are 1, 2, 3, 5, 7, 10. Though
+it doesn't matter which base we use, here we adopt only a base of 10.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Equidigital(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Frugal</code>, <code>Extravagant</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 20 Equidigital numbers
+print(Equidigital(20))
+
+</code></pre>
+
+
+</div>

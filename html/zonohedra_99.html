@@ -1,0 +1,190 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonohedron</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+zonohedron construction
+</h2>
+
+<h3>Description</h3>
+
+<p>Construct a zonohedron from a numeric matrix with 3 rows.
+Also construct some special zonohedra useful for testing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zonohedron( mat, e0=0, e1=1.e-6, e2=1.e-10, ground=NULL )
+
+polarzonohedron( n, m=n, height=pi, ground=NULL )
+
+regularprism( n, m=n, axis=c(0,0,1), ground=NULL )
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mat</code></td>
+<td>
+
+<p>a numeric 3xM matrix, where 3 <code class="reqn">\le</code> M.
+The matrix must have rank 3 (verified).
+The M columns are the generators of the zonohedron.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e0</code></td>
+<td>
+
+<p>threshold for a column of <code>mat</code> to be considered 0,
+in the <code class="reqn">L^\infty</code> norm.
+Since the default is <code>e0=0</code>, 
+by default a column must be exactly 0 to be considered 0.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e1</code></td>
+<td>
+
+<p>threshold, in a pseudo-angular sense,
+for non-zero column vectors to be multiples of each other,
+and thus members of a group of multiple (aka parallel) points in the associated matroid.
+It OK for a column to be a negative multiple of another.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e2</code></td>
+<td>
+
+<p>threshold, in a pseudo-angular sense, for the planes
+spanned by pairs of column vectors to be considered coincident,
+and thus the columns to be in the same hyperplane of the associated matroid.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ground</code></td>
+<td>
+
+<p>The <em>ground set</em> of the associated matroid of rank 3 -
+an integer vector in strictly increasing order, or <code>NULL</code>.
+<br>
+When <code>ground</code> is <code>NULL</code>, it is set to <code>1:ncol(mat)</code>.
+If <code>ground</code> is not <code>NULL</code>, <code>length(ground)</code> must be equal to <code>ncol(mat)</code>.
+The point <code>ground[i]</code> corresponds to the <em>i'th</em> column of <code>mat</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+
+<p>an integer <code class="reqn">\ge</code> 3.
+The generators are computed as <code>n</code> equally spaced points on
+a circle.
+See <b>Details</b> for more on this circle.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>an integer with 2 <code class="reqn">\le</code> <code>m</code> <code class="reqn">\le</code> <code>n</code>.
+When  <code>m </code>&lt; <code>n</code>, only the first <code>m</code>
+points are used as generators of the zonohedron.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>height</code></td>
+<td>
+<p>the z value at the apex of the zonohedron,
+which is the sum of all the generators.
+The z value of all the generators is set to make this happen.
+When <code>height=pi</code>, as <code class="reqn">n \to \infty</code> the zonohedron
+converges to the interior of the surface of revolution
+of the curve <code class="reqn">x = sin(z)</code> for <code class="reqn">z \in [0,\pi]</code>,
+see <b>Chilton &amp; Coxeter</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>axis</code></td>
+<td>
+
+<p>the axis of the regular prism. It must be a 3-vector with z value non-zero.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>In <code>zonohedron()</code>, the contruction of the <em>zones</em> (or <em>belts</em>) is optimized by following
+the procedure in <cite>Heckbert</cite>.
+The key step is sorting face normals that all lie on a great circle
+of the unit sphere.
+<br><br>
+For <code>polarzonohedron()</code> the circle is centered at
+(0,0,<code>height/n</code>) and parallel to the xy-plane.
+The radius is <code>height/n</code>.
+<br><br>
+For <code>regularprism()</code> the circle is the unit circle in the xy-plane.
+The 3-vector <code>axis</code> is added as column <code>m+1</code> of the matrix.
+The returned zonohedron is the Minkowski sum of a zonogon and
+the line segment defined by <code>axis</code>.
+If <code>m</code> &lt; <code>n</code>, the zonogon may not be regular.
+<br><br>
+Both of these functions are useful for testing.
+They load the matrix <code>mat</code> and pass it to <code>zonohedron()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>zonohedron()</code> and <code>polarzonohedron()</code> return a list with S3 class <code>'zonohedron'</code>.
+In case of error, e.g. invalid <code>mat</code>,
+the functions print an error message and returns <code>NULL</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <em>ground set</em> of positive integers should not be too sparse;
+otherwise performance may suffer.
+</p>
+
+
+<h3>References</h3>
+
+<p>B. L. Chilton and H. S. M. Coxeter.
+<b>Polar Zonohedra</b>.
+The American Mathematical Monthly.
+Vol 70. No. 9.
+pp. 946-951.
+1963.
+</p>
+<p>Paul Heckbert.
+<b>An Efficient Algorithm for Generating Zonohedra</b>.
+3-D Technical Memo 11.
+24 February 1985.
+Computer Graphics Lab.
+New York Institute of Technology
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>zonoseg()</code>,
+</p>
+
+
+</div>

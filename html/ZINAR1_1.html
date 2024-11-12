@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EST_ZINAR</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parameter Estimation for ZINAR(1) Models</h2>
+
+<h3>Description</h3>
+
+<p>This function uses the EM algorithm to find the maximum likelihood estimates of a ZINAR(1) model.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">EST_ZINAR(y,init = NULL,tol = 1e-05,iter = 1000,model,innovation,desc = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>A vector containing a discrete non-negative time series dataset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init</code></td>
+<td>
+<p>A vector containing the initial parameters estimates to maximize the likelihood function. If not informed, uses Yule-Walker method to calculate.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+<p>Tolerance for the convergence of the algorithm. Defaults to 1e-5.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>Maximum number of iterations of the algorithm. Defaults to 1000.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>Must be "zinar", if the innovation have Zero-Inflated distribution, and "inar", otherwise.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>innovation</code></td>
+<td>
+<p>Must be "Po" if Poisson, "NB" if Negative binomial or "GI" if Gaussian inverse.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>desc</code></td>
+<td>
+<p>TRUE to plot the exploratory graphs. Defaults to FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a list containing the parameters estimates and the number of interactions.
+</p>
+
+
+<h3>References</h3>
+
+<p>Aldo M.; Medina, Francyelle L.; Jales, Isaac C.; Bertail, Patrice. First-order integer valued AR processes with zero-inflated innovations. Cyclostationarity: Theory and Methods, Springer Verlag - 2021, v. 1, p. 19-40.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Estimates the parameters of an INAR(1) and a ZINAR(1) models with Poisson innovations
+# for the monthly number of drug offenses recorded from January 1990 to December 2001
+# in Pittsburgh census tract 2206.
+
+data(PghTracts)
+
+y=ts(PghTracts$DRUGS,start=c(1990,1),end=c(2001,12),frequency=12)
+
+Inar1 = EST_ZINAR(y, init = c(0.3,0.5,2), model = "inar", innovation = "Po",desc = TRUE)
+
+ZIPInar1 = EST_ZINAR(y, init = c(0.3,0.5,2), model = "zinar", innovation = "Po",desc = TRUE)
+
+</code></pre>
+
+
+</div>

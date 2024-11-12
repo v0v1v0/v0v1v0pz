@@ -1,0 +1,176 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>section2trans</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+compute the intersection of a plane and the
+2-transition surface associated with a zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>In general, the 2-transition surface may be highly non-convex,
+possibly with self-intersections.
+The intersection of a plane and the 2-transition surface is
+a union of polygons,
+possibly with self-intersections and intersecting each other.
+This function computes one of those polygons.
+If there are other polygons, it issues a warning
+and does not try to compute them.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">section2trans( x, normal, beta, invert=FALSE, plot=FALSE, tol=1.e-12, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normal</code></td>
+<td>
+
+<p>a non-zero numeric 3-vector - the normal of all the planes
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+
+<p>a numeric M-vector of plane constants.  
+The equation of the k'th plane k is: <code>&lt;x,normal&gt; = beta[k]</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>invert</code></td>
+<td>
+
+<p>if <code>TRUE</code>, then compute a point in the unit cube that maps to the point on the 2-transition surface,
+and add it as a column in the returned <code>data.frame</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+
+<p>if <code>TRUE</code>, the polygons formed by the the intersection 
+of the planes and the 2-transition surface.
+<em>added</em> to an existing 3D plot of the zonohedron <code>x</code>,
+see <code>plot.zonohedron()</code>.
+The polygons are drawn in red.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+
+<p>a small positive number, used as the tolerance for the plane
+intersecting the interior of each parallelogram, see <b>Details</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The function is designed for the situation when the
+intersection of a plane and the surface is a single polygon.
+</p>
+<p>Given a plane, the function finds all the parallelograms of the surface
+whose interiors intersect the plane.
+Each intersection is a line segment.
+For each parallelogram it associates one of the endpoints of the segment.
+The parallelograms are put in polygon order by picking an
+arbitrary one as the starting point,
+and then "marching" from one to the next using
+the canonical parallelogram adjacency relation.
+After returning to the starting point, if there are other parallelograms
+remaining, it means that there are other polygons
+in the section and a warning is issued.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>section2trans()</code> returns a list of length M
+(=<code>length(beta)</code>),
+and the i'th item in the list is a data frame with these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>point</code></td>
+<td>
+
+<p>a Px3 matrix with the P points of the i'th polygon in the rows.
+If the plane does not intersect the 2-transition surface, then P=0
+and the matrix has 0 rows.
+The row names of <code>point</code> are the indexes of the facets
+that contain the vertices of the polygon; see <b>Details</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gndpair</code></td>
+<td>
+
+<p>the 2 indexes from the ground set that generates the parallelogram
+containing <code>point</code>.
+See <b>Details</b> for a description of the "marching parallelogram"
+procedure.
+</p>
+</td>
+</tr>
+</table>
+<p>And if <code>invert</code> is <code>TRUE</code>, then this column is added:
+</p>
+<table><tr style="vertical-align: top;">
+<td><code>pcube</code></td>
+<td>
+<p>a point in the unit cube that maps to <code>point</code>.  This point in the cube always has 2 transitions.</p>
+</td>
+</tr></table>
+<p>The names of the returned list are readable strings that contain
+<code>normal</code> and <code>beta[i]</code>.
+</p>
+<p>In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The package <span class="pkg">rgl</span> is required for 3D plotting.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>plot.zonohedron()</code>,
+<code>section.zonohedron()</code>,
+<code>raytrace2trans()</code>
+</p>
+
+
+</div>

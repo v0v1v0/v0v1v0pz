@@ -1,0 +1,2946 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZenodoManager</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ZenodoManager</h2>
+
+<h3>Description</h3>
+
+<p>ZenodoManager
+</p>
+<p>ZenodoManager
+</p>
+
+
+<h3>Format</h3>
+
+<p><code>R6Class</code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of <code>R6Class</code> for modelling an ZenodoManager
+</p>
+
+
+<h3>Super class</h3>
+
+<p><code>zen4R::zen4RLogger</code> -&gt; <code>ZenodoManager</code>
+</p>
+
+
+<h3>Public fields</h3>
+
+<div class="r6-fields">
+
+<dl>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Zenodo manager sandbox status, <code>TRUE</code> if we interact with Sandbox infra</p>
+</dd>
+<dt><code>anonymous</code></dt>
+<dd>
+<p>Zenodo manager anonymous status, <code>TRUE</code> when no token is specified</p>
+</dd>
+</dl>
+</div>
+
+
+<h3>Methods</h3>
+
+
+
+<h4>Public methods</h4>
+
+
+<ul>
+<li> <p><a href="#method-ZenodoManager-new"><code>ZenodoManager$new()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getToken"><code>ZenodoManager$getToken()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getLanguages"><code>ZenodoManager$getLanguages()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getLanguageById"><code>ZenodoManager$getLanguageById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getLicenses"><code>ZenodoManager$getLicenses()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getLicenseById"><code>ZenodoManager$getLicenseById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getResourceTypes"><code>ZenodoManager$getResourceTypes()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getResourceTypeById"><code>ZenodoManager$getResourceTypeById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getCommunities"><code>ZenodoManager$getCommunities()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getCommunityById"><code>ZenodoManager$getCommunityById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-submitRecordToCommunities"><code>ZenodoManager$submitRecordToCommunities()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-removeRecordFromCommunities"><code>ZenodoManager$removeRecordFromCommunities()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRecordCommunities"><code>ZenodoManager$getRecordCommunities()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-createReviewRequest"><code>ZenodoManager$createReviewRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getReviewRequest"><code>ZenodoManager$getReviewRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-deleteReviewRequest"><code>ZenodoManager$deleteReviewRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-submitRecordForReview"><code>ZenodoManager$submitRecordForReview()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getGrants"><code>ZenodoManager$getGrants()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getAwards"><code>ZenodoManager$getAwards()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getGrantsByName"><code>ZenodoManager$getGrantsByName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getAwardsByName"><code>ZenodoManager$getAwardsByName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getGrantById"><code>ZenodoManager$getGrantById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getAwardById"><code>ZenodoManager$getAwardById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getAffiliations"><code>ZenodoManager$getAffiliations()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getAffiliationByName"><code>ZenodoManager$getAffiliationByName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getAffiliationById"><code>ZenodoManager$getAffiliationById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getFunders"><code>ZenodoManager$getFunders()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getFundersByName"><code>ZenodoManager$getFundersByName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getFunderById"><code>ZenodoManager$getFunderById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getDepositions"><code>ZenodoManager$getDepositions()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getDepositionByConceptDOI"><code>ZenodoManager$getDepositionByConceptDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getDepositionByDOI"><code>ZenodoManager$getDepositionByDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getDepositionById"><code>ZenodoManager$getDepositionById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getDepositionByConceptId"><code>ZenodoManager$getDepositionByConceptId()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-depositRecord"><code>ZenodoManager$depositRecord()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-reserveDOI"><code>ZenodoManager$reserveDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-deleteDOI"><code>ZenodoManager$deleteDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-depositRecordVersion"><code>ZenodoManager$depositRecordVersion()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-deleteRecord"><code>ZenodoManager$deleteRecord()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-deleteRecordByDOI"><code>ZenodoManager$deleteRecordByDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-deleteRecords"><code>ZenodoManager$deleteRecords()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-createEmptyRecord"><code>ZenodoManager$createEmptyRecord()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-editRecord"><code>ZenodoManager$editRecord()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-discardChanges"><code>ZenodoManager$discardChanges()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-publishRecord"><code>ZenodoManager$publishRecord()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getFiles"><code>ZenodoManager$getFiles()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getFile"><code>ZenodoManager$getFile()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-startFileUpload"><code>ZenodoManager$startFileUpload()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-completeFileUpload"><code>ZenodoManager$completeFileUpload()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-uploadFile"><code>ZenodoManager$uploadFile()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-deleteFile"><code>ZenodoManager$deleteFile()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRecords"><code>ZenodoManager$getRecords()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRecordByConceptDOI"><code>ZenodoManager$getRecordByConceptDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRecordByDOI"><code>ZenodoManager$getRecordByDOI()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRecordById"><code>ZenodoManager$getRecordById()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRecordByConceptId"><code>ZenodoManager$getRecordByConceptId()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRequests"><code>ZenodoManager$getRequests()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-getRequest"><code>ZenodoManager$getRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-isActionableRequest"><code>ZenodoManager$isActionableRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-acceptRequest"><code>ZenodoManager$acceptRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-declineRequest"><code>ZenodoManager$declineRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-cancelRequest"><code>ZenodoManager$cancelRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoManager-clone"><code>ZenodoManager$clone()</code></a>
+</p>
+</li>
+</ul>
+<details><summary>Inherited methods</summary><ul>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR"><code>zen4R::zen4RLogger$ERROR()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO"><code>zen4R::zen4RLogger$INFO()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN"><code>zen4R::zen4RLogger$WARN()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass"><code>zen4R::zen4RLogger$getClass()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName"><code>zen4R::zen4RLogger$getClassName()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger"><code>zen4R::zen4RLogger$logger()</code></a></span></li>
+</ul></details><hr>
+<a id="method-ZenodoManager-new"></a>
+
+
+
+<h4>Method <code>new()</code>
+</h4>
+
+<p>initializes the Zenodo Manager
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$new(
+  url = "https://zenodo.org/api",
+  token = zenodo_pat(),
+  sandbox = FALSE,
+  logger = NULL,
+  keyring_backend = "env"
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>url</code></dt>
+<dd>
+<p>Zenodo API URL. By default, the url is set to "https://zenodo.org/api". For tests, 
+the Zenodo sandbox API URL can be used: https://sandbox.zenodo.org/api</p>
+</dd>
+<dt><code>token</code></dt>
+<dd>
+<p>the user token. By default an attempt will be made to retrieve token using zenodo_pat</p>
+</dd>
+<dt><code>sandbox</code></dt>
+<dd>
+<p>Indicates if the Zenodo sandbox platform should be used. Default is <code>FALSE</code></p>
+</dd>
+<dt><code>logger</code></dt>
+<dd>
+<p>logger type. The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
+(for complete curl http calls logs)</p>
+</dd>
+<dt><code>keyring_backend</code></dt>
+<dd>
+<p>The <span class="pkg">keyring</span> backend used to store user token. The <code>keyring_backend</code> 
+can be set to use a different backend for storing the Zenodo token with <span class="pkg">keyring</span> (Default value is 'env').</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoManager-getToken"></a>
+
+
+
+<h4>Method <code>getToken()</code>
+</h4>
+
+<p>Get user token
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getToken()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the token, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getLanguages"></a>
+
+
+
+<h4>Method <code>getLanguages()</code>
+</h4>
+
+<p>Get Languages supported by Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getLanguages(pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of languages as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of languages</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of languages as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getLanguageById"></a>
+
+
+
+<h4>Method <code>getLanguageById()</code>
+</h4>
+
+<p>Get language by Id.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getLanguageById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>license id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the license
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getLicenses"></a>
+
+
+
+<h4>Method <code>getLicenses()</code>
+</h4>
+
+<p>Get Licenses supported by Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getLicenses(pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of licenses as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of licenses.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of licenses as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getLicenseById"></a>
+
+
+
+<h4>Method <code>getLicenseById()</code>
+</h4>
+
+<p>Get license by Id.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getLicenseById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>license id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the license
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getResourceTypes"></a>
+
+
+
+<h4>Method <code>getResourceTypes()</code>
+</h4>
+
+<p>Get Resource types supported by Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getResourceTypes(pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of resource types as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of resource types</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of resource types as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getResourceTypeById"></a>
+
+
+
+<h4>Method <code>getResourceTypeById()</code>
+</h4>
+
+<p>Get resource type by Id.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getResourceTypeById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>resource type id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the resource type
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getCommunities"></a>
+
+
+
+<h4>Method <code>getCommunities()</code>
+</h4>
+
+<p>Get Communities supported by Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getCommunities(pretty = TRUE, q = "", size = 500)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of communities as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of communities</p>
+</dd>
+<dt><code>q</code></dt>
+<dd>
+<p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all communities can be listed from Zenodo, a query has to be specified.</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of communities to be returned. By default equal to 500</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of communities as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getCommunityById"></a>
+
+
+
+<h4>Method <code>getCommunityById()</code>
+</h4>
+
+<p>Get community by Id.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getCommunityById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>community id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the community
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-submitRecordToCommunities"></a>
+
+
+
+<h4>Method <code>submitRecordToCommunities()</code>
+</h4>
+
+<p>Submit a published record to one or more community
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$submitRecordToCommunities(
+  record,
+  communities = list(),
+  message = NULL
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>an object of class ZenodoRecord</p>
+</dd>
+<dt><code>communities</code></dt>
+<dd>
+<p>communities to which the record will be submitted</p>
+</dd>
+<dt><code>message</code></dt>
+<dd>
+<p>message to send to the community curator(s), either a text or a named list
+for each community in case a community-specific message should be sent</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a submission object of class <code>list</code>, or NULL if nothing was submitted
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-removeRecordFromCommunities"></a>
+
+
+
+<h4>Method <code>removeRecordFromCommunities()</code>
+</h4>
+
+<p>Remove a record from one or more community
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$removeRecordFromCommunities(record, communities = list())</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>an object of class ZenodoRecord</p>
+</dd>
+<dt><code>communities</code></dt>
+<dd>
+<p>communities to which the record will be submitted</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getRecordCommunities"></a>
+
+
+
+<h4>Method <code>getRecordCommunities()</code>
+</h4>
+
+<p>Get record communities
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRecordCommunities(record)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>object of class <code>ZenodoRecord</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the list of communities in which the record was included
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-createReviewRequest"></a>
+
+
+
+<h4>Method <code>createReviewRequest()</code>
+</h4>
+
+<p>Creates a record review request in a community
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$createReviewRequest(record, community)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>an object of class ZenodoRecord</p>
+</dd>
+<dt><code>community</code></dt>
+<dd>
+<p>a community to which the record is submitted for review and publication</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a review request object of class <code>list</code>, or NULL if nothing was submitted
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getReviewRequest"></a>
+
+
+
+<h4>Method <code>getReviewRequest()</code>
+</h4>
+
+<p>Get a record review request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getReviewRequest(record)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>an object of class ZenodoRecord</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a review request object of class <code>list</code>, or NULL if nothing exists
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-deleteReviewRequest"></a>
+
+
+
+<h4>Method <code>deleteReviewRequest()</code>
+</h4>
+
+<p>Deletes a review request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$deleteReviewRequest(record)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>an object of class ZenodoRecord</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if deleted, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-submitRecordForReview"></a>
+
+
+
+<h4>Method <code>submitRecordForReview()</code>
+</h4>
+
+<p>Submits a record for review. Prior to this submission, a community
+has to be selected for a record. This is done by using the method <code>createReviewRequest(record, community)</code>.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$submitRecordForReview(recordId, message = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>the ID of a Zenodo record</p>
+</dd>
+<dt><code>message</code></dt>
+<dd>
+<p>message content for the submission. Optional</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if submitted, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getGrants"></a>
+
+
+
+<h4>Method <code>getGrants()</code>
+</h4>
+
+<p>Get Grants supported by Zenodo. DEPRECATED: replaced by <code>getAwards</code>
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getGrants(q = "", pretty = TRUE, size = 500)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all grants can be listed from Zenodo, a query has to be specified.</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of grants as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of grants</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of grants to be returned. By default equal to 500.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of grants as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getAwards"></a>
+
+
+
+<h4>Method <code>getAwards()</code>
+</h4>
+
+<p>Get Awards supported by Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getAwards(q = "", pretty = TRUE, size = 500)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all awards can be listed from Zenodo, a query has to be specified.</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of awards as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of awards</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of awards to be returned. By default equal to 500.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of awards as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getGrantsByName"></a>
+
+
+
+<h4>Method <code>getGrantsByName()</code>
+</h4>
+
+<p>Get grants by name. DEPRECATED: replaced by <code>getAwardByName</code>
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getGrantsByName(name, pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>name</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of grants as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of grants</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of grants as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getAwardsByName"></a>
+
+
+
+<h4>Method <code>getAwardsByName()</code>
+</h4>
+
+<p>Get awards by name.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getAwardsByName(name, pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>name</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of awards as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of awards</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of awards as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getGrantById"></a>
+
+
+
+<h4>Method <code>getGrantById()</code>
+</h4>
+
+<p>Get grant by Id.DEPRECATED: replaced by <code>getAwardById</code>
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getGrantById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>grant id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the grant
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getAwardById"></a>
+
+
+
+<h4>Method <code>getAwardById()</code>
+</h4>
+
+<p>Get award by Id.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getAwardById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>award id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the award
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getAffiliations"></a>
+
+
+
+<h4>Method <code>getAffiliations()</code>
+</h4>
+
+<p>Get Affiliations supported by Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getAffiliations(q = "", pretty = TRUE, size = 500)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all affiliations can be listed from Zenodo, a query has to be specified.</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of affiliations as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of affiliations</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of affiliations to be returned. By default equal to 500.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of affiliations as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getAffiliationByName"></a>
+
+
+
+<h4>Method <code>getAffiliationByName()</code>
+</h4>
+
+<p>Get affiliations by name.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getAffiliationByName(name, pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>name</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of affiliations as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of affiliations</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of affiliations as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getAffiliationById"></a>
+
+
+
+<h4>Method <code>getAffiliationById()</code>
+</h4>
+
+<p>Get affiliation by Id.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getAffiliationById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>affiliation id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the affiliation
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getFunders"></a>
+
+
+
+<h4>Method <code>getFunders()</code>
+</h4>
+
+<p>Get Funders supported by Zenodo based on a query.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getFunders(q = "", pretty = TRUE, size = 500)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all funders can be listed from Zenodo, a query has to be specified.</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of funders as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of funders</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of funders to be returned. By default equal to 500</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of funders as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getFundersByName"></a>
+
+
+
+<h4>Method <code>getFundersByName()</code>
+</h4>
+
+<p>Get funders by name.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getFundersByName(name, pretty = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>name</code></dt>
+<dd>
+<p>name</p>
+</dd>
+<dt><code>pretty</code></dt>
+<dd>
+<p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<code>TRUE</code> which will returns the list of funders as <code>data.frame</code>.
+Set <code>pretty = FALSE</code> to get the raw list of funders</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of funders as <code>data.frame</code> or <code>list</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getFunderById"></a>
+
+
+
+<h4>Method <code>getFunderById()</code>
+</h4>
+
+<p>Get funder by Id.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getFunderById(id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>id</code></dt>
+<dd>
+<p>funder id</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the funder
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getDepositions"></a>
+
+
+
+<h4>Method <code>getDepositions()</code>
+</h4>
+
+<p>Get the list of Zenodo records deposited in your Zenodo workspace (user records). By default
+the list of depositions will be returned by page with a size of 10 results per page (default size of 
+the Zenodo API). The parameter <code>q</code> allows to specify an ElasticSearch-compliant query to filter 
+depositions (default query is empty to retrieve all records). The argument <code>all_versions</code>, if set 
+to TRUE allows to get all versions of records as part of the depositions list. The argument <code>exact</code>
+specifies that an exact matching is wished, in which case paginated search will be disabled (only the first 
+search page will be returned).
+Examples of ElasticSearch queries for Zenodo can be found at <a href="https://help.zenodo.org/guides/search/">https://help.zenodo.org/guides/search/</a>.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getDepositions(
+  q = "",
+  size = 10,
+  all_versions = FALSE,
+  exact = TRUE,
+  quiet = FALSE
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>Elastic-Search-compliant query, as object of class <code>character</code>. Default is ""</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of depositions to be retrieved per request (paginated). Default is 10</p>
+</dd>
+<dt><code>all_versions</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if all versions of deposits have to be retrieved. Default is <code>FALSE</code></p>
+</dd>
+<dt><code>exact</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if exact matching has to be applied. Default is <code>TRUE</code></p>
+</dd>
+<dt><code>quiet</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if logs have to skipped. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a list of <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getDepositionByConceptDOI"></a>
+
+
+
+<h4>Method <code>getDepositionByConceptDOI()</code>
+</h4>
+
+<p>Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions).
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getDepositionByConceptDOI(conceptdoi)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>conceptdoi</code></dt>
+<dd>
+<p>the concept DOI, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getDepositionByDOI"></a>
+
+
+
+<h4>Method <code>getDepositionByDOI()</code>
+</h4>
+
+<p>Get a Zenodo deposition record by DOI.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getDepositionByDOI(doi)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>doi</code></dt>
+<dd>
+<p>the DOI, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getDepositionById"></a>
+
+
+
+<h4>Method <code>getDepositionById()</code>
+</h4>
+
+<p>Get a Zenodo deposition record by ID.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getDepositionById(recid)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recid</code></dt>
+<dd>
+<p>the record ID, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getDepositionByConceptId"></a>
+
+
+
+<h4>Method <code>getDepositionByConceptId()</code>
+</h4>
+
+<p>Get a Zenodo deposition record by concept ID.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getDepositionByConceptId(conceptrecid)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>conceptrecid</code></dt>
+<dd>
+<p>the record concept ID, object of class <code>character</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-depositRecord"></a>
+
+
+
+<h4>Method <code>depositRecord()</code>
+</h4>
+
+<p>Deposits a record on Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$depositRecord(record, reserveDOI = TRUE, publish = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>the record to deposit, object of class <code>ZenodoRecord</code></p>
+</dd>
+<dt><code>reserveDOI</code></dt>
+<dd>
+<p>reserve DOI. By default <code>TRUE</code></p>
+</dd>
+<dt><code>publish</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if record has to be published (default <code>FALSE</code>). 
+Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish your record)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-reserveDOI"></a>
+
+
+
+<h4>Method <code>reserveDOI()</code>
+</h4>
+
+<p>Reserves a DOI for a deposition (draft record)
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$reserveDOI(record)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>the record to deposit, object of class <code>ZenodoRecord</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-deleteDOI"></a>
+
+
+
+<h4>Method <code>deleteDOI()</code>
+</h4>
+
+<p>Reserves a DOI for a deposition (draft record)
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$deleteDOI(record)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>the record for which DOI has to be deleted, object of class <code>ZenodoRecord</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-depositRecordVersion"></a>
+
+
+
+<h4>Method <code>depositRecordVersion()</code>
+</h4>
+
+<p>Deposits a record version on Zenodo.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$depositRecordVersion(
+  record,
+  delete_latest_files = TRUE,
+  files = list(),
+  publish = FALSE
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>record</code></dt>
+<dd>
+<p>the record version to deposit, object of class <code>ZenodoRecord</code></p>
+</dd>
+<dt><code>delete_latest_files</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if latest files have to be deleted. Default is <code>TRUE</code></p>
+</dd>
+<dt><code>files</code></dt>
+<dd>
+<p>a list of files to be uploaded with the new record version</p>
+</dd>
+<dt><code>publish</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if record has to be published (default <code>FALSE</code>)</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if deposited (and eventually published), <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-deleteRecord"></a>
+
+
+
+<h4>Method <code>deleteRecord()</code>
+</h4>
+
+<p>Deletes a record given its ID
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$deleteRecord(recordId)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>the ID of the record to be deleted</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if deleted, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-deleteRecordByDOI"></a>
+
+
+
+<h4>Method <code>deleteRecordByDOI()</code>
+</h4>
+
+<p>Deletes a record by DOI
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$deleteRecordByDOI(doi)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>doi</code></dt>
+<dd>
+<p>the DOI of the record to be deleted</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if deleted, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-deleteRecords"></a>
+
+
+
+<h4>Method <code>deleteRecords()</code>
+</h4>
+
+<p>Deletes all Zenodo deposited (unpublished) records. 
+The parameter <code>q</code> allows to specify an ElasticSearch-compliant query to filter depositions (default query 
+is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo  can be found at 
+<a href="https://help.zenodo.org/guides/search/">https://help.zenodo.org/guides/search/</a>.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$deleteRecords(q = "", size = 10)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>an ElasticSearch compliant query, object of class <code>character</code></p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of records to be passed to <code>$getDepositions</code> method</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if all records have been deleted, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-createEmptyRecord"></a>
+
+
+
+<h4>Method <code>createEmptyRecord()</code>
+</h4>
+
+<p>Creates an empty record in the Zenodo deposit. Returns the record
+newly created in Zenodo, as an object of class <code>ZenodoRecord</code> with an 
+assigned identifier.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$createEmptyRecord(reserveDOI = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>reserveDOI</code></dt>
+<dd>
+<p>reserve DOI. By default <code>TRUE</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-editRecord"></a>
+
+
+
+<h4>Method <code>editRecord()</code>
+</h4>
+
+<p>Unlocks a record already submitted. Required to edit metadata of a Zenodo record already published.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$editRecord(recordId)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>the ID of the record to unlock and set in editing mode.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-discardChanges"></a>
+
+
+
+<h4>Method <code>discardChanges()</code>
+</h4>
+
+<p>Discards changes on a Zenodo record. Deleting a draft for an unpublished 
+record will remove the draft and associated files from the system. Deleting a draft for 
+a published record will remove the draft but not the published record.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$discardChanges(recordId)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>the ID of the record for which changes have to be discarded.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-publishRecord"></a>
+
+
+
+<h4>Method <code>publishRecord()</code>
+</h4>
+
+<p>Publishes a Zenodo record.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$publishRecord(recordId)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>the ID of the record to be published.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>an object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getFiles"></a>
+
+
+
+<h4>Method <code>getFiles()</code>
+</h4>
+
+<p>Get list of files attached to a Zenodo record.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getFiles(recordId)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>the ID of the record.</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>list of files
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getFile"></a>
+
+
+
+<h4>Method <code>getFile()</code>
+</h4>
+
+<p>Get a file record metadata.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getFile(recordId, filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>the ID of the record.</p>
+</dd>
+<dt><code>filename</code></dt>
+<dd>
+<p>filename</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the file metadata
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-startFileUpload"></a>
+
+
+
+<h4>Method <code>startFileUpload()</code>
+</h4>
+
+<p>Start a file upload. The method will create a key for the file to be uploaded
+This method is essentially for internal purpose, and is called directly in <code>uploadFile</code>
+for user convenience and for backward compatibility with the legacy Zenodo API.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$startFileUpload(path, recordId)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>path</code></dt>
+<dd>
+<p>Local path of the file</p>
+</dd>
+<dt><code>recordId</code></dt>
+<dd>
+<p>ID of the record</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoManager-completeFileUpload"></a>
+
+
+
+<h4>Method <code>completeFileUpload()</code>
+</h4>
+
+<p>Completes a file upload. The method will complete a file upload through a commit operation
+This method is essentially for internal purpose, and is called directly in <code>uploadFile</code>
+for user convenience and for backward compatibility with the legacy Zenodo API.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$completeFileUpload(path, recordId)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>path</code></dt>
+<dd>
+<p>Local path of the file</p>
+</dd>
+<dt><code>recordId</code></dt>
+<dd>
+<p>ID of the record</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoManager-uploadFile"></a>
+
+
+
+<h4>Method <code>uploadFile()</code>
+</h4>
+
+<p>Uploads a file to a Zenodo record. With the new Zenodo Invenio RDM API, this method
+internally calls <code>startFileUpload</code> to create a file record (with a filename key) at start, followed
+by the actual file content upload. At this stage, the file upload is in "pending" status. At the end,
+the function calls <code>completeFileUpload</code> to commit the file which status becomes "completed".
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$uploadFile(path, record = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>path</code></dt>
+<dd>
+<p>Local path of the file</p>
+</dd>
+<dt><code>record</code></dt>
+<dd>
+<p>object of class <code>ZenodoRecord</code></p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoManager-deleteFile"></a>
+
+
+
+<h4>Method <code>deleteFile()</code>
+</h4>
+
+<p>Deletes a file for a record. With the new Zenodo Invenio RDM API, if a file is
+deleted although its status was pending, only the upload content is deleted, and the file upload
+record (identified by a filename key) is kept. If the status was completed (with a file commit),
+the file record is deleted.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$deleteFile(recordId, filename)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recordId</code></dt>
+<dd>
+<p>ID of the record</p>
+</dd>
+<dt><code>filename</code></dt>
+<dd>
+<p>name of the file to be deleted</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoManager-getRecords"></a>
+
+
+
+<h4>Method <code>getRecords()</code>
+</h4>
+
+<p>Get the list of Zenodo records. By defaut the list of records will be returned by
+page with a size of 10 results per page (default size of the Zenodo API). The parameter 
+<code>q</code> allows to specify an ElasticSearch-compliant query to filter depositions 
+(default query is empty to retrieve all records). The argument <code>all_versions</code>, 
+if set to TRUE allows to get all versions of records as part of the depositions list. 
+The argument <code>exact</code> specifies that an exact matching is wished, in which case 
+paginated search will be disabled (only the first search page will be returned).
+Examples of ElasticSearch queries for Zenodo can be found at <a href="https://help.zenodo.org/guides/search/">https://help.zenodo.org/guides/search/</a>.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRecords(q = "", size = 10, all_versions = FALSE, exact = TRUE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>Elastic-Search-compliant query, as object of class <code>character</code>. Default is ""</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of records to be retrieved per request (paginated). Default is 10</p>
+</dd>
+<dt><code>all_versions</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if all versions of records have to be retrieved. Default is <code>FALSE</code></p>
+</dd>
+<dt><code>exact</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if exact matching has to be applied. Default is <code>TRUE</code></p>
+</dd>
+<dt><code>quiet</code></dt>
+<dd>
+<p>object of class <code>logical</code> indicating if logs have to skipped. Default is <code>FALSE</code></p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a list of <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getRecordByConceptDOI"></a>
+
+
+
+<h4>Method <code>getRecordByConceptDOI()</code>
+</h4>
+
+<p>Get Record by concept DOI
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRecordByConceptDOI(conceptdoi)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>conceptdoi</code></dt>
+<dd>
+<p>the concept DOI</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getRecordByDOI"></a>
+
+
+
+<h4>Method <code>getRecordByDOI()</code>
+</h4>
+
+<p>Get Record by DOI
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRecordByDOI(doi)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>doi</code></dt>
+<dd>
+<p>the DOI</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getRecordById"></a>
+
+
+
+<h4>Method <code>getRecordById()</code>
+</h4>
+
+<p>Get Record by ID
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRecordById(recid)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>recid</code></dt>
+<dd>
+<p>the record ID</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getRecordByConceptId"></a>
+
+
+
+<h4>Method <code>getRecordByConceptId()</code>
+</h4>
+
+<p>Get Record by concept ID
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRecordByConceptId(conceptrecid)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>conceptrecid</code></dt>
+<dd>
+<p>the concept ID</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a object of class <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getRequests"></a>
+
+
+
+<h4>Method <code>getRequests()</code>
+</h4>
+
+<p>Search requests
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRequests(q = "", sort = "bestmatch", size = 10)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>q</code></dt>
+<dd>
+<p>Search query used to filter results based on ElasticSearch's query string syntax. 
+e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax</p>
+</dd>
+<dt><code>sort</code></dt>
+<dd>
+<p>Sort search results. Built-in options are "bestmatch", "name", "newest", "oldest" (default: "bestmatch" or "newest").</p>
+</dd>
+<dt><code>size</code></dt>
+<dd>
+<p>number of records to be retrieved per request (paginated). Default is 10</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>a list of <code>ZenodoRecord</code>
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-getRequest"></a>
+
+
+
+<h4>Method <code>getRequest()</code>
+</h4>
+
+<p>Get a request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$getRequest(request_id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>request_id</code></dt>
+<dd>
+<p>the request ID</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p>the request <code>list</code> object, NULL otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-isActionableRequest"></a>
+
+
+
+<h4>Method <code>isActionableRequest()</code>
+</h4>
+
+<p>Checks if the request can be subject to an operation (accept, decline, cancel)
+depending on its status. To be subject to an operation, a request should not be closed or expired
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$isActionableRequest(request_id)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>request_id</code></dt>
+<dd>
+<p>the request ID</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-acceptRequest"></a>
+
+
+
+<h4>Method <code>acceptRequest()</code>
+</h4>
+
+<p>Accepts a request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$acceptRequest(request_id, message = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>request_id</code></dt>
+<dd>
+<p>the request ID</p>
+</dd>
+<dt><code>message</code></dt>
+<dd>
+<p>optional message reason for acceptance</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if accepted, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-declineRequest"></a>
+
+
+
+<h4>Method <code>declineRequest()</code>
+</h4>
+
+<p>Declines a request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$declineRequest(request_id, message = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>request_id</code></dt>
+<dd>
+<p>the request ID</p>
+</dd>
+<dt><code>message</code></dt>
+<dd>
+<p>optional message reason for declination</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if declined, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-cancelRequest"></a>
+
+
+
+<h4>Method <code>cancelRequest()</code>
+</h4>
+
+<p>Cancels a request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$cancelRequest(request_id, message = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>request_id</code></dt>
+<dd>
+<p>the request ID</p>
+</dd>
+<dt><code>message</code></dt>
+<dd>
+<p>optional message reason for cancelation</p>
+</dd>
+</dl>
+</div>
+
+
+
+<h5>Returns</h5>
+
+<p><code>TRUE</code> if canceled, <code>FALSE</code> otherwise
+</p>
+
+
+<hr>
+<a id="method-ZenodoManager-clone"></a>
+
+
+
+<h4>Method <code>clone()</code>
+</h4>
+
+<p>The objects of this class are cloneable with this method.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoManager$clone(deep = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>deep</code></dt>
+<dd>
+<p>Whether to make a deep clone.</p>
+</dd>
+</dl>
+</div>
+
+
+
+
+<h3>Note</h3>
+
+<p>Main user class to be used with <span class="pkg">zen4R</span>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Emmanuel Blondel &lt;emmanuel.blondel1@gmail.com&gt;
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  ZENODO &lt;- ZenodoManager$new(
+     url = "https://sandbox.zenodo.org/api",
+     token = "&lt;your_token&gt;",
+     logger = "INFO"
+  )
+  
+  #create (deposit) an empty record
+  newRec &lt;- ZENODO$createEmptyRecord()
+  
+  #create and fill a local (not yet deposited) record
+  myrec &lt;- ZenodoRecord$new()
+  myrec$setTitle("my R package")
+  myrec$setDescription("A description of my R package")
+  myrec$setUploadType("software")
+  myrec$addCreator(
+    firstname = "John", lastname = "Doe",
+    affiliation = "Independent", orcid = "0000-0000-0000-0000"
+   )
+  myrec$setLicense("mit")
+  myrec$setAccessRight("open")
+  myrec$setDOI("mydoi") #use this method if your DOI has been assigned elsewhere, outside Zenodo
+  
+  #deposit the record 
+  myrec &lt;- ZENODO$depositRecord(myrec)
+  
+  #publish a record (with caution!!)
+  #this method will PUBLISH the deposition done earlier
+  ZENODO$publishRecord(myrec$id)
+  #With even more caution the publication can be done with a shortcut argument at deposit time
+  ZENODO$depositRecord(myrec, publish = TRUE)
+  
+  #delete a record (by id)
+  #this methods only works for unpublished deposits 
+  #(if a record is published, it cannot be deleted anymore!)
+  ZENODO$deleteRecord(myrec$id)
+  
+  #HOW TO UPLOAD FILES to a deposit
+  
+  #upload a file
+  ZENODO$uploadFile("path/to/your/file", record = myrec)
+  
+  #list files
+  zen_files &lt;- ZENODO$getFiles(myrec$id)
+  
+  #delete a file?
+  ZENODO$deleteFile(myrec$id, zen_files[[1]]$filename)
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

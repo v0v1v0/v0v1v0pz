@@ -1,0 +1,39 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>london_area</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Region representing London in projected coordinate system</h2>
+
+<h3>Description</h3>
+
+<p>'london_a()' and 'london_c()' return the city boundaries and centre
+point of London, respectively.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">london_a()
+
+london_c()
+</code></pre>
+
+
+<h3>Note</h3>
+
+<p>'london_a()'  returns a projected version of 'lnd' in 'spDataLarge'.
+See the ‘data-raw' folder in the package’s repo to reproduce these datasets
+The 'lonlat' versions of the data have coordinates in units of degrees.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(london_a(), reset = FALSE)
+plot(london_c(), add = TRUE)
+</code></pre>
+
+
+</div>

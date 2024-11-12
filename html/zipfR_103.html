@@ -1,0 +1,154 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>read.tfl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Loading and Saving Type Frequency Lists (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>read.tfl</code> loads type frequency list from <code>.tfl</code> file
+</p>
+<p><code>write.tfl</code> saves type frequency list object in <code>.tfl</code>
+file
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  read.tfl(file, encoding=getOption("encoding"))
+
+  write.tfl(tfl, file, encoding=getOption("encoding"))
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>character string specifying the pathname of a disk file.
+Files with extension <code>.gz</code> will automatically be compressed/decompressed.
+See section "Format" for a description of the required file format</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tfl</code></td>
+<td>
+<p>a type frequency list, i.e.\ an object of class <code>tfl</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>encoding</code></td>
+<td>
+<p>specifies the character encoding of the disk
+file to be read or written to.  See <code>file</code> for details.</p>
+</td>
+</tr>
+</table>
+<h3>Format</h3>
+
+<p>A TAB-delimited text file with column headers but no row names
+(suitable for reading with <code>read.delim</code>), containing the
+following columns:
+</p>
+
+<dl>
+<dt><code>f</code></dt>
+<dd>
+<p>type frequencies <code class="reqn">f_k</code> </p>
+</dd>
+<dt><code>k</code></dt>
+<dd>
+<p>optional: the corresponding type IDs <code class="reqn">k</code>.  If
+missing, increasing non-negative integers are automatically
+assigned as IDs.</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>optional: type representations (such as word
+forms or lemmas)</p>
+</dd>
+</dl>
+<p>These columns may appear in any order in the text file.  Only the
+<code>f</code> column is mandatory and all unrecognized columns will be
+silently ignored.
+</p>
+
+
+<h3>Details</h3>
+
+<p>If the filename <code>file</code> ends in the extension <code>.gz</code>, <code>.bz2</code> pr <code>.xz</code>,
+the disk file will automatically be decompressed (<code>read.tfl</code>) and compressed (<code>write.tfl</code>).
+</p>
+<p>The <code>.tfl</code> file format stores neither the values of <code>N</code> and
+<code>V</code> nor the range of type frequencies explicitly.  Therefore,
+incomplete type frequency lists cannot be fully reconstructed from
+disk files (and will not even be recognized as such).  An attempt to
+save such a list will trigger a corresponding warning.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>read.tfl</code> returns an object of class <code>tfl</code> (see the
+<code>tfl</code> manpage for details)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the <code>tfl</code> manpage for details on <code>tfl</code>
+objects. See <code>read.spc</code> and <code>read.vgc</code> for
+import/export of other data structures.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## save type-frequency list for Brown corpus to external file
+fname &lt;- tempfile(fileext=".tfl.gz") # automatically compresses file
+write.tfl(Brown.tfl, fname)
+## file &lt;fname&gt; contains a compressed TAB-delimited table with fields
+##   k    ... type ID (usually Zipf rank)
+##   f    ... frequency of type
+##   type ... the type itself (here a word form)
+
+## read it back in
+New.tfl &lt;- read.tfl(fname)
+
+## same as Brown.tfl
+summary(New.tfl)
+summary(Brown.tfl)
+print(New.tfl)
+print(Brown.tfl)
+head(New.tfl)
+head(Brown.tfl)
+stopifnot(isTRUE(all.equal(New.tfl, Brown.tfl))) # should by identical
+
+## Not run: 
+## suppose you have a text file with a frequency list, one f per line, e.g.:
+##   f
+##   14
+##   12
+##   31
+##   ...
+
+## you can import this with read.tfl
+MyData.tfl &lt;- read.tfl("mylist.txt")
+summary(MyData.tfl)
+print(MyData.tfl) # ids in column k added by zipfR
+
+## from this you can generate a spectrum with tfl2spc
+MyData.spc &lt;- tfl2spc(MyData.tfl)
+summary(MyData.spc)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

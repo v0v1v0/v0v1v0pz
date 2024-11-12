@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>control_density_v1</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Control settings for the original z-curve density algorithm</h2>
+
+<h3>Description</h3>
+
+<p>All settings are passed to the density fitting
+algorithm. All unspecified settings are set to the default value.
+Setting <code>model = "KD1"</code> sets all settings to the default
+value irrespective of any other setting and fits z-curve as described
+in Brunner and Schimmack (2020).
+</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>version</code></td>
+<td>
+<p>Set to <code>1</code> to fit the original version of z-curve.
+Defaults to <code>2</code> = the updated version of z-curve. For its settings
+page go to control_density.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A type of model to be fitted, defaults to <code>"KD1"</code>
+(the only possibility)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig_level</code></td>
+<td>
+<p>An alpha level of the test statistics, defaults to
+<code>.05</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>A beginning of fitting interval, defaults to
+<code>qnorm(sig_level/2,lower.tail = F)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>An end of fitting interval, defaults to <code>6</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>K</code></td>
+<td>
+<p>Number of mixture components, defaults to <code>3</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_iter</code></td>
+<td>
+<p>A maximum number of iterations for the nlminb
+optimization for fitting mixture model, defaults to <code>150</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_eval</code></td>
+<td>
+<p>A maximum number of evaluation for the nlminb
+optimization for fitting mixture model, defaults to <code>300</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion</code></td>
+<td>
+<p>A criterion to terminate nlminb optimization,
+defaults to <code>1e-10</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bw</code></td>
+<td>
+<p>A bandwidth of the kernel density estimation, defaults to <code>"nrd0"</code></p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Brunner J, Schimmack U (2020).
+“Estimating population mean power under conditions of heterogeneity and selection for significance.”
+<em>Meta-Psychology</em>, <b>4</b>.
+<a href="https://doi.org/10.15626/MP.2018.874">doi:10.15626/MP.2018.874</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zcurve()</code>, control_density, control_EM
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># to increase the number of iterations
+ctrl &lt;- list(
+   version   = 1,
+   max_iter  = 300
+)
+## Not run: zcurve(OSC.z, method = "density", control = ctrl)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,354 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZenodoRequest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ZenodoRequest</h2>
+
+<h3>Description</h3>
+
+<p>ZenodoRequest
+</p>
+<p>ZenodoRequest
+</p>
+
+
+<h3>Format</h3>
+
+<p><code>R6Class</code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of <code>R6Class</code> for modelling a generic Zenodo request
+</p>
+
+
+<h3>Super class</h3>
+
+<p><code>zen4R::zen4RLogger</code> -&gt; <code>ZenodoRequest</code>
+</p>
+
+
+<h3>Methods</h3>
+
+
+
+<h4>Public methods</h4>
+
+
+<ul>
+<li> <p><a href="#method-ZenodoRequest-new"><code>ZenodoRequest$new()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-execute"><code>ZenodoRequest$execute()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-getRequest"><code>ZenodoRequest$getRequest()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-getRequestHeaders"><code>ZenodoRequest$getRequestHeaders()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-getStatus"><code>ZenodoRequest$getStatus()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-getResponse"><code>ZenodoRequest$getResponse()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-getException"><code>ZenodoRequest$getException()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-getResult"><code>ZenodoRequest$getResult()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-setResult"><code>ZenodoRequest$setResult()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-ZenodoRequest-clone"><code>ZenodoRequest$clone()</code></a>
+</p>
+</li>
+</ul>
+<details><summary>Inherited methods</summary><ul>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR"><code>zen4R::zen4RLogger$ERROR()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO"><code>zen4R::zen4RLogger$INFO()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN"><code>zen4R::zen4RLogger$WARN()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass"><code>zen4R::zen4RLogger$getClass()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName"><code>zen4R::zen4RLogger$getClassName()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href="../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger"><code>zen4R::zen4RLogger$logger()</code></a></span></li>
+</ul></details><hr>
+<a id="method-ZenodoRequest-new"></a>
+
+
+
+<h4>Method <code>new()</code>
+</h4>
+
+<p>Initializes a <code>ZenodoRequest</code>
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$new(
+  url,
+  type,
+  request,
+  data = NULL,
+  file = NULL,
+  progress = FALSE,
+  accept = "application/vnd.inveniordm.v1+json",
+  token,
+  logger = NULL,
+  ...
+)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>url</code></dt>
+<dd>
+<p>request URL</p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>Type of request: 'GET', 'POST', 'PUT', 'DELETE'</p>
+</dd>
+<dt><code>request</code></dt>
+<dd>
+<p>the method request</p>
+</dd>
+<dt><code>data</code></dt>
+<dd>
+<p>payload (optional)</p>
+</dd>
+<dt><code>file</code></dt>
+<dd>
+<p>to be uploaded (optional)</p>
+</dd>
+<dt><code>progress</code></dt>
+<dd>
+<p>whether a progress status has to be displayed for download/upload</p>
+</dd>
+<dt><code>accept</code></dt>
+<dd>
+<p>accept header. Default is "application/vnd.inveniordm.v1+json"</p>
+</dd>
+<dt><code>token</code></dt>
+<dd>
+<p>user token</p>
+</dd>
+<dt><code>logger</code></dt>
+<dd>
+<p>the logger type</p>
+</dd>
+<dt><code>...</code></dt>
+<dd>
+<p>any other arg</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRequest-execute"></a>
+
+
+
+<h4>Method <code>execute()</code>
+</h4>
+
+<p>Executes the request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$execute()</pre></div>
+
+
+<hr>
+<a id="method-ZenodoRequest-getRequest"></a>
+
+
+
+<h4>Method <code>getRequest()</code>
+</h4>
+
+<p>Get request
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$getRequest()</pre></div>
+
+
+<hr>
+<a id="method-ZenodoRequest-getRequestHeaders"></a>
+
+
+
+<h4>Method <code>getRequestHeaders()</code>
+</h4>
+
+<p>Get request headers
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$getRequestHeaders()</pre></div>
+
+
+<hr>
+<a id="method-ZenodoRequest-getStatus"></a>
+
+
+
+<h4>Method <code>getStatus()</code>
+</h4>
+
+<p>Get request status
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$getStatus()</pre></div>
+
+
+<hr>
+<a id="method-ZenodoRequest-getResponse"></a>
+
+
+
+<h4>Method <code>getResponse()</code>
+</h4>
+
+<p>Get request response
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$getResponse()</pre></div>
+
+
+<hr>
+<a id="method-ZenodoRequest-getException"></a>
+
+
+
+<h4>Method <code>getException()</code>
+</h4>
+
+<p>Get request exception
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$getException()</pre></div>
+
+
+<hr>
+<a id="method-ZenodoRequest-getResult"></a>
+
+
+
+<h4>Method <code>getResult()</code>
+</h4>
+
+<p>Get request result
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$getResult()</pre></div>
+
+
+<hr>
+<a id="method-ZenodoRequest-setResult"></a>
+
+
+
+<h4>Method <code>setResult()</code>
+</h4>
+
+<p>Set request result
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$setResult(result)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>result</code></dt>
+<dd>
+<p>result to be set</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-ZenodoRequest-clone"></a>
+
+
+
+<h4>Method <code>clone()</code>
+</h4>
+
+<p>The objects of this class are cloneable with this method.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>ZenodoRequest$clone(deep = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>deep</code></dt>
+<dd>
+<p>Whether to make a deep clone.</p>
+</dd>
+</dl>
+</div>
+
+
+
+
+<h3>Note</h3>
+
+<p>Abstract class used internally by <span class="pkg">zen4R</span>
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Emmanuel Blondel &lt;emmanuel.blondel1@gmail.com&gt;
+</p>
+
+
+</div>

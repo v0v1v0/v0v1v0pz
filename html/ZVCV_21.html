@@ -1,0 +1,141 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>VDP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Example of estimation using SMC</h2>
+
+<h3>Description</h3>
+
+<p>This example illustrates how ZV-CV can be used for post-processing of results from likelihood-annealing SMC. In particular, we use ZV-CV to estimate posterior expectations and the evidence for a single SMC run of this example based on the Van der Pol oscillatory differential equations (Van der Pol, 1926). Further details about this example and applications to ZV-CV can be found in Oates et al. (2017) and South et al. (2019).
+</p>
+<p>Given that the focus of this R package is on ZV-CV, we assume that samples have already been obtained from SMC and put into the correct format. One could use the R package <code>RcppSMC</code> or implement their own sampler in order to obtain results like this. The key is to make sure the derivatives of the log likelihood and log prior are stored, along with the inverse temperatures.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(VDP)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A list containing the following :
+</p>
+
+<dl>
+<dt>N</dt>
+<dd>
+<p>The size of the SMC population</p>
+</dd>
+<dt>rho</dt>
+<dd>
+<p>The tolerance for the new temperatures, which are selected so that the CESS at each temperature is <code class="reqn">\rho*N</code> where <code class="reqn">N</code> is the population size.</p>
+</dd>
+<dt>temperatures</dt>
+<dd>
+<p>A vector of length <code class="reqn">T</code> of inverse power posterior temperatures</p>
+</dd>
+<dt>samples</dt>
+<dd>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> by <code class="reqn">T</code> matrix of samples from the <code class="reqn">T</code> power posteriors, where <code class="reqn">d</code> is the dimension of the target distribution. The samples are transformed to be on the log scale and all derivatives are with respect to log samples.</p>
+</dd>
+<dt>loglike</dt>
+<dd>
+<p>An <code class="reqn">N</code> by <code class="reqn">T</code> matrix of log likelihood values corresponding to <code>samples</code></p>
+</dd>
+<dt>logprior</dt>
+<dd>
+<p>An <code class="reqn">N</code> by <code class="reqn">T</code> matrix of log prior values corresponding to <code>samples</code></p>
+</dd>
+<dt>der_loglike</dt>
+<dd>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> by <code class="reqn">T</code> matrix of the derivatives of the log likelihood with respect to the parameters, with parameter values corresponding to <code>samples</code></p>
+</dd>
+<dt>der_logprior</dt>
+<dd>
+<p> An <code class="reqn">N</code> by <code class="reqn">d</code> by <code class="reqn">T</code> matrix of the derivatives of the log prior with respect to the parameters, with parameter values corresponding to <code>samples</code></p>
+</dd>
+</dl>
+<h3>References</h3>
+
+ 
+<p>Oates, C. J., Girolami, M. &amp; Chopin, N. (2017). Control functionals for Monte Carlo integration. Journal of the Royal Statistical Society: Series B (Statistical Methodology), 79(3), 695-718.
+</p>
+<p>South, L. F., Oates, C. J., Mira, A., &amp; Drovandi, C. (2019). Regularised zero-variance control variates for high-dimensional variance reduction.
+</p>
+<p>Van der Pol, B. (1926). On relaxation-oscillations. The London, Edinburgh and Dublin Philosophical Magazine and Journal of Science, 2(11), 978-992.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See ZVCV for more package details.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(1)
+
+# Load the SMC results
+data(VDP) 
+
+# Set up the list of control variates to choose from 
+options &lt;- list()
+# Vanilla Monte Carlo
+options[[1]] &lt;- list(polyorder = 0)
+# Standard ZV-CV with polynomial order selected through cross-validation
+options[[2]] &lt;- list(polyorder = Inf, regul_reg = FALSE)
+
+##############################
+# Posterior expectation - The true expectation is 0.9852 to 4 decimal places
+##############################
+
+# Note the exp() because samples and derivatives were stored on the log scale
+# but we are interested in the expectation on the original scale
+posterior &lt;- zvcv(exp(VDP$samples[,,8]), VDP$samples[,,8],
+VDP$der_loglike[,,8] + VDP$der_logprior[,,8], options = options) 
+posterior$expectation # The posterior expectation estimate
+posterior$polyorder # The selected polynomial order
+
+##############################
+# Evidence estimation - The true logged evidence is 10.36 to 2 decimal places
+##############################
+
+# Getting additional temperatures based on maintaing a CESS of 0.91N rather than 0.9N.
+# The value 0.91 is used for speed but South et al. (2019) use 0.99.
+temp &lt;- Expand_Temperatures(VDP$temperatures, VDP$loglike, 0.91)
+VDP$temperatures_new &lt;- temp$temperatures_all # the new temperatures
+VDP$most_recent &lt;- temp$relevant_samples # the samples associated with the new temperatures
+
+n_sigma &lt;- 3 # For speed, South et al. (2019) uses 15
+sigma_list &lt;- as.list( 10^(0.5*seq(-3,4,length.out=n_sigma)) )
+
+# Evidence estimation using the SMC identity
+Z_SMC &lt;- evidence_SMC(VDP$samples, VDP$loglike, VDP$der_loglike, VDP$der_logprior,
+VDP$temperatures, VDP$temperatures_new, VDP$most_recent, options = options)
+Z_SMC$log_evidence
+
+# Evidence estimation using the SMC identity
+Z_SMC_CF &lt;- evidence_SMC_CF(VDP$samples, VDP$loglike, VDP$der_loglike, VDP$der_logprior,
+VDP$temperatures, VDP$temperatures_new, VDP$most_recent, steinOrder = 2,
+kernel_function = "gaussian", sigma_list = sigma_list, folds = 2)
+Z_SMC_CF$log_evidence
+
+# Evidence estimation using the CTI identity
+Z_CTI &lt;- evidence_CTI(VDP$samples, VDP$loglike, VDP$der_loglike, VDP$der_logprior,
+VDP$temperatures, VDP$temperatures_new, VDP$most_recent, options = options)
+Z_CTI$log_evidence_PS2
+
+# Evidence estimation using the CTI identity
+Z_CTI_CF &lt;- evidence_CTI_CF(VDP$samples, VDP$loglike, VDP$der_loglike, VDP$der_logprior,
+VDP$temperatures, VDP$temperatures_new, VDP$most_recent, steinOrder = 2,
+kernel_function = "gaussian", sigma_list = sigma_list, folds = 2)
+Z_CTI_CF$log_evidence_PS2
+</code></pre>
+
+
+</div>

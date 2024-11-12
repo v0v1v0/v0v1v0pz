@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_repair</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Repair ZIP Code or ZCTA Vector</h2>
+
+<h3>Description</h3>
+
+<p>This function repairs two of the four conditions identified
+in the validation checks with <code>zi_validate()</code>. For the other two
+conditions, values are conveted <code>NA</code>. See Details below for the
+specific changes made.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_repair(x, style = "zcta5")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector containing ZIP or ZCTA values to be repaired.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>style</code></td>
+<td>
+<p>A character scalar - either <code>"zcta5"</code> or <code>"zcta3"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>zi_repair()</code> function addresses four conditions:
+</p>
+
+<ul>
+<li>
+<p>If the input vector is numeric, it will be converted to character data.
+</p>
+</li>
+<li>
+<p>If there are values less than five characters (if <code>style = "zcta5"</code>,
+the default), or three characters (if <code>style = "zcta3"</code>), they will
+be padded with leading zeros.
+</p>
+</li>
+<li>
+<p>If there are input values over five characters (if <code>style = "zcta5"</code>,
+the default), or three characters (if <code>style = "zcta3"</code>), they will
+be converted to <code>NA</code>.
+</p>
+</li>
+<li>
+<p>If there are input values that have non-numeric characters, they will
+be converted to <code>NA</code>.
+</p>
+</li>
+</ul>
+<p>Since two of the four steps will result in <code>NA</code> values, it is strongly
+recommended to attempt to manually fix these issues first.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A repaired vector of ZIP or ZCTA values.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># sample five-digit ZIPs with character
+zips &lt;- c("63088", "63108", "zip")
+
+# failed validation
+zi_validate(zips)
+
+# repair
+zips &lt;- zi_repair(zips)
+
+# successful validation
+zi_validate(zips)
+
+</code></pre>
+
+
+</div>

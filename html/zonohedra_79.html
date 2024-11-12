@@ -1,0 +1,250 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonohedron-raytrace</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+compute the intersection of a ray, based in the interior of
+a zonohedron, and the boundary of that zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>The <em>open ray</em> with basepoint <code class="reqn">\bold{b}</code>
+and non-zero direction <code class="reqn">\bold{d}</code> is the set of the form
+<code class="reqn">\bold{b} + t \bold{d}</code> where <code class="reqn">t &gt; 0</code>.
+<br><br>
+This function computes the intersection of an open ray
+and the boundary of a zonohedron <code class="reqn">Z</code>.
+The basepoint is normally required to be in the interior
+of <code class="reqn">Z</code>, but an exception is made if the basepoint is 0,
+and on the boundary of <code class="reqn">Z</code>,
+and the direction points into the interior of <code class="reqn">Z</code>.
+In these two cases the intersection of the open ray
+and the boundary of <code class="reqn">Z</code> is unique.
+In the second case, the basepoint is also allowed to be
+the sum of all the generators - the so-called <em>white point</em>
+of <code class="reqn">Z</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonohedron'
+raytrace( x, base, direction, invert=FALSE, plot=FALSE, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+
+<p>a numeric 3-vector - the basepoint of all the rays.
+<code>base</code> must either be in the interior of <code>x</code>,
+or 0 or the <em>white point</em> and on the boundary of <code>x</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+
+<p>a numeric Mx3 matrix with M non-zero directions in the rows.
+The basepoint and these directions define M rays.
+<br><code>direction</code> can also be a numeric vector that can be converted
+to such a matrix, by row.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>invert</code></td>
+<td>
+
+<p>if <code>TRUE</code>, then compute a point in the unit cube that maps to the point on the boundary
+of <code>x</code> and add it as a column in the returned <code>data.frame</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+
+<p>if <code>TRUE</code>, the computed rays, up to the boundary,
+are <em>added</em> to an existing
+plot of the zonohedron <code>x</code>, see <code>plot.zonohedron()</code>.
+The segments are drawn in the color red.
+If there is no open plot, a warning is issued.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>plot</code> is <code>TRUE</code>, the rays are drawn
+with <code>rgl::segments3d()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>raytrace.zonohedron()</code> returns a <code>data.frame</code> with M rows and these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+
+<p>the given basepoint - this is the same in every row
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>direction</code></td>
+<td>
+
+<p>the given direction
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>facetidx</code></td>
+<td>
+
+<p>the index of the facet (a zonogon) where ray exits the zonohedron
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sign</code></td>
+<td>
+
+<p>of the facet, either +1 or -1
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tmax</code></td>
+<td>
+
+<p>ray parameter of the intersection with the exit facet, always positive
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>point</code></td>
+<td>
+
+<p>the point on the boundary; the intersection of the ray and the facet
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timetrace</code></td>
+<td>
+
+<p>the computation time, in seconds
+</p>
+</td>
+</tr>
+</table>
+<p>And if <code>invert</code> is <code>TRUE</code>, then these columns are added:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>distance</code></td>
+<td>
+<p>signed distance to the boundary of <code>x</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pcube</code></td>
+<td>
+<p>a point in the unit cube that maps to <code>boundary</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>transitions</code></td>
+<td>
+<p>the number of transitions in <code>pcube</code> - a non-negative even integer</p>
+</td>
+</tr>
+</table>
+<p>If <code>base</code> and <code>direction</code> in a row cannot be
+processed, the rest of the row is <code>NA</code>.
+</p>
+<p>If the row names of <code>direction</code> are unique,
+they are copied to the row names of the output.
+<br><br>
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The package <span class="pkg">rgl</span> is required for 3D plotting.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>plot.zonohedron()</code>,
+<code>section.zonohedron()</code>,
+<code>invertboundary()</code>,
+<code>raytrace.zonogon()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#   make a regular prism, a regular 20-gon extruded 1 unit along z-axis
+rp10 = regularprism( 10 )
+
+#   make 7 random directions
+set.seed(0)
+dir = matrix(rnorm(7*3),7,3)
+
+#  use basepoint in the interior of the zonohedron
+raytrace( rp10, c(0.5,0.5,0.5), dir )
+#   base.1 base.2 base.3  direction.1  direction.2  direction.3 facetidx sign      tmax   ...
+# 1    0.5    0.5    0.5  1.262954285 -0.294720447 -0.299215118        1    1 1.6710386   ...
+# 2    0.5    0.5    0.5 -0.326233361 -0.005767173 -0.411510833        1    1 1.2150348   ...
+# 3    0.5    0.5    0.5  1.329799263  2.404653389  0.252223448        6   -1 0.8724774   ...
+# 4    0.5    0.5    0.5  1.272429321  0.763593461 -0.891921127        1    1 0.5605877   ...
+# 5    0.5    0.5    0.5  0.414641434 -0.799009249  0.435683299        1   -1 1.1476226   ...
+# 6    0.5    0.5    0.5 -1.539950042 -1.147657009 -1.237538422        1    1 0.4040279   ...
+# 7    0.5    0.5    0.5 -0.928567035 -0.289461574 -0.224267885        1    1 2.2294766   ...
+
+#  use basepoint 0 on the boundary of the zonohedron
+#  note that only 2 directions point into the interior
+raytrace( rp10, c(0,0,0), dir )
+#   base.1 base.2 base.3  direction.1  direction.2  direction.3 facetidx sign     tmax   ...
+# 1      0      0      0  1.262954285 -0.294720447 -0.299215118       NA   NA       NA   ...
+# 2      0      0      0 -0.326233361 -0.005767173 -0.411510833       NA   NA       NA   ...
+# 3      0      0      0  1.329799263  2.404653389  0.252223448        6   -1 1.128580   ...
+# 4      0      0      0  1.272429321  0.763593461 -0.891921127       NA   NA       NA   ...
+# 5      0      0      0  0.414641434 -0.799009249  0.435683299        1   -1 2.295245   ...
+# 6      0      0      0 -1.539950042 -1.147657009 -1.237538422       NA   NA       NA   ...
+# 7      0      0      0 -0.928567035 -0.289461574 -0.224267885       NA   NA       NA   ...
+</code></pre>
+
+
+</div>

@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>processZoomOutput</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Wrapper function to process the raw files from Zoom in a single call</h2>
+
+<h3>Description</h3>
+
+<p>The user provides a fileRoot that is used for a given meeting. Output
+files should be named as fileRoot_chat.txt; fileRoot_transcript.vtt;
+and fileRoot_participants.csv. Any relevant files will be processed.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">processZoomOutput(
+  fileRoot,
+  rosetta = TRUE,
+  sessionStartDateTime = "1970-01-01 00:00:00",
+  recordingStartDateTime = "1970-01-01 00:00:00",
+  languageCode = "en"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fileRoot</code></td>
+<td>
+<p>string giving the path to the files and the root</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rosetta</code></td>
+<td>
+<p>boolean to produce the rosetta file or not</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sessionStartDateTime</code></td>
+<td>
+<p>string giving the start of the session in YYYY-MM-DD HH:MM:SS</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>recordingStartDateTime</code></td>
+<td>
+<p>string giving the start of the recording in YYYY-MM-DD HH:MM:SS</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>languageCode</code></td>
+<td>
+<p>string giving the language code</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a named list containing data.frames for each of the available files:
+</p>
+
+<ul>
+<li>
+<p> meetInfo - A single row with info for the meeting that is in the
+participants file. Columns provide information about the meeting from the Zoom
+Cloud recording site.
+</p>
+</li>
+<li>
+<p> partInfo - Each row is a Zoom display name (with display name changes
+in parentheses). Columns provide information about participants from the Zoom Cloud
+recording site.
+</p>
+</li>
+<li>
+<p> transcript - Each row is an utterance in the audio transcript. This is the
+output from processZoomTranscript.
+</p>
+</li>
+<li>
+<p> chat - Each row is a message posted to the chat. This is the output
+from processZoomChat.
+</p>
+</li>
+<li>
+<p> rosetta - Each row is a unique display name (within meeting) encountered
+in the batchInput. This is used to reconcile user identities.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">zoomOut = processZoomOutput(fileRoot=file.path(
+system.file('extdata', package = 'zoomGroupStats'),"meeting001"
+), rosetta=TRUE)
+## Not run: 
+zoomOut = processZoomOutput(fileRoot="~/zoomMeetings/myMeeting", rosetta=TRUE)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

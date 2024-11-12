@@ -1,0 +1,156 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>invertboundary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+invert points on the boundary of a zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>A <em>zonohedron</em> <code class="reqn">Z</code> is the image of a linear map
+<code class="reqn">[0,1]^n \to Z \subset \bold{R}^3</code>, from the n-cube to 3D space.
+For a point on the boundary of the zonohedron, this function
+computes a point in the unit cube that maps to it.
+All coordinates of the point in the cube are 0 or 1, 
+except for two of them.
+The point is not necessarily unique.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonohedron'
+invertboundary( x, point, tol=5.e-14 )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>point</code></td>
+<td>
+
+<p>Mx3 matrix with points on the boundary of <code>x</code> in the rows.
+Such a matrix typically is returned by
+<code>raytrace.zonohedron()</code>
+or
+<code>section.zonohedron()</code>.
+<code>point</code> can also be a numeric vector that can be converted
+to such a matrix, by row.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+
+<p>points that are not within <code>tol</code> of the boundary are
+skipped, see <b>Details</b>
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Given the boundary point, the function determines the facet
+that contains it.
+The <code>pcube</code> coordinates of the <em>base vertex</em> of this facet are
+all 0 or 1, and fairly easy to determine.
+If the facet is a parallelogram, the other two coordinates are
+fairly easy to determine too.
+If the facet is a zonogon with <code>K</code> generators, with <code>K&gt;2</code>,
+then the unknown <code>K</code> coordinates are calculated
+using <code>invert.zonogon()</code>.
+<br>
+Because of floating point behaviour, coordinates can be slightly
+negative or slightly more than 1.
+After the calculation, they are clamped to [0,1].
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>invertboundary.zonohedron()</code> returns a <code>data.frame</code>
+with M rows and these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>point</code></td>
+<td>
+<p>the given boundary point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance</code></td>
+<td>
+
+<p>signed distance to the boundary of <code>x</code>;
+for successful inversion its absolute value is <code class="reqn">\le</code> <code>tol</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>facetidx</code></td>
+<td>
+<p>index of the facet pair that contains the point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sign</code></td>
+<td>
+<p>sign of the facet pair; either +1 or -1</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pcube</code></td>
+<td>
+
+<p>a point in the unit n-cube that maps to the given boundary point;
+all coordinates of <code>pcube</code> are 0 or 1,
+except for 2 of them.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>transitions</code></td>
+<td>
+
+<p>the number of transitions in <code>pcube</code> - a non-negative even integer
+</p>
+</td>
+</tr>
+</table>
+<p>If a point <code>point</code> cannot be inverted, e.g. because
+<code>distance</code> is too large, the other columns are all <code>NA</code>.  
+</p>
+<p>If the row names of <code>point</code> are unique,
+they are copied to the row names of the output.
+The column names of <code>pcube</code> are copied from the ground set of the
+associated matroid.
+<br><br>
+In case of global error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>section.zonohedron()</code>,
+<code>raytrace.zonohedron()</code>,
+<code>invert.zonogon()</code>
+</p>
+
+
+</div>

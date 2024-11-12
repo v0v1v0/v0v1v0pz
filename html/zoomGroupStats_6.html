@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>grabVideoStills</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Helper function to split a video into still frames</h2>
+
+<h3>Description</h3>
+
+<p>This function currently relies on the av package and
+'ffmpeg' to split a video file into images. This function will save
+the images to the directory specified by the user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">grabVideoStills(
+  inputVideo,
+  imageDir = NULL,
+  overWriteDir = FALSE,
+  sampleWindow
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputVideo</code></td>
+<td>
+<p>full filepath to a video file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imageDir</code></td>
+<td>
+<p>the directory where you want the function to write the extracted image files</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overWriteDir</code></td>
+<td>
+<p>logical indicating whether you want to overwrite imageDir if it exists</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampleWindow</code></td>
+<td>
+<p>an integer indicating how frequently you want to sample
+images in number of seconds.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame that gives information about the still frames. Each record is
+a stillframe, with the following info:
+</p>
+
+<ul>
+<li>
+<p> imageSeconds - number of seconds from the start of the video when this image was captured
+</p>
+</li>
+<li>
+<p> imageName - full path to where the image has been saved as a .png
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">vidOut = grabVideoStills(inputVideo=system.file('extdata', "meeting001_video.mp4", 
+package = 'zoomGroupStats'), imageDir=tempdir(), overWriteDir=TRUE, sampleWindow=2)
+## Not run: 
+grabVideoStills(inputVideo='myMeeting.mp4', 
+imageDir="~/Documents/myMeetings/videoImages", overWriteDir=TRUE,  sampleWindow=45)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

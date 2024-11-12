@@ -1,0 +1,115 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfPolylogFit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ZipfPolylog parameters estimation.</h2>
+
+<h3>Description</h3>
+
+<p>For a given sample of strictly positive integer numbers,  usually of the type of ranking data or
+frequencies of frequencies data, estimates the parameters of the ZipfPolylog distribution by means of
+the maximum likelihood method. The input data should be provided as a frequency matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zipfPolylogFit(data, init_alpha, init_beta, level = 0.95, ...)
+
+## S3 method for class 'zipfPolyR'
+residuals(object, ...)
+
+## S3 method for class 'zipfPolyR'
+fitted(object, ...)
+
+## S3 method for class 'zipfPolyR'
+coef(object, ...)
+
+## S3 method for class 'zipfPolyR'
+plot(x, ...)
+
+## S3 method for class 'zipfPolyR'
+print(x, ...)
+
+## S3 method for class 'zipfPolyR'
+summary(object, ...)
+
+## S3 method for class 'zipfPolyR'
+logLik(object, ...)
+
+## S3 method for class 'zipfPolyR'
+AIC(object, ...)
+
+## S3 method for class 'zipfPolyR'
+BIC(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Matrix of count data in form of a table of frequencies.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_alpha</code></td>
+<td>
+<p>Initial value of <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_beta</code></td>
+<td>
+<p>Initial value of <code class="reqn">\beta</code> parameter (<code class="reqn">\beta &gt; 0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Confidence level used to calculate the confidence intervals (default 0.95).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments to the generic functions. The extra arguments are passing to the <em>optim</em> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>An object from class "zipfPolyR" (output of <em>zipfPolylogFit</em> function).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object from class "zipfPolyR" (output of <em>zipfPolylogFit</em> function).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The argument <code>data</code> is a two column matrix with the first column containing the observations and
+the second column containing their frequencies.
+</p>
+<p>The log-likelihood function is equal to:
+</p>
+<p>The function <em>optim</em> is used to estimate the parameters.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns a <em>zipfPolyR</em> object composed by the maximum likelihood parameter estimations
+jointly with their standard deviation and confidence intervals. It also contains
+the value of the log-likelihood at the maximum likelihood estimator.
+</p>
+
+
+</div>

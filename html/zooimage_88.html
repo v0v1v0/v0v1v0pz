@@ -1,0 +1,255 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>gui-utilities</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Various GUI utility functions used by ZooImage </h2>
+
+<h3>Description</h3>
+
+<p>These functions are usually not called directly by the user, but they are
+interesting for developers. They allow to select elements through dialog boxes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">selectObject(class = "data.frame", default = "", multiple = FALSE,
+    title = paste0("Choose a ", class, ":"))
+selectList(class = "data.frame", default = "", multiple = FALSE,
+    title = paste0("Choose a list (of ", class, "s):"))
+selectFile(type = c("ZipZid", "ZimZis", "LstZid", "ZidZidb", "Zip", "Zid", "Zidb",
+    "Zim", "Zis", "Zie", "Zic", "Img", "TifPgm", "RData"), multiple = FALSE,
+    quote = TRUE, title = NULL)
+selectGroups(groups, multiple = TRUE, title = "Select taxa you want to plot")
+
+createThreshold(ZIDat)
+
+imageViewer(dir = getwd(), pgm = getOption("ZI.ImageViewer"))
+startPgm(program, cmdline = "", switchdir = FALSE, iconize = FALSE, wait = FALSE)
+modalAssistant(title, text, init, options = NULL, check = NULL,
+    select.file = NULL, returnValOnCancel = "ID_CANCEL", help.topic = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>class</code></td>
+<td>
+<p> the class of objects to retrieve (or class of list components
+for <code>selectList()</code>). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>default</code></td>
+<td>
+<p> the default item selected in the list. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multiple</code></td>
+<td>
+<p> are multiple selections allowed? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p> the title of the dialog box. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p> the type of file to list in selection dialog box. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quote</code></td>
+<td>
+<p> do we add quotes (\") around file names? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>groups</code></td>
+<td>
+<p> a list of groups to select from. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ZIDat</code></td>
+<td>
+<p> a ZIDat object. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dir</code></td>
+<td>
+<p> directory to open in the image viewer. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pgm</code></td>
+<td>
+<p> program to use as image viewer. If not provided and not defined
+in the <code>option(ZI.ImageViewer = ...)</code>, then, a reasonable default
+program is used (the file explorer is no better program found). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>program</code></td>
+<td>
+<p> name of the program to start. It must match an entry in R
+options giving the actual executable that correspond to that program. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cmdline</code></td>
+<td>
+<p> the command line to run to start this program. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>switchdir</code></td>
+<td>
+<p> do we switch R current directory to the directory where
+the program is located? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iconize</code></td>
+<td>
+<p> in case the ZooImage assistant is open, do we iconize it? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wait</code></td>
+<td>
+<p> do we wait that the external program is closed? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>text</code></td>
+<td>
+<p> textual explanations to show in the modal assistant. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init</code></td>
+<td>
+<p> initial values for the modal assistant. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>options</code></td>
+<td>
+<p> options to select in the modal assistant. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check</code></td>
+<td>
+<p> checkbox to add in the modal assistant. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>select.file</code></td>
+<td>
+<p> prompt for a file to select in the modal assistant. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>returnValOnCancel</code></td>
+<td>
+<p> what to return if the user clicks the Cancel
+button in the modal assistant dialog box? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>help.topic</code></td>
+<td>
+<p> help topic to associate with the Help button of the modal
+assistant dialog box.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>As these functions are not made to be directly used by end-users, We don't
+give more details here. Developers interested to use these functions are
+encouraged to look at their code in the zooimage package source!
+</p>
+
+
+<h3>Value</h3>
+
+<p>A string or vector of strings of selected items. <code>character(0)</code> is
+returned to indicate the user clicked 'Cancel', while an empty string
+(<code>""</code>) is returned in case there is no corresponding element found.
+</p>
+<p><code>createThreshold()</code> proposes a dialog box to create a threshold on one
+variable in a ZIDat object (indicate minimum and maximum value allowed for
+that variable).
+</p>
+<p>For <code>imageViewer()</code>, <code>TRUE</code> or <code>FALSE</code> is returned invisibly,
+depending if the program could be lauched or not. The problem is reported in
+a warning.
+</p>
+<p><code>startPgm()</code> is mostly invoked for its side effect of starting an
+external program. Status code returned by the program is returned if
+<code>wait = TRUE</code>.
+</p>
+<p><code>modalAssistant()</code> is currently disabled, and it will thus display no
+dialog box and return <code>returnValOnCancel</code> directly.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt;</p>
+
+
+<h3>See Also</h3>
+
+<p><code>listSamples</code>, <code>noExtension</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## Create two datasets in R and ask for selecting one:
+df1__ &lt;- data.frame(x = 1:3, y = 4:6)
+df2__ &lt;- data.frame(z = 1:10)
+selectObject() # Try also to click 'Cancel'
+## Can select both too
+selectObject(multiple = TRUE, title = "Choose one or more data.frames")
+selectObject("nonexistingclass") # Returns an empty string!
+
+## Create lists containing only data frames as components
+lst1__ &lt;- list(A = df1__, B = df2__)
+lst2__ &lt;- list(C = df1__)
+selectList() # Try also to click 'Cancel'
+## Can select both too
+selectList(multiple = TRUE, title = "Select one or more lists")
+selectList("nonexistingclass")
+rm(df1__, df2__, lst1__, lst2__)
+
+## Select one or more ZooImage files
+selectFile() # One Zip or Zid file
+
+## Select groups to process
+selectGroups(c("Copepods", "Appendicularians", "Medusae"))
+
+## Start default image viewer on the current working directory
+imageViewer()
+
+## TODO: examples for createThreshold(), startPgm() and modalAssistant()
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ztable.cbind.mytable</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make ztable from object cbind.mytable</h2>
+
+<h3>Description</h3>
+
+<p>Make ztable from object cbind.mytable
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'cbind.mytable'
+ztable(x, digits = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object of cbind.mytable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Numeric vector of length equal to one (in which case it will be
+replicated as necessary) or to the number of columns of the resulting table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>arguments to be passed to <code>ztable_sub</code></p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(moonBook)
+res=mytable(sex+DM~.,data=acs)
+z=ztable(res)
+z
+</code></pre>
+
+
+</div>

@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>comtrade</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>A sample of the UN Comtrade Database.</h2>
+
+<h3>Description</h3>
+
+<p>A sample of the UN Comtrade Database prepared by the United
+Nations Department of Statistics with official international trade
+information.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">comtrade
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A dataframe object.
+</p>
+
+
+<h3>Details</h3>
+
+<p>In the following example the original base (comtrade.rda) has only 229,585
+information on positive bilateral trade flow (greater than zero). However,
+after expanding this base to also present the bilateral trade flow equal to
+zero, the new base will have 1,255,892 observations (both positive and zero
+flow). Note that the final size of the base will depend on the number of
+years, the number of exporting and importing countries and the items present
+in the base. Since the distinct number of exporting and importing countries
+has an important determining factor in the expansion of the base (see the
+examples with the distinct.rda and same.rda bases).
+</p>
+<p>A dataset consisting of two years, 24 exporting countries, 24
+importing countries, 1,241 Harmonized System codes and the value of exports
+in dollars. The data includes the following fields:
+</p>
+<p>* ano - Numeric. Year in which exports were carried out.
+* ido - String. ISO code corresponding to the exporting country.
+* idd - String. ISO code corresponding to the importing country.
+* HS4 - Numeric. HS4 code corresponding to the merchandise sold.
+* comercio - Numeric. Dollar value of exports.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a dataframe object contains the five variables passed as parameters
+to the get_zerotradeflow() function (year, exporter, importer, item, trade)
+including the bilateral trade flow equal to zero.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Repository UN Comtrade.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+
+
+zeroflow &lt;- get_zerotradeflow(comtrade, ano, ido, idd, HS4, comercio)
+
+
+
+
+</code></pre>
+
+
+</div>

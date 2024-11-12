@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dp.search</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return data product IDs based on a search keyword</h2>
+
+<h3>Description</h3>
+
+<p>For a given keyword or search string, a data frame of possible
+data products will be returned. The search is performed against the data product names,
+not full data product descriptions.
+If the R session is interactive, candidate
+data product information will also print in the console.
+The data product IDs are used in other Z10 functions to return data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dp.search(keyword)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>keyword</code></td>
+<td>
+<p>Parameter of class character.
+The search phrase used when searching through data product names.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A data frame of data product names and their associated data product IDs
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robert Lee <a href="mailto:rhlee@colorado.edu">rhlee@colorado.edu</a><br></p>
+
+
+<h3>See Also</h3>
+
+<p>Currently none
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+names=Z10::dp.search(keyword="fish")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

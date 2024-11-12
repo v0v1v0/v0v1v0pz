@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zoltar_authenticate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Log in to a Zoltar host</h2>
+
+<h3>Description</h3>
+
+<p>Returns a new <code>ZoltarConnection</code> object, which is the starting point for working with the Zoltar API.
+Once you have the connection you can call <code>zoltar_authenticate()</code> on it, and call <code>projects()</code> to get a list of objects
+to start working with.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zoltar_authenticate(zoltar_connection, username, password)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>username</code></td>
+<td>
+<p>Username for the account to use on the connection's host</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>password</code></td>
+<td>
+<p>Password ""</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>None
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  zoltar_authenticate(conn, "USERNAME", "PASSWORD")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

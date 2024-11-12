@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>predator.prey.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The PredatorPrey model (Predator-Prey Lotka-Volterra with logistic equation for prey)</h2>
+
+<h3>Description</h3>
+
+<p>Predator-Prey Lotka-Volterra model (with logistic prey)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">predator.prey.model(grH = 1, kH = 10, mrH = 0.2, eff = 0.5,
+  mrA = 0.2, H0 = 1, A0 = 2, duration = 200, dt = 1,
+  method = "euler")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>grH</code></td>
+<td>
+<p>: relative rate of prey population growth</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kH</code></td>
+<td>
+<p>: environment carrying capacity for prey (number per ha)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mrH</code></td>
+<td>
+<p>: maximum predation rate (number per predator and per prey per day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eff</code></td>
+<td>
+<p>: efficiency, growth of predator population depending on predation (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mrA</code></td>
+<td>
+<p>: mortality of predator (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>H0</code></td>
+<td>
+<p>: size of population of prey, at time 0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>A0</code></td>
+<td>
+<p>: size of population of predator, at time 0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>duration</code></td>
+<td>
+<p>: simulation duration</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dt</code></td>
+<td>
+<p>: time step for integration</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>: integration method</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with daily H and A
+</p>
+
+
+</div>

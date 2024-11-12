@@ -1,0 +1,221 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>tfl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Type Frequency Lists (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>In the <code>zipfR</code> library, <code>tfl</code> objects are used to represent
+a type frequency list, which specifies the observed frequency of each
+type in a corpus.  For mathematical reasons, expected type frequencies
+are rarely considered.
+</p>
+<p>With the <code>tfl</code> constructor function, an object can be initialized
+directly from the specified data vectors.  It is more common to read
+a type frequency list from a disk file with <code>read.tfl</code> or,
+in some cases, derive it from an observed frequency spectrum with
+<code>spc2tfl</code>. 
+</p>
+<p><code>tfl</code> objects should always be treated as read-only.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  tfl(f, k=seq_along(f), type=NULL, f.min=min(f), f.max=max(f),
+      incomplete=!(missing(f.min) &amp;&amp; missing(f.max)), N=NA, V=NA,
+      delete.zeros=FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>integer vector of type IDs <code class="reqn">k</code> (if omitted, natural
+numbers <code class="reqn">1,2,\ldots</code> are assigned automatically)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>f</code></td>
+<td>
+<p>vector of corresponding type frequencies <code class="reqn">f_k</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>optional character vector of type representations
+(e.g. word forms or lemmata), used for informational and
+printing purposes only</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>incomplete</code></td>
+<td>
+<p>indicates that the type frequency list is
+incomplete, i.e. only contains types in a certain frequency range
+(typically, the lowest-frequency types may be excluded).  Incomplete
+type frequency lists are rarely useful.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N, V</code></td>
+<td>
+<p>sample size and vocabulary size corresponding to the type
+frequency list have to be specified explicitly for incomplete lists</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>f.min, f.max</code></td>
+<td>
+<p>frequency range represented in an incomplete type
+frequency list (see details below)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delete.zeros</code></td>
+<td>
+<p>if <code>TRUE</code>, delete types with <code class="reqn">f=0</code> from
+the type frequency list, <em>after</em> assigning type IDs.  This
+operation does <em>not</em> make the resulting <code>tfl</code> object
+incomplete.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If <code>f.min</code> and <code>f.max</code> are not specified, but the list is
+marked as incomplete (with <code>incomplete=TRUE</code>), they are
+automatically determined from the frequency vector <code>f</code> (making
+the assumption that all types in this frequency range are listed).
+Explicit specification of either <code>f.min</code> or <code>f.max</code> implies
+an incomplete list.  In this case, all types outside the specified
+range will be deleted from the list.  If <code>incomplete=FALSE</code> is
+explicitly given, <code>N</code> and <code>V</code> will be determined
+automatically from the input data (which is assumed to be complete),
+but the resulting type frequency list will still be incomplete.
+</p>
+<p>If you just want to remove types with <code class="reqn">f=0</code> without marking the
+type frequency list as incomplete, use the option
+<code>delete.zeros=TRUE</code>.
+</p>
+<p>A <code>tfl</code> object is a data frame with the following variables:
+</p>
+
+<dl>
+<dt><code>k</code></dt>
+<dd>
+<p>integer type ID <code class="reqn">k</code> </p>
+</dd>
+<dt><code>f</code></dt>
+<dd>
+<p>corresponding type frequency <code class="reqn">f_k</code> </p>
+</dd>
+<dt><code>type</code></dt>
+<dd>
+<p>optional: character vector with type
+representations used for printing</p>
+</dd>
+</dl>
+<p>The data frame always has to be sorted with respect to the <code>k</code>
+column (ascending order).  If a <code>type</code> column is present, 
+rownames are set to the types and can be used for character indexing.
+</p>
+<p>The following attributes are used to store additional information
+about the frequency spectrum:
+</p>
+
+<dl>
+<dt><code>N, V</code></dt>
+<dd>
+<p>sample size <code class="reqn">N</code> and vocabulary size <code class="reqn">V</code>
+corresponding to the type frequency list.  For a complete list,
+these values could easily be determined from the <code>f</code>
+variable, but they are essential for an incomplete list.</p>
+</dd>
+<dt><code>incomplete</code></dt>
+<dd>
+<p>if <code>TRUE</code>, the type frequency list is
+incomplete, i.e. it lists only types in the frequency range given
+by <code>f.min</code> and <code>f.max</code></p>
+</dd>
+<dt>
+<code>f.min</code>, <code>f.max</code>
+</dt>
+<dd>
+<p>range of type frequencies
+represented in the list (should be ignored unless the
+<code>incomplete</code> flag is set)</p>
+</dd>
+<dt><code>hasTypes</code></dt>
+<dd>
+<p>indicates whether or not the <code>type</code>
+variable is present</p>
+</dd>
+</dl>
+<h3>Value</h3>
+
+<p>An object of class <code>tfl</code> representing the specified type
+frequency list.  This object should be treated as read-only (although
+such behaviour cannot be enforced in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>read.tfl</code>, <code>write.tfl</code>, <code>plot.tfl</code>,
+<code>sample.tfl</code>, <code>spc2tfl</code>, <code>tfl2spc</code>
+</p>
+<p>Generic methods supported by <code>tfl</code> objects are
+<code>print</code>, <code>summary</code>, <code>N</code>,
+<code>V</code> and <code>Vm</code>.
+</p>
+<p>Implementation details and non-standard arguments for these methods
+can be found on the manpages <code>print.tfl</code>,
+<code>summary.tfl</code>, <code>N.tfl</code>, <code>V.tfl</code>,
+etc.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## typically, you will read a tfl from a file
+## (see examples in the read.tfl manpage)
+
+## or you can load a ready-made tfl
+data(Brown.tfl)
+summary(Brown.tfl)
+print(Brown.tfl)
+
+## or create it from a spectrum (with different ids and
+## no type labels)
+data(Brown.spc)
+
+Brown.tfl2 &lt;- spc2tfl(Brown.spc)
+
+## same frequency information as Brown.tfl
+## but with different ids and no type labels
+summary(Brown.tfl2)
+print(Brown.tfl2)
+
+## how to display draw a Zipf's rank/frequency plot
+## by extracting frequencies from a tfl
+plot(sort(Brown.tfl$f,decreasing=TRUE),log="y",xlab="rank",ylab="frequency")
+
+## simulating a tfl
+Zipfian.tfl &lt;- tfl(1000/(1:1000))
+plot(Zipfian.tfl$f,log="y")
+
+</code></pre>
+
+
+</div>

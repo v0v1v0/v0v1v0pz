@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_mo_zcta3</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Missouri Three-digit ZCTAs, 2022</h2>
+
+<h3>Description</h3>
+
+<p>A simple features data set containing the geometric data
+for Missouri's three-digit ZIP Code Tabulation Areas (ZCTAs) for 2022,
+derived from the U.S. Census Bureau's 2022 TIGER/Line shapefiles.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(zi_mo_zcta3)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 31 rows and 2 variables:
+</p>
+
+<dl>
+<dt>ZCTA3</dt>
+<dd>
+<p>three-digit ZCTA value</p>
+</dd>
+<dt>geometry</dt>
+<dd>
+<p>simple features geometry</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The data included in <code>zi_mo_zcta3</code> can be replicated with the
+following code: <code>zi_get_geometry(year = 2022, style = "zcta3",
+  state = "MO", method = "intersect")</code>.
+</p>
+
+
+<h3>Source</h3>
+
+<p>U.S. Census Bureau's TIGER/Line database
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::str(zi_mo_zcta3)
+utils::head(zi_mo_zcta3)
+
+</code></pre>
+
+
+</div>

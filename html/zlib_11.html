@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>flush_decompressor_buffer</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Flush the internal buffer of the decompressor object.</h2>
+
+<h3>Description</h3>
+
+<p>This function processes all pending input and returns the remaining uncompressed output.
+The function uses the provided initial buffer size and dynamically expands it as necessary
+to ensure all remaining data is decompressed. After calling this function, the
+decompress_chunk() method cannot be called again on the same object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">flush_decompressor_buffer(decompressorPtr, length = 256L)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>decompressorPtr</code></td>
+<td>
+<p>A SEXP pointer to an existing decompressor object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>length</code></td>
+<td>
+<p>An optional parameter that sets the initial size of the output buffer. Default is 256.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A raw vector containing the remaining uncompressed output.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">decompressor &lt;- create_decompressor()
+# ... (some decompression actions)
+flushed_data &lt;- flush_decompressor_buffer(decompressor)
+</code></pre>
+
+
+</div>

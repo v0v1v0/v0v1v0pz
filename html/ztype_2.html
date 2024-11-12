@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>gen_game</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>gen_game</h2>
+
+<h3>Description</h3>
+
+<p>generate a ZType game by puhsing a set of levels on the website.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">gen_game(set_of_levels, open = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>set_of_levels</code></td>
+<td>
+<p>the set of levels to use</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>open</code></td>
+<td>
+<p>booleen open browser</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+require(ztype)
+require(magrittr)
+c("dplyr","ggplot2","lubridate") %&gt;% gen_set_of_words() %&gt;%
+gen_set_of_levels(10) %&gt;%
+gen_game() %&gt;% browseURL()
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

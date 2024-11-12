@@ -1,0 +1,119 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>preprocess</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Preprocess data</h2>
+
+<h3>Description</h3>
+
+<p>Subroutine called by <code>lassie</code>. Discretizes, subsets and remove missing data from a data.frame.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">preprocess(x, select, continuous, breaks, default_breaks = 4)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>data.frame or matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>select</code></td>
+<td>
+<p>optional vector of column numbers or column names
+specifying a subset of data to be used. By default, uses all columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>continuous</code></td>
+<td>
+<p>optional vector of column numbers or column names specifying
+continuous variables that should be discretized.
+By default, assumes that every variable is categorical.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>breaks</code></td>
+<td>
+<p>numeric vector or list passed on to <code>cut</code> to discretize
+continuous variables. When a numeric vector is specified, break points are
+applied to all continuous variables. In order to specify variable-specific
+breaks, lists are used. List names identify variables and list values identify
+breaks. List names are column names (not numbers). If a continuous
+variable has no specified breaks, then <code>default_breaks</code> will be applied.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>default_breaks</code></td>
+<td>
+<p>default break points for discretizations.
+Same syntax as in <code>cut</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List containing the following values:
+</p>
+
+<ul>
+<li>
+<p> raw: raw subsetted data.frame
+</p>
+</li>
+<li>
+<p> pp: discretized, subsetted and complete data.frame
+</p>
+</li>
+<li>
+<p> select
+</p>
+</li>
+<li>
+<p> continuous
+</p>
+</li>
+<li>
+<p> breaks
+</p>
+</li>
+<li>
+<p> default_breaks
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># This is what happens behind the curtains in the 'lassie' function
+# Here we compute the association between the 'Girth' and 'Height' variables
+# of the 'trees' dataset
+
+# 'select' and 'continuous' take column numbers or names
+select &lt;- c('Girth', 'Height') # select subset of trees
+continuous &lt;-c(1, 2) # both 'Girth' and 'Height' are continuous
+
+# equal-width discretization with 3 bins
+breaks &lt;- 3
+
+# Preprocess data: subset, discretize and remove missing data
+pre &lt;- preprocess(trees, select, continuous, breaks)
+
+# Estimates marginal and multivariate probabilities from preprocessed data.frame
+prob &lt;- estimate_prob(pre$pp)
+
+# Computes local and global association using Ducher's Z
+lam &lt;- local_association(prob, measure = 'z')
+</code></pre>
+
+
+</div>

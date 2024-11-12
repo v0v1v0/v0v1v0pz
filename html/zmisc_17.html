@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zeq</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generate sequence in a safe way</h2>
+
+<h3>Description</h3>
+
+<p>The <code>zeq()</code> function creates an increasing integer sequence, but differs from
+the standard one in that it will not silently generate a decreasing sequence
+when the second argument is smaller than the first. If the second argument is
+one smaller than the first it will generate an empty sequence, if the
+difference is greater, the function will throw an error.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zeq(from, to)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>from</code></td>
+<td>
+<p>The lower bound of the sequence</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>The higher bound of the sequence</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A sequence ranging from <code>from</code> to <code>to</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># For increasing sequences, zeq() and seq() are identical
+zeq(11,15)
+zeq(11,11)
+
+# If second argument equals first-1, an empty sequence is returned
+zeq(11,10)
+
+# If second argument is less than first-1, the function throws an error
+tryCatch(zeq(11,9), error=wrap_error)
+
+</code></pre>
+
+
+</div>

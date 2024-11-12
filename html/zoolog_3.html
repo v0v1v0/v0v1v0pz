@@ -1,0 +1,143 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>CondenseLogs</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Condense Measure Log-Ratios</h2>
+
+<h3>Description</h3>
+
+<p>This function condenses the calculated log ratio values into a reduced number
+of features by grouping log ratio values and selecting or calculating a
+feature value. By default the selected groups each represents a single dimension,
+i.e. <code>Length</code> and <code>Width</code>. Only one feature is extracted per group.
+Currently, two methods are possible: priority (default) or average.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">CondenseLogs(
+  data,
+  grouping = list(Length = c("GL", "GLl", "GLm", "HTC"), Width = c("BT", "Bd", "Bp",
+    "SD", "Bfd", "Bfp"), Depth = c("Dd", "DD", "BG", "Dp")),
+  method = "priority"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A dataframe with the input measurements.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grouping</code></td>
+<td>
+<p>A list of named character vectors. The list includes a vector
+per selected group. Each vector gives the group of measurements in order of
+priority. By default the groups are
+<code>Length = c("GL", "GLl", "GLm", "HTC")</code>,
+<code>Width = c("BT", "Bd", "Bp", "SD", "Bfd", "Bfp")</code>, and
+<code>Depth = c("Dd", "DD", "BG", "Dp")</code>.
+The order is irrelevant for <code>method = "average"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Character string indicating which method to use for extracting
+the condensed features. Currently accepted methods: <code>"priority"</code>
+(default) and <code>"average"</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This operation is motivated by two circumstances. First, not all measurements
+are available for every bone specimen, which obstructs their direct comparison
+and statistical analysis. Second, several measurements can be strongly
+correlated (e.g. SD and Bd both represent bone width).
+Thus, considering them as independent would
+produce an over-representation of bone remains with more measurements per
+axis. Condensing each group of measurements into a single feature
+(e.g. one measure per axis) palliates both problems.
+</p>
+<p>Observe that an important property of the log-ratios from a reference is that
+it makes the different measures comparable. For instance, if a bone is
+scaled with respect to the reference, so that it homogeneously doubles its
+width, then all width related measures
+(<em>BT</em>, <em>Bd</em>, <em>Bp</em>, <em>SD</em>, ...) will give the
+same log-ratio (<code>log(2)</code>). In contrast, the
+absolute measures are not directly comparable.
+</p>
+<p>The measurement names in the grouping list are given without the
+<code>logPrefix</code>. But the selection is made from the log-ratios.
+</p>
+<p>The default method is <code>"priority"</code>, which selects the first available
+measure log-ratio in each group. The method <code>"average"</code> extracts the
+mean per group, ignoring the non-available measures.
+We provide the following by-default group and prioritization:
+For lengths, the order of priority is: GL, GLl, GLm, HTC.
+For widths, the order of priority is: BT, Bd, Bp, SD, Bfd, Bfp.
+For depths, the order of priority is: Dd, DD, BG, Dp
+This order maximises the robustness and reliability of the measurements,
+as priority is given to the most abundant, more replicable, and less age
+dependent measurements.
+</p>
+<p>This method was first used in:
+Trentacoste, A., Nieto-Espinet, A., &amp; Valenzuela-Lamas, S. (2018).
+Pre-Roman improvements to agricultural production: Evidence from livestock
+husbandry in late prehistoric Italy.
+PloS one, 13(12), e0208109.
+</p>
+<p>Alternatively, a user-defined <code>method</code> can be provided as a function
+with a single argument (data.frame) assumed to have as columns the measure
+log-ratios determined by the <code>grouping</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A dataframe including the input dataframe and additional columns, one
+for each extracted condensed feature, with the corresponding name given in
+<code>grouping</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Read an example dataset:
+dataFile &lt;- system.file("extdata", "dataValenzuelaLamas2008.csv.gz",
+                        package="zoolog")
+dataExample &lt;- utils::read.csv2(dataFile,
+                                na.strings = "",
+                                encoding = "UTF-8")
+## For illustration purposes we keep now only a subset of cases to make
+## the example run sufficiently fast.
+## Avoid this step if you want to process the full example dataset.
+dataExample &lt;- dataExample[1:1000, ]
+
+## Compute the log-ratios and select the cases with available log ratios:
+dataExampleWithLogs &lt;- RemoveNACases(LogRatios(dataExample))
+## We can observe the first lines (excluding some columns for visibility):
+head(dataExampleWithLogs)[, -c(6:20,32:63)]
+
+## Extract the default condensed features with the default "priority" method:
+dataExampleWithSummary &lt;- CondenseLogs(dataExampleWithLogs)
+head(dataExampleWithSummary)[, -c(6:20,32:63)]
+
+## Extract only width with "average" method:
+dataExampleWithSummary2 &lt;- CondenseLogs(dataExampleWithLogs,
+                               grouping = list(Width = c("BT", "Bd", "Bp", "SD")),
+                               method = "average")
+head(dataExampleWithSummary2)[, -c(6:20,32:63)]
+</code></pre>
+
+
+</div>

@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_LDprofile</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Creates an LD profile</h2>
+
+<h3>Description</h3>
+
+<p>An LD (linkage disequilibrium) profile is a look-up table containing the expected correlation between SNPs given the genetic distance between them. The use of an LD profile can increase the accuracy of results by taking into account the expected correlation between SNPs. This function aids the user in creating their own LD profile.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_LDprofile(dist, x, bin_size, max_dist = NULL, beta_params = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>A numeric vector, or a list of numeric vectors, containing the genetic distance for each SNP.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A matrix of SNP values, or a list of matrices. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the <code>dist</code> vector. SNPs should all be biallelic.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bin_size</code></td>
+<td>
+<p>The size of each bin, in the same units as <code>dist</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_dist</code></td>
+<td>
+<p>Optional. The maximum genetic distance to be considered. If this is not supplied, it will default to the maximum distance in the <code>dist</code> vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta_params</code></td>
+<td>
+<p>Optional. Beta parameters are calculated if this is set to TRUE. Default is FALSE.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The input for <code>dist</code> and <code>x</code> can be lists. This allows multiple datasets to be used in the creation of the LD profile. For example, using all 22 autosomes from the human genome would involve 22 different distance vectors and SNP matrices.
+Both lists should be the same length and should correspond exactly to each other (i.e. the distances in each element of <code>dist</code> should go with the SNPs in the same element of x)
+</p>
+<p>In the output, bins represent lower bounds. The first bin contains pairs where the genetic distance is greater than or equal to 0 and less than <code>bin_size</code>. The final bin contains pairs where the genetic distance is greater than or equal to <code>max_dist</code>-<code>bin_size</code> and less than <code>max_dist</code>.
+If the <code>max_dist</code> is not an increment of <code>bin_size</code>, it will be adjusted to the next highest increment. The final bin will be the bin that <code>max_dist</code> falls into. For example, if the <code>max_dist</code> is given as 4.5 and the <code>bin_size</code> is 1, the final bin will be 4.
+<code>max_dist</code> should be big enough to cover the genetic distances between pairs of SNPs within the window size given when the <code class="reqn">Z_{\alpha}</code> statistics are run. Any pairs with genetic distances bigger than <code>max_dist</code> will be assigned the values in the maximum bin of the LD profile.<br></p>
+<p>By default, Beta parameters are not calculated. To fit a Beta distribution to the expected correlations, needed for the <code>Zalpha_BetaCDF</code> and <code>Zbeta_BetaCDF</code> statistics, <code>beta_params</code> should be set to TRUE and the package 'fitdistrplus' must be installed.
+</p>
+<p>Ideally, an LD profile would be generated using data from a null population with no selection, For example by using a simulation if the other population parameters are known. However, often these are unknown or complex, so generating an LD profile using the same data as is being analysed is acceptable, as long as the bins are large enough.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame containing an LD profile that can be used by other statistics in this package.
+</p>
+
+
+<h3>References</h3>
+
+<p>Jacobs, G.S., T.J. Sluckin, and T. Kivisild, <em>Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.</em> Genetics, 2016. <strong>203</strong>(4): p. 1807
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zalpha_expected</code>, <code>Zalpha_rsq_over_expected</code>, <code>Zalpha_log_rsq_over_expected</code>, <code>Zalpha_Zscore</code>, <code>Zalpha_BetaCDF</code>, <code>Zbeta_expected</code>, <code>Zbeta_rsq_over_expected</code>, <code>Zbeta_log_rsq_over_expected</code>, <code>Zbeta_Zscore</code>, <code>Zbeta_BetaCDF</code>, <code>Zalpha_all</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load the snps example dataset
+data(snps)
+## Create an LD profile using this data
+create_LDprofile(snps$cM_distances,as.matrix(snps[,3:12]),0.001)
+## To get the Beta distribution parameter estimates, the fitdistrplus package is required
+if (requireNamespace("fitdistrplus", quietly = TRUE)==TRUE) {
+  create_LDprofile(snps$cM_distances,as.matrix(snps[,3:12]),0.001,beta_params=TRUE)
+}
+
+
+</code></pre>
+
+
+</div>

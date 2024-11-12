@@ -1,0 +1,59 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Frugal</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Frugal numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A046759">A046759</a>, a <em>Frugal</em> number has more digits
+than the number of digits in its prime factorization including exponents. First 6 Frugal numbers are  	125, 128, 243, 256, 343, 512. Though
+it doesn't matter which base we use, here we adopt only a base of 10.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Frugal(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Extravagant</code>, <code>Equidigital</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 5 Frugal numbers
+print(Frugal(5))
+
+</code></pre>
+
+
+</div>

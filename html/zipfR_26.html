@@ -1,0 +1,226 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>beta_gamma</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Incomplete Beta and Gamma Functions (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>The functions documented here compute incomplete and regularized
+Beta and Gamma functions as well as their logarithms and the
+corresponding inverse functions. These functions will be of interest
+to developers, not users of the toolkit.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  Cgamma(a, log=!missing(base), base=exp(1))
+  Igamma(a, x, lower=TRUE, log=!missing(base), base=exp(1))
+  Igamma.inv(a, y, lower=TRUE, log=!missing(base), base=exp(1))
+  Rgamma(a, x, lower=TRUE, log=!missing(base), base=exp(1))
+  Rgamma.inv(a, y, lower=TRUE, log=!missing(base), base=exp(1))
+
+  Cbeta(a, b, log=!missing(base), base=exp(1))
+  Ibeta(x, a, b, lower=TRUE, log=!missing(base), base=exp(1))
+  Ibeta.inv(y, a, b, lower=TRUE, log=!missing(base), base=exp(1))
+  Rbeta(x, a, b, lower=TRUE, log=!missing(base), base=exp(1))
+  Rbeta.inv(y, a, b, lower=TRUE, log=!missing(base), base=exp(1))
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>a, b</code></td>
+<td>
+<p>non-negative numeric vectors, the parameters of the Gamma
+and Beta functions (<code>b</code> applies only to Beta functions)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a non-negative numeric vector, the point at which the
+incomplete or regularized Gamma or Beta function is evaluated (for
+the Beta functions, <code>x</code> must be in the range <code class="reqn">[0,1]</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a non-negative numeric vector, the values of the Gamma or
+Beta function on linear or logarithmic scale</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower</code></td>
+<td>
+<p>whether to compute the lower (<code>TRUE</code>) or upper
+(<code>FALSE</code>) incomplete or regularized Gamma or Beta function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log</code></td>
+<td>
+<p>if <code>TRUE</code>, return values of the Gamma and Beta
+functions – as well as the <code>y</code> argument of the inverse
+functions – are on logarithmic scale</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>a positive number, specifying the base of the logarithmic
+scale for values of the Gamma and Beta functions (default: natural
+logarithm).  Setting the <code>base</code> parameter implies
+<code>log=TRUE</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>Cgamma</code> returns the (complete) Gamma function evaluated at
+<code>a</code>, <code class="reqn">\Gamma(a)</code>.  <code>Igamma</code> returns the (lower or upper)
+incomplete Gamma function with parameter <code>a</code> evaluated at point
+<code>x</code>, <code class="reqn">\gamma(a,x)</code> (<code>lower=TRUE</code>) or <code class="reqn">\Gamma(a,x)</code>
+(<code>lower=FALSE</code>).  <code>Rgamma</code> returns the corresponding
+regularized Gamma function, <code class="reqn">P(a,x)</code> (<code>lower=TRUE</code>) or
+<code class="reqn">Q(a,x)</code> (<code>lower=FALSE</code>).  If <code>log=TRUE</code>, the returned
+values are on logarithmic scale as specified by the <code>base</code>
+parameter.
+</p>
+<p><code>Igamma.inv</code> and <code>Rgamma.inv</code> compute the inverse of the
+incomplete and regularized Gamma functions with respect to the
+parameter <code>x</code>.  I.e., <code>Igamma.inv(a,y)</code> returns the point
+<code>x</code> at which the (lower or upper) incomplete Gamma function with
+parameter <code>a</code> evaluates to <code>y</code>, and <em>mutatis mutandis</em>
+for <code>Rgamma.inv(a,y)</code>.  If <code>log=TRUE</code>, the parameter
+<code>y</code> is taken to be on a logarithmic scale as specified by
+<code>base</code>.
+</p>
+<p><code>Cbeta</code> returns the (complete) Beta function with arguments
+<code>a</code> and <code>b</code>, <code class="reqn">B(a,b)</code>.  <code>Ibeta</code> returns the (lower
+or upper) incomplete Beta function with parameters <code>a</code> and
+<code>b</code>, evaluated at point <code>x</code>, <code class="reqn">B(x;a,b)</code>
+(<code>lower=TRUE</code>) and <code class="reqn">B^*(x;a,b)</code>
+(<code>lower=FALSE</code>).  Note that in contrast to the Gamma functions,
+capital <code class="reqn">B</code> refers to the <em>lower</em> incomplete Beta function,
+and there is no standardized notation for the upper incomplete Beta
+function, so <code class="reqn">B^*</code> is used here as an ad-hoc symbol.
+<code>Rbeta</code> returns the corresponding regularized Beta function,
+<code class="reqn">I(x;a,b)</code> (<code>lower=TRUE</code>) or <code class="reqn">I^*(x;a,b)</code>
+(<code>lower=FALSE</code>).  If <code>log=TRUE</code>, the returned values are on
+logarithmic scale as specified by the <code>base</code> parameter.
+</p>
+<p><code>Ibeta.inv</code> and <code>Rbeta.inv</code> compute the inverse of the
+incomplete and regularized Beta functions with respect to the
+parameter <code>x</code>.  I.e., <code>Ibeta.inv(y,a,b)</code> returns the point
+<code>x</code> at which the (lower or upper) incomplete Beta function with
+parameters <code>a</code> and <code>b</code> evaluates to <code>y</code>, and
+<em>mutatis mutandis</em> for <code>Rbeta.inv(y,a,b)</code>.  If
+<code>log=TRUE</code>, the parameter <code>y</code> is taken to be on a
+logarithmic scale as specified by <code>base</code>.
+</p>
+<p>All Gamma and Beta functions can be vectorized in the arguments
+<code>x</code>, <code>y</code>, <code>a</code> and <code>b</code>, with the usual R value
+recycling rules in the case of multiple vectorizations.
+</p>
+
+
+<h3>Mathematical Details</h3>
+
+<p>The upper incomplete Gamma function is defined by the Gamma integral
+</p>
+<p style="text-align: center;"><code class="reqn">\Gamma(a,x) = \int_x^{\infty} t^{a-1} e^{-t}\,dt</code>
+</p>
+
+<p>The lower incomplete Gamma function is defined by the complementary
+Gamma integral
+</p>
+<p style="text-align: center;"><code class="reqn">\gamma(a,x) = \int_0^x t^{a-1} e^{-t}\,dt</code>
+</p>
+
+<p>The complete Gamma function calculates the full Gamma integral,
+i.e. <code class="reqn">\Gamma(a) = \gamma(a,0)</code>.  The regularized Gamma functions
+scale the corresponding incomplete Gamma functions to the interval
+<code class="reqn">[0,1]</code>, by dividing through <code class="reqn">\Gamma(a)</code>.  Thus, the lower
+regularized Gamma function is given by
+</p>
+<p style="text-align: center;"><code class="reqn">P(a,x) = \frac{\gamma(a,x)}{\Gamma(a)}</code>
+</p>
+
+<p>and the upper regularized Gamma function is given by
+</p>
+<p style="text-align: center;"><code class="reqn">Q(a,x) = \frac{\Gamma(a,x)}{\Gamma(a)}</code>
+</p>
+
+<p>The lower incomplete Beta function is defined by the Beta integral
+</p>
+<p style="text-align: center;"><code class="reqn">B(x;a,b) = \int_0^x t^{a-1} (1-t)^{b-1}\,dt</code>
+</p>
+
+<p>and the upper incomplete Beta function is defined by the complementary
+integral
+</p>
+<p style="text-align: center;"><code class="reqn">B^*(x;a,b) = \int_x^1 t^{a-1} (1-t)^{b-1}\,dt</code>
+</p>
+
+<p>The complete Beta function calculates the full Beta integral, i.e.
+<code class="reqn">B(a,b) = B(1;a,b) = B^*(0;a,b)</code>.
+The regularized Beta function scales the incomplete Beta function to
+the interval <code class="reqn">[0,1]</code>, by dividing through <code class="reqn">B(a,b)</code>.  The lower
+regularized Beta function is thus given by
+</p>
+<p style="text-align: center;"><code class="reqn">I(x;a,b) = \frac{B(x;a,b)}{B(a,b)}</code>
+</p>
+
+<p>and the upper regularized Beta function is given by 
+</p>
+<p style="text-align: center;"><code class="reqn">I^*(x;a,b) = \frac{B^*(x;a,b)}{B(a,b)}</code>
+</p>
+
+
+
+<h3>See Also</h3>
+
+<p><code>gamma</code> and <code>lgamma</code>, which are fully
+equivalent to <code>Cgamma</code>.  <code>beta</code> and
+<code>lbeta</code>, which are fully equivalent to <code>Cbeta</code>
+</p>
+<p>The implementations of the incomplete and regularized Gamma functions
+are based on the Gamma distribution (see <code>pgamma</code>), and
+those of the Beta functions are based on the Beta distribution (see
+<code>pbeta</code>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+Cgamma(5 + 1) # = factorial(5)
+
+## P(X &gt;= k) for Poisson distribution with mean alpha
+alpha &lt;- 5
+k &lt;- 10
+Rgamma(k, alpha) # == ppois(k-1, alpha, lower=FALSE)
+
+n &lt;- 49
+k &lt;- 6
+1 / ((n+1) * Cbeta(n-k+1, k+1)) # == choose(n, k)
+
+## P(X &gt;= k) for binomial distribution with parameters n and p
+n &lt;- 100
+p &lt;- .1
+k &lt;- 15
+Rbeta(p, k, n-k+1) # == pbinom(k-1, n, p, lower=FALSE)
+
+</code></pre>
+
+
+</div>

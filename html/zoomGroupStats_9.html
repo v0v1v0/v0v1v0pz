@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>processZoomChat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Process a Zoom chat file</h2>
+
+<h3>Description</h3>
+
+<p>Parses the data from the chatfile that is downloaded from the Zoom Cloud recording
+site. Note that this is the file that accompanies a recording. This is not the file
+that you might download directly within a given Zoom session, nor is it the one
+that is saved locally on your computer. This is the file that you can access
+after a session if you record in the cloud.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">processZoomChat(
+  fname,
+  sessionStartDateTime = "1970-01-01 00:00:00",
+  languageCode = "en"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>fname</code></td>
+<td>
+<p>String that is the path to the downloaded Zoom .txt chat file</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sessionStartDateTime</code></td>
+<td>
+<p>String that is the start of the session in YYYY-MM-DD HH:MM:SS</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>languageCode</code></td>
+<td>
+<p>String denoting the language</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame where each record is a message submission in the chat, containing columns:
+</p>
+
+<ul>
+<li>
+<p> messageId - Numeric identifier for each message, only unique within a given meeting
+</p>
+</li>
+<li>
+<p> messageSeconds - When message was posted, in number of seconds from start of session
+</p>
+</li>
+<li>
+<p> messageTime - When message was posted as POSIXct, using the supplied sessionStartDateTime
+</p>
+</li>
+<li>
+<p> userName - Display name of user who posted the message
+</p>
+</li>
+<li>
+<p> message - Text of the message that was posted
+</p>
+</li>
+<li>
+<p> messageLanguage - Language code for the message
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">ch.out = processZoomChat(
+fname=system.file('extdata', "meeting001_chat.txt", package = 'zoomGroupStats'), 
+sessionStartDateTime = '2020-04-20 13:30:00', 
+languageCode = 'en')
+</code></pre>
+
+
+</div>

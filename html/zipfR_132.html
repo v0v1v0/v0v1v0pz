@@ -1,0 +1,247 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LNRE</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Type and Probability Distributions of LNRE Models (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Type density <code class="reqn">g</code> (<code>tdlnre</code>), type distribution <code class="reqn">G</code>
+(<code>tplnre</code>), type quantiles <code class="reqn">G^{-1}</code> (<code>tqlnre</code>),
+probability density <code class="reqn">f</code> (<code>dlnre</code>), distribution function
+<code class="reqn">F</code> (<code>plnre</code>), quantile function <code class="reqn">F^{-1}</code> (<code>qlnre</code>),
+logarithmic type and probability densities (<code>ltdlnre</code> and
+<code>ldlnre</code>), and random sample generation (<code>rlnre</code>) for LNRE
+models.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  tdlnre(model, x, ...)
+  tplnre(model, q, lower.tail=FALSE, ...)
+  tqlnre(model, p, lower.tail=FALSE, ...)
+
+  dlnre(model, x, ...)
+  plnre(model, q, lower.tail=TRUE, ...)
+  qlnre(model, p, lower.tail=TRUE, ...)
+
+  ltdlnre(model, x, base=10, log.x=FALSE, ...)
+  ldlnre(model, x, base=10, log.x=FALSE, ...)
+
+  rlnre(model, n, what=c("tokens", "tfl"), ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>an object belonging to a subclass of <code>lnre</code>,
+representing a LNRE model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>vector of type probabilities <code class="reqn">pi</code> for which the density
+function is evaluated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>q</code></td>
+<td>
+<p>vector of type probability quantiles, i.e. threshold values
+<code class="reqn">\rho</code> on the type probability axis</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of tail probabilities</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>if <code>TRUE</code>, lower tail probabilities or type
+counts are returned / expected in the <code>p</code> argument.  Note that
+the defaults differ for distribution function and type distribution,
+and see "Details" below.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>base</code></td>
+<td>
+<p>positive number, the base with respect to which the
+log-transformation is peformed (see "Details" below)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log.x</code></td>
+<td>
+<p>if <code>TRUE</code>, the values passed in the argument
+<code>x</code> are assumed to be logarithmic, i.e. <code class="reqn">\log_a \pi</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>size of random sample to generate.  If <code>length(n) &gt; 1</code>,
+the length is taken to be the number required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>what</code></td>
+<td>
+<p>whether to return the sample as a vector of tokens or as
+a type-frequency list (usually more efficient)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments are passed through to the method
+implementations (currently unused)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that the order in which arguments are specified differs from the
+analogous functions for common statistical distributions in the <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>
+standard library.  In particular, the LNRE model <code>model</code> always
+has to be given as the first parameter so that <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> can dispatch the
+function call to an appropriate method implementation for the chosen
+LNRE model.
+</p>
+<p>Some of the functions may not be available for certain types of LNRE
+models.  In particular, no analytical solutions are known for the
+distribution and quantiles of GIGP models, so the functions
+<code>tplnre</code>, <code>tqlnre</code>, <code>plnre</code>, <code>qlnre</code> and
+<code>rlnre</code> (which depends on <code>qlnre</code> and <code>tplnre</code>) are not
+implemented for objects of class <code>lnre.gigp</code>. 
+</p>
+<p>The default tails differ for the distribution function (<code>plnre</code>,
+<code>qlnre</code>) and the type distribution (<code>tplnre</code>,
+<code>tqlnre</code>), in order to match the definitions of <code class="reqn">F(\rho)</code> and
+<code class="reqn">G(\rho)</code>.  While the distribution function defaults to lower
+tails (<code>lower.tail=TRUE</code>, corresponding to <code class="reqn">F</code> and
+<code class="reqn">F^{-1}</code>), the type distribution defaults to upper tails
+(<code>lower.tail=FALSE</code>, corresponding to <code class="reqn">G</code> and <code class="reqn">G^{-1}</code>).
+</p>
+<p>Unlike for standard distriutions, logarithmic tail probabilities
+(<code>log.p=TRUE</code>) are not provided for the LNRE models, since here
+the focus is usually on the bulk of the distribution rather than on
+the extreme tails.
+</p>
+<p>The log-transformed density functions <code class="reqn">f^*</code> and <code class="reqn">g^*</code>
+returned by <code>ldlnre</code> and <code>ltdlnre</code>, respectively, can be
+understood as probability and type densities for <code class="reqn">\log_a \pi</code>
+instead of <code class="reqn">\pi</code>, and are useful for visualization of LNRE
+populations (with a logarithmic scale for the parameter <code class="reqn">\pi</code> on
+the x-axis).  For example,
+</p>
+<p style="text-align: center;"><code class="reqn">
+    G(\log_a \rho) = \int_{\log_a \rho}^{0} g^*(t) \,dt
+  </code>
+</p>
+
+
+
+<h3>Value</h3>
+
+<p>For <code>rnlre</code>, either a factor of length <code>n</code> (<code>what="tokens"</code>,
+the default) or a <code>tfl</code> object (<code>what="tfl"</code>), representing
+a random sample from the population described by the specified LNRE model.
+Note that the type-frequency list is a sufficient statistic, i.e. it provides
+all relevant information from the sample. For large <code>n</code>, type-frequency
+lists are generated more efficiently and with less memory overhead.
+</p>
+<p>For all other functions, a vector of non-negative numbers of the same
+length as the second argument (<code>x</code>, <code>p</code> or <code>q</code>).
+</p>
+<p><code>tdlnre</code> returns the type density <code class="reqn">g(\pi)</code> for the values of
+<code class="reqn">\pi</code> specified in the vector <code>x</code>.  <code>tplnre</code> returns the
+type distribution <code class="reqn">G(\rho)</code> (default) or its complement
+<code class="reqn">1-G(\rho)</code> (if <code>lower.tail=TRUE</code>), for the values of
+<code class="reqn">\rho</code> specified in the vector <code>q</code>.  <code>tqlnre</code> returns
+type quantiles, i.e. the inverse <code class="reqn">G^{-1}(x)</code> (default) or
+<code class="reqn">G^{-1}(S-x)</code> (if <code>lower.tail=TRUE</code>) of the type
+distribution, for the type counts <code class="reqn">x</code> specified in the vector
+<code>p</code>.
+</p>
+<p><code>dlnre</code> returns the probability density <code class="reqn">f(\pi)</code> for the
+values of <code class="reqn">\pi</code> specified in the vector <code>x</code>.  <code>plnre</code>
+returns the distribution function <code class="reqn">F(\rho)</code> (default) or its
+complement <code class="reqn">1-F(\rho)</code> (if <code>lower.tail=FALSE</code>), for the
+values of <code class="reqn">\rho</code> specified in the vector <code>q</code>.  <code>qlnre</code>
+returns quantiles, i.e. the inverse <code class="reqn">F^{-1}(p)</code> (default) or
+<code class="reqn">F^{-1}(1-p)</code> (if <code>lower.tail=FALSE</code>) of the distribution
+function, for the probabilities <code class="reqn">p</code> specified in the vector
+<code>p</code>.
+</p>
+<p><code>ldlnre</code> and <code>ltdlnre</code> compute logarithmically transformed
+versions of the probability and type density functions, respectively,
+taking logarithms with respect to the base <code class="reqn">a</code> specified in the
+<code>base</code> argument (default: <code class="reqn">a=10</code>).  See "Details" above for
+more information.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>lnre</code> for more information about LNRE models and how to
+initialize them.
+</p>
+<p>Random samples generated with <code>rnlre</code> can be further processed
+with the functions <code>vec2tfl</code>, <code>vec2spc</code> and
+<code>vec2vgc</code> (for token vectors) and <code>tfl2spc</code> 
+(for type-frequency lists).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## define ZM and fZM LNRE models 
+ZM &lt;- lnre("zm", alpha=.8, B=1e-3)
+FZM &lt;- lnre("fzm", alpha=.8, A=1e-5, B=.05)
+
+## random samples from the two models
+vec2tfl(rlnre(ZM, 10000))
+vec2tfl(rlnre(FZM, 10000))
+rlnre(FZM, 10000, what="tfl") # more efficient
+
+## plot logarithmic type density functions
+x &lt;- 10^seq(-6, 1, by=.01)  # pi = 10^(-6) .. 10^(-1)
+y.zm &lt;- ltdlnre(ZM, x)
+y.fzm &lt;- ltdlnre(FZM, x)
+
+plot(x, y.zm, type="l", lwd=2, col="red", log="x", ylim=c(0,14000))
+lines(x, y.fzm, lwd=2, col="blue")
+legend("topright", legend=c("ZM", "fZM"), lwd=3, col=c("red", "blue"))
+
+## probability pi_k of k-th type according to FZM model
+k &lt;- 10
+plnre(FZM, tqlnre(FZM, k-1)) - plnre(FZM, tqlnre(FZM, k))
+
+## number of types with pi &gt;= 1e-6
+tplnre(ZM, 1e-6)
+
+## lower tail fails for infinite population size
+## Not run: 
+tplnre(ZM, 1e-3, lower=TRUE)
+## End(Not run)
+
+## total probability mass assigned to types with pi &lt;= 1e-6
+plnre(ZM, 1e-6)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,218 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pzcor</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Test for Equal Zero Order and (Semi) Partial Correlation</h2>
+
+<h3>Description</h3>
+
+<p>Compute a bootstrap test to determine whether zero order
+correlation is equal to partial or semi-partial correlation.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pzcor(x, y, z, semi = FALSE, k = 1000, method = "pearson",
+  test = "eq")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a numeric vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>a numeric vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>a numeric vector (data.frame, matrix, etc.)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>semi</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, then the semi-partial correlation between
+<code>x</code> and <code>y</code> given <code>z</code> is used. If <code>FALSE</code> (default),
+then the partial correlation between <code>x</code> given <code>z</code> and <code>y</code>
+given <code>z</code> is used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>the number of bootstrap samples taken (default is 1000).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>a character string indicating which correlation
+coefficient is to be computed. One of "pearson" (default), "kendall", or
+"spearman" can be abbreviated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>character string denoting the null hypothesis to be tested. Can
+be one of the three:
+</p>
+
+<ul>
+<li>
+<p><code>'eq'</code> tests  <code class="reqn">\rho.xy - \rho.xy.z = 0</code> (default)
+</p>
+</li>
+<li>
+<p><code>'gt'</code> tests  <code class="reqn">\rho.xy - \rho.xy.z \ge 0</code>
+</p>
+</li>
+<li>
+<p><code>'lt'</code> tests  <code class="reqn">\rho.xy - \rho.xy.z \le 0</code> </p>
+</li>
+</ul>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Uses the bias-corrected and accelerated (BCa) bootstrap method to
+test if the difference <code class="reqn">\rho.xy - \rho.xy.z</code> is equal to, above, or
+below zero where <code class="reqn">\rho.xy</code> is the zero order correlation between
+variables <code class="reqn">x</code> and <code class="reqn">y</code>, and <code class="reqn">\rho.xy.z</code> is the (semi) partial
+correlation between the respective variables after partialing out
+variables represented by <code class="reqn">z</code>.
+</p>
+<p>If the bootstrap distribution of
+<code class="reqn">\rho.xy - \rho.xy.z</code> is strictly above or below zero, then
+the p-value provided is the most extreme value that can be determined
+by the test. In the case of highly correlated variables, the
+covariance matrix may be singular which will lead to <code>k_eff</code> being
+less than <code>k</code> (as <code class="reqn">\rho.xy - \rho.xy.z</code> would not be computed).
+</p>
+
+
+<h3>Value</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>acceleration</code></td>
+<td>
+<p>the acceleration used for the BCa method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>the proportion of the bootstrapped distribution below zero.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bias</code></td>
+<td>
+<p>the bias used for the BCa method.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>call</code></td>
+<td>
+<p>shows the function call.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>difference</code></td>
+<td>
+<p>calculated from the data. Same as <code>p.xy - p.xy.z</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distribution</code></td>
+<td>
+<p>the estimated distribution of the difference as
+determined through bootstrapping.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k_eff</code></td>
+<td>
+<p>the number of successful bootstrap samples. Less than or equal
+to <code>k</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>the method of correlation used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.value</code></td>
+<td>
+<p>significance level of the test.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.xy</code></td>
+<td>
+<p>Zero order correlation between <code>x</code> and <code>y</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p.xy.z</code></td>
+<td>
+<p>(semi) partial correlation between <code>x</code> and <code>y</code> while
+accounting for <code>z</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>semi</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, <code>p.xy.z</code> is the semi-partial
+correlation. Otherwise <code>p.xy.z</code> is the partial correlation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>test</code></td>
+<td>
+<p>shows the type of test performed.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>pzconf</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(graphics)
+require(MASS)
+# data
+set.seed(1111)
+mu &lt;- rep(0,4)
+Sigma &lt;- matrix(.2, nrow=4, ncol=4) + diag(4)*.8
+data &lt;- mvrnorm(n=100, mu=mu, Sigma=Sigma)
+
+# p.(1,2) = p.(1,2)|(3,4) test
+test &lt;- pzcor(data[,1], data[,2], data[,c(3,4)], k = 1000, semi = FALSE,
+              test = 'eq')
+hist(test$distribution)
+test
+</code></pre>
+
+
+</div>

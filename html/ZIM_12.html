@@ -1,0 +1,40 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>injury</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Example: Injury Series from Occupational Health</h2>
+
+<h3>Description</h3>
+
+<p>Monthly number of injuries in hospitals from July 1988 to October 1995.
+</p>
+
+
+<h3>Source</h3>
+
+<p>Numbers from Figure 1 of Yau et al. (2004).
+</p>
+
+
+<h3>References</h3>
+
+<p>Yau, K. K. W., Lee, A. H. and Carrivick, P. J. W. (2004). Modeling zero-inflated count series with 
+application to occupational health. <em>Computer Methods and Programs in Biomedicine</em>, <b>74</b>, 47-52.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(injury)
+plot(injury, type = "o", pch = 20, xaxt = "n", yaxt = "n", ylab = "Injury Count")
+  axis(side = 1, at = seq(1, 96, 8))
+  axis(side = 2, at = 0:9)
+  abline(v = 57, lty = 2)
+  mtext("Pre-intervention",  line = 1, at = 25, cex = 1.5)
+  mtext("Post-intervention", line = 1, at = 80, cex = 1.5)
+</code></pre>
+
+
+</div>

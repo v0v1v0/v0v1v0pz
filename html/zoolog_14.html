@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>RemoveNACases</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Remove Cases Missing All Measurements</h2>
+
+<h3>Description</h3>
+
+<p>Function to remove the table rows for which all measurements of interest
+are non-available (NA).
+A particular list of measurement names can be explicitly provided
+or selected by a common initial pattern.
+The default setting removes the rows with no log-ratio available.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">RemoveNACases(data, measureNames = NULL, prefix = logPrefix)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A dataframe with the input measurements.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>measureNames</code></td>
+<td>
+<p>A vector of characters with the list of measurements
+to be considered for missing values. If <code>NULL</code> (default), all measurements
+starting by <code>prefix</code> are considered.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>A character string with the initial pattern to select the
+list of measurements. The default is given by the internal variable
+<code>logPrefix</code>. It is in effect only when <code>measureNames = NULL</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A dataframe with the same columns as the input dataframe but
+removing the rows with missing values for all measurements in the list.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Read an example dataset:
+dataFile &lt;- system.file("extdata", "dataValenzuelaLamas2008.csv.gz",
+                        package = "zoolog")
+dataExample &lt;- utils::read.csv2(dataFile,
+                                na.strings = "",
+                                encoding = "UTF-8")
+## We can observe the first lines (excluding some columns for visibility):
+head(dataExample)[, -c(6:20,32:64)]
+
+## Remove the cases not including any measurement present in the reference.
+refMeasureNames &lt;- unique(reference$Combi$Measure)
+refMeasureNames
+dataExamplePruned &lt;- RemoveNACases(dataExample,
+                                   measureNames = refMeasureNames)
+## The first lines of the output data frame show at least one available
+## measurement value in the selected list:
+head(dataExamplePruned)[, -c(6:20,32:64)]
+
+## If we compute first the log-ratios
+dataExampleWithLogs &lt;- LogRatios(dataExample)
+## the cases not including any log-ratio can be removed with the
+## default logPrefix
+dataExampleWithLogsPruned &lt;- RemoveNACases(dataExampleWithLogs)
+head(dataExampleWithLogsPruned)[, -c(6:20,32:64)]
+</code></pre>
+
+
+</div>

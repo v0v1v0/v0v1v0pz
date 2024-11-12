@@ -1,0 +1,244 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfR.plotutils</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plotting Utilities (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><b>These functions are deprecated and should not be used in new code.</b>
+</p>
+<p>Conveniently create plots with different layout and in different
+output formats (both on-screen and various graphics file formats).
+</p>
+<p>Each plot is wrapped in a pair of <code>zipfR.begin.plot</code> and
+<code>zipfR.end.plot</code> commands, which make sure that a suitable
+plotting window / image file is opened and closed as required.  Format
+and dimensions of the plots are controlled by global settings made
+with <code>zipfR.par</code>, but can be overridden in the
+<code>zipfR.begin.plot</code> call.
+</p>
+<p><code>zipfR.pick.device</code> automatically selects a default device by
+scanning the specified vector for strings of the form <code>--pdf</code>,
+<code>--eps</code>, etc.
+</p>
+<p><b>NB:</b> These are advanced functions intended to make it easier
+to produce plots in different formats. Most users will only need
+the basic plotting functionalities provided by <code>plot.tfl</code>, 
+<code>plot.spc</code> and <code>plot.vgc</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+zipfR.pick.device(args=commandArgs())
+
+zipfR.begin.plot(device=zipfR.par("device"), filename="",
+                 width=zipfR.par("width"), height=zipfR.par("height"),
+                 bg=zipfR.par("bg"), pointsize=zipfR.par("pointsize"))
+
+## plotting commands go here
+
+zipfR.end.plot(shutdown=FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>args</code></td>
+<td>
+<p>a character vector, which will be scanned for strings of
+the form <code>--pdf</code>, <code>--eps</code>, etc.  If <code>args</code> is not
+specified, the command-line arguments supplied to <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> will be
+examined.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>device</code></td>
+<td>
+<p>name of plotting device to be used (see "Devices"
+below)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filename</code></td>
+<td>
+<p>for graphics file devices, <em>basename</em> of the
+output file.  A suitable extension for the selected file format will
+be added automatically to <code>filename</code>.  This parameter is
+ignored for screen devices.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>width, height</code></td>
+<td>
+<p>width and height of the plotting window or image,
+in inches</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bg</code></td>
+<td>
+<p>background colour of the plotting window or image (use
+<code>"transparent"</code> for images with transparent background)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pointsize</code></td>
+<td>
+<p>default point size for text in the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shutdown</code></td>
+<td>
+<p>if set to FALSE (the default), on-screen plot devices
+will be kept open for re-use in the next plot.  Specify <code>shutdown=TRUE</code>
+to ensure that the screen device is closed after a series of related plots.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>zipfR.begin.plot</code> opens a new plotting window or image file of
+the specified dimensions (<code>width</code>, <code>height</code>), using the
+selected graphics device (<code>device</code>).  Background colour
+(<code>bg</code>) and default point size (<code>pointsize</code>) are set as
+requested.  Then, any global graphics parameter settings (defined with
+the <code>init.par</code> option of <code>zipfR.par</code>) are applied.
+See the <code>zipfR.par</code> manpage for the "factory default"
+settings of these options.
+</p>
+<p><code>zipfR.end.plot</code> finalizes the current plot.  For image file
+devices, the device will be closed, writing the generated file to
+disk.  For screen devices, the plotting window remains visible until a
+new plot is started (which will close and re-open the plotting
+window).
+</p>
+<p>The main purpose of the <code>zipfR</code> plotting utilities is to make it
+easier to draw plots that are both shown on screen (for interactive
+work) and saved to image files in various formats.  If an <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span> script
+specifies <code>filename</code>s in all <code>zipfR.begin.plot</code> commands, a
+single global parameter setting at the start of the script is
+sufficient to switch from screen graphics to EPS files, or any other
+supported file format.
+</p>
+<p>On-screen plotting devices are platform-dependent, and there may be
+different devices available depending on which version of R is used.
+For this reason, <code>zipfR.begin.plot</code> no longer allows users to
+pick an on-screen device explicitly, but rather opens a default device
+with <code>dev.new</code>. Note that this default device may write
+output to a graphics file, but is usually set to a suitable on-screen
+device in an interactive R session. In any case, users can change the
+default by setting <code>options(device=...)</code>. For backwards-compatibility,
+the device name <code>x11</code> (and <code>quartz</code> on macOS is accepted
+for the default graphics device.
+</p>
+<p>The <code>png</code> bitmap device may not be available on all platforms,
+and may also require access to an X server.  Since the width and
+height of a PNG device have to be specified in pixels rather than
+inches, <code>zipfR.begin.plot</code> translates the <code>width</code> and
+<code>height</code> settings, assuming a resolution of 150 dpi.  Use of
+the <code>png</code> device is strongly discouraged.  A better way of
+producing high-quality bitmaps is to generate EPS image (with the
+<code>eps</code> device) and convert them to PNG or JPEG format with the
+external <code>pstoimg</code> program (part of the <code>latex2html</code>
+distribution).
+</p>
+<p><code>zipfR.pick.device</code> will issue a warning if multiple flags
+matching supported graphics devices are found.  However, it is not an
+error to find no matching flag, and all unrecognized strings are
+silently ignored.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>zipfR.begin.plot</code> invisibly returns the ID of the active plot device.
+</p>
+
+
+<h3>Devices</h3>
+
+<p>Currently, the following devices are supported (and can be used in the
+<code>device</code> argument).
+</p>
+<p><em>Screen devices:</em>
+</p>
+
+<dl>
+<dt><code>x11</code></dt>
+<dd>
+<p>opens the default graphic device set by
+<code>getOption("device")</code>. In an interactive R sessions,
+this will usually be a suitable on-screen device.</p>
+</dd>
+<dt><code>quartz</code></dt>
+<dd>
+<p>accepted as an alias for <code>x11</code> on
+macOS platforms</p>
+</dd>
+</dl>
+<p><em>Graphics file devices:</em>
+</p>
+
+<dl>
+<dt><code>eps</code></dt>
+<dd>
+<p>Encapsulated PostScript (EPS) output (using
+<code>postscript</code> device with appropriate settings)</p>
+</dd>
+<dt><code>pdf</code></dt>
+<dd>
+<p>PDF output</p>
+</dd>
+<dt><code>png</code></dt>
+<dd>
+<p>PNG bitmap file (may not be available on all
+platforms)</p>
+</dd>
+</dl>
+<h3>See Also</h3>
+
+<p><code>zipfR.par</code>, <code>par</code>
+</p>
+<p>Devices, <code>dev.new</code>, <code>postscript</code>,
+<code>pdf</code> and <code>png</code> for more information about the
+supported graphics devices
+</p>
+<p><code>zipfR</code>-specific plotting commands are <code>plot.spc</code>, 
+<code>plot.spc</code> and <code>plot.vgc</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## these graphics parameters will be set for every new plot
+zipfR.par(init.par=list(bg="lightblue", cex=1.3))
+zipfR.par(width=12, height=9)
+
+## will be shown on screen or saved to specified file, depending on
+## selected device (eps -&gt; "myplot.eps", pdf -&gt; "myplot.pdf", etc.)
+
+zipfR.begin.plot(filename="myplot")
+plot.spc(Brown100k.spc)
+zipfR.end.plot()
+
+## By starting an R script "myplots.R" with this command, you can
+## display plots on screen when stepping through the script in an
+## interactive session, or save them to disk files in various
+## graphics formats with "R --no-save --args --pdf &lt; myplots.R" etc.
+zipfR.pick.device()
+
+## End(Not run)
+</code></pre>
+
+
+</div>

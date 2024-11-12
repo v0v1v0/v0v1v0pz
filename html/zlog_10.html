@@ -1,0 +1,124 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>z_df</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate z/zlog Values for a data.frame</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the z or z(log) values for laboratory measurement standardisation
+as proposed in Hoffmann 2017 et al. for a complete <code>data.frame</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">z_df(x, limits, probs = c(0.025, 0.975), log = FALSE)
+
+zlog_df(x, limits, probs = c(0.025, 0.975))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>data.frame</code>, with the columns: "age", <code>numeric</code>, "sex", <code>factor</code>
+and more user defined <code>numeric</code> columns that should be z/z(log) transformed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limits</code></td>
+<td>
+<p><code>data.frame</code>, reference table, has to have the columns:
+"age", <code>numeric</code> (same units as in <code>age</code>, e.g. days or years, age of <code>0</code>
+matches all ages),
+"sex", <code>factor</code> (same levels for male and female as <code>sex</code> and a special level
+<code>"both"</code>), "param", <code>character</code> with the laboratory parameter name that have
+to match the column name in <code>x</code>, "lower" and "upper", <code>numeric</code> for the
+lower and upper reference limits.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probs</code></td>
+<td>
+<p><code>numeric</code>, probabilities of the lower and upper reference limit,
+default: <code>c(0.025, 0.975)</code> (spanning 95 %). Has to be of length 2 for
+<code>numeric</code> or a two-column <code>matrix</code> with as many rows as elements in <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log</code></td>
+<td>
+<p><code>logical</code>, should z (<code>log = FALSE</code>, default) or
+z(log) (<code>log = TRUE</code>) calculated?</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This is a wrapper function for <code>z()</code> and <code>lookup_limits()</code>. Please find
+the details for the z/z(log) calculation at <code>z()</code>.
+</p>
+<p><code>zlog_df</code> is an alias for <code>z_df(..., log = TRUE)</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>data.frame</code>, with the columns: "age", "sex" and all <code>numeric</code>
+columns z/zlog transformed. If a column name is missing in <code>limits$param</code>
+a warning is thrown and the column is set to <code>NA</code>.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Sebastian Gibb
+</p>
+
+
+<h3>References</h3>
+
+<p>Georg Hoffmann, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
+2017.
+"The Zlog-Value as Basis for the Standardization of Laboratory Results."
+LaboratoriumsMedizin 41 (1): 23–32.
+<a href="https://doi.org/10.1515/labmed-2016-0087">doi:10.1515/labmed-2016-0087</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zlog()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">l &lt;- data.frame(
+    param = c("alb", "bili"),
+    age = c(0, 0),
+    sex = c("both", "both"),
+    units = c("mg/l", "µmol/l"),
+    lower = c(35, 2),
+    upper = c(52, 21)
+)
+x &lt;- data.frame(
+    age = 40:48,
+    sex = rep(c("female", "male"), c(5, 4)),
+    # from Hoffmann et al. 2017
+    alb = c(42, 34, 38, 43, 50, 42, 27, 31, 24),
+    bili = c(11, 9, 2, 5, 22, 42, 37, 200, 20)
+)
+z_df(x, l)
+
+zlog_df(x, l)
+</code></pre>
+
+
+</div>

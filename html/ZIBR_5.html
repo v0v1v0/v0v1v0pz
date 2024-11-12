@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simulate_beta_random_effect_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate beta data</h2>
+
+<h3>Description</h3>
+
+<p>Simulate beta data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simulate_beta_random_effect_data(
+  subject_n = 50,
+  time_n = 5,
+  v = 2,
+  beta = as.matrix(c(-0.5, -0.5, 0.5)),
+  Z = NA,
+  s2 = 1,
+  sim_seed = 100
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>subject_n</code></td>
+<td>
+<p>the number of subjects</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_n</code></td>
+<td>
+<p>the number of time points</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>v</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s2</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sim_seed</code></td>
+<td>
+<p>the random seed with which to simulate the data</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a named list
+</p>
+
+<ul>
+<li>
+<p> Y
+</p>
+</li>
+<li>
+<p> Z
+</p>
+</li>
+<li>
+<p> c
+</p>
+</li>
+<li>
+<p> u
+</p>
+</li>
+<li>
+<p> v
+</p>
+</li>
+<li>
+<p> beta
+</p>
+</li>
+<li>
+<p> s2
+</p>
+</li>
+<li>
+<p> subject_ind
+</p>
+</li>
+<li>
+<p> time_ind
+</p>
+</li>
+</ul>
+</div>

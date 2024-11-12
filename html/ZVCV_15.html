@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>medianTune</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Median heuristic</h2>
+
+<h3>Description</h3>
+
+<p>This function calculates the median heuristic for use in e.g. the Gaussian, Matern and rational quadratic kernels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">medianTune(samples, Z = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of samples from the target</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z</code></td>
+<td>
+<p>(optional) An NxN matrix of square norms, which can be calculated
+using <code>squareNorm</code>, as long as the <code>nystrom_inds</code> are <code>NULL</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The median heuristic, which can then be used as the length-scale parameter in the Gaussian, Matern and rational quadratic kernels
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Leah F. South
+</p>
+
+
+<h3>References</h3>
+
+<p>Garreau, D., Jitkrittum, W. and Kanagawa, M. (2017). Large sample analysis of the median heuristic.  <a href="https://arxiv.org/abs/1707.07269">https://arxiv.org/abs/1707.07269</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code>medianTune</code> and <code>K0_fn</code> for functions which use this.
+</p>
+
+
+</div>

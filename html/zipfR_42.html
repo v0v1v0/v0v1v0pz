@@ -1,0 +1,167 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>estimate.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimate LNRE Model Parameters (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><b>Internal function:</b> Generic method for estimation of LNRE model
+parameters.  Based on the class of its first argument, the method
+dispatches to a suitable implementation of the estimation procedure.
+</p>
+<p>Unless you are a developer working on the <code>zipfR</code> source code,
+you are probably looking for the <code>lnre</code> manpage.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  estimate.model(model, spc, param.names,
+                 method, cost.function, m.max=15,
+                 runs=3, debug=FALSE, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>LNRE model object of the appropriate class (a subclass of
+<code>lnre</code>).  All parameters of the LNRE model that are not listed
+in <code>param.names</code> must have been initialized to their
+prespecified values in the <code>model</code> object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spc</code></td>
+<td>
+<p>an observed frequency spectrum, i.e. an object of class
+<code>spc</code>.  The values of the missing parameters will be estimated
+from this frequency spectrum.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param.names</code></td>
+<td>
+<p>a character vector giving the names of parameters
+for which values have to be estimated ("missing" parameters)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>name of the minimization algorithm used for parameter
+estimation (see <code>lnre</code> for details)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cost.function</code></td>
+<td>
+<p>cost function to be minimized (see
+<code>lnre</code> for details).  <b>NB:</b> this is a direct
+reference to the function object rather than just the name of the
+cost function.  Look-up of the appropriate cost function
+implementation is performed in the <code>lnre</code> constructor.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m.max</code></td>
+<td>
+<p>number of spectrum elements that will be used to compute
+the cost function (passed on to <code>cost.function</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runs</code></td>
+<td>
+<p>number of parameter optimization runs with random
+initialization. Parameters from the run that achieves the smallest
+value of the cost function will be selected. Some method implementations
+may not support multiple optimization runs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>debug</code></td>
+<td>
+<p>if <code>TRUE</code>, some debugging and progress information
+will be printed during the estimation procedure</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments are passed on and may be used by some
+implementations</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>By default, <code>estimate.model</code> dispatches to a generic
+implementation of the estimation procedure that can be used with all
+types of LNRE models (<code>estimate.model.lnre</code>). 
+</p>
+<p>This generic implementation can be overridden for specific LNRE
+models, e.g. to calculate better init values or improve the estimation
+procedure in some other way.  To provide a custom implementation for
+Zipf-Mandelbrot models (of class <code>lnre.zm</code>), for instance, it is
+sufficient to define the corresponding method implementation
+<code>estimate.model.lnre.zm</code>.  If no custom implementation is
+provided but the user has selected the <code>Custom</code> method (which is
+the default), <code>estimate.model</code> falls back on <code>Nelder-Mead</code>
+for multi-dimensional minimization and <code>NLM</code> for one-dimensional
+minimization (where Nelder-Mead is considered to be unreliable).
+</p>
+<p>Parmeter estimation is performed by minimization of the cost function
+passed in the <code>cost.function</code> argument (see <code>lnre</code>
+for details).  Depending on the <code>method</code> argument, a range of
+different minimization algorithms can be used (see <code>lnre</code>
+for a complete listing).  The minimization algorithm always operates
+on <em>transformed</em> parameter values, making use of the
+<code>transform</code> utility provided by LNRE models (see
+<code>lnre.details</code> for more information about utility
+functions).  All parameters are initialized to 0 in the transformed
+scale, which should translate to sensible starting points.
+</p>
+<p>Note that the <code>estimate.model</code> implementations <em>do not
+perform any error checking</em>.  It is the responsibility of the caller
+to make sure that the arguments are sensible and complete.  In
+particular, all model parameters that will not be estimated (i.e. are
+not listed in <code>param.names</code>) must have been initialized to
+their prespecified values in the <code>model</code> passed to the function.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A modified version of <code>model</code>, where the missing parameters
+listed in <code>param.names</code> have been estimated from the observed
+frequency spectrum <code>spc</code>.  In addition, goodness-of-fit
+information is added to the object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The user-level function for estimating LNRE models is
+<code>lnre</code>.  Its manpage also lists available cost functions
+and minimization algorithms.
+</p>
+<p>The internal structure of <code>lnre</code> objects (representing LNRE
+models) is described on the <code>lnre.details</code> manpage, which
+also outlines the necessary steps for implementing a new LNRE model.
+</p>
+<p>The minimization algorithms used are described in detail on the
+<code>nlm</code> and <code>optim</code> manpages from <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>'s standard
+library.
+</p>
+
+
+</div>

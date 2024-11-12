@@ -1,0 +1,476 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lnre</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>LNRE Models (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>LNRE model constructor, returns an object representing a LNRE model
+with the specified parameters, or allows parameters to be estimated
+automatically from an observed frequency spectrum.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  lnre(type=c("zm", "fzm", "gigp"),
+       spc=NULL, debug=FALSE,
+       cost=c("gof", "chisq", "linear", "smooth.linear", "mse", "exact"),
+       m.max=15, runs=5,
+       method=c("Nelder-Mead", "NLM", "BFGS", "SANN", "Custom"),
+       exact=TRUE, sampling=c("Poisson", "multinomial"),
+       bootstrap=0, verbose=TRUE, parallel=1L,
+       ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>class of LNRE model to use (see "LNRE Models" below)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spc</code></td>
+<td>
+<p>observed frequency spectrum used to estimate model
+parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>debug</code></td>
+<td>
+<p>if <code>TRUE</code>, detailed debugging information will be
+printed during parameter estimation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cost</code></td>
+<td>
+<p>cost function for measuring the "distance" between
+observed and expected vocabulary size and frequency spectrum.
+Parameters are estimated by minimizing this cost function (see "Cost
+Functions" below for a list of built-in cost functions and details
+on user-defined cost functions).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m.max</code></td>
+<td>
+<p>number of spectrum elements considered by the cost
+function (see "Cost Functions" below for more information). If
+unspecified, the default is automatically adjusted to avoid small
+spectrum elements that may be mathematically unreliable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>runs</code></td>
+<td>
+<p>number of parameter optimization runs with random
+initialization. Parameters from the run that achieves the smallest
+value of the cost function will be selected. Currently not supported
+for <code>method="Custom"</code>, please use <em>runs=1</em> in this case.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>algorithm used for parameter estimation, by minimizing
+the value of the cost function (see "Parameter Estimation" below for
+details, and "Minimization Algorithms" for descriptions of the
+available algorithms)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exact</code></td>
+<td>
+<p>if <code>FALSE</code>, certain LNRE models will be allowed to
+use approximations when calculating expected values and variances,
+in order to improve performance and numerical stability.  However,
+the computed values might be inaccurate or inconsistent in "extreme"
+situations: in particular, <code class="reqn">E[V]</code> might be larger than <code class="reqn">N</code>
+when <code class="reqn">N</code> is very small; <code class="reqn">\sum_m E[V_m]</code> can be larger than
+<code class="reqn">E[V]</code> at the same <code class="reqn">N</code>; <code class="reqn">\sum_m m \cdot E[V_m]</code> can be larger than <code class="reqn">N</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampling</code></td>
+<td>
+<p>type of random sampling model to use.  <code>Poisson</code>
+sampling is mathematically simpler and allows fast and robust
+calculations, while <code>multinomial</code> sampling is more accurate
+especially for very small samples.  <code>Poisson</code> sampling is the
+default and should be unproblematic for sample sizes <code class="reqn">N \ge
+    10000</code>.  <b>NB:</b> The <code>multinomial</code> sampling option has not
+been implemented yet.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bootstrap</code></td>
+<td>
+<p>number of bootstrap samples used to estimate confidence
+intervals for estimated model parameters.  Recommended values are
+<code>bootstrap=100</code> or <code>bootstrap=200</code>.  Bootstrapping can be very
+time-consuming and should not be used if the underlying sample size
+is very large (roughly, more than 1 million tokens).  See
+<code>lnre.bootstrap</code> for further information and warnings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parallel</code></td>
+<td>
+<p>whether to use parallelisation for the bootstrapping procedure
+(highly recommended). See <code>lnre.bootstrap</code> for details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>if <code>TRUE</code>, a progress bar will be shown in the R console
+during the bootstrapping procedure</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>all further named arguments are interpreted as parameter
+values for the chosen LNRE model (see the respective manpages for
+names and descriptions of the model parameters)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Currently, the following LNRE models are supported by the <code>zipfR</code>
+package:
+</p>
+<p>The <b>Zipf-Mandelbrot (ZM)</b> LNRE model (see <code>lnre.zm</code>
+for details).
+</p>
+<p>The <b>finite Zipf-Mandelbrot (fZM)</b> LNRE model (see
+<code>lnre.fzm</code> for details).
+</p>
+<p>The <b>Generalized Inverse Gauss-Poisson (GIGP)</b> LNRE model (see
+<code>lnre.gigp</code> for details).
+</p>
+<p>If explicit model parameters are specified in addition to an observed
+frequency spectrum <code>spc</code>, these parameters are fixed to the given
+values and are excluded from the estimation procedure.  This feature
+can be useful if fully automatic parameter estimation leads to a poor
+or counterintuitive fit.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of a suitable subclass of <code>lnre</code>, depending on the
+<code>type</code> argument (e.g. <code>lnre.fzm</code> for <code>type="fzm"</code>).
+This object represents a LNRE model of the selected type with the
+specified parameter values, or with parameter values estimated from
+the observed frequency spectrum <code>spc</code>.
+</p>
+<p>The internal structure of <code>lnre</code> objects is described on the
+<code>lnre.details</code> manpage (intended for developers).
+</p>
+
+
+<h3>Parameter Estimation</h3>
+
+<p>Automatic parameter estimation for LNRE models is performed by
+matching the expected vocabulary size and frequency spectrum of the
+model against the observed data passed in the <code>spc</code> argument.
+</p>
+<p>For this purpose, a <em>cost function</em> has to be defined as a
+measure of the "distance" between observed and expected frequency
+spectrum.  Parameters are then estimated by applying a
+<em>minimization algorithm</em> in order to find those parameter values
+that lead to the smallest possible cost.
+</p>
+<p>Parameter estimation is a crucial and often also quite critical step
+in the application of LNRE models.  Depending on the shape of the
+observed frequency spectrum, the automatic estimation procedure may
+result in a poor and counter-intuitive fit, or may fail altogether.
+</p>
+<p>Usually, multiple runs of the minimization are performed with different
+random start values. An error will only be reported if all the estimation
+runs fail. Such multiple runs have not been implemented for the <code>Custom</code>
+minimization method yet; please specify <code>runs=1</code> in this case.
+</p>
+<p>Users can influence parameter estimation by choosing from a range of
+predefined cost functions and from several minimization algorithms, as
+described in the following sections.  Some experimentation with the
+<code>cost</code>, <code>m.max</code> and <code>method</code> arguments will often help
+to resolve estimation failures and may result in a considerably better
+goodness-of-fit.
+</p>
+
+
+<h3>Cost Functions</h3>
+
+<p>The following cost functions are available and can be selected with
+the <code>cost</code> argument.  All functions are based on the differences
+between observed and expected values for vocabulary size and the first
+elements of the frequency spectrum (<code class="reqn">V_1, \ldots, V_m</code>, where
+<code class="reqn">m</code> is given by the <code>m.max</code> argument):
+</p>
+
+<dl>
+<dt>
+<code>gof</code>:</dt>
+<dd>
+<p>the multivariate chi-squared statistic used for
+goodness-of-fit testing (<code>lnre.goodness.of.fit</code>).
+This cost function corresponds (almost) to maximum-likelihood
+parameter estimation and is used by default.</p>
+</dd>
+<dt>
+<code>chisq</code>:</dt>
+<dd>
+<p>cost function based on a simplified version of
+the multivariate chi-squared test for goodness-of-fit (assuming
+independence between the random variables <code class="reqn">V_m</code>).
+
+</p>
+</dd>
+<dt>
+<code>linear</code>:</dt>
+<dd>
+<p>linear cost function, which sums over the
+absolute differences between observed and expected values.  This
+cost function puts more weight on fitting the vocabulary size and
+the first few elements of the frequency spectrum (where absolute
+differences are much larger than for higher spectrum elements).</p>
+</dd>
+<dt>
+<code>smooth.linear</code>:</dt>
+<dd>
+<p>modified version of the linear cost
+function, which smoothes the kink of the absolute value function
+for a difference of <code class="reqn">0</code> (since non-differentiable cost
+functions might be problematic for gradient-base minimization
+algorithms)</p>
+</dd>
+<dt>
+<code>mse</code>:</dt>
+<dd>
+<p>mean squared error cost function, averaging over
+the squares of differences between observed and expected values.
+This cost function penalizes large absolute differences more
+heavily than linear cost (and therefore puts even greater weight
+on fitting vocabulary size and the first spectrum elements).</p>
+</dd>
+<dt>
+<code>exact</code>:</dt>
+<dd>
+<p>this "virtual" cost function attempts to match
+the observed vocabulary size and first spectrum elements exactly,
+ignoring differences for all higher spectrum elements.  This is
+achieved by adjusting the value of <code>m.max</code> automatically,
+depending on the number of free parameters that are estimated (in
+general, the number of constraints that can be satisfied by
+estimating parameters is the same as the number of free
+parameters).  Having adjusted <code>m.max</code>, the <code>mse</code> cost
+function is used to determined parameter values, so that the
+estimation procedure will not fail even if the constraints cannot
+be matched exactly.</p>
+</dd>
+</dl>
+<p>Alternatively a user-defined cost function can be passed as a function object
+with signature 'cost(model, spc, m.max)', which compares the LNRE model 'model'
+against the observed frequency spectrum 'spc' and returns a cost value
+(i.e. lower cost indicates a better fit).
+</p>
+
+
+<h3>Minimization Algorithms</h3>
+
+<p>Several different minimization algorithms can be used for parmeter
+estimation and are selected with the <code>method</code> argument:
+</p>
+
+<dl>
+<dt>
+<code>Nelder-Mead</code>:</dt>
+<dd>
+<p>the Nelder-Mead algorithm, implemented by
+the <code>optim</code> function, performs minimization without using
+derivatives.  Parameter estimation is therefore very robust, while
+almost as fast and accurate as the <code>NLM</code> method. 
+<code>Nelder-Mead</code> is the default algorithm and is also used
+internally by most custom minimization procedures (see below).</p>
+</dd>
+<dt>
+<code>NLM</code>:</dt>
+<dd>
+<p>a standard Newton-type algorithm for nonlinear
+minimization, implemented by the <code>nlm</code> function, which
+makes use of numerical derivatives of the cost function.
+<code>NLM</code> minimization converges quickly and obtains very precise
+parameter estimates (for a local minimum of the cost function),
+but it is not very stable and may cause parameter estimation to
+fail altogether.</p>
+</dd>
+<dt>
+<code>SANN</code>:</dt>
+<dd>
+<p>minimization by simulated annealing, also provided by the
+<code>optim</code> function.  Like <code>Nelder-Mead</code>, this algorithm is
+very robust because it avoids numerical derivatives, but
+convergence is extremely slow.  In some cases, <code>SANN</code> might
+produce a better fit than <code>Nelder-Mead</code> (if the latter
+converges to a suboptimal local minimum).</p>
+</dd>
+<dt>
+<code>BFGS</code>:</dt>
+<dd>
+<p>a quasi-Newton method developed by Broyden, Fletcher,
+Goldfarb and Shanno. This minimization algorithm is efficient, but
+should be applied with care as it will often overshoot the valid range of
+parameter values.</p>
+</dd>
+<dt>
+<code>Custom</code>:</dt>
+<dd>
+<p>a custom estimation procedure provided 
+for certain types of LNRE model, which may exploit special
+mathematical properties of the model in order to calculate one or
+more of the parameter values directly.  For example, one parameter
+of the ZM and fZM models can easily be determined from the
+constraint <code class="reqn">E[V] = V</code> (but note that this additional
+constraint leads to a different fit than is obtained by plain
+minimization of the cost function!).  Custom estimation might also
+apply special configuration settings to improve convergence of the
+minimization process, based on knowledge about the valid ranges
+and "behaviour" of model parameters.  If no custom estimation
+procedure has been implemented for the selected LNRE model,
+<code>lnre</code> falls back on the <code>Nelder-Mead</code> or <code>NLM</code>
+algorithm.</p>
+</dd>
+</dl>
+<p>See the <code>nlm</code> and <code>optim</code> manpages for more
+information about the minimization algorithms used and key references.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Detailed descriptions of the different LNRE models provided by
+<code>zipfR</code> and their parameters can be found on the manpages
+<code>lnre.zm</code>, <code>lnre.fzm</code> and
+<code>lnre.gigp</code>.
+</p>
+<p>Useful methods for trained models are <code>lnre.spc</code>,
+<code>lnre.vgc</code>, <code>EV</code>, <code>EVm</code>,
+<code>VV</code>, <code>VVm</code>.  Suitable implementations of the
+<code>print</code> and <code>summary</code> methods are also
+provided (see <code>print.lnre</code> for details), as well as for
+plotting (see <code>plot.lnre</code>).  Note that the
+methods <code>N</code>, <code>V</code> and <code>Vm</code> can be
+applied to LNRE models with estimated parameters and return
+information about the observed frequency spectrum used for parameter
+estimation.
+</p>
+<p>If bootstrapping samples have been generated (<code>bootstrap &gt; 0</code>), 
+confidence intervals for the model parameters can be determined with
+<code>confint.lnre</code>.  See <code>lnre.bootstrap</code> for 
+more information on the bootstrapping procedure and implementation.
+</p>
+<p>The <code>lnre.details</code> manpage gives details about the
+implementation of LNRE models and the internal structure of
+<code>lnre</code> objects, while <code>estimate.model</code> has more
+information on the parameter estimation procedure (both manpages are
+intended for developers).
+</p>
+<p>See <code>lnre.goodness.of.fit</code> for a complete description of
+the goodness-of-fit test that is automatically performed after
+parameter estimation (and which is reported in the <code>summary</code> of
+the LNRE model).  This function can also be used to evaluate the
+predictions of the LNRE model on a different data set than the one
+used for parameter estimation.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load Dickens dataset
+data(Dickens.spc)
+
+## estimate parameters of GIGP model and show summary
+m &lt;- lnre("gigp", Dickens.spc)
+m
+
+
+## N, V and V1 of spectrum used to compute model
+## (should be the same as for Dickens.spc)
+N(m)
+V(m)
+Vm(m,1)
+
+
+## expected V and V_m and their variances for arbitrary N 
+EV(m,100e6)
+VV(m,100e6)
+EVm(m,1,100e6)
+VVm(m,1,100e6)
+
+## use only 10 instead of 15 spectrum elements to estimate model
+## (note how fit improves for V and V1)
+m.10 &lt;- lnre("gigp", Dickens.spc, m.max=10)
+m.10
+
+## experiment with different cost functions
+m.mse &lt;- lnre("gigp", Dickens.spc, cost="mse")
+m.mse
+m.exact &lt;- lnre("gigp", Dickens.spc, cost="exact")
+m.exact
+
+
+## NLM minimization algorithm is faster but less robust
+m.nlm &lt;- lnre("gigp", Dickens.spc, method="NLM")
+m.nlm
+
+## ZM and fZM LNRE models have special estimation algorithms
+m.zm &lt;- lnre("zm", Dickens.spc)
+m.zm
+m.fzm &lt;- lnre("fzm", Dickens.spc)
+m.fzm
+
+
+## estimation is much faster if approximations are allowed
+m.approx &lt;- lnre("fzm", Dickens.spc, exact=FALSE)
+m.approx
+
+
+## specify parameters of LNRE models directly
+m &lt;- lnre("zm", alpha=.5, B=.01)
+lnre.spc(m, N=1000, m.max=10)
+
+m &lt;- lnre("fzm", alpha=.5, A=1e-6, B=.01)
+lnre.spc(m, N=1000, m.max=10)
+
+m &lt;- lnre("gigp", gamma=-.5, B=.01, C=.01)
+lnre.spc(m, N=1000, m.max=10)
+
+## bootstrapped confidence intervals for model parameters
+## Not run: 
+model &lt;- lnre("fzm", spc=BrownAdj.spc, bootstrap=40)
+confint(model, "alpha") # Zipf slope
+confint(model, "S")     # population diversity
+confint(model, "S", method="normal") # Gaussian approx works well in this case
+
+## speed up with parallelisation (see ?lnre.bootstrap for more information)
+model &lt;- lnre("fzm", spc=BrownAdj.spc, bootstrap=40, 
+              parallel=8) # on Linux / MacOS with 8 available cores
+## End(Not run)
+</code></pre>
+
+
+</div>

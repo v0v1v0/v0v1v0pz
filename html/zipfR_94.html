@@ -1,0 +1,264 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>productivity.measures</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Measures of Productivity and Lexical Richness (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Compute various measures of productivity and lexical richness from
+an observed frequency spectrum or type-frequency list, from an
+observed vocabulary growth curve, or from a vector of tokens.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">productivity.measures(obj, measures, data.frame=TRUE, ...)
+
+## S3 method for class 'tfl'
+productivity.measures(obj, measures, data.frame=TRUE, ...)
+## S3 method for class 'spc'
+productivity.measures(obj, measures, data.frame=TRUE, ...)
+## S3 method for class 'vgc'
+productivity.measures(obj, measures, data.frame=TRUE, ...)
+
+## Default S3 method:
+productivity.measures(obj, measures, data.frame=TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>a suitable data object from which productivity measures
+can be computed. Currently either a frequency spectrum
+(of class <code>spc</code>), a type-frequency list (of class <code>tfl</code>),
+a vocabulary growth curve (of class <code>vgc</code>), or a token vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>measures</code></td>
+<td>
+<p>character vector naming the productivity measures to
+be computed (see "Productivity Measures" below).
+Names may be abbreviated as long as they remain unique.
+If unspecified, all supported measures are computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.frame</code></td>
+<td>
+<p>if <code>TRUE</code>, the return value is converted to a data frame
+for convenience in interactive use (default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on to the method implementations
+(currently, no further arguments are recognized)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function computes productivity measures based on an observed frequency spectrum, type-frequency list or vocabulary growth curve.
+If an <em>expected</em> spectrum or VGC is passed, the expectations <code class="reqn">E[V]</code>, <code class="reqn">E[V_m]</code> will simply be substituted for the sample values <code class="reqn">V</code>, <code class="reqn">V_m</code> in the equations. In most cases, this does <em>not</em> yield the expected value of the productivity measure!
+</p>
+<p>Some measures can only be computed from a complete frequency spectrum.  They will return <code>NA</code> if <code>obj</code> is an incomplete spectrum or type-frequency list, an expected spectrum or a vocabulary growth curve is passed.
+</p>
+<p>Some other measures can only be computed is a sufficient number of spectrum elements is included in a vocabulary growth curve (usually at least
+<code class="reqn">V_1</code> and <code class="reqn">V_2</code>), and will return <code>NA</code> otherwise.
+</p>
+<p>Such limitations are indicated in the list of measures below (unless spectrum elements <code class="reqn">V_1</code> and <code class="reqn">V_2</code> are sufficient).
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>obj</code> is a frequency spectrum, type-frequency list or token vector:
+A numeric vector of the same length as <code>measures</code> with the corresponding observed values of the productivity measures.
+If <code>data.frame=TRUE</code> (the default), a single-row data frame is returned.
+</p>
+<p>If <code>obj</code> is a vocabulary growth curve:
+A numeric matrix with columns corresponding to the selected productivity measures and rows corresponding to the sample sizes of the vocabulary growth curve.
+If <code>data.frame=TRUE</code> (the default), the matrix is converted to a data frame.
+</p>
+
+
+<h3>Productivity Measures</h3>
+
+<p>The following productivity measures are currently supported:
+</p>
+
+<dl>
+<dt>
+<code>V</code>:</dt>
+<dd>
+<p>the total number of types <code class="reqn">V</code> 
+</p>
+</dd>
+<dt>
+<code>TTR</code>:</dt>
+<dd>
+<p>the type-token ratio TTR = <code class="reqn">V / N</code>
+</p>
+</dd>
+<dt>
+<code>R</code>:</dt>
+<dd> 
+<p>Guiraud's (1954) <code class="reqn">R = V / \sqrt{N}</code>. An equivalent measure is Carroll's (1964) <code class="reqn">CTTR = R / \sqrt{2}</code>.
+</p>
+</dd>
+<dt>
+<code>C</code>:</dt>
+<dd>
+<p>Herdan's (1964) <code class="reqn">C = \frac{ \log V }{ \log N }</code> 
+</p>
+</dd>
+<dt>
+<code>k</code>:</dt>
+<dd>
+<p>Dugast's (1979) <code class="reqn">k = \frac{ \log V }{ \log \log N}</code>
+</p>
+</dd>
+<dt>
+<code>U</code>:</dt>
+<dd>
+<p>Dugast's (1978, 1979) <code class="reqn">U = \frac{ (\log N)^2 }{ \log N - \log V}</code>.
+Maas (1972) proposed an equivalent measure <code class="reqn">a^2 = 1 / U</code>.
+</p>
+</dd>
+<dt>
+<code>W</code>:</dt>
+<dd>
+<p>Brunet's (1978) <code class="reqn">W = N ^ {V ^ {-a}}</code> with <code class="reqn">a = 0.172</code>. 
+</p>
+</dd>
+<dt>
+<code>P</code>:</dt>
+<dd>
+<p>Baayen's (1991) productivity index <code class="reqn">P = \frac{V_1}{N}</code>, which corresponds to the slope of the vocabulary growth curve (under random sampling assumptions) 
+</p>
+</dd>
+<dt>
+<code>Hapax</code>:</dt>
+<dd>
+<p>the proportion of <em>hapax legomena</em> <code class="reqn">\frac{V_1}{V}</code> is a direct estimate for the parameter <code class="reqn">\alpha = 1 / a</code> of a population following the Zipf-Mandelbrot law (Evert 2004b: 130).
+</p>
+</dd>
+<dt>
+<code>H</code>:</dt>
+<dd>
+<p>Honoré's (1979) <code class="reqn">H = 100 \frac{ \log N }{ 1 - V_1 / V }</code>, a transformation of the proportion of <em>hapax legomena</em> adjusted for sample size
+</p>
+</dd>
+<dt>
+<code>S</code>:</dt>
+<dd>
+<p>Sichel's (1975) <code class="reqn">S = V_2 / V</code>, i.e. the proportion of <em>dis legomena</em>. Michéa's (1969, 1971) <code class="reqn">M = 1 / S</code> is an equivalent measure.
+</p>
+</dd>
+<dt>
+<code>alpha2</code>:</dt>
+<dd>
+<p>Evert's <code class="reqn">\alpha_2 = 1 - 2 \frac{V_2}{V_1}</code> is another direct estimate for the parameter <code class="reqn">\alpha = 1 / a</code> of a Zipf-Mandelbrot population (Evert 2004b: 127).
+</p>
+</dd>
+<dt>
+<code>K</code>:</dt>
+<dd>
+<p>Yule's (1944) <code class="reqn">K = 10^4 \cdot \frac{ \sum_m m^2 V_m - N}{ N^2 }</code> <br>
+(only for complete frequency spectrum or type-frequency list). Herdan (1955) proposes an almost equivalent measure <code class="reqn">v_m \approx \sqrt{K}</code> based on a different derviation. Both measures converge for large <code class="reqn">N</code> and <code class="reqn">V</code>.
+Yule's <code class="reqn">K</code> is almost identical to Simpson's <code class="reqn">D</code> and is an unbiased estimator for the same population coefficient <code class="reqn">\delta</code> under an independent Poisson sampling scheme.
+A measure of <em>lexical poverty</em>, i.e. smaller values correpond to higher productivity.
+</p>
+</dd>
+<dt>
+<code>D</code>:</dt>
+<dd>
+<p>Simpson's (1949) <code class="reqn">D = \sum_m V_m \frac{m}{N}\cdot \frac{m-1}{N-1}</code> <br>
+(only for complete frequency spectrum or type-frequency list) is a slightly modified version of Yule's <code class="reqn">K</code>.
+This measure is an unbiased estimator for a population coefficient <code class="reqn">\delta</code>, representing the probability of picking the same type twice in two consecutive draws from the population. 
+A measure of <em>lexical poverty</em>, i.e. smaller values correpond to higher productivity.
+</p>
+</dd>
+<dt>
+<code>Entropy</code>:</dt>
+<dd>
+<p>Entropy of the sample frequency distribution <code class="reqn">-\sum_m V_m \frac{m}{N} \log_2 \frac{m}{N}</code> <br>
+(only for complete frequency spectrum or type-frequency list). This is not a reliable estimator of population entropy. It is therefore not recommended as a productivity measure and has only been included for evaluation studies.
+A measure of <em>lexical poverty</em>, i.e. smaller values correpond to higher productivity.
+</p>
+</dd>
+<dt>
+<code>eta</code>:</dt>
+<dd>
+<p>Normalised entropy or <em>evenness</em> <code class="reqn">\eta = \textrm{Entropy} / \log_2 V</code><br>
+(only for complete frequency spectrum or type-frequency list) where <code class="reqn">\log_2 V</code> is the largest possible value for a sample with the observed vocabulary size (obtained for a uniform distribution).  Therefore, <code class="reqn">0 \le \eta \le 1</code>.
+Not recommended as a productivity measure because it is expected to produce erratic and counterintuitive results.
+</p>
+</dd>
+</dl>
+<p>See Sec. 2.1 of the technical report <a href="https://zipfr.r-forge.r-project.org/materials/inside-zipfr.pdf">Inside <em>zipfR</em></a> for further details and references.
+</p>
+
+
+<h3>References</h3>
+
+<p>Evert, Stefan (2004b). <em>The Statistics of Word Cooccurrences: Word
+Pairs and Collocations.</em> PhD Thesis, IMS, University of Stuttgart.
+URN urn:nbn:de:bsz:93-opus-23714
+<a href="http://dx.doi.org/10.18419/opus-2556">http://dx.doi.org/10.18419/opus-2556</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>lnre.productivity.measures</code> for parametric bootstrapping and approximate expectations 
+of productivity measures in random samples from a LNRE population.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">rbind(
+  AllTexts=productivity.measures(Brown.spc),
+  Fiction=productivity.measures(BrownImag.spc),
+  NonFiction=productivity.measures(BrownInform.spc))
+
+## can be applied to token vector, type-frequency list, or frequency spectrum
+bar.vec &lt;- EvertLuedeling2001$bar
+bar1 &lt;- productivity.measures(bar.vec)          # token vector
+bar2 &lt;- productivity.measures(vec2tfl(bar.vec)) # type-frequency list
+bar3 &lt;- productivity.measures(vec2spc(bar.vec)) # frequency spectrum
+print(rbind(tokens=bar1, tfl=bar2, spc=bar3))
+
+## sample-size dependency of productivity measures in Brown corpus
+## (note that only a subset of the measures can be computed)
+n &lt;- c(10e3, 50e3, 100e3, 200e3, 500e3, 1e6)
+idx &lt;- N(Brown.emp.vgc) %in% n
+my.vgc &lt;- vgc(N=N(Brown.emp.vgc)[idx],
+              V=V(Brown.emp.vgc)[idx],
+              Vm=list(Vm(Brown.emp.vgc, 1)[idx]))
+print(my.vgc) # since we don't have a subset method for VGCs yet
+productivity.measures(my.vgc)
+
+productivity.measures(my.vgc, measures=c("TTR", "P")) # selected measures
+
+## parametric bootstrapping to obtain sampling distribution of measures
+## (much easier with ?lnre.productivity.measures)
+model &lt;- lnre("zm", spc=ItaRi.spc) # realistic LNRE model
+res &lt;- lnre.bootstrap(model, 1e6, ESTIMATOR=identity,
+                      STATISTIC=productivity.measures)
+bootstrap.confint(res, method="normal")
+</code></pre>
+
+
+</div>

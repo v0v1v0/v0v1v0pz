@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_users</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns All Available Zendesk Users.</h2>
+
+<h3>Description</h3>
+
+<p>It takes your Email Id, authentication token,
+sub-domain and parse all the users in a list.
+It iterates through all the pages returning only 100 users per
+page until the "next_page" parameter becomes null indicating
+there are no more pages to fetch.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_users(email_id, token, subdomain, start_time, user_role = "all")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>email_id</code></td>
+<td>
+<p>Zendesk Email Id (username).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>token</code></td>
+<td>
+<p>Zendesk API token.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subdomain</code></td>
+<td>
+<p>Your organization's Zendesk sub-domain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start_time</code></td>
+<td>
+<p>String with a date or datetime to get all
+tickets modified after that date.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>user_role</code></td>
+<td>
+<p>User role, one of "all", "end-user", "agent", or "admin".</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>It's not a good practice to write down these authentication
+parameters in your code. There are various methods and
+packages available that are more secure; this package
+doesn't require you to use any one in particular.
+</p>
+<p>The start_page parameter is useful if you have many users. Each
+page contains 100 users. Zendesk does not have an incremental
+method for pulling users by date but after you retrieve all of
+your users once, you can then increment your start page to
+something that will limit the number of users you are
+re-pulling each time.
+</p>
+<p>If you are pulling partial lists of users be aware that you
+will not get updates on older users. You will only get recently
+created users, not modified/deleted users and their modified
+data nor updated last login dates.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Data Frame with user details
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://developer.zendesk.com/rest_api/docs/support/users">https://developer.zendesk.com/rest_api/docs/support/users</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+users &lt;- get_users(email_id, token, subdomain)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_resource</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get JSON for a resource (URL). Authenticates if necessary</h2>
+
+<h3>Description</h3>
+
+<p>Get JSON for a resource (URL). Authenticates if necessary
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_resource(zoltar_connection, url, col_types = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>A string of the resource's URL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>col_types</code></td>
+<td>
+<p>Same as readr::read_csv takes</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>list</code> that contains JSON information for the passed URL
+</p>
+
+
+</div>

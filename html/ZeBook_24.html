@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>goodness.of.fit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calcule multiple goodness-of-fit criteria</h2>
+
+<h3>Description</h3>
+
+<p>Calcule multiple goodness-of-fit criteria
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">goodness.of.fit(Yobs, Ypred, draw.plot = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Yobs</code></td>
+<td>
+<p>: observed values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Ypred</code></td>
+<td>
+<p>: prediction values from the model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>draw.plot</code></td>
+<td>
+<p>: draw evaluation plot</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with the different evaluation criteria
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># observed and simulated values
+obs&lt;-c(78,110,92,75,110,108,113,155,150)
+sim&lt;-c(126,126,126,105,105,105,147,147,147)
+goodness.of.fit(obs,sim,draw.plot=TRUE)
+</code></pre>
+
+
+</div>

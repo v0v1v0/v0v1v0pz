@@ -1,0 +1,253 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zeta.decline.mc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zeta diversity decline using Monte Carlo sampling</h2>
+
+<h3>Description</h3>
+
+<p>Computes zeta diversity, the number of species shared by multiple assemblages, for a range of orders (number of assemblages or sites), using combinations of sampled sites, and fits the decline to an exponential and a power law relationship.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zeta.decline.mc(
+  data.spec,
+  xy = NULL,
+  orders = 1:10,
+  sam = 1000,
+  sd.correct = TRUE,
+  sd.correct.adapt = FALSE,
+  confint.level = 0.95,
+  sd.plot = TRUE,
+  rescale = FALSE,
+  normalize = FALSE,
+  NON = FALSE,
+  FPO = NULL,
+  DIR = FALSE,
+  empty.row = "empty",
+  plot = TRUE,
+  silent = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data.spec</code></td>
+<td>
+<p>Site-by-species presence-absence data frame, with sites as rows and species as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xy</code></td>
+<td>
+<p>Site coordinates. This is only used if <code>NON</code> = TRUE or <code>DIR</code> = TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>orders</code></td>
+<td>
+<p>Range of number of assemblages or sites for which zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sam</code></td>
+<td>
+<p>Number of samples for which the zeta diversity is computed for each number of assemblages or sites.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd.correct</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation must be computed with an unbiased estimator (using the number of site combinations - 1 as the denominator) or not (using the number of site combinations as the denominator).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd.correct.adapt</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation must be computed with an unbiased estimator (using the number of site combinations - 1 as the denominator) if <code>sam</code> is higher than the number of possible combinations, or not (using the number of site combinations as the denominator) if <code>sam</code> is lower than the number of possible combinations. If <code>sd.correct.adapt = TRUE</code>, it takes precedence over <code>sd.correct</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>confint.level</code></td>
+<td>
+<p>Percentage for the confidence intervals of the coefficients from the regressions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd.plot</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation of each zeta diversity value must be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the zeta values should be divided by <code class="reqn">\zeta_1</code>, to get a range of values between 0 and 1. Has no effect if <code>normalize</code> != <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalize</code></td>
+<td>
+<p>Indicates if the zeta values for each sample should be divided by the total number of species for this specific sample (<code>normalize = "Jaccard"</code>), by the average number of species per site for this specific sample (<code>normalize = "Sorensen"</code>), or by the minimum number of species in the sites of this specific sample <br> (<code>normalize = "Simpson"</code>). Default value is <code>FALSE</code>, indicating that no normalization is performed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NON</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the number of species in common should only be counted for the nearest neighbours.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FPO</code></td>
+<td>
+<p>A vector with the coordinates of the fixed point origin from which the zeta diversity will be computed (overrides NON). In that case, <code class="reqn">\zeta_1</code> is the number of species in the closest site to the FPO, <code class="reqn">\zeta_2</code> is the number of species shared by the 2 closest sites, etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DIR</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if zeta diversity must be computed using a directed nearest neighbour scheme in the direction away from the FPO, starting from any site.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>empty.row</code></td>
+<td>
+<p>Determines how to handle empty rows, i.e. sites with no species. Such sites can cause underestimations of zeta diversity, and computation errors for the normalized version of zeta due to divisions by 0. Options are "<code>empty</code>" to let the data untreated, "<code>remove</code>" to remove the empty rows, 0 to set the normalized zeta to 0 when zeta is divided by 0 during normalization (sites share no species, so are completely dissimilar), and 1 to set the normalized zeta to 1 when zeta is divided by 0 during normalization (i.e. sites are perfectly similar).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the outputs must be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if messages must be printed.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If the number of combinations of sites is lower than the value of the parameter <code>sam</code>, all the combinations are used and an exact solution is computed. In that case, using the number of site combinations as the denominator may be appropriate to compute the standard deviation, if all sites were sampled and the zeta values. This can be adjusted with parameters <code>sd.correct</code> and <code>sd.correct.adapt</code>.
+</p>
+<p><code>Zeta.decline.mc</code> is faster than <code>Zeta.decline.ex</code> to compute the exact value of zeta diversity when the number of species is higher than <code class="reqn">C^N_{i}</code>, where <em>N</em> is the total number of sites and <em>i</em> is the order of zeta.
+</p>
+<p>The exponential and the power law fit are performed using linear regressions on log-transformed data (only the zeta values are log-transformed for the exponential fit, and both the orders and the zeta values are log-transformed for the power law fit).
+</p>
+<p><code>Zeta.decline.mc</code> enables accomodating richness heterogeneity by setting <code>normalize = "Jaccard"</code>, <code>normalize = "Sorensen"</code> or <code>normalize = "Simpson"</code>. This cannot be performed by <br><code>Zeta.decline.ex</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>Zeta.decline.mc</code> returns a list containing the following components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>zeta.order</code></td>
+<td>
+<p>The number of assemblages or sites for which the zeta diversity was computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combinations</code></td>
+<td>
+<p>The number of possible combinations of sites for the chosen orders.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.val</code></td>
+<td>
+<p>The zeta diversity values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.val.sd</code></td>
+<td>
+<p>The zeta diversity standard deviation values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.ratio</code></td>
+<td>
+<p>The ratio of zeta diversity values by the zeta diversity values at the lower order <code class="reqn">\zeta_i / \zeta_{i-1}</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.exp</code></td>
+<td>
+<p>Object of class "<code>lm</code>", containing the output of the exponential regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.exp.confint</code></td>
+<td>
+<p>The confidence intervals of the coefficients of the exponential regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.pl</code></td>
+<td>
+<p>Object of class "<code>lm</code>", containing the output of the power law regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.pl.confint</code></td>
+<td>
+<p>The confidence intervals of the coefficients of the power law regression.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>aic</code></td>
+<td>
+<p>AIC values for <code>zeta.exp</code> and <code>zeta.pl</code>.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Hui C. &amp; McGeoch M.A. (2014). Zeta diversity as a concept and metric that unifies incidence-based biodiversity patterns. <em>The American Naturalist</em>, 184, 684-694.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.decline.ex</code>, <code>Zeta.order.ex</code>, <code>Zeta.order.mc</code>, <code>Plot.zeta.decline</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::data(bird.spec.coarse)
+xy.bird &lt;- bird.spec.coarse[,1:2]
+data.spec.bird &lt;- bird.spec.coarse[,3:193]
+
+dev.new(width = 12, height = 4)
+zeta.bird &lt;- Zeta.decline.mc(data.spec.bird, xy.bird, orders = 1:5, sam = 100,
+   NON = TRUE)
+zeta.bird
+
+##########
+
+utils::data(Marion.species)
+xy.marion &lt;- Marion.species[,1:2]
+data.spec.marion &lt;- Marion.species[,3:33]
+
+dev.new(width = 12, height = 4)
+zeta.marion &lt;- Zeta.decline.mc(data.spec.marion, orders = 1:5, sam = 100,
+     normalize = "Jaccard")
+zeta.marion
+
+</code></pre>
+
+
+</div>

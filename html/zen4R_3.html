@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>export_zenodo</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>export_zenodo</h2>
+
+<h3>Description</h3>
+
+<p><code>export_zenodo</code> allows to export a Zenodo record, identified by its 
+DOI or concept DOI, using one of the export formats supported by Zenodo.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">export_zenodo(
+  doi,
+  filename,
+  format,
+  append_format = TRUE,
+  sandbox = FALSE,
+  logger = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>doi</code></td>
+<td>
+<p>a Zenodo DOI or concept DOI</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filename</code></td>
+<td>
+<p>a base file name (without file extension) to export to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>format</code></td>
+<td>
+<p>a valid Zenodo export format among the following: BibTeX, CSL, DataCite, DublinCore, 
+DCAT, JSON, JSON-LD, GeoJSON, MARCXML.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>append_format</code></td>
+<td>
+<p>wether format name has to be appended to the filename. Default is <code>TRUE</code> (for
+backward compatibility reasons). Set it to <code>FALSE</code> if you want to use only the <code>filename</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sandbox</code></td>
+<td>
+<p>Use the sandbox infrastructure. Default is <code>FALSE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>logger</code></td>
+<td>
+<p>a logger to print Zenodo API-related messages. The logger can be either NULL, 
+"INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>the exported file name (with extension)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+ export_zenodo("10.5281/zenodo.2547036", filename = "test", format = "BibTeX", append_format = F)
+
+## End(Not run)
+                
+</code></pre>
+
+
+</div>

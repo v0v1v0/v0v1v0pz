@@ -1,0 +1,277 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.vgc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Vocabulary Growth Curves (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Plot a vocabulary growth curve (i.e., <code class="reqn">V(N)</code> or <code class="reqn">V_m(N)</code>
+against <code class="reqn">N</code>), or a comparison of several vocabulary growth curves.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'vgc'
+plot(x, y, ...,
+     m=NULL, add.m=NULL, N0=NULL,
+     conf.level=.95, conf.style=c("ticks", "lines"),
+     log=c("", "x", "y", "xy"),
+     bw=zipfR.par("bw"), 
+     xlim=NULL, ylim=NULL,
+     xlab="N", ylab="V(N)", legend=NULL,
+     main="Vocabulary Growth",
+     lty=NULL, lwd=NULL, col=NULL)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, y, ...</code></td>
+<td>
+<p>one or more objects of class <code>vgc</code>, representing
+observed or expected vocabulary growth curves to be plotted. Alternatively, 
+all VGCs can be passed as a list in the <code>x</code> argument if the method is
+called explicitly (see ‘Examples’.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>a single integer <code class="reqn">m</code> in the range <code class="reqn">1 \ldots 9</code>.  If
+specified, graphs will be plotted for <code class="reqn">V_m(N)</code> instead of
+<code class="reqn">V(N)</code> (the default).  Note that all <code>vgc</code> objects to be
+plotted must contain the necessary data in this case.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add.m</code></td>
+<td>
+<p>a vector of integers in the range <code class="reqn">1 \ldots 9</code>.  If
+specified, graphs for <code class="reqn">V_m(N)</code> will be added as thin lines to
+the default <code class="reqn">V(N)</code> curve, for all specified frequency classes
+<code class="reqn">m</code>.  This option cannot be combined with the <code>m</code> option
+above.  See "Details" below.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N0</code></td>
+<td>
+<p>if specified, draw a dashed vertical line at <code class="reqn">N=N_0</code>,
+indicating the sample size where a LNRE model has been estimated
+(this is never done automatically)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log</code></td>
+<td>
+<p>a character string specifying the axis or axes for which
+logarithmic scale is to be used (<code>"x"</code>, <code>"y"</code>, or
+<code>"xy"</code>), similar to the <code>log</code> argument of
+<code>plot.default</code>.  By default, both axes use linear scale
+(also see "Details" below).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.level</code></td>
+<td>
+<p>confidence level for confidence intervals around
+expected vocabulary growth curves (see "Details" below).  The
+default value of <code class="reqn">.95</code> produces 95%-confidence intervals.
+Set to <code>NA</code> in order to suppress confidence interval
+markers.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.style</code></td>
+<td>
+<p>if <code>"ticks"</code>, confidence intervals are
+indicated by vertical lines at each data point in the <code>vgc</code>
+object (default).  If <code>"lines"</code>, confidence intervals are
+indicated by thin curves above and below the VGC (which may be
+difficult to see when plotting multiple VGCs).  Notice that
+confidence intervals might be so narrow as to be invisible in
+plots (one way to visualize them in such case might be to set an
+extremely conservative confidence level, such as <code class="reqn">.9999</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bw</code></td>
+<td>
+<p>if <code>TRUE</code>, draw plot in B/W style (default is the
+global <code>zipfR.par</code> setting)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlim, ylim</code></td>
+<td>
+<p>visible range on x- and y-axis.  The default values
+are automatically determined to fit the selected data in the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab, ylab</code></td>
+<td>
+<p>labels for the x-axis and y-axis.  The default
+values nicely typeset mathematical expressions.  The y-axis label
+also distinguishes between observed and expected vocabulary growth
+curves, as well as between <code class="reqn">V(N)</code> and <code class="reqn">V_m(N)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p>a character string or expression specifying a main title
+for the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend</code></td>
+<td>
+<p>optional vector of character strings or expressions,
+specifying labels for a legend box, which will be drawn in the lower
+right-hand corner of the screen.  If <code>legend</code> is given, its
+length must correspond to the number of VGCs in the plot.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lty, lwd, col</code></td>
+<td>
+<p>style vectors that can be used to override the
+global styles defined by <code>zipfR.par</code>.  If these vectors
+are specified, they must contain at least as many elements as there
+are VGCs in the plot: the values are <em>not</em> automatically
+recycled.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>By default, standard vocabulary growth curves are plotted for all
+specified <code>vgc</code> objects, i.e. graphs of <code class="reqn">V(N)</code> against
+<code class="reqn">N</code>.  If <code>m</code> is specified, growth curves for hapax legomena
+or other frequency classes are shown instead, i.e. graphs of
+<code class="reqn">V_m(N)</code> against <code class="reqn">N</code>.  In this case, all <code>vgc</code> objects
+must contain the necessary data for <code class="reqn">V_m(N)</code>.
+</p>
+<p>Alternatively, the option <code>add.m</code> can be used to display growth
+curves for one or more spectrum elements <em>in addition</em> to the
+standard VGCs.  These growth curves are plotted as thinner lines,
+otherwise matching the styles of the main curves.  Since such plots
+can become fairly confusing and there is no finer control over the
+styles of the additional curves, it is generally not recommended to
+make use of the <code>add.m</code> option.
+</p>
+<p>Confidence intervals are indicated for expected vocabulary growth
+curves with variance data, either by short vertical lines
+(<code>conf.style="ticks"</code>, the default) or by thin curves above and
+below the main growth curve (<code>conf.style="lines"</code>). The size of
+the confidence intervals is controlled by the <code>conf.level</code>
+parameter (default: 95%).  Set <code>conf.level=NA</code> in order to
+suppress the confidence interval indicators.
+</p>
+<p>In y-logarithmic plots, data points with <code class="reqn">V(N) = 0</code> or <code class="reqn">V_m(N)
+  = 0</code> are drawn outside the plot region (below the bottom margin)
+rather than skipped.
+</p>
+<p>Line and point styles can be defined globally with <code>zipfR.par</code>.
+They can be overridden locally with the optional parameters
+<code>lty</code>, <code>lwd</code> and <code>col</code>, but this should only be used
+when absolutely necessary.  In most cases, it is more advisable to
+change the global settings temporarily for a sequence of plots.
+</p>
+<p>The <code>bw</code> parameter is used to switch between B/W and color
+modes.  It can also be set globally with <code>zipfR.par</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>vgc</code>, <code>lnre</code>, <code>lnre.vgc</code>,
+<code>plot.tfl</code>, <code>plot.spc</code>, <code>zipfR.par</code>,
+<code>zipfR.plotutils</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load Our Mutual Friend spectrum and empirical vgc
+data(DickensOurMutualFriend.emp.vgc)
+data(DickensOurMutualFriend.spc)
+
+## plot empirical V and V1 growth
+plot(DickensOurMutualFriend.emp.vgc,add.m=1)
+
+## use log scale for y-axis
+plot(DickensOurMutualFriend.emp.vgc,add.m=1,log="y")
+
+## binomially interpolated vgc at same points as
+## empirical vgc
+omf.bin.vgc &lt;- vgc.interp(DickensOurMutualFriend.spc,N(DickensOurMutualFriend.emp.vgc))
+
+## compare empirical and interpolated vgc, also with
+## thinner lines, and in black and white
+plot(DickensOurMutualFriend.emp.vgc,omf.bin.vgc,legend=c("observed","interpolated"))
+plot(DickensOurMutualFriend.emp.vgc,omf.bin.vgc,legend=c("observed","interpolated"),lwd=c(1,1)) 
+plot(DickensOurMutualFriend.emp.vgc,omf.bin.vgc,legend=c("observed","interpolated"),bw=TRUE)
+
+
+## load Great Expectations spectrum and use it to
+## compute ZM model
+data(DickensGreatExpectations.spc)
+ge.zm &lt;- lnre("zm",DickensGreatExpectations.spc)
+
+## expected V of Great Expectations at sample
+## sizes of OMF's interpolated vgc
+ge.zm.vgc &lt;- lnre.vgc(ge.zm,N(omf.bin.vgc))
+
+## compare interpolated OMF Vs and inter/extra-polated
+## GE Vs, with a vertical line at sample size
+## used to compute GE model
+plot(omf.bin.vgc,ge.zm.vgc,N0=N(ge.zm),legend=c("OMF","GE"))
+
+
+## load Italian ultra- prefix data and compute zm model
+data(ItaUltra.spc)
+ultra.zm &lt;- lnre("zm",ItaUltra.spc)
+
+## compute vgc up to about twice the sample size
+## with variance of V
+ultra.zm.vgc &lt;- lnre.vgc(ultra.zm,(1:100)*70, variances=TRUE)
+
+## plot with confidence intervals derived from variance in
+## vgc (with larger datasets, ci will typically be almost
+## invisible)
+plot(ultra.zm.vgc)
+
+## use more conservative confidence level, and plot 
+## the intervals as lines
+plot(ultra.zm.vgc,conf.level=.99,conf.style="lines")
+
+## suppress ci plotting, and insert different title and labels
+plot(ultra.zm.vgc,conf.level=NA,main="ultra-",xlab="sample sizes",ylab="types")
+
+## load Brown adjective spectrum
+## (about 80k tokens) 
+data(BrownAdj.spc)
+
+## binomially interpolated curve of V and V_1 to V_5
+BrownAdj.bin.vgc &lt;- vgc.interp(BrownAdj.spc,(1:100)*800,m.max=5)
+
+## plot with V and 5 spectrum elements
+plot(BrownAdj.bin.vgc,add.m=c(1:5))
+
+## can pass list of VGCs in first argument with explicit call
+plot.vgc(lapply(EvertLuedeling2001, vec2vgc), 
+         xlim=c(0, 30000), ylim=c(0, 1200),
+         legend=names(EvertLuedeling2001))
+</code></pre>
+
+
+</div>

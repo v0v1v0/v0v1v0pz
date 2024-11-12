@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>deposit_stats</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fetch statistics from one or more Zenodo deposits</h2>
+
+<h3>Description</h3>
+
+<p>This function will fetch statistics from multiple deposits, respecting web crawling policies from Zenodo's 'robots.txt' file.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">deposit_stats(deposit_ids, all_versions_only = FALSE, progress = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>deposit_ids</code></td>
+<td>
+<p>vector. A vector of Zenodo deposit ids.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all_versions_only</code></td>
+<td>
+<p>logical. If <code>TRUE</code>, return only the results for all versions.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>progress</code></td>
+<td>
+<p>logical. Show a progress bar.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a tibble.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+deposit_stats(c(10013255, 10889682), all_versions_only = TRUE)
+
+</code></pre>
+
+
+</div>

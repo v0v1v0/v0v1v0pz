@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EventCoverage</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generation of Zeta Plot.</h2>
+
+<h3>Description</h3>
+
+<p>A zeta plot is generated from the input Z-score matrix. Zeta plot labels: x-axis: Z-score cutoffs, y-axis: the percentage of readouts that survived at a given Z-score cutoff over the total scored readouts. In order to generate this plot, the range of Z-scores is determined by ranking the absolute value of Zij (Z-score value in row i and column j) from the smallest to the largest. Z-cutoffs next are selected in the range of (-|Znxmx0.9999|, -2) to (2, |Znxmx0.9999|) to excluded the insignificant changes that may result from experimental noise( |Z| &lt; 2, which equals to p-value &gt;0.05). Then, for all Zij within the selected range (both positive range and negative range), the range is divided equally into x bins (the recommended input of x is 100). Thus, the percentage of readouts scored above the Z-cutoff in each bin is determined.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">EventCoverage(ZscoreVal, negGene, posGene, binNum, combine = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ZscoreVal</code></td>
+<td>
+<p>zscore value</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>negGene</code></td>
+<td>
+<p>negative control dataset, the siRNAs/genes used as negative controls in screening.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>posGene</code></td>
+<td>
+<p>positive control dataset, the siRNAs/genes used as positive controls in screening.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>binNum</code></td>
+<td>
+<p>bin number</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combine</code></td>
+<td>
+<p>combine two direction zeta together(TRUE or FALSE),default FALSE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of data.frames and plots, the data.frame includes 'ZseqList', 'EC_N_I', 'EC_N_D', 'EC_P_I' and 'EC_P_D'. The plot 'EC_jitter_D' and 'EC_jitter_I' are the zeta plot for positive and negative samples.'ZseqList', 'EC_N_I', 'EC_N_D', 'EC_P_I' and 'EC_P_D' are the inputfiles for zeta plot and SVM.R. ZseqList describs the bin size in the zeta plot.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yajing Hao, Shuyang Zhang, Junhui Li, Guofeng Zhao, Xiang-Dong Fu
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(countMat)
+data(negGene)
+data(posGene)
+ZscoreVal &lt;- Zscore(countMat,negGene)
+ECList &lt;- EventCoverage(ZscoreVal,negGene,posGene,binNum=100,combine=TRUE)
+
+</code></pre>
+
+
+</div>

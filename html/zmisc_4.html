@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ll_labelled</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a labelled variable</h2>
+
+<h3>Description</h3>
+
+<p>The labelled_light (ll) collection is a minimal implementation of core
+functions for creating and managing <code>haven_labelled</code> variables, and with
+minimal dependencies. These functions, prefixed with <code>ll_</code> rely only on base
+R, and operate only on objects of type <code>haven_labelled</code>. All functions check
+internally that the variables have the correct class and the correct
+structure for labelled variables, satisfying the (minimal) specification
+inherent in the parameter documentation of the <code>haven::labelled()</code> function.
+</p>
+<p>The constructor, <code>ll_labelled()</code>, creates a labelled variable satisfying that
+specification.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ll_labelled(x = double(), labels = NULL, label = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector to label. Must be either numeric (integer or double) or
+character.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p>A named vector or <code>NULL</code>. The vector should be the same type
+as <code>x</code>. Unlike factors, labels don't need to be exhaustive: only a fraction
+of the values might be labelled.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>A short, human-readable description of the vector.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A valid labelled variable.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other labelled light: 
+<code>ll_assert_labelled()</code>,
+<code>ll_to_character()</code>,
+<code>ll_val_labels()</code>,
+<code>ll_var_label()</code>,
+<code>threadbare()</code>
+</p>
+
+
+</div>

@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>carbonsoil.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The CarbonSoil model - calculate daily values over designated time period</h2>
+
+<h3>Description</h3>
+
+<p>Simple dynamic model of soil carbon content, with a time step of one year. The equations that describe the dynamics of this system are adapted from the Henin-Dupuis model described in Jones et al. (2004). The soil carbon content is represented by a single state variable: the mass of carbon per unit land area in the top 20 cm of soil in a given year (Z, kg.ha-1). It is assumed that soil C is known in some year, taken as the initial year. 
+The yearly change in soil C is the difference between input from crop biomass and loss.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">carbonsoil.model(R, b, U, Z1, duration)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>R</code></td>
+<td>
+<p>: the fraction of soil carbon content lost per year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>: the fraction of yearly crop biomass production left in the soil</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>U</code></td>
+<td>
+<p>: the amount of C in crop biomass production (constant or time series)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z1</code></td>
+<td>
+<p>: initial soil carbon content</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>duration</code></td>
+<td>
+<p>:  duration of simulation (year))</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Soil carbon years.
+</p>
+
+
+</div>

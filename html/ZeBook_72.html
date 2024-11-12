@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>watbal.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>WaterBalance model - calculate soil water over designated time period</h2>
+
+<h3>Description</h3>
+
+<p>WaterBalance model - calculate soil water over designated time period
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">watbal.model(param, weather, WP, FC, WAT0 = NA)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>: a vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weather</code></td>
+<td>
+<p>: weather data.frame for one single year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>WP</code></td>
+<td>
+<p>: Water content at wilting Point (cm^3.cm^-3)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FC</code></td>
+<td>
+<p>: Water content at field capacity (cm^3.cm^-3)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>WAT0</code></td>
+<td>
+<p>: Initial Water content (mm). If NA WAT0=z*FC</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with daily RAIN, ETR, Water at the beginning of the day (absolute : WAT, mm and relative value : WATp, -)
+</p>
+
+
+</div>

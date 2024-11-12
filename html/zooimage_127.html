@@ -1,0 +1,131 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zid</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Manage .zid files (ZooImage Data) </h2>
+
+<h3>Description</h3>
+
+<p>Compress, uncompress and verify ZooImage Data files.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zidCompress(zidir, type = c("ZI1", "ZI2", "ZI3", "ZI4", "ZI5"), check = TRUE,
+    check.vignettes = TRUE, replace = FALSE, delete.source = replace)
+zidCompressAll(path = ".", samples = NULL, type = c("ZI1", "ZI2", "ZI3", "ZI4", "ZI5"),
+    check = TRUE, check.vignettes = TRUE, replace = FALSE,
+    delete.source = replace)
+
+zidClean(path = ".", samples = NULL)
+zidDatMake(zidir, type = "ZI5", replace = FALSE)
+zidDatRead(zidfile)
+
+zidUncompress(zidfile, path = dirname(zidfile), delete.source = FALSE)
+zidUncompressAll(path = ".", zidfiles = zidList(path, full.names = TRUE),
+    path.extract = path, skip.existing.dirs = TRUE, delete.source = FALSE)
+
+zidVerify(zidir, type = c("ZI1", "ZI2", "ZI3", "ZI4", "ZI5"), check.vignettes = TRUE)
+zidVerifyAll(path = ".", samples = NULL, type = c("ZI1", "ZI2", "ZI3", "ZI4", "ZI5"),
+    check.vignettes = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zidir</code></td>
+<td>
+<p> a directory containing data to put in a .zid files. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p> the ZI file format, currently 'ZI1', 'ZI2', 'ZI3', 'ZI4', or 'ZI5' types are
+supported (ZooImage1-5). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check</code></td>
+<td>
+<p> do we check the files in this directory before/after compression? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check.vignettes</code></td>
+<td>
+<p> do we check if the future .zid file contains all vignettes? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replace</code></td>
+<td>
+<p> do we replace existing files? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delete.source</code></td>
+<td>
+<p> do we delete source files after compression? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p> (un)compress or verify all subdirectories (except those starting with '\_')
+in respective .zid files. Also, a place where to put uncompressed files (in the 'sample' subdirectory). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p> a list of 'samples', i.e., subdirectories to process. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zidfile</code></td>
+<td>
+<p> a .zid file to uncompress or read from. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zidfiles</code></td>
+<td>
+<p> a series of .zid files to uncompress. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path.extract</code></td>
+<td>
+<p> a place where to extract data from .zid files. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>skip.existing.dirs</code></td>
+<td>
+<p> do not unzip if the subdir already exists. </p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>zimMake</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">##TODO...
+</code></pre>
+
+
+</div>

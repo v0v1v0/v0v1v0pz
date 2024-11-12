@@ -1,0 +1,78 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>coredata</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Extracting/Replacing the Core Data of Objects</h2>
+
+<h3>Description</h3>
+
+<p>Generic functions for extracting the core data contained in
+a (more complex) object and replacing it.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">coredata(x, ...)
+coredata(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments passed to methods.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>a suitable value object for use with <code>x</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>In <code>zoo</code>, there are currently <code>coredata</code> methods for time series
+objects of class <code>"zoo"</code>, <code>"ts"</code>, <code>"its"</code>, <code>"irts"</code>, all of
+which strip off the index/time attributes and return only the observations.
+The are also corresponding replacement methods for these classes.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zoo</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">suppressWarnings(RNGversion("3.5.0"))
+set.seed(1)
+
+x.date &lt;- as.Date(paste(2003, rep(1:4, 4:1), seq(1,20,2), sep = "-"))
+x &lt;- zoo(matrix(rnorm(20), ncol = 2), x.date)
+
+## the full time series
+x
+## and only matrix of observations
+coredata(x)
+
+## change the observations
+coredata(x) &lt;- matrix(1:20, ncol = 2)
+x
+</code></pre>
+
+
+</div>

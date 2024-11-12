@@ -1,0 +1,464 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ztable_sub</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Exporting "data.frame" to an object of class "ztable"</h2>
+
+<h3>Description</h3>
+
+<p>Exporting "data.frame" to an object of class "ztable"
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ztable_sub(
+  x,
+  family = NULL,
+  size = 5,
+  color = getOption("ztable.color", "black"),
+  tablewidth = 0.3,
+  type = getOption("ztable.type", "latex"),
+  include.rownames = getOption("ztable.include.rownames", TRUE),
+  placement = "!hbtp",
+  position = "c",
+  show.heading = getOption("ztable.show.heading", TRUE),
+  show.footer = getOption("ztable.show.footer", TRUE),
+  caption = NULL,
+  caption.placement = getOption("ztable.caption.placement", "top"),
+  caption.position = getOption("ztable.caption.position", "c"),
+  caption.bold = getOption("ztable.caption.bold", FALSE),
+  align = NULL,
+  digits = NULL,
+  display = NULL,
+  sidewaystable = FALSE,
+  longtable = FALSE,
+  rotate = FALSE,
+  turn = FALSE,
+  angle = 0,
+  wraptable = FALSE,
+  wraptablewidth = 12,
+  tabular = FALSE,
+  label = NULL,
+  hline.after = NULL,
+  booktabs = getOption("ztable.booktabs", TRUE),
+  prefix.rows = NULL,
+  commands = NULL,
+  top.command = NULL,
+  zebra = getOption("ztable.zebra", NULL),
+  zebra.color = getOption("ztable.zebra.color", NULL),
+  zebra.type = getOption("ztable.zebra.type", 1),
+  zebra.colnames = getOption("ztable.zebra.colnames", FALSE),
+  zebra.rownames = getOption("ztable.zebra.rownames", TRUE),
+  zebra.list = NULL,
+  colnames.bold = getOption("ztable.colnames.bold", FALSE),
+  include.colnames = getOption("ztable.include.colnames", TRUE),
+  cgroup = NULL,
+  n.cgroup = NULL,
+  rgroup = NULL,
+  n.rgroup = NULL,
+  cspan.rgroup = NULL,
+  pcol = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>Font family. Default value is NULL. Possible value is one of the c("serif","times").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>An integer from 1 to 10 indicating font size= c("tiny","scriptsize",
+"footnotesize","small","normalsize","large","Large","LARGE","huge","Huge")
+respectively. Defaulting is 5(= "normalsize").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>color</code></td>
+<td>
+<p>A character indicating color of ztable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tablewidth</code></td>
+<td>
+<p>A numeric value indicating desired table width as a ratio to linewidth.
+This value is only useful when caption is longer than table length.
+Default value is 0.3.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>character indicating formats of ztable, either "html" or "latex".
+Default value is "latex"</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include.rownames</code></td>
+<td>
+<p>A logical value whether or not include rownames in the table
+Default value is TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>placement</code></td>
+<td>
+<p>The table will have placement given by placement where placement
+must be NULL or contain only elements of "h","t","b","p","!","H".
+Default value is "!hbtp".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>position</code></td>
+<td>
+<p>The table will be have placed at the center of the paper
+if position is "center" or "c", and at the left side of the paper
+if it equals "left" or "l", and at the right side of the paper
+if it equals "right" or "r". The position is translated to specific
+latex environments such as "flushright" or "flushleft" or "center"
+(provided as a character vector) will enclose the tabular environment.
+Default value is "center".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show.heading</code></td>
+<td>
+<p>A logical value whether or not include headings in the table.
+Default value is TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>show.footer</code></td>
+<td>
+<p>A logical value whether or not include headings in the table.
+Default value is TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption</code></td>
+<td>
+<p>A character</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption.placement</code></td>
+<td>
+<p>The caption will be have placed at the top of the table
+if caption.placement is "top" and at the bottom of the table
+if it equals "bottom". Default value is "top".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption.position</code></td>
+<td>
+<p>The caption will be have placed at the center of the table
+if caption.position is "center" or "c", and at the left side of the table
+if it equals "left" or "l", and at the right side of the table
+if it equals "right" or "r". Default value is "center".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caption.bold</code></td>
+<td>
+<p>whether or not use bold font for caption</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>align</code></td>
+<td>
+<p>Character vector : nchar equal to the number of columns of the
+resulting table indicating the alignment of the corresponding columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>digits</code></td>
+<td>
+<p>Numeric vector of length equal to one (in which case it will be
+replicated as necessary) or to the number of columns of the resulting table</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>display</code></td>
+<td>
+<p>Character vector of length equal to the number of columns of the
+resulting table indicating the format for the corresponding columns.
+Since the row names are printed in the first column, the length of display
+is one greater than ncol(x) if x is a data.frame. These values are passed
+to the formatC function. Use "d" (for integers), "f", "e", "E", "g", "G",
+"fg" (for reals), or "s" (for strings). "f" gives numbers in the usual
+xxx.xxx format; "e" and "E" give n.ddde+nn or n.dddE+nn (scientific format);
+"g" and "G" put x[i] into scientific format only if it saves space to do so.
+"fg" uses fixed format as "f", but digits as number of significant digits.
+Note that this can lead to quite long result strings. Default value is NULL.
+the class of x.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sidewaystable</code></td>
+<td>
+<p>Logical value whether or not set the tabular environment=
+"sidewaystable". Requires Latex "rotating" package in preamble.
+Default value is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>longtable</code></td>
+<td>
+<p>Logical value whether or not set the tabular environment=
+"longtable". Requires Latex "longtable" package in preamble.
+Default value is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rotate</code></td>
+<td>
+<p>Logical value whether or not set the tabular environment=
+"rotate". No special arrangement is made to find space for the result.
+Requires Latex "rotating" package in preamble.
+If TRUE, requires the rotate angle(counterclockwise).
+Default value is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>turn</code></td>
+<td>
+<p>Logical value whether or not set the tabular environment=
+"turn". In this environment, Latex leaves space for the rotated table.
+Requires Latex "rotating" package in preamble.
+If TRUE, requires the rotate angle.
+Default value is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>angle</code></td>
+<td>
+<p>An integer indicate the angle to rotate(degree); range -180 to 180.
+Default value is 0.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wraptable</code></td>
+<td>
+<p>Logical value whether or not set the tabular environment=
+"wraptable". Requires Latex "wrapfig" package in preamble.
+Default value is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wraptablewidth</code></td>
+<td>
+<p>A integer indicate wraptable width in centimeter. Default=12.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tabular</code></td>
+<td>
+<p>Logical value whether or not set the tabular environment.
+If TRUE, no tabular environment is set. Default value is FALSE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Character vector of length 1 containing the LaTeX label or HTML anchor.
+Set to NULL to suppress the label. Default value is NULL.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hline.after</code></td>
+<td>
+<p>A vector of numbers between -1 and "nrow(x)", inclusive,
+indicating the rows after which a horizontal line should appear.
+If NULL is used no lines are produced. Default value is c(-1,0,nrow(x))
+which means draw a line before and after the columns names and at the
+end of the table. Repeated values are allowed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>booktabs</code></td>
+<td>
+<p>Logical value. If TRUE, the toprule, midrule and bottomrule tags
+from the LaTex "booktabs" package are used rather than hline for the
+horizontal line tags. Requires Latex "booktabs" package in preamble.
+Default value is TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix.rows</code></td>
+<td>
+<p>A numeric vector contains the position of rows on which
+extra Latex commands should be added as a prefix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>commands</code></td>
+<td>
+<p>A character vector of the length 1 or same length of the nrow of
+data.frame which contains the command that should be added as a prefix at
+the specified rows. Default value is NULL, i.e. do not add commands.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>top.command</code></td>
+<td>
+<p>A character vector of the length 1 which contains the command
+that should be added as a prefix at the colnames row.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra</code></td>
+<td>
+<p>Null or an integer of 0 or 1 or 2 or 3. The arguments zebra and zebra.color are
+used to make a Zebra striping table(table with alternating background colors)
+easily. A value of 1 sets background color of all odd rows/columns with specified with
+zebra.color. A value of 2 sets all even rows/columns. A value of 0 sets
+background colors of all rows/columns with colors specified with zebra.color.
+When zebra is 1 or 2, the parameters of prefix.rows and commands ignored.
+When zebra=3, the background colors can be defined by addRowColor, addColColor
+and addCellColor functions.
+Default is NULL.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.color</code></td>
+<td>
+<p>A color name or a numeric value indicating pre-defined color.
+When parameter zebra is 0 or 1 or 2 and zebra.color is NULL, then zebra.color
+is set to "platinum". Numeric values between 1 to 13 is converted to
+predefined color names. The predefined color names are c("peach","peach-orange",
+"peachpuff","peach-yellow","pear","pearl","peridot","periwinkle","pastelred",
+"pastelgray"). Default is NULL.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.type</code></td>
+<td>
+<p>An integer of 0 or 1 or 2 or 3. A value of 1 sets background colors by row.
+A value of 2 sets background colors by column. A value of 0 sets background colors of all cells.
+A value of 3 sets background colors of cells specified with zebra.list.
+Default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.colnames</code></td>
+<td>
+<p>whether or not use background colors in column names row,
+Default value is FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.rownames</code></td>
+<td>
+<p>whether or not use background colors in row names column,
+Default value is TRUE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.list</code></td>
+<td>
+<p>A list consists of y,x,color. zebra.list is used only when zebra.type=3.
+zebra.list sets the cells specified with rows of vector "y" and columns of vector "x" with "color".
+The y and x are integer vector indicating rows and columns. NA value of y or x indicating all columns or rows.
+The color is an character vector consists of names of color.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>colnames.bold</code></td>
+<td>
+<p>whether or not use bold font for column names, Default value is FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include.colnames</code></td>
+<td>
+<p>Logical. If TRUE the column names is printed. Default value is TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cgroup</code></td>
+<td>
+<p>A character vector or matrix indicating names of column group. Default value is NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.cgroup</code></td>
+<td>
+<p>A integer vector or matrix indicating the numbers of columns included in each cgroup
+Default value is NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rgroup</code></td>
+<td>
+<p>A character vector indicating names of row group. Default value is NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.rgroup</code></td>
+<td>
+<p>A integer vector indicating the numbers of rows included in each rgroup
+Default value is NULL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cspan.rgroup</code></td>
+<td>
+<p>The number of columns that an rgroup should span. It spans by default all
+columns but you may want to limit this if you have column colors that you want to retain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pcol</code></td>
+<td>
+<p>number of column displaying p value</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">require(ztable)
+x=head(iris)
+ztable(x)
+## Not run: 
+ztable(x,size=3,caption="Table 1. ztable Test")
+ztable(x,size=7,caption="Table 1. ztable Test",caption.position="l")
+ztable(x,size=7,caption="Table 1. ztable Test",caption.placement="bottom",
+      caption.position="l")
+fit=lm(mpg~.,data=mtcars)
+ztable(fit)
+data(USArrests)
+pr1 &lt;- prcomp(USArrests)
+ztable(pr1)
+ztable(summary(pr1))
+require(survival)
+data(colon)
+attach(colon)
+out &lt;- glm(status ~ rx+obstruct+adhere+nodes+extent, data=colon, family=binomial)
+ztable(out)
+colon$TS = Surv(time,status==1)
+out1=coxph(TS~rx+obstruct+adhere+differ+extent+surg+node4,data=colon)
+ztable(out1)
+ztable(head(mtcars),zebra=1)
+ztable(head(mtcars),zebra=1,zebra.type=2)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>flush_compressor_buffer</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Flush the internal buffer of the compressor object.</h2>
+
+<h3>Description</h3>
+
+<p>This function flushes the internal buffer according to the specified mode.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">flush_compressor_buffer(compressorPtr, mode = 4L)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>compressorPtr</code></td>
+<td>
+<p>A SEXP pointer to an existing compressor object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mode</code></td>
+<td>
+<p>A compression flush mode. Default is Z_FINISH.
+Available modes are Z_NO_FLUSH, Z_PARTIAL_FLUSH, Z_SYNC_FLUSH, Z_FULL_FLUSH, Z_BLOCK, and Z_FINISH.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A raw vector containing the flushed output.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">compressor &lt;- create_compressor()
+# ... (some compression actions)
+flushed_data &lt;- flush_compressor_buffer(compressor)
+</code></pre>
+
+
+</div>

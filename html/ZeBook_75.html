@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>watbal.update</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>WaterBalance model - calculate change in soil water for one day</h2>
+
+<h3>Description</h3>
+
+<p>WaterBalance model - calculate change in soil water for one day
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">watbal.update(WAT0, RAIN, ETr, param, WP, FC)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>WAT0</code></td>
+<td>
+<p>: Water at the beginning of the day (mm).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>RAIN</code></td>
+<td>
+<p>: Rainfall of day (mm)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ETr</code></td>
+<td>
+<p>: Evapotranspiration of day (mm)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>: a vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>WP</code></td>
+<td>
+<p>: Water content at wilting Point (cm^3.cm^-3)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FC</code></td>
+<td>
+<p>: Water content at field capacity (cm^3.cm^-3)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>WAT1 : Water at the beginning of the day+1 (mm).
+</p>
+
+
+</div>

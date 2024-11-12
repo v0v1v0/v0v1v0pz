@@ -1,0 +1,108 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spc2tfl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert Between Frequency Spectra and Type Frequency Lists (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>tfl2spc</code> computes an observed frequency spectrum from a type
+frequency list, while <code>spc2tfl</code> reconstructs the type frequency
+list underlying a frequency spectrum (but without type
+representations).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  tfl2spc(tfl)
+
+  spc2tfl(spc)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>tfl</code></td>
+<td>
+<p>an object of class <code>tfl</code>, representing a type
+frequency list</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spc</code></td>
+<td>
+<p>an object of class <code>spc</code>, representing a frequency
+spectrum</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The current implementation of these functions does not support
+incomplete type frequency lists and frequency spectra.
+</p>
+<p><code>spc2tfl</code> can only convert frequency spectra where all class
+sizes are integers.  For this reason, expected frequency spectra
+(including all spectra with variance data) are not supported.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For <code>tfl2spc</code>, an object of class <code>spc</code> representing the
+frequency spectrum corresponding to the type frequency list <code>tfl</code>.
+</p>
+<p>For <code>spc2tfl</code>, an object of class <code>tfl</code> representing type
+frequency list underlying the observed frequency spectrum <code>tfl</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>spc</code> for more information about <code>spc</code> objects and
+links to relevant functions; <code>tfl</code> for more information
+about <code>tfl</code> objects and links to relevant functions
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Brown tfl and spc
+data(Brown.tfl)
+data(Brown.spc)
+
+
+## a spectrum from a tfl
+Brown.spc2 &lt;- tfl2spc(Brown.tfl)
+
+## identical to Brown.spc:
+summary(Brown.spc)
+summary(Brown.spc2)
+
+tail(Brown.spc)
+tail(Brown.spc2)
+
+
+## a tfl from a spectrum
+Brown.tfl2 &lt;- spc2tfl(Brown.spc)
+
+## same frequency information as Brown.tfl
+## but with different ids and no type labels
+summary(Brown.tfl)
+summary(Brown.tfl2)
+
+print(Brown.tfl2)
+print(Brown.tfl)
+
+</code></pre>
+
+
+</div>

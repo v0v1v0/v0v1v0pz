@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>reference_limits</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate Reference Limits</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the lower and upper reference limit for given probabilities.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">reference_limits(x, probs = c(0.025, 0.975), na.rm = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>numeric</code>, laboratory values</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probs</code></td>
+<td>
+<p><code>numeric</code>, probabilities of the lower and upper reference limit,
+default: <code>c(0.025, 0.975)</code> (spanning 95 %).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p><code>logical</code>, if <code>TRUE</code> (default) <code>NA</code> values are removed before
+the reference limits are calculated.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>numeric</code> of length 2 with the lower and upper limit.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Sebastian Gibb
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">reference_limits(1:10)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfpssVariance</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variance of the Zipf-PSS distribution.</h2>
+
+<h3>Description</h3>
+
+<p>Computes the variance of the Zipf-PSS distribution for given values of parameters
+<code class="reqn">\alpha</code> and <code class="reqn">\lambda</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zipfpssVariance(alpha, lambda, isTruncated = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 3</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Value of the <code class="reqn">\lambda</code> parameter (<code class="reqn">\lambda &gt; 0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>isTruncated</code></td>
+<td>
+<p>Logical; if TRUE Use the zero-truncated version of the distribution to calculate the expected value (default = FALSE).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The variance of the Zipf-PSS distribution only exists for <code class="reqn">\alpha</code> values strictly greater than 3.
+The value is obtained from the <em>law of total variance</em> that says that: </p>
+<p style="text-align: center;"><code class="reqn">Var[Y] = E[N]\, Var[X] + E[X]^2 \, Var[N],</code>
+</p>
+
+<p>where X follows a Zipf distribution with parameter <code class="reqn">\alpha</code>, and N follows a Poisson distribution with
+parameter <code class="reqn">\lambda</code>. From where one has that:
+</p>
+<p style="text-align: center;"><code class="reqn">Var[Y] = \lambda\, \frac{\zeta(\alpha - 2)}{\zeta(\alpha)}</code>
+</p>
+
+<p>Particularlly, if one is working with the zero-truncated version of the Zipf-PSS distribution.
+This values is computed as:
+</p>
+<p style="text-align: center;"><code class="reqn">Var[Y^{ZT}] = \frac{\lambda\, \zeta(\alpha)\, \zeta(\alpha - 2)\, (1 - e^{-\lambda}) - \lambda^2 \, \zeta(\alpha - 1)^2 \, e^{-\lambda}}{\zeta(\alpha)^2 \, (1 - e^{-\lambda})^2}</code>
+</p>
+
+
+
+<h3>Value</h3>
+
+<p>A positive real value corresponding to the variance of the distribution.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Sarabia Alegría, JM. and Gómez Déniz, E. and Vázquez Polo, F. Estadística actuarial: teoría y aplicaciones. Pearson Prentice Hall.
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zipfpssVariance(4.5, 2.3)
+zipfpssVariance(4.5, 2.3, TRUE)
+</code></pre>
+
+
+</div>

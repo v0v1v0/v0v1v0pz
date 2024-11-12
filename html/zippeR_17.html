@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_validate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Validate ZIP Code or ZCTA Vector</h2>
+
+<h3>Description</h3>
+
+<p>This function validates vectors of ZIP Code or ZCTA values. It
+is used internally throughout <code>zippeR</code> for data validation, but
+is exported to facilitate troubleshooting.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_validate(x, style = "zcta5", verbose = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector containing ZIP or ZCTA values to be validated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>style</code></td>
+<td>
+<p>A character scalar - either <code>"zcta5"</code> (default) or
+<code>"zcta3"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>A logical scalar; if <code>FALSE</code> (default), an overall
+evaluation will be returned. If <code>TRUE</code>, a <code>tibble</code> object
+listing validation criteria and results will be returned.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>zi_validate()</code> function checks for four conditions:
+</p>
+
+<ul>
+<li>
+<p>Is the input vector character data? This is important because of USPS's
+use of leading zeros in ZIP codes and ZCTAs.
+</p>
+</li>
+<li>
+<p>Are all values five characters (if <code>style = "zcta5"</code>, the default),
+or three characters (if <code>style = "zcta3"</code>)?
+</p>
+</li>
+<li>
+<p>Are any input values over five characters (if <code>style = "zcta5"</code>,
+the default), or three characters (if <code>style = "zcta3"</code>)?
+</p>
+</li>
+<li>
+<p>Do any input values have non-numeric characters?
+</p>
+</li>
+</ul>
+<p>The questions provide a basis for repairing issues identified with
+<code>zi_repair()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Either a logical value (if <code>verbose = FALSE</code>) or a <code>tibble</code>
+containing validation criteria and results.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># sample five-digit ZIPs
+zips &lt;- c("63088", "63108", "63139")
+
+# successful validation
+zi_validate(zips)
+
+# sample five-digit ZIPs in data frame
+zips &lt;- data.frame(id = c(1:3), ZIP = c("63139", "63108", "00501"), stringsAsFactors = FALSE)
+
+# successful validation
+zi_validate(zips$ZIP)
+
+# sample five-digit ZIPs with character
+zips &lt;- c("63088", "63108", "zip")
+
+# failed validation
+zi_validate(zips)
+zi_validate(zips, verbose = TRUE)
+
+</code></pre>
+
+
+</div>

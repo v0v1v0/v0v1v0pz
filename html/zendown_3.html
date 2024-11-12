@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>download_deposit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Download files from a Zenodo deposit</h2>
+
+<h3>Description</h3>
+
+<p>Download files from a Zenodo deposit
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">download_deposit(list_deposit, file_name = NULL, dest, quiet = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>list_deposit</code></td>
+<td>
+<p>data.frame or tibble. Obtained with list_deposit.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file_name</code></td>
+<td>
+<p>character. If <code>NULL</code>, all files from the file list. If a file name is specified, only this file will be downloaded.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dest</code></td>
+<td>
+<p>character. Destination folder.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>logical. Show download info and progress bar.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>No return value. The function downloads files to the specified destination.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+res &lt;- list_deposit(deposit_id = 10959197)
+temp_dir &lt;- tempdir()
+download_deposit(list_deposit = res, dest = temp_dir, quiet = FALSE)
+file.exists(file.path(temp_dir, "iris.rds"))
+file.exists(file.path(temp_dir, "mtcars.rds"))
+
+</code></pre>
+
+
+</div>

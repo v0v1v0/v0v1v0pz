@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getInitialValues</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculates initial values for the parameters of the models.</h2>
+
+<h3>Description</h3>
+
+<p>The selection of appropiate initial values to compute the maximum likelihood estimations
+reduces the number of iterations which in turn, reduces the computation time.
+The initial values proposed by this function are computed using the first two empirical
+frequencies.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getInitialValues(data, model = "zipf")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Matrix of count data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>Specify the model that requests the initial values (default='zipf').</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The argument <code>data</code> is a two column matrix with the first column containing the observations and
+the second column containing their frequencies. The argument <code>model</code> refers to the selected model of those
+implemented in the package. The possible values are: <em>zipf</em>, <em>moezipf</em>, <em>zipfpe</em>,
+<em>zipfpss</em> or its zero truncated version <em>zt_zipfpss</em>. By default, the selected model is the Zipf one.
+</p>
+<p>For the MOEZipf, the Zipf-PE and the zero truncated Zipf-PSS models that contain the Zipf model as
+a particular case, the <code class="reqn">\beta</code> value will correspond to the one of the Zipf model (i.e. <code class="reqn">\beta = 1</code> for the MOEZipf,
+<code class="reqn">\beta = 0</code> for the Zipf-PE and <code class="reqn">\lambda = 0</code> for the zero truncated Zipf-PSS model) and the initial value for <code class="reqn">\alpha</code>
+is set to be equal to:
+</p>
+<p style="text-align: center;"><code class="reqn">\alpha_0 = log_2 \big (\frac{f_r(1)}{f_r(2)} \big),</code>
+</p>
+
+<p>where <code class="reqn">f_r(1)</code> and <code class="reqn">f_r(2)</code> are the empirical relative frequencies of one and two.
+This value is obtained equating the two empirical probabilities to their theoritical ones.
+</p>
+<p>For the case of the Zipf-PSS the proposed initial values are obtained equating the empirical probability of zero
+to the theoretical one which gives:
+</p>
+<p style="text-align: center;"><code class="reqn">\lambda_0 = -log(f_r(0)),</code>
+</p>
+
+<p>where <code class="reqn">f_r(0)</code> is the empirical relative frequency of zero. The initial value of <code class="reqn">\alpha</code> is obtained
+equating the ratio of the theoretical probabilities at zero and one to the empirical ones. This gives place to:
+</p>
+<p style="text-align: center;"><code class="reqn">\alpha_0 = \zeta^{-1}(\lambda_0 * f_r(0)/f_r(1)),</code>
+</p>
+
+<p>where <code class="reqn">f_r(0)</code> and <code class="reqn">f_r(1)</code> are the empirical relative frequencies associated to the values 0 and 1 respectively.
+The inverse of the Riemman Zeta function is obtained using the <code>optim</code> routine.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns the initial values of the parameters for a given distribution.
+</p>
+
+
+<h3>References</h3>
+
+<p> Güney, Y., Tuaç, Y., &amp; Arslan, O. (2016). Marshall–Olkin distribution: parameter estimation and
+application to cancer data. Journal of Applied Statistics, 1-13.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data &lt;- rmoezipf(100, 2.5, 1.3)
+data &lt;- as.data.frame(table(data))
+data[,1] &lt;- as.numeric(levels(data[,1])[data[,1]])
+initials &lt;- getInitialValues(data, model='zipf')
+</code></pre>
+
+
+</div>

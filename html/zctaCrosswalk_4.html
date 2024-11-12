@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_zcta_metadata</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return metadata on a ZCTA</h2>
+
+<h3>Description</h3>
+
+<p>Given a vector of ZIP Code Tabulation Areas (ZCTAs), return what
+state and county they are in. NOTE: A single ZCTA can span multiple
+states and counties.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_zcta_metadata(zctas)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zctas</code></td>
+<td>
+<p>A vector of ZCTAs (character or numeric)</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A tibble, where each row is a (zcta, county, state) combination.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">get_zcta_metadata("90210")
+
+# Some ZCTAs span multiple counties
+get_zcta_metadata(39573)
+</code></pre>
+
+
+</div>

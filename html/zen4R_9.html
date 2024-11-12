@@ -1,0 +1,329 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zen4RLogger</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>zen4RLogger</h2>
+
+<h3>Description</h3>
+
+<p>zen4RLogger
+</p>
+<p>zen4RLogger
+</p>
+
+
+<h3>Format</h3>
+
+<p><code>R6Class</code> object.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Object of <code>R6Class</code> for modelling a simple logger
+</p>
+
+
+<h3>Public fields</h3>
+
+<div class="r6-fields">
+
+<dl>
+<dt><code>verbose.info</code></dt>
+<dd>
+<p>logger info status</p>
+</dd>
+<dt><code>verbose.debug</code></dt>
+<dd>
+<p>logger debug status</p>
+</dd>
+<dt><code>loggerType</code></dt>
+<dd>
+<p>Logger type, either "INFO", "DEBUG" or NULL (if no logger)</p>
+</dd>
+</dl>
+</div>
+
+
+<h3>Methods</h3>
+
+
+
+<h4>Public methods</h4>
+
+
+<ul>
+<li> <p><a href="#method-zen4RLogger-logger"><code>zen4RLogger$logger()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-zen4RLogger-INFO"><code>zen4RLogger$INFO()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-zen4RLogger-WARN"><code>zen4RLogger$WARN()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-zen4RLogger-ERROR"><code>zen4RLogger$ERROR()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-zen4RLogger-new"><code>zen4RLogger$new()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-zen4RLogger-getClassName"><code>zen4RLogger$getClassName()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-zen4RLogger-getClass"><code>zen4RLogger$getClass()</code></a>
+</p>
+</li>
+<li> <p><a href="#method-zen4RLogger-clone"><code>zen4RLogger$clone()</code></a>
+</p>
+</li>
+</ul>
+<hr>
+<a id="method-zen4RLogger-logger"></a>
+
+
+
+<h4>Method <code>logger()</code>
+</h4>
+
+<p>internal logger function for the Zenodo manager
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$logger(type, text)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>type</code></dt>
+<dd>
+<p>logger message type, "INFO", "WARN", or "ERROR"</p>
+</dd>
+<dt><code>text</code></dt>
+<dd>
+<p>log message</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-zen4RLogger-INFO"></a>
+
+
+
+<h4>Method <code>INFO()</code>
+</h4>
+
+<p>internal INFO logger function
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$INFO(text)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>text</code></dt>
+<dd>
+<p>log message</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-zen4RLogger-WARN"></a>
+
+
+
+<h4>Method <code>WARN()</code>
+</h4>
+
+<p>internal WARN logger function
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$WARN(text)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>text</code></dt>
+<dd>
+<p>log message</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-zen4RLogger-ERROR"></a>
+
+
+
+<h4>Method <code>ERROR()</code>
+</h4>
+
+<p>internal ERROR logger function
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$ERROR(text)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>text</code></dt>
+<dd>
+<p>log message</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-zen4RLogger-new"></a>
+
+
+
+<h4>Method <code>new()</code>
+</h4>
+
+<p>initialize the Zenodo logger
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$new(logger = NULL)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>logger</code></dt>
+<dd>
+<p>logger type NULL, 'INFO', or 'DEBUG'</p>
+</dd>
+</dl>
+</div>
+
+
+<hr>
+<a id="method-zen4RLogger-getClassName"></a>
+
+
+
+<h4>Method <code>getClassName()</code>
+</h4>
+
+<p>Get object class name
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$getClassName()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the class name, object of class <code>character</code>
+</p>
+
+
+<hr>
+<a id="method-zen4RLogger-getClass"></a>
+
+
+
+<h4>Method <code>getClass()</code>
+</h4>
+
+<p>Get object class
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$getClass()</pre></div>
+
+
+
+<h5>Returns</h5>
+
+<p>the class, object of class <code>R6</code>
+</p>
+
+
+<hr>
+<a id="method-zen4RLogger-clone"></a>
+
+
+
+<h4>Method <code>clone()</code>
+</h4>
+
+<p>The objects of this class are cloneable with this method.
+</p>
+
+
+<h5>Usage</h5>
+
+<div class="r"><pre>zen4RLogger$clone(deep = FALSE)</pre></div>
+
+
+
+<h5>Arguments</h5>
+
+<div class="arguments">
+
+<dl>
+<dt><code>deep</code></dt>
+<dd>
+<p>Whether to make a deep clone.</p>
+</dd>
+</dl>
+</div>
+
+
+
+
+<h3>Note</h3>
+
+<p>Logger class used internally by zen4R
+</p>
+
+
+</div>

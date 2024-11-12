@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>str_jnormalize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converts characters following the rules of 'neologd'</h2>
+
+<h3>Description</h3>
+
+<p>Converts characters following the rules of 'neologd'
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">str_jnormalize(str)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>str</code></td>
+<td>
+<p>Input vector.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Converts the characters into normalized style
+basing on rules that is recommended by the Neologism dictionary for MeCab.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a character
+</p>
+
+
+<h3>See Also</h3>
+
+<p><a href="https://github.com/neologd/mecab-ipadic-neologd/wiki/Regexp.ja">https://github.com/neologd/mecab-ipadic-neologd/wiki/Regexp.ja</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">str_jnormalize(
+  paste0(
+    "    \uff30",
+    "\uff32\uff2d\uff2c\u300    \u526f    \u8aad    \u672c      "
+  )
+)
+str_jnormalize(
+  paste0(
+    "\u5357\u30a2\u30eb\u30d7\u30b9\u306e\u3000\u5929\u7136\u6c34",
+    "-\u3000\uff33\uff50\uff41\uff52\uff4b\uff49\uff4e\uff47\u3000",
+    "\uff2c\uff45\uff4d\uff4f\uff4e\u3000\u30ec\u30e2\u30f3\u4e00\u7d5e\u308a"
+ )
+)
+</code></pre>
+
+
+</div>

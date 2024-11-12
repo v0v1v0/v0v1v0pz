@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>cwt_spectrogram</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Computes a spectrogram using CWT</h2>
+
+<h3>Description</h3>
+
+<p>A port of Continuous Wavelet transform to <code>rethomics</code>.
+This function is intended to be used as an argument in the spectrogram wrapper.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">cwt_spectrogram(x, period_range = c(hours(1), hours(32)),
+  sampling_rate = 1/mins(1), resolution = 1/64,
+  summary_time_window = mins(30))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>numeric vector</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>period_range</code></td>
+<td>
+<p>vector of size 2 defining minimal and maximal range of period to study (in seconds)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampling_rate</code></td>
+<td>
+<p>the – implicitly regular – sampling rate of x (in hertz)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>resolution</code></td>
+<td>
+<p>the period resolution of the CWT (i.e. the number of suboctaves)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>summary_time_window</code></td>
+<td>
+<p>the sampling period after post-processing.
+Values of power are avegraged over this time window, for each period.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+
+<ul>
+<li> <p>spectrogram – to apply this fucntion to all indivvidual, with some preprocessing.
+</p>
+</li>
+<li> <p>WaveletComp::analyze.wavelet – the orginal function for <code>cwt_spectrogram</code>
+</p>
+</li>
+</ul>
+</div>

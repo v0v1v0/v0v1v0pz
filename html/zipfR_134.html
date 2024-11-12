@@ -1,0 +1,163 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>N-V-Vm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Access Methods for Observed Frequency Data (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>N</code>, <code>V</code> and <code>Vm</code> are generic methods that can (and
+should) be used to access observed frequency data for objects of class
+<code>tfl</code>, <code>spc</code>, <code>vgc</code> and <code>lnre</code>.  The precise
+behaviour of the functions depends on the class of the object, but in
+general <code>N</code> returns the sample size, <code>V</code> the vocabulary
+size, and <code>Vm</code> one or more selected elements of the frequency
+spectrum.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  N(obj, ...)
+  V(obj, ...)
+  Vm(obj, m, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>tfl</code> (type frequency list),
+<code>spc</code> (frequency spectrum), <code>vgc</code> (vocabulary growth
+curve) or <code>lnre</code> (LNRE model)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>positive integer value determining the frequency class
+<code class="reqn">m</code> to be returned (or a vector of such values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on to the method implementation
+(see respective manpages for details)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>For <code>tfl</code> and <code>vgc</code> objects, the <code>Vm</code> method allows
+only a single value <code>m</code> to be specified.
+</p>
+
+
+<h3>Value</h3>
+
+<p>For a frequency spectrum (class <code>spc</code>), <code>N</code> returns the
+sample size, <code>V</code> returns the vocabulary size, and <code>Vm</code>
+returns individual spectrum elements.  
+</p>
+<p>For a type frequency list (class <code>tfl</code>), <code>N</code> returns the
+sample size and <code>V</code> returns the vocabulary size corresponding to
+the list.  <code>Vm</code> returns a single spectrum element from the
+corresponding frequency spectrum, and may only be called with a single
+value <code>m</code>.
+</p>
+<p>For a vocabulary growth curve (class <code>vgc</code>), <code>N</code> returns the
+vector of sample sizes and <code>V</code> the vector of vocabulary sizes.
+<code>Vm</code> may only be called with a single value <code>m</code> and returns
+the corresponding vector from the <code>vgc</code> object (if present).
+</p>
+<p>For a LNRE model (class <code>lnre</code>) estimated from an observed
+frequency spectrum, the methods <code>N</code>, <code>V</code> and <code>Vm</code>
+return information about this frequency spectrum.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>For details on the implementations of these methods, see
+<code>N.tfl</code>, <code>N.spc</code>, <code>N.vgc</code>, etc.
+When applied to an LNRE model, the methods return information about
+the observed frequency spectrum from which the model was estimated, so
+the manpages for <code>N.spc</code> are relevant in this case.
+</p>
+<p>Expected vocabulary size and frequency spectrum for a sample of size
+<code class="reqn">N</code> according to a LNRE model can be computed with the analogous
+methods <code>EV</code> and <code>EVm</code>.  The corresponding
+variances are obtained with the <code>VV</code> and <code>VVm</code>
+methods, which can also be applied to expected or interpolated
+frequency spectra and vocabulary growth curves.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## load Brown spc and tfl
+data(Brown.spc)
+data(Brown.tfl)
+
+## you can extract N, V and Vm (for a specific m)
+## from either structure
+N(Brown.spc)
+N(Brown.tfl)
+
+V(Brown.spc)
+V(Brown.tfl)
+
+Vm(Brown.spc,1)
+Vm(Brown.tfl,1)
+
+## you can extract the same info also from a lnre model estimated
+## from these data (NB: these are the observed quantities; for the
+## expected values predicted by the model use EV and EVm instead!)
+model &lt;- lnre("gigp",Brown.spc)
+N(model)
+V(model)
+Vm(model,1)
+
+## Baayen's P:
+Vm(Brown.spc,1)/N(Brown.spc)
+
+## when input is a spectrum (and only then) you can specify a vector
+## of m's; e.g., to obtain class sizes of first 5 spectrum elements
+## you can write:
+Vm(Brown.spc,1:5)
+
+## the Brown vgc
+data(Brown.emp.vgc)
+
+## with a vgc as input, N, V and Vm return vectors of the respective
+## values for each sample size listed in the vgc
+Ns &lt;- N(Brown.emp.vgc)
+Vs &lt;- V(Brown.emp.vgc)
+V1s &lt;- Vm(Brown.emp.vgc,1)
+
+head(Ns)
+head(Vs)
+head(V1s)
+
+## since the last sample size in Brown.emp.vgc
+## corresponds to the full Brown, the last elements
+## of the Ns, Vs and V1s vectors are the same as
+## the quantities extracted from the spectrum and
+## tfl:
+Ns[length(Ns)]
+Vs[length(Vs)]
+V1s[length(V1s)]
+
+</code></pre>
+
+
+</div>

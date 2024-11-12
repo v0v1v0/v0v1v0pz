@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zip</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Zip and unzip raw .tif images for ZooImage and embed metadata </h2>
+
+<h3>Description</h3>
+
+<p>Perform simple zip/unzip operations on images. Corresponding metadata
+from .zim files are embedded as zip comments.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zipImg(imagefile, zimfile = NULL, check.zim = TRUE, replace = FALSE,
+    delete.source = FALSE)
+zipImgAll(path = ".", images = NULL, check.zim = TRUE, replace = FALSE,
+    delete.source = FALSE)
+unzipImg(zipfile, replace = FALSE, delete.source = FALSE)
+unzipImgAll(path = ".", zipfiles = NULL, replace = FALSE,
+    delete.source = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>imagefile</code></td>
+<td>
+<p> file path of the .tif image to compress. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zimfile</code></td>
+<td>
+<p> file path of the corresponding .zim file (calculated
+automatically if <code>NULL</code>, by default). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check.zim</code></td>
+<td>
+<p> do we verify the .zim file before zipping data? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replace</code></td>
+<td>
+<p> do we replace existing .zip files? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delete.source</code></td>
+<td>
+<p> should the original .tif file be deleted (the .zim file
+is never deleted)? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p> directory where .tif images to be zipped are located. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>images</code></td>
+<td>
+<p> a list of .tif images to zip. If <code>NULL</code>, the list of all
+.tif images present in <code>path</code> is computed. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zipfile</code></td>
+<td>
+<p> a zipfile to unzip. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zipfiles</code></td>
+<td>
+<p> a list of zipfiles to unzip. If <code>NULL</code>, a list of all
+.zip files found is <code>path</code> is calculated. </p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>All these functions are designed to be run in batch mode. Problems are
+reported as warnings, and the function always returns <code>TRUE</code> or
+<code>FALSE</code>, depending if the process succeeds or fails. The <code>xxxAll()</code>
+functions are convenient wrapper around <code>batch()</code> to process several
+items in a row. Take care that, despite the functions possibly use internal
+R code to zip or unzip files, they still need the zip and unzip programs
+for injecting and extracting .zim files metadata in the .zip archive!
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+<p><code>zipNoteAdd</code>, <code>zipNoteGet</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Create a fake example of two .tif images and their associated .zim files
+testdir &lt;- file.path(tempdir(), "ziptest")
+dir.create(testdir)
+file.copy(system.file("examples", "BIO.2000-05-05.p72.zid",
+    package = "zooimage"), testdir)
+curdir &lt;-setwd(testdir)
+unzip("BIO.2000-05-05.p72.zid", junkpaths = TRUE)
+## Keep only first 3 image plus the .zim file
+unlink("BIO.2000-05-05.p72.zid")
+unlink("BIO.2000-05-05.p72_dat1.RData")
+unlink(dir(pattern = "[.]jpg$")[-(1:3)])
+## Rename .jpg images, pretending they are .tif images
+jpgFiles &lt;- dir(pattern = "[.]jpg$")
+tifFiles &lt;- sub("[.]jpg$", ".tif", jpgFiles)
+file.rename(jpgFiles, tifFiles)
+## Recreate the .zim file
+zimData &lt;- readLines("BIO.2000-05-05.p72+A_dat1.zim", n = 32)
+zimFile &lt;- "BIO.2000-05-05.p72+A_.zim"
+writeLines(zimData, zimFile)
+unlink("BIO.2000-05-05.p72+A_dat1.zim")
+## Here is what we got...
+dir()
+
+## Zip first image...
+(zipImg(tifFiles[1]))
+## It is added in the _raw subdirectory
+dir()
+zipDir &lt;- file.path(".", "_raw")
+dir(zipDir)
+
+## Now, zip all images in batch and delete sources
+(zipImgAll(".", delete.source = TRUE))
+dir() # .zim files are never deleted!
+(zipFiles &lt;- dir(zipDir, full.names = TRUE)) # All three are there
+## Force delete of the .zim file
+unlink(zimFile)
+
+## Unzip first zip file...
+#####(unzipImg(zipFiles[1]))
+## The image and .zim file are recreated
+dir()
+## Check extracted .zim file
+#####all(readLines(zimFile) == zimData)
+
+## Unzip all images...
+(unzipImgAll(zipDir, replace = TRUE, delete.source = TRUE))
+## All original files are there...
+dir()
+## and the _raw subdir is now empty
+dir(zipDir)
+
+## Reset and clean up
+setwd(curdir)
+unlink(testdir, recursive = TRUE)
+rm(testdir, curdir, jpgFiles, tifFiles, zimFile, zimData, zipDir, zipFiles)
+</code></pre>
+
+
+</div>

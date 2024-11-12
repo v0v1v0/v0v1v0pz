@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>gui</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> The ZooImage GUI (Graphical User Interface) </h2>
+
+<h3>Description</h3>
+
+<p>These function display menus and dialog boxes to access ZooImages function
+without programming. Most of them are not intended to be called directly.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIDlg()
+aboutZI(graphical = FALSE)
+exitZI()
+closeAssistant()
+closeZooImage()
+viewManual()
+viewFrenchManual()
+focusR()
+focusGraph()
+acquireImg()
+importImg()
+processImg()
+makeZid()
+makeZidb()
+makeZidbFlowCAM()
+makeTrain()
+countCellsGUI()
+activeLearningGUI()
+collectTrain()
+compTrain()
+addVigsToTrain()
+makeClass()
+analyzeClass()
+vignettesClass()
+validClass()
+editDescription()
+processSamples()
+processSamplesWithCells()
+viewResults()
+exportResults
+loadObjects()
+saveObjects()
+listObjects()
+removeObjects()
+calib()
+optInOutDecimalSep()
+ZIUI()
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>graphical</code></td>
+<td>
+<p> If <code>TRUE</code>, a graphical dialog box displays the information.
+Otherwise, information is printed at the R console. </p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>ZIDlg()</code> is called for its side effect of dispalying the main ZooImage dialog box.
+<code>aboutZI()</code> gives sone information about the current ZooImage version.
+<code>exitZI()</code> unloads the zooimage package (for instance, to allow updating it).
+<code>ZIUI()</code> launches the error correction GUI using Shiny. The working dir
+must be in _analyze subdirectory of an analysis directory tree.
+</p>
+<p>All the other functions are called for their side-effect and return value,
+if any, is not of primary importance.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>zidCompress</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># The dialog box can be started just by issuing
+# &gt; ZIDlg()
+</code></pre>
+
+
+</div>

@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zim.control</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Auxiliary for Controlling ZIM Fitting</h2>
+
+<h3>Description</h3>
+
+<p>Auxiliary function for <code>zim</code> fitting. Typically only used internally by 
+<code>zim.fit</code>, but may be used to construct a control argument for either function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zim.control(dist = c("zip", "zinb"), method = c("EM-NR", "EM-FS"),
+  type = c("solve", "ginv"), robust = FALSE, trace = FALSE,
+  start = NULL, minit = 10, maxit = 10000, epsilon = 1e-08)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>count model family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>algorithm for parameter estimation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>type of matrix inverse.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>robust</code></td>
+<td>
+<p>logical; if TRUE, robust standard errors will be calculated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trace</code></td>
+<td>
+<p>logical; if TRUE, display iteration history.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>initial parameter values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minit</code></td>
+<td>
+<p>minimum number of iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>maxit</code></td>
+<td>
+<p>maximum number of iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>epsilon</code></td>
+<td>
+<p>positive convergence tolerance.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>zim</code>, <code>zim.fit</code>
+</p>
+
+
+</div>

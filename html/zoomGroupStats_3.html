@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>batchProcessZoomOutput</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Batch process files that have been downloaded from Zoom</h2>
+
+<h3>Description</h3>
+
+<p>Provide the location of a structured batchInput file and this
+function will process a set of meetings at once.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">batchProcessZoomOutput(batchInput, exportZoomRosetta = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>batchInput</code></td>
+<td>
+<p>String giving the location of the xlsx file
+that contains the information for the zoom meetings. All corresponding
+Zoom downloads for the meetings in the batch must be saved in the same
+directory as the batchInput file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exportZoomRosetta</code></td>
+<td>
+<p>optional string giving the path for exporting the
+zoomRosetta file to link up unique individual IDs manually. Providing this
+path will write the zoomRosetta file to that location.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a list that has a data.frame for each of the elements
+of a Zoom output that are available in the input directory:
+</p>
+
+<ul>
+<li>
+<p> batchInfo - Each row is a meeting included in batchInput. Columns
+provide information about each meeting.
+</p>
+</li>
+<li>
+<p> meetInfo - Each row is a meeting for which there was a downloaded
+participants file. Columns provide information about the meeting from the Zoom
+Cloud recording site.
+</p>
+</li>
+<li>
+<p> partInfo - Each row is a Zoom display name (with display name changes
+in parentheses). Columns provide information about participants from the Zoom Cloud
+recording site.
+</p>
+</li>
+<li>
+<p> transcript - Each row is an utterance in the audio transcript. This is the
+output from processZoomTranscript.
+</p>
+</li>
+<li>
+<p> chat - Each row is a message posted to the chat. This is the output
+from processZoomChat.
+</p>
+</li>
+<li>
+<p> rosetta - Each row is a unique display name (within meeting) encountered
+in the batchInput. This is used to reconcile user identities.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">batchOut = batchProcessZoomOutput(batchInput=system.file('extdata', 
+'myMeetingsBatch.xlsx', package = 'zoomGroupStats'), 
+exportZoomRosetta=file.path(tempdir(),"_rosetta.xlsx"))
+
+</code></pre>
+
+
+</div>

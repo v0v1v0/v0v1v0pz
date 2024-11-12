@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lactation.calf.model2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Lactation model for use with lactation.calf.simule</h2>
+
+<h3>Description</h3>
+
+<p>see lactation.calf.model for model description.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lactation.calf.model2(param, duration, dt)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>: a vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>duration</code></td>
+<td>
+<p>: duration of simulation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dt</code></td>
+<td>
+<p>: time step</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with CS, M, Mmoy, RM, day, week
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">sim=lactation.calf.model2(lactation.define.param()["nominal",],6+2*7, 0.1)
+</code></pre>
+
+
+</div>

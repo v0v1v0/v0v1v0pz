@@ -1,0 +1,185 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zeta.sam.sensitivity</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Sensitivity analysis for the sample size of zeta</h2>
+
+<h3>Description</h3>
+
+<p>Computes zeta diversity for a given order (number of assemblages or sites) for a range of sample sizes, to assess the sensitivity to this parameter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zeta.sam.sensitivity(
+  data.spec,
+  xy = NULL,
+  order = 1,
+  sam.seq,
+  reps = 20,
+  sd.correct = TRUE,
+  sd.correct.adapt = FALSE,
+  rescale = FALSE,
+  normalize = FALSE,
+  NON = FALSE,
+  FPO = NULL,
+  DIR = FALSE,
+  display = TRUE,
+  plot = TRUE,
+  notch = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data.spec</code></td>
+<td>
+<p>Site-by-species presence-absence data frame, with sites as rows and species as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xy</code></td>
+<td>
+<p>Site coordinates. This is only used if <code>NON</code> = TRUE or <code>DIR</code> = TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>Specific number of assemblages or sites at which zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sam.seq</code></td>
+<td>
+<p>Sequence of samples for which the zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reps</code></td>
+<td>
+<p>Number of replicates of zeta diversity computations for each sample size.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd.correct</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation must be computed with an unbiased estimator (using the number of site combinations - 1 as the denominator) or not (using the number of site combinations as the denominator).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd.correct.adapt</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation must be computed with an unbiased estimator (using the number of site combinations - 1 as the denominator) if <code>sam</code> is higher than the number of possible combinations, or not (using the number of site combinations as the denominator) if <code>sam</code> is lower than the number of possible combinations. If <code>sd.correct.adapt == TRUE</code>, it takes precedence over <code>sd.correct</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the zeta values should be divided by <code class="reqn">\zeta_1</code>, to get a range of values between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalize</code></td>
+<td>
+<p>Indicates if the zeta values for each sample should be divided by the total number of species for this specific sample (<code>normalize = "Jaccard"</code>), by the average number of species per site for this specific sample (<code>normalize = "Sorensen"</code>), or by the minimum number of species in the sites of this specific sample <br> (<code>normalize = "Simpson"</code>). Default value is <code>FALSE</code>, indicating that no normalization is performed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NON</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the number of species in common should only be counted for the nearest neighbours.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FPO</code></td>
+<td>
+<p>A vector with the coordinates of the fixed point origin from which the zeta diversity will be computed (overrides NON). In that case, <code class="reqn">\zeta_1</code> is the number of species in the closest site to the FPO, <code class="reqn">\zeta_2</code> is the number of species shared by the 2 closest sites, etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DIR</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if zeta diversity must be computed using a directed nearest neighbour scheme in the direction away from the FPO, starting from any site.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>display</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the current value of the sample size must be displayed. Acts as a counter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the outputs must be plotted as a boxplot of the zeta diversity distributions for each sample size</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>notch</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the notches must be plotted in the boxplot.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Note that the execution of <code>Zeta.sam.sensitivity</code> can be quite lengthy, because of the number of replicates needed.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>Zeta.sam.sensitivity</code> returns a matrix with <code>(sam.max-sam.min)/sam.incr</code> columns and <code>reps</code> rows.
+</p>
+
+
+<h3>References</h3>
+
+<p>Hui C. &amp; McGeoch M.A. (2014). Zeta diversity as a concept and metric that unifies incidence-based biodiversity patterns. <em>The American Naturalist</em>, 184, 684-694.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.decline.mc</code>, <code>Zeta.order.mc</code>, <code>Zeta.decline.ex</code>, <code>Zeta.order.ex</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+#Note that the sensitivity analyses in the following two examples are quite long to run,
+#typically around 10 minutes for the first example and 1-2 minutes for the second.
+
+utils::data(bird.spec.coarse)
+xy.bird &lt;- bird.spec.coarse[1:2]
+data.spec.bird &lt;- bird.spec.coarse[3:193]
+
+dev.new()
+zeta.sens.bird &lt;- Zeta.sam.sensitivity(data.spec.bird, order = 3,
+    sam.seq = seq(250,1000,250), reps = 20, display = TRUE, plot = TRUE, notch = TRUE)
+zeta.sens.bird
+
+##########
+
+utils::data(Marion.species)
+xy.marion &lt;- Marion.species[1:2]
+data.spec.marion &lt;- Marion.species[3:33]
+
+dev.new()
+zeta.sens.marion &lt;- Zeta.sam.sensitivity(data.spec.marion, order = 3,
+    sam.seq = seq(50,250,50), reps = 20, plot = TRUE, notch = TRUE)
+zeta.sens.marion
+
+
+</code></pre>
+
+
+</div>

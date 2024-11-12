@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_mo_hud</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Missouri HUD ZIP Code to County Crosswalk, 2023</h2>
+
+<h3>Description</h3>
+
+<p>A tibble containing the HUD ZIP Code to County Crosswalk file
+for Missouri's ZIP Codes in 2023's first quarter.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(zi_mo_hud)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 1749 rows and 8 variables:
+</p>
+
+<dl>
+<dt>ZIP</dt>
+<dd>
+<p>five-digit United States Postal Service ZIP Code</p>
+</dd>
+<dt>GEOID</dt>
+<dd>
+<p>five-digit county FIPS code</p>
+</dd>
+<dt>RES_RATIO</dt>
+<dd>
+<p>for ZIP Codes that cross county boundaries, the proportion
+of the ZIP Code's residential customers in the given county</p>
+</dd>
+<dt>BUS_RATIO</dt>
+<dd>
+<p>for ZIP Codes that cross county boundaries, the proportion
+of the ZIP Code's commercial customers in the given county</p>
+</dd>
+<dt>OTH_RATIO</dt>
+<dd>
+<p>for ZIP Codes that cross county boundaries, the proportion
+of the ZIP Code's other customers in the given county</p>
+</dd>
+<dt>TOT_RATIO</dt>
+<dd>
+<p>for ZIP Codes that cross county boundaries, the proportion
+of the ZIP Code's total customers in the given county</p>
+</dd>
+<dt>CITY</dt>
+<dd>
+<p>United States Postal Service city name</p>
+</dd>
+<dt>STATE</dt>
+<dd>
+<p>United States Postal Service state abbreviation</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The data included in <code>zi_mo_hud</code> can be replicated with the
+following code: <code>zi_load_crosswalk(zip_source = "HUD", year = 2023,
+  qtr = 1, target = "COUNTY", query = "MO")</code>. This assumes your HUD API key
+is stored in your <code>.Rprofile</code> file as <code>hud_key</code>.
+</p>
+
+
+<h3>Source</h3>
+
+<p>U.S. Department of Housing and Urban Development's ZIP Code crosswalk
+files
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::str(zi_mo_hud)
+utils::head(zi_mo_hud)
+
+</code></pre>
+
+
+</div>

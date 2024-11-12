@@ -1,0 +1,212 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pzoeppritz</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Scattering (Zoeppritz) Coefficients</h2>
+
+<h3>Description</h3>
+
+<p>Calculate and plot the P and S-wave scattering amplitudes for a plane
+wave at an interface.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pzoeppritz(chtype = "Amplitude", alpha1, alpha2,
+ beta1, beta2, rho1, rho2, chincw = "P",
+choutkind = "ALL")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>chtype</code></td>
+<td>
+<p>character, type of output, one of: Amplitude, Potential,
+Energy</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha1</code></td>
+<td>
+<p>P-wave Velocity of Upper Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha2</code></td>
+<td>
+<p>P-wave Velocity of Lower Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta1</code></td>
+<td>
+<p>S-wave Velocity of Upper Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta2</code></td>
+<td>
+<p>S-wave Velocity of Lower Layer, km/s</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho1</code></td>
+<td>
+<p>Density of Upper Layer, kg/m3</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rho2</code></td>
+<td>
+<p>Density of Lower Layer, kg/m3</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chincw</code></td>
+<td>
+<p>Incident Wave: P, S </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>choutkind</code></td>
+<td>
+<p>character, type of out put one of: P, S, ALL, NONE</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Front end for zoeppritz program.  
+</p>
+
+
+<h3>Value</h3>
+
+<p>List output of zoeppritz call:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>angle</code></td>
+<td>
+<p>Incident angles, degrees</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rmat</code></td>
+<td>
+<p>Matrix of 4 by n reflection coefficients for each angle</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rra</code></td>
+<td>
+<p>Matrix of 4 by n real part of scattering matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rra</code></td>
+<td>
+<p>Matrix of 4 by n imaginary part of scattering matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ang</code></td>
+<td>
+<p>Matrix of 4 by n phase angle</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>incw</code></td>
+<td>
+<p>integer, from input parameter </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>icoef</code></td>
+<td>
+<p>integer, from input parameter </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alphacrit</code></td>
+<td>
+<p>critical angle</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>This front end is easier to call because it is more verbose.
+Creates a plot of the coefficients versus incident angle.
+If coefficients are complex, they are replaced with NA
+and they are thus not plotted.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jonathan M. Lees&lt;jonathan.lees@unc.edu&gt;</p>
+
+
+<h3>References</h3>
+
+<p>Young,~G.B., Braile, L. W. 1976. A computer program for the application
+of Zoeppritz's amplitude equations and Knott's energy equations,
+<em>Bulletin of the Seismological Society of America</em>, vol.66,
+no.6,1881-1885.
+</p>
+<p>K. Aki and P. G. Richards. <em>Quantitative seismology</em>.
+University Science Books, Sausalito, Calif., 2nd edition, 2002.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>zoeppritz, pzoeppritz, piczoeppritz</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+#############  Incident wave in Low velocity layer
+
+alpha1 = 4.98
+  beta1 =  2.9
+   rho1 = 2.667
+
+  alpha2 = 8.0
+   beta2 = 4.6
+   rho2 = 3.38
+
+  App =  pzoeppritz( "Amplitude" , alpha1, alpha2,
+beta1, beta2, rho1 ,rho2, "P", "ALL");
+
+App =  pzoeppritz( "Amplitude" , alpha1, alpha2,
+beta1, beta2, rho1 ,rho2, "S", "ALL");
+
+#############  Incident wave in high velocity layer
+  alpha1 = 8.0
+  beta1 =  4.6
+   rho1 = 3.38
+
+  alpha2 = 4.98
+   beta2 = 2.9
+   rho2 = 2.667
+
+ App =  pzoeppritz( "Amplitude" , alpha1, alpha2,
+beta1, beta2, rho1 ,rho2, "P", "ALL");
+
+App =  pzoeppritz( "Amplitude" , alpha1, alpha2,
+beta1, beta2, rho1 ,rho2, "S", "ALL");
+
+
+</code></pre>
+
+
+</div>

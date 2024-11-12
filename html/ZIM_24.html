@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zim.fit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fitter Function for Zero-Inflated Models</h2>
+
+<h3>Description</h3>
+
+<p><code>zim.fit</code> is the basic computing engine called by <code>zim</code> used to fit 
+zero-inflated models. This should usually <em>not</em> be used directly unless by experienced users.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zim.fit(y, X, Z, weights = rep(1, nobs), offset = rep(0, nobs),
+  control = zim.control(...), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>response variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>design matrix for log-linear part.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z</code></td>
+<td>
+<p>design matrix for logistic part.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p>an optional vector of 'prior weights' to be used in the fitting process.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>offset variable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>control arguments from <code>zim.control</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional argumetns.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>zim</code>, <code>zim.control</code>
+</p>
+
+
+</div>

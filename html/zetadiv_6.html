@@ -1,0 +1,143 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>glm.fit.cons</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Generalized Linear Models fitting method with negative coefficients constraint</h2>
+
+<h3>Description</h3>
+
+<p><code>glm.fit.cons</code> is an adaptation of function <code>glm.fit2</code> from package {glm2} in which the least squares estimation is replaced by a non-positive regression using function <code>nnnpls</code> from package {nnls}.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">glm.fit.cons(
+  x,
+  y,
+  weights = rep(1, nobs),
+  cons = -1,
+  cons.inter = 1,
+  start = NULL,
+  etastart = NULL,
+  mustart = NULL,
+  offset = rep(0, nobs),
+  family = stats::gaussian(),
+  control = list(),
+  intercept = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons</code></td>
+<td>
+<p>type of constraint. Default is -1 for negative coefficients on the predictors. The other option is 1 for positive coefficients on the predictors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons.inter</code></td>
+<td>
+<p>type of constraint for the intercept. Default is 1 for positive intercept, suitable for Gaussian family. The other option is -1 for negative intercept, suitable for binomial family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>etastart</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mustart</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intercept</code></td>
+<td>
+<p>as for <code>glm.fit</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The value returned by <code>glm.fit.cons</code> has exactly the same structure as the value returned by <code>glm.fit</code> and <code>glm.fit2</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Marschner, I.C. (2011) glm2: Fitting generalized linear models with convergence problems. <em>The R Journal</em>, 3(2), 12-15.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>glm.fit</code>, <code>glm.fit2</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Dobson (1990) Page 93: Randomized Controlled Trial :
+counts &lt;- c(18,17,15,20,10,20,25,13,12)
+outcome &lt;- gl(3,1,9)
+treatment &lt;- gl(3,3)
+print(d.AD &lt;- data.frame(treatment, outcome, counts))
+glm.D93 &lt;- glm.cons(counts ~ outcome + treatment, family = poisson())
+glm.D93.ngl &lt;- glm.cons(counts ~ outcome + treatment, family = poisson(),
+   method="glm.fit.cons")
+summary(glm.D93)
+summary(glm.D93.ngl)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ztype</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>ztype</h2>
+
+<h3>Description</h3>
+
+<p>How fast can you type R functions on your keyboard? Find out by running a 'zty.pe' game: export R functions as instructions to type to destroy opponents vessels.
+</p>
+<p>launch a ZType game using function names of R packages
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ztype(packages = c("dplyr", "ggplot2", "lubridate"), nb = 25)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>packages</code></td>
+<td>
+<p>a vector containing installed packages from which extract function names</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nb</code></td>
+<td>
+<p>number of levels to design in the ZType game</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## Not run: 
+require(ztype)
+require(magrittr)
+ztype() # dplyr, ggplot2 and lubridate
+c("lubridate") %&gt;% ztype()
+
+## End(Not run)
+
+
+
+
+## Not run: 
+require(ztype)
+require(magrittr)
+ztype()# dplyr, ggplot2 and lubridate
+c("lubridate") %&gt;% ztype()
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIPG_CI</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get confidence interval from ZIPG model</h2>
+
+<h3>Description</h3>
+
+<p>Get confidence interval from ZIPG model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIPG_CI(ZIPG_res, type = "Wald", CI_type = "normal", alpha = 0.05)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ZIPG_res</code></td>
+<td>
+<p>Result from ZIPG_main()</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of hypothesis testing method, 'Wald' or 'bWald'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CI_type</code></td>
+<td>
+<p>Type of confidence interval, 'Wald','bWald' or 'pbWald'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>We construct (1- alpha)% confidence interval by alpha/2 and (1-alpha/2).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Table of confidence interval
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Dietary)
+dat = Dietary
+ZIPG_res &lt;- ZIPG_main(data = dat$COV,
+X = ~ALC01+nutrPC1+nutrPC2, X_star = ~ ALC01,
+W = dat$OTU[,100], M = dat$M )
+ZIPG_CI(ZIPG_res)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,45 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>reverse_zipcode</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Given a ZIP code, returns columns of metadata about that ZIP code</h2>
+
+<h3>Description</h3>
+
+<p>Given a ZIP code, returns columns of metadata about that ZIP code
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">reverse_zipcode(zip_code)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zip_code</code></td>
+<td>
+<p>A 5-digit U.S. ZIP code or chracter vector with multiple ZIP codes</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A tibble containing data for the ZIP code(s)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">reverse_zipcode("90210")
+reverse_zipcode("08731")
+reverse_zipcode(c("08734", "08731"))
+reverse_zipcode("07762")$county
+reverse_zipcode("07762")$state
+</code></pre>
+
+
+</div>

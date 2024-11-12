@@ -1,0 +1,60 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zcol</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Z(log) Depending Color</h2>
+
+<h3>Description</h3>
+
+<p>This function provides a color gradient depending on the zlog value as
+described in Hoffmann et al. 2017. The colours are only roughly equal to the
+one found in the article.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zcol(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>numeric</code>, z(log) value.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>character</code>, of <code>length(x)</code> with the corresponding color hex code.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Sebastian Gibb
+</p>
+
+
+<h3>References</h3>
+
+<p>Hoffmann, Georg, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
+2017.
+"The Zlog-Value as Basis for the Standardization of Laboratory Results."
+LaboratoriumsMedizin 41 (1): 23–32. <a href="https://doi.org/10.1515/labmed-2016-0087">doi:10.1515/labmed-2016-0087</a>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">z &lt;- -10:10
+image(matrix(z, ncol = 1), col = zcol(z), xaxt = "n", yaxt = "n")
+text(seq(0, 1, length.out=length(z)), 0, label = z)
+</code></pre>
+
+
+</div>

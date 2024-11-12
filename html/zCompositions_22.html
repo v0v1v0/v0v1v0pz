@@ -1,0 +1,79 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zVarArrayTest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Variation array homogeneity test</h2>
+
+<h3>Description</h3>
+
+<p>This function performs a permutation test of the homogeneity of group-wise and overall variation arrays from all
+pair-wise log-ratios in a compositional data set. Groups can be defined by either zero/unobserved data patterns or by a grouping
+factor in fully observed zero-free data sets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zVarArrayTest(X, label = 0, groups = NULL, b = 1000)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Compositional data set (<code>matrix</code> or <code>data.frame</code> class).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote zeros/unobserved data in <code>X</code> (<code>label = 0</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>groups</code></td>
+<td>
+<p>Grouping factor in fully observed zero-free data sets (<code>groups = NULL</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>Number of bootstrap resamples used (<code>b = 1000</code>, default).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The permutation test of homogeneity is based on total weighted squared relative errors (SRE) reflecting on divergence
+between group-wise variation arrays and overall (see <code>zVarArrayError</code> and
+<code>zVarArray</code> for more details). Note that for groups including less than two observations SRE is set to NA.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Test p-values for log-ratio variances and means.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code>, <code>zVarArray</code>, <code>zVarArrayError</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Water)
+zPatterns(Water, label = 0)
+zVarArrayTest(Water)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sample.tfl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Incremental Samples from a Type Frequency List (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Compute incremental random samples from a type frequency list (an
+object of class <code>tfl</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  sample.tfl(obj, N, force.list=FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>tfl</code>, representing a type
+frequency list</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>a vector of non-negative integers in increasing order, the
+sample sizes for which incremental samples will be generated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.list</code></td>
+<td>
+<p>if <code>TRUE</code>, the return value will always be a
+list of <code>tfl</code> objects, even if <code>N</code> is just a single
+integer</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The current implementation is reasonably efficient, but will be rather
+slow when applied to very large type frequency lists.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>N</code> is a single integer (and the <code>force.list</code> flag is not
+set), a <code>tfl</code> object representing a random sample of size <code class="reqn">N</code>
+from the type frequency list <code>obj</code>.
+</p>
+<p>If <code>N</code> is a vector of length greater one, or if
+<code>force.list=TRUE</code>, a list of <code>tfl</code> objects representing
+incremental random samples of the specified sizes <code class="reqn">N</code>.
+<em>Incremental</em> means that each sample is a superset of the
+preceding sample.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>tfl</code> for more information about type frequency lists
+</p>
+<p><code>sample.spc</code> is an analogous function for frequency
+spectra (objects of class <code>spc</code>)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## load Brown tfl
+data(Brown.tfl)
+summary(Brown.tfl)
+
+## sample a tfl of 100k tokens
+MiniBrown.tfl &lt;- sample.tfl(Brown.tfl,1e+5)
+summary(MiniBrown.tfl)
+
+## if we repat, we get a different sample
+MiniBrown.tfl &lt;- sample.tfl(Brown.tfl,1e+5)
+summary(MiniBrown.tfl)
+
+</code></pre>
+
+
+</div>

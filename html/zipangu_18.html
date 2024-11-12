@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>kansuji2arabic</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert kansuji character to arabic</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+Converts a given Kansuji element such as Ichi (1) and Nana (7) to an Arabic.
+<code>kansuji2arabic_all()</code> converts only Kansuji in the string.
+<code>kansuji2arabic_num()</code> convert kansuji that contain the positions (e.g. Hyaku,
+Sen, etc) with the numbers represented by kansuji. <code>kansuji2arabic_str()</code>
+converts kansuji in a string to numbers represented by kansuji while
+retaining the non-kansuji characters.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">kansuji2arabic(str, convert = TRUE, .under = Inf)
+
+kansuji2arabic_all(str, ...)
+
+kansuji2arabic_num(str, consecutive = c("convert", "non"), ...)
+
+kansuji2arabic_str(
+  str,
+  consecutive = c("convert", "non"),
+  widths = c("all", "halfwidth"),
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>str</code></td>
+<td>
+<p>Input vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>convert</code></td>
+<td>
+<p>If <code>FALSE</code>, will return as numeric. The default value is <code>TRUE</code>,
+and numeric values are treated as strings.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>.under</code></td>
+<td>
+<p>Number scale to be converted. The default value is infinity.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments to carry over to <code>kansuji2arabic()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>consecutive</code></td>
+<td>
+<p>If you select "convert", any sequence of 1 to 9 kansuji will
+be replaced with Arabic numerals. If you select "non", any sequence of 1-9
+kansuji will not be replaced by Arabic numerals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>widths</code></td>
+<td>
+<p>If you select "all", both full-width and half-width Arabic numerals
+are taken into account when calculating kansuji, but if you select "halfwidth",
+only half-width Arabic numerals are taken into account when calculating kansuji.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a character or numeric.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">kansuji2arabic("\u4e00")
+kansuji2arabic(c("\u4e00", "\u767e"))
+kansuji2arabic(c("\u4e00", "\u767e"), convert = FALSE)
+# Keep Kansuji over 1000.
+kansuji2arabic(c("\u4e00", "\u767e", "\u5343"), .under = 1000)
+# Convert all character
+kansuji2arabic_all("\u3007\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341")
+kansuji2arabic_all("\u516b\u4e01\u76ee")
+# Convert kansuji that contain the positions with the numbers represented by kansuji.
+kansuji2arabic_num("\u4e00\u5104\u4e8c\u5343\u4e09\u767e\u56db\u5341\u4e94\u4e07")
+kansuji2arabic_num("\u4e00\u5104\u4e8c\u4e09\u56db\u4e94\u4e07\u516d\u4e03\u516b\u4e5d")
+# Converts kansuji in a string to numbers represented by kansuji.
+kansuji2arabic_str("\u91d1\u4e00\u5104\u4e8c\u5343\u4e09\u767e\u56db\u5341\u4e94\u4e07\u5186")
+kansuji2arabic_str("\u91d1\u4e00\u5104\u4e8c\u4e09\u56db\u4e94\u4e07\u516d\u4e03\u516b\u4e5d\u5186")
+kansuji2arabic_str("\u91d11\u51042345\u4e076789\u5186")
+</code></pre>
+
+
+</div>

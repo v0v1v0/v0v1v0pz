@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.vgc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Printing Vocabulary Growth Curves (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Implementations of the <code>print</code> and <code>summary</code>
+methods for vocabulary growth curve objects (of class <code>vgc</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'vgc'
+print(x, all=FALSE, ...)
+
+  ## S3 method for class 'vgc'
+summary(object, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, object</code></td>
+<td>
+<p>an object of class <code>vgc</code>, representing a vocabulary
+growth curve</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all</code></td>
+<td>
+<p>if <code>FALSE</code>, vocabulary growth data are shown for at
+most 25 sample sizes (default)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments passed on from generic method will be ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><b>NB:</b> implementation details and format of the summary are subject to
+change in future releases
+</p>
+<p><code>print.vgc</code> calls the standard <code>print</code> method for
+data frames internally, but reduces the data set randomly to
+show at most 25 sample sizes (unless <code>all=TRUE</code>).
+</p>
+<p><code>summary.vgc</code> gives a concise summary of the available vocabulary
+growth data in the <code>vgc</code> object, including the number and range
+of sample sizes, whether spectrum elements are included, and whether
+variances are included.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>NULL</code>
+</p>
+<p>Unlike other implementations of the <code>summary</code> method,
+<code>summary.vgc</code> only prints a summary on screen and does not return
+a special "summary" object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the <code>vgc</code> manpage for details on <code>vgc</code> objects.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## load Brown "informative" prose empirical vgc
+data(BrownInform.emp.vgc)
+
+## summary, print (random subset) and print all
+summary(BrownInform.emp.vgc)
+print(BrownInform.emp.vgc)
+print(BrownInform.emp.vgc,all=TRUE)
+
+## load Brown informative prose spectrum
+## and get estimate a fzm model
+data(BrownInform.spc)
+fzm &lt;- lnre("fzm",BrownInform.spc,exact=FALSE)
+
+## obtain expected vgc up to 2M tokens
+## with spectrum elements up to V_3
+## and variances
+fzm.vgc &lt;- lnre.vgc(fzm,(1:100)*2e+4,m.max=3,variances=TRUE)
+
+## summary and print
+summary(fzm.vgc)
+print(fzm.vgc)
+print(fzm.vgc,all=TRUE)
+
+</code></pre>
+
+
+</div>

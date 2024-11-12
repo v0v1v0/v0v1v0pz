@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>forecast_info</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Gets a forecast's information</h2>
+
+<h3>Description</h3>
+
+<p>Gets a forecast's information
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">forecast_info(zoltar_connection, forecast_url)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forecast_url</code></td>
+<td>
+<p>URL of a forecast in zoltar_connection's forecasts</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>list</code> of forecast information for the passed forecast_url
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  the_forecast_info &lt;- forecast_info(conn, "http://example.com/api/forecast/1/")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

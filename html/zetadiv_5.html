@@ -1,0 +1,192 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>glm.cons</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fitting Generalized Linear Models with constraint on the coefficients signs</h2>
+
+<h3>Description</h3>
+
+<p><code>glm.cons</code> is an adaptation of function <code>glm2</code> from package {glm2} in which the least squares estimation is replaced by a regression with signs constraint on the coefficients using function <code>nnnpls</code> from package {nnls}.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">glm.cons(
+  formula,
+  family = stats::gaussian(),
+  data,
+  weights,
+  subset,
+  na.action,
+  start = NULL,
+  etastart,
+  mustart,
+  offset,
+  control = list(...),
+  model = TRUE,
+  method = "glm.fit.cons",
+  cons = -1,
+  cons.inter = 1,
+  x = FALSE,
+  y = TRUE,
+  contrasts = NULL,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>family</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subset</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.action</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>etastart</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mustart</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>the method used in fitting the model. The default method "<code>glm.fit.cons</code>" uses function nnnpls from package nnls instead of <code>lm.fit</code> to impose the sign of the coefficients. As in <code>glm</code>, the alternative method "<code>model.frame</code>" returns the model frame and does no fitting.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons</code></td>
+<td>
+<p>type of constraint. Default is -1 for negative coefficients on the predictors. The other option is 1 for positive coefficients on the predictors.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cons.inter</code></td>
+<td>
+<p>type of constraint for the intercept. Default is 1 for positive intercept, suitable for Gaussian family. The other option is -1 for negative intercept, suitable for binomial family.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>contrasts</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>as for <code>glm</code></p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The value returned by <code>glm.cons</code> has exactly the same structure as the value returned by <code>glm</code> and <code>glm.2</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Marschner, I.C. (2011) glm2: Fitting generalized linear models with convergence problems. <em>The R Journal</em>, 3(2), 12-15.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>glm</code>, <code>glm2</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Dobson (1990) Page 93: Randomized Controlled Trial :
+counts &lt;- c(18,17,15,20,10,20,25,13,12)
+outcome &lt;- gl(3,1,9)
+treatment &lt;- gl(3,3)
+print(d.AD &lt;- data.frame(treatment, outcome, counts))
+glm.D93 &lt;- glm.cons(counts ~ outcome + treatment, family = poisson())
+glm.D93.ngl &lt;- glm.cons(counts ~ outcome + treatment, family = poisson(),
+   method="glm.fit.cons")
+summary(glm.D93)
+summary(glm.D93.ngl)
+</code></pre>
+
+
+</div>

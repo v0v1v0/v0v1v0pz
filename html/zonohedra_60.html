@@ -1,0 +1,175 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>matroid</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+matroid construction
+</h2>
+
+<h3>Description</h3>
+
+<p>Construct a matroid from a matrix, or from explicit list of hyperplanes
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'matrix'
+matroid( x, e0=0, e1=1.e-6, e2=1.e-10, ground=NULL, ... )
+
+## S3 method for class 'list'
+matroid( x, ground=NULL, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>x</code> can be a numeric matrix with 3, 2, or 1 rows whose columns determine the matroid.
+The matrix must be either square or "wide", i.e. more columns than rows.
+The matrix must be <em>full-rank</em>, i.e. the rank must be equal to the number of rows, which is then the rank of the constructed matroid.
+Such a matroid is often called a <em>column matroid</em> or <em>vector matroid</em>.
+<br><br><code>x</code> can also be a list of vectors of positive integers,
+which are thought of as sets, and are the hyperplanes of the matroid.
+The hyperplanes are checked that they satisfy the matroid hyperplane axioms.
+The rank of the constructed matroid is determined automatically,
+and must be 3, 2, or 1.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ground</code></td>
+<td>
+
+<p>The <em>ground set</em> of the matroid -
+a vector of positive integers in strictly increasing order.
+<br><br>
+When <code>x</code> is a matrix,
+<code>length(ground)</code> must be equal to <code>ncol(x)</code>.
+The point <code>ground[i]</code> corresponds to the <em>i'th</em> column of <code>x</code>.
+If <code>ground</code> is <code>NULL</code>,
+the column names of <code>x</code> are converted to such a vector if possible.
+If this is not possible, <code>ground</code> is set to <code>1:ncol(x)</code>.
+<br><br>
+When <code>x</code> is a list, every set in the list must be a subset of <code>ground</code>.
+If <code>ground</code> is <code>NULL</code>, it is set to the union of all
+the sets in <code>x</code>.
+For technical reasons, when the rank is 1, <code>ground</code> is required
+and cannot be <code>NULL</code>, see <b>Details</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e0</code></td>
+<td>
+
+<p>threshold, in the <code class="reqn">L^{\infty}</code> norm, for a column vector of
+<code>x</code> to be considered 0,
+and thus that the corresponding point in the matroid is a loop.
+
+Since the default is <code>e0=0</code>, 
+by default a column vector must be exactly 0 to become a loop.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e1</code></td>
+<td>
+
+<p>threshold, in a pseudo-angular sense, for column vectors to be multiples
+of each other,
+and thus members of a group of multiple (aka parallel) points in the matroid.
+This tolerance is only used when the rank is 2 or 3.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e2</code></td>
+<td>
+
+<p>threshold, in a pseudo-angular sense, for the planes
+spanned by pairs of column vectors to be considered coincident,
+and thus the columns to be in the same hyperplane of the matroid.
+This tolerance is used when the rank is 3.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>It was mentioned above that the tolerances <code>e1</code> and <code>e2</code> are
+<em>pseudo-angular</em>.
+Specifically, vectors are normalized to the <code class="reqn">L^2</code> unit sphere and the
+distance between them is computed in the <code class="reqn">L^{\infty}</code> norm.
+<br><br>
+Matroids are well-known to have many cryptomorphic definitions,
+e.g. independent sets, bases, circuits, rank function, closure operator,
+flats, and hyperplanes.  See <b>Matroid - Wikipedia</b>.
+In this package, matroids can only be constructed from hyperplanes,
+but there are functions
+<code>rank()</code> and <code>is_independent()</code>
+that can be used <em>after</em> construction.
+<br><br>
+Checking that the hyperplanes satisfy the matroid hyperplane axioms
+is made easier by the fact that all simple matroids of rank 3 or less
+are <em>paving matroids</em>, see <b>Paving Matroid - Wikipedia</b>
+<br><br>
+Rank 1 matroids are extremely simple - the loops form the
+single hyperplane (possibly empty), and the non-loops form
+a multiple group.
+If <code>ground=NULL</code> the non-loops are unknown, so this is why
+<code>ground</code> is required when the rank is 1.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>matroid()</code> returns an object with S3 class <b>'matroid'</b>.
+<br>
+In case of error, e.g. invalid <code>x</code> or computed hyperplanes,
+the function prints an error message and returns <code>NULL</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <em>ground set</em> of positive integers should not be too sparse;
+otherwise performance may suffer.
+<br><br>
+When <code>x</code> is a matrix with 3 rows,
+it may happen that the computed hyperplanes do not satisfy the axioms for a matroid.
+In that case, the user will be prompted to try reducing tolerance <code>e2</code>.
+Getting the expected hyperplanes may require some <em>a priori</em> knowledge of the expected hyperplanes.
+For best results, the matrix should be given with maximum precision.
+</p>
+
+
+<h3>References</h3>
+
+<p><b>Matroid - Wikipedia</b>.<br><a href="https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057">https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057</a>
+</p>
+<p><b>Paving Matroid - Wikipedia</b>.<br><a href="https://en.wikipedia.org/w/index.php?title=Paving_matroid&amp;oldid=1021966244">https://en.wikipedia.org/w/index.php?title=Paving_matroid&amp;oldid=1021966244</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rank()</code>, 
+<code>simplify()</code>,
+<code>getsimplified()</code>
+</p>
+
+
+</div>

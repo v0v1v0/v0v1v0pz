@@ -1,0 +1,190 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonoseg</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+zonoseg construction, querying, and printing
+</h2>
+
+<h3>Description</h3>
+
+<p>Construct a zonoseg from a numeric matrix with one row.
+<br><br>
+A <em>zonoseg</em> ("zonotope" + "segment") is my own personal term
+for a 1-dimensional zonotope.
+I could not find an alternative term.
+It is a linear image of the unit cube <code class="reqn">[0,1]^n</code> in the real numbers,
+and a compact segment of reals.
+The order of the generators has no effect on the zonoseg.
+<br><br>
+The image of the <em>2-transition subcomplex</em> of <code class="reqn">[0,1]^n</code>
+is a compact subsegment of the zonoseg.
+The order of the generators affects this subsegment in a major way.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zonoseg( mat, e0=0, ground=NULL )
+
+## S3 method for class 'zonoseg'
+getsegment( x )
+
+## S3 method for class 'zonoseg'
+getsegment2trans( x )
+
+## S3 method for class 'zonoseg'
+print( x, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mat</code></td>
+<td>
+
+<p>a numeric matrix with 1 row whose entries determine the zonoseg.
+One or more entries must be non-zero.
+It is OK to have both positive and negative entries.
+<br><code>mat</code> can also be a numeric vector which is then
+converted to a matrix with 1 row.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e0</code></td>
+<td>
+
+<p>threshold for an entry of <code>mat</code> to be considered 0.
+Since the default is <code>e0=0</code>, 
+by default an entry must be exactly 0 to become a loop in the
+associated matroid.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ground</code></td>
+<td>
+
+<p>The <em>ground set</em> of the associated matroid of rank 1 -
+an integer vector in strictly increasing order, or <code>NULL</code>.
+<br>
+When <code>ground</code> is <code>NULL</code>, it is set to <code>1:ncol(mat)</code>.
+If <code>ground</code> is not <code>NULL</code>, <code>length(ground)</code> must be equal to <code>ncol(mat)</code>.
+The point <code>ground[i]</code> corresponds to the <em>i'th</em> column of <code>mat</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <code>zonoseg</code> object as returned by <code>zonoseg()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A <b>zonoseg</b> object is a list with only 3 items:
+the associated matroid, the endpoints of the segment,
+and endpoints of the <em>2-transition subsegment</em>.
+<br><br><code>print.zonoseg()</code> prints some information about the generators,
+and the endpoints of the segment plus the 2 vertices of the unit cube
+that map to these endpoints.
+It prints similar data for the 2-transition subsegment.
+Finally, it prints data on the associated matroid.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>zonoseg()</code> returns a list with S3 class <code>'zonoseg'</code>.
+In case of error, e.g. invalid <code>mat</code>,
+the function prints an error message and returns <code>NULL</code>.
+<br><br><code>getsegment()</code> and <code>getsegment2trans()</code> 
+return numeric 2-vectors - the min and max endpoints of the corresponding
+segments.
+<br><br><code>print.zonoseg()</code> returns <code>TRUE</code> or <code>FALSE</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <em>ground set</em> of positive integers should not be too sparse;
+otherwise performance may suffer.
+</p>
+
+
+<h3>References</h3>
+
+<p><b>Matroid - Wikipedia</b>.<br><a href="https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057">https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rank()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zono1 = zonoseg( c(1,-2,3,0,-3,-4) )
+zono1
+
+# generators:        6 -- 3 negative, 2 positive, and 1 loops.
+#
+# segment:                   [-9,4]
+#      value pcube.1 pcube.2 pcube.3 pcube.4 pcube.5 pcube.6
+# zmin    -9       0       1       0       0       1       1
+# zmax     4       1       0       1       0       0       0
+#
+# 2-transition subsegment:   [-8,3]
+#             value source.1 source.2 source.3 source.4 source.5 source.6
+# tmin-2trans    -8        1        1        0        0        1        1
+# tmax-2trans     3        0        0        1        1        0        0
+# 
+# matroid:
+# ground set:           6 points   {1 2 3 4 5 6}
+# hyperplanes:          1     {4}
+# rank:                 1
+# loops:                1   {4}
+# multiple groups:      1     {1 2 3 5 6}
+# uniform:              FALSE
+# paving:               TRUE
+# simple:               FALSE
+# This matroid is constructed from a 1x6 real matrix.
+#      1  2 3 4  5  6
+# [1,] 1 -2 3 0 -3 -4
+# 
+# The summary of the simplified matroid is:
+#     ground set:           1 points   {1}
+#                       Point 1 corresponds to the multiple group {1 2 3 5 6} in the original ...
+#      hyperplanes:          1     {}
+#      rank:                 1
+#      loops:                0   {}
+#      multiple groups:      0   {}
+#      uniform:              TRUE
+#      paving:               TRUE
+#      simple:               TRUE
+#      This matroid is constructed from a 1x1 real matrix.
+#           1+...+6
+#      [1,]     -13
+
+
+## so the 2-transition subsegment is a proper subset of the zonoseg
+</code></pre>
+
+
+</div>

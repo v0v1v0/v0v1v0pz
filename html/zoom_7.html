@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>session.zoom</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Opening of an interactive zoom/navigate session.</h2>
+
+<h3>Description</h3>
+
+<p>To launch an interactive session you should use zm() but if you are sure of
+your device you can launch directly one of these functions.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">session.zoom(...)
+
+navigation.zoom(...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Everything that can be accepted by sq.zoom.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>session.zoom launch an interactive console menu to navigate a plot.
+</p>
+<p>navigation.zoom allows to interactively navigate a plot with the mouse.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Returns the final plot, as saved by recordPlot().
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Corentin M. Barbu, Sebastian Gibb
+</p>
+
+
+<h3>See Also</h3>
+
+<p>zm().
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+plot(rnorm(100),rnorm(100))
+session.zoom()
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

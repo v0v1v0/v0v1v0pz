@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>bshift</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Backshift Operator</h2>
+
+<h3>Description</h3>
+
+<p>Apply the backshift operator or lag operator to a time series objective.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">bshift(x, k = 1)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>univariate or multivariate time series.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>number of lags.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>lag</code>, <code>zlag</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- arima.sim(model = list(ar = 0.8, sd = 0.5), n = 120)
+bshift(x, k = 12)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dzim.fit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fitter Function for Dynamic Zero-Inflated Models</h2>
+
+<h3>Description</h3>
+
+<p><code>dzim.fit</code> is the basic computing engine called by <code>dzim</code> used to fit 
+dynamic zero-inflated models. This should usually <em>not</em> be used directly unless by experienced users.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dzim.fit(y, X, offset = rep(0, n), control = dzim.control(...), ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>response variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>design matrix.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>offset variable.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>control</code></td>
+<td>
+<p>control arguments.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>dzim</code>,
+<code>dzim.control</code>, 
+<code>dzim.filter</code>, 
+<code>dzim.smooth</code>,
+<code>dzim.sim</code>,
+<code>dzim.plot</code>
+</p>
+
+
+</div>

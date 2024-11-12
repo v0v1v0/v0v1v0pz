@@ -1,0 +1,96 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_zerotradeflow</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Expand the dataset from the passed database as parameters.</h2>
+
+<h3>Description</h3>
+
+<p>Creates zero bilateral trade flow for a given pair of countries.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_zerotradeflow(data, year, exporter, importer, item, trade)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>a data set containing the variables that will be used to guide
+the expansion of the base including all possible combinations of the reference
+variables.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>year</code></td>
+<td>
+<p>refers to the column in the database that contains information for
+the years under review.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exporter</code></td>
+<td>
+<p>refers to the column with the ISO codes (ISO 3166 standard -
+Codes for the representation of names of countries and their subdivisions,
+created and maintains by International Organization for Standardization - ISO)
+of each exporter country (Ex.: BRA, PRT, ITA, USA,...).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>importer</code></td>
+<td>
+<p>refers to the column with the ISO codes (ISO 3166 standard -
+Codes for the representation of names of countries and their subdivisions,
+created and maintains by International Organization for Standardization - ISO)
+of each importer country (Ex.: BRA, PRT, ITA, USA,...).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>item</code></td>
+<td>
+<p>refers to the column in the database that contains information
+about Harmonized System (HS) codes, or other classification. Harmonized
+System is an acronym for Harmonized Commodity Designation and Coding System,
+and it is a customs nomenclature, used internationally as a standardized
+system of coding and classification of import and export products, developed
+and maintained by the World Customs Organization (WCO).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trade</code></td>
+<td>
+<p>refers to the column in the database that contains information
+about the value of exports/imports</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The zerotradeflow package allows generating the bilateral trade flow equal
+to zero of each country pair in each year present in the database passed in
+data parameter. Since, by default, data on bilateral trade flows of countries
+only report positive trade flows (flows greater than zero).
+</p>
+<p>Function to expand the database with the bilateral trade flow equal
+to zero, passing the following parameters:
+</p>
+
+
+<h3>Value</h3>
+
+<p>a dataframe object contains the five variables passed as parameters
+to the get_zerotradeflow() function (year, exporter, importer, item, trade)
+including the bilateral trade flow equal to zero.
+</p>
+
+
+</div>

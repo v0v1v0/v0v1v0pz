@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Juggler</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Juggler sequence</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A094683">A094683</a>, a <em>Juggler</em> sequence is an integer-valued
+sequence that starts with a nonnegative number iteratively follows that <code class="reqn">J_{k+1}=floor(J_k^{1/2})</code> if <code class="reqn">J_k</code> is even, or <code class="reqn">J_{k+1}=floor(J_k^{3/2})</code> if odd.
+No first 6 terms are given since it all depends on the starting value.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Juggler(start, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>the starting nonnegative integer.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector recording the sequence of unknown length a priori.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## let's start from 9 and show the sequence
+print(Juggler(9))
+
+</code></pre>
+
+
+</div>

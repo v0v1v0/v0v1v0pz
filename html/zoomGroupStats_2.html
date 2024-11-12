@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>batchGrabVideoStills</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Batch process video files, breaking them into stills</h2>
+
+<h3>Description</h3>
+
+<p>#' This helper calls grabVideoStills, which function currently
+relies on the av package and 'ffmpeg' to split a video file into images.
+This function will save the images to the director specified by the user.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">batchGrabVideoStills(
+  batchInfo,
+  imageDir = NULL,
+  overWriteDir = FALSE,
+  sampleWindow
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>batchInfo</code></td>
+<td>
+<p>the batchInfo data.frame that is output from batchProcessZoomOutput</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imageDir</code></td>
+<td>
+<p>the directory where you want the function to write the extracted image files</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>overWriteDir</code></td>
+<td>
+<p>logical indicating whether you want to overwrite imageDir if it exists</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampleWindow</code></td>
+<td>
+<p>an integer indicating how frequently you want to sample
+images in number of seconds.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame that gives information about the batch. Each record
+corresponds to one video, with:
+</p>
+
+<ul>
+<li>
+<p> batchMeetingId - the meeting identifier
+</p>
+</li>
+<li>
+<p> videoExists - boolean indicating whether the video file was there
+</p>
+</li>
+<li>
+<p> imageDir - path to the directory where video images are saved
+</p>
+</li>
+<li>
+<p> sampleWindow - integer with the sampleWindow requested
+</p>
+</li>
+<li>
+<p> numFramesExtracted - the number of image files that were saved
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">vidBatchInfo = batchGrabVideoStills(batchInfo=sample_batch_info,
+imageDir=tempdir(), overWriteDir=TRUE, sampleWindow=2)
+## Not run: 
+vidBatchInfo = batchGrabVideoStills(batchInfo=zoomOut$batchInfo,
+imageDir="~/Documents/myMeetings/videoImages", overWriteDir=TRUE,  sampleWindow=600)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

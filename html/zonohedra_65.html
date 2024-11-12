@@ -1,0 +1,169 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot2trans</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+plot the 2-transition surface associated with a zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>The 2-transition surface has the topology of a sphere and is contained in the zonohedron.
+All the facets are parallelograms.
+The surface is centrally symmetric, with the same center as the zonohedron.
+The surface may have self-intersections.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plot2trans(  x, type='ef', ecol='black', econc=FALSE,
+                 fcol='yellow', falpha=0.5, level=NULL,
+                 normals=FALSE, both=TRUE, bgcol="gray40", add=FALSE, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+
+<p>a character string with what parts to draw.
+If <code>type</code> contains <code>'e'</code>, then draw the edges.
+If <code>type</code> contains <code>'f'</code>, then draw filled facets.
+If <code>type</code> contains <code>'p'</code>, then draw points
+at the centers of the facets.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ecol</code></td>
+<td>
+
+<p>The color to use when drawing the edges.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>econc</code></td>
+<td>
+
+<p>If <code>TRUE</code> then draw the concave edges in red,
+and with extra thickness
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>fcol</code></td>
+<td>
+
+<p>The color to use when drawing the facets.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>falpha</code></td>
+<td>
+
+<p>The opacity to use when drawing the facets.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+
+<p>An integer vector which is a subvector of <code>0:(M-2)</code>,
+where <code>M</code> is the number of simplified generators.
+Only the facets and edges at the specified levels are drawn.
+When <code>level=NULL</code> then <em>all</em> facets and edges are drawn.
+This argument does not affect the drawing of points.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normals</code></td>
+<td>
+
+<p>If <code>TRUE</code> then draw the unit facet normals.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>both</code></td>
+<td>
+
+<p>if <code>FALSE</code> then draw only one half of the centrally symmetric surface.
+Otherwise draw both halves (the default).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bgcol</code></td>
+<td>
+
+<p>the background color
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add</code></td>
+<td>
+
+<p>If <code>TRUE</code> then add to the current 3D plot.
+If there is no current 3D plot, it is an error.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Facets and regular edges are drawn with <code>rgl::quads3d()</code>.
+Concave edges are drawn with <code>rgl::segments3d()</code>.
+Points are drawn with <code>rgl::points3d()</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The function returns <code>TRUE</code>; or <code>FALSE</code> in case of error.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The package <span class="pkg">rgl</span> is required for 3D plots.
+A large black point is drawn at 0, 
+a large white point at the "white point",
+and a 50% gray point at the center.
+A line from the black point to the white point is also drawn.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>plothighertrans()</code>,
+<code>plot.zonohedron()</code>
+</p>
+
+
+</div>

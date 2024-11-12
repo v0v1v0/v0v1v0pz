@@ -1,0 +1,150 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>permDT</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Permutations tests</h2>
+
+<h3>Description</h3>
+
+<p>Permutations tests to identify factor correlated
+to a zero-inflated proportions response. The statistic are the Spearman's
+correlation for numeric factor and mean by level for other factor.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">permDT(
+  DT,
+  ColNameFactor,
+  B = 1000,
+  nclust = 1,
+  ColNameWeight = "weight",
+  ColNameRecep = "ID.recep",
+  ColNameSource = "ID.source",
+  seed = NULL,
+  no_const = FALSE,
+  num_class = ColNameFactor,
+  other_class = NULL,
+  multiple_test = FALSE,
+  adjust_method = "none",
+  alpha = 0.05
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>DT</code></td>
+<td>
+<p>a data table contains the factors and the response.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ColNameFactor</code></td>
+<td>
+<p>a char vector with the name of the selected factor.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>B</code></td>
+<td>
+<p>number of permutations (use at least B=1000 permutations to get a correct accuracy of the p-value.)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nclust</code></td>
+<td>
+<p>number of proc for parallel computation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ColNameWeight</code></td>
+<td>
+<p>a char with the name of the ZI response.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ColNameRecep</code></td>
+<td>
+<p>colname of the column with the target names</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ColNameSource</code></td>
+<td>
+<p>colname of the column with the contributor names</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>vector with the seed for the permutations: size(<code>seed</code>)=<code>B</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>no_const</code></td>
+<td>
+<p>FALSE for receiver block constraint for permutations: TRUE no constraint.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>num_class</code></td>
+<td>
+<p>a char vector with the name of numeric factor.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>other_class</code></td>
+<td>
+<p>a char vector with the name of other classes than numeric (factor or char).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multiple_test</code></td>
+<td>
+<p>useful option only for discrete factors: Set TRUE to calculate multiple tests.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>adjust_method</code></td>
+<td>
+<p>p-values adjusted methods (default "none" ). c("holm", "hochberg", "hommel", "bonferroni", "BH", "BY","fdr", "none").</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>significant level (default 0.05).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with two columns. One for the statistics and the other one for the p-value.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">library(data.table)
+data(example_data)
+res = permDT (example_data,
+colnames(example_data)[c(4,10,14,20)],
+B = 10,
+nclust = 1,
+ColNameWeight = "y",
+ColNameRecep = "ID.recep",
+ColNameSource = "ID.source",
+seed = NULL,
+num_class = colnames(example_data)[c(4,10)],
+other_class = colnames(example_data)[c(14,20)])
+print(res)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>read.spc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Loading and Saving Frequency Spectra (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>read.spc</code> loads frequency spectrum from <code>.spc</code> file
+</p>
+<p><code>write.spc</code> saves frequency spectrum object in <code>.spc</code>
+file
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  read.spc(file)
+
+  write.spc(spc, file)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>character string specifying the pathname of a disk file.
+Files with extension <code>.gz</code> will automatically be compressed/decompressed.
+See section "Format" for a description of the required file format</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>spc</code></td>
+<td>
+<p>a frequency spectrum, i.e.\ an object of class
+<code>spc</code></p>
+</td>
+</tr>
+</table>
+<h3>Format</h3>
+
+<p>A TAB-delimited text file with column headers but no row names
+(suitable for reading with <code>read.delim</code>).  The file must contain
+at least the following two columns:
+</p>
+
+<dl>
+<dt><code>m</code></dt>
+<dd>
+<p>frequency class <code class="reqn">m</code> </p>
+</dd>
+<dt><code>Vm</code></dt>
+<dd>
+<p>number <code class="reqn">V_m</code> of types in frequency class
+<code class="reqn">m</code> (or expected class size <code class="reqn">E[V_m]</code>)</p>
+</dd>
+</dl>
+<p>An optional column labelled <code>VVm</code> can be used to specify
+variances of expected class sizes (for a frequency spectrum derived
+from a LNRE model or by binomial interpolation).  
+</p>
+<p>These columns may appear in any order in the text file.  All other
+columns will be silently ignored.
+</p>
+
+
+<h3>Details</h3>
+
+<p>If the filename <code>file</code> ends in the extension <code>.gz</code>, <code>.bz2</code> or <code>.xz</code>,
+the disk file will automatically be decompressed (<code>read.spc</code>) or compressed (<code>write.spc</code>).
+</p>
+<p>The <code>.spc</code> file format does not store the values of <code>N</code>,
+<code>V</code> and <code>VV</code> explicitly.  Therefore, incomplete frequency
+spectra and expected spectra with variances cannot be fully
+reconstructed from disk files.  Saving such frequency spectra (or
+loading a spectrum with variance data) will trigger corresponding
+warnings.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>read.spc</code> returns an object of class <code>spc</code> (see the
+<code>spc</code> manpage for details)
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the <code>spc</code> manpage for details on <code>spc</code>
+objects. See <code>read.tfl</code> and <code>read.vgc</code> for
+import/export of other data structures.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## save Italian ultra- frequency spectru to external text file
+fname &lt;- tempfile(fileext=".spc")
+write.spc(ItaUltra.spc, fname)
+## now &lt;fname&gt; is a TAB-delimited text file with columns m and Vm
+
+## we ready it back in
+New.spc &lt;- read.spc(fname)
+
+## same spectrum as ItaUltra.spc, compare:
+summary(New.spc)
+summary(ItaUltra.spc)
+
+stopifnot(isTRUE(all.equal(New.spc, ItaUltra.spc))) # should be identical
+
+## Not run: 
+## DON'T do the following, incomplete spectrum will not be restored properly !!!
+zm &lt;- lnre("zm", ItaUltra.spc) # estimate model
+zm.spc &lt;- lnre.spc(zm,N(zm))   # incomplete spectrum from model
+write.spc(zm.spc, fname)       # WARNINGS
+bad.spc &lt;- read.spc(fname)     # but this function cannot know something is wrong
+
+summary(zm.spc)
+summary(bad.spc) # note that N and V are completely wrong !!!
+
+## End(Not run)
+</code></pre>
+
+
+</div>

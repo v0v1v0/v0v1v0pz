@@ -1,0 +1,248 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vgc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Vocabulary Growth Curves (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>In the <code>zipfR</code> library, <code>vgc</code> objects are used to represent
+a vocabulary growth curve (VGC).  This can be an observed VGC from an
+incremental set of sample (such as a corpus), a randomized VGC
+obtained by binomial interpolation, or the expected VGC according to a
+LNRE model.
+</p>
+<p>With the <code>vgc</code> constructor function, an object can be initialized
+directly from the specified data vectors.  It is more common to read
+an observed VGC from a disk file with <code>read.vgc</code>, generate
+a randomized VGC with <code>vgc.interp</code> or compute an expected
+VGC with <code>lnre.vgc</code>, though.
+</p>
+<p><code>vgc</code> objects should always be treated as read-only.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  vgc(N, V, Vm=NULL, VV=NULL, VVm=NULL, expected=FALSE, check=TRUE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>integer vector of sample sizes <code class="reqn">N</code> for which vocabulary
+growth data is available</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>V</code></td>
+<td>
+<p>vector of corresponding vocabulary sizes <code class="reqn">V(N)</code>, or
+expected vocabulary sizes <code class="reqn">E[V(N)]</code> for an interpolated or
+expected VGC.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Vm</code></td>
+<td>
+<p>optional list of growth vectors for hapaxes <code class="reqn">V_1(N)</code>,
+dis legomena <code class="reqn">V_2(N)</code>, etc.  Up to 9 growth vectors are accepted
+(i.e.\ <code class="reqn">V_m(N)</code> for <code class="reqn">m \le 9</code>).  For an interpolated or
+expected VGC, the vectors represent expected class sizes
+<code class="reqn">E[V_m(N)]</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>VV</code></td>
+<td>
+<p>optional vector of variances
+<code class="reqn">\mathop{Var}[V(N)]</code> for an interpolated or expected
+VGC</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>VVm</code></td>
+<td>
+<p>optional list of variance vectors
+<code class="reqn">\mathop{Var}[V_m(N)]</code> for an expected VGC.  If
+present, these vectors must be defined for exactly the same frequency
+classes <code class="reqn">m</code> as the vectors in <code>Vm</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expected</code></td>
+<td>
+<p>if <code>TRUE</code>, the object represents an interpolated
+or expected VGC (for informational purposes only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check</code></td>
+<td>
+<p>by default, various sanity checks are performed on the
+data supplied to the <code>spc</code> constructor.  Specify
+<code>check=FALSE</code> to skip these sanity test, e.g. when
+automatically processing data from external programs that may be
+numerically unstable.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>If variances (<code>VV</code> or <code>VVm</code>) are specified for an expected
+VGC, all relevant vectors must be given.  In other words, <code>VV</code>
+always has to be present in this case, and <code>VVm</code> has to be
+present whenever <code>Vm</code> is specified, and must contain vectors for
+exactly the same frequency classes.
+</p>
+<p><code>V</code> and <code>VVm</code> are integer vectors for an observed VGC, but
+will usually be fractional for an interpolated or expected VGC.
+</p>
+<p>A <code>vgc</code> object is a data frame with the following variables:
+</p>
+
+<dl>
+<dt><code>N</code></dt>
+<dd>
+<p>sample size <code class="reqn">N</code> </p>
+</dd>
+<dt><code>V</code></dt>
+<dd>
+<p>corresponding vocabulary size (either observed
+vocabulary size <code class="reqn">V(N)</code> or expected vocabulary size
+<code class="reqn">E[V(N)]</code>)</p>
+</dd>
+<dt>
+<code>V1</code> ... <code>V9</code>
+</dt>
+<dd>
+<p>optional: observed or expected
+spectrum elements (<code class="reqn">V_m(N)</code> or <code class="reqn">E[V_m(N)]</code>).  Not all of
+these variables have to be present, but there must not be any
+"gaps" in the spectrum.</p>
+</dd>
+<dt><code>VV</code></dt>
+<dd>
+<p>optional: variance of expected vocabulary size,
+<code class="reqn">\mathop{Var}[V(N)]</code> </p>
+</dd>
+<dt>
+<code>VV1</code> ... <code>VV9</code>
+</dt>
+<dd>
+<p>optional: variances of expected
+spectrum elements, <code class="reqn">\mathop{Var}[V_m(N)]</code>.  If
+variances are present, they must be available for exactly the same
+frequency classes as the corresponding expected values.</p>
+</dd>
+</dl>
+<p>The following attributes are used to store additional information
+about the vocabulary growth curve:
+</p>
+
+<dl>
+<dt><code>m.max</code></dt>
+<dd>
+<p>if non-zero, the VGC includes spectrum elements
+<code class="reqn">V_m(N)</code> for <code class="reqn">m</code> up to <code>m.max</code>.  For <code>m.max=0</code>,
+no spectrum elements are present.</p>
+</dd>
+<dt><code>expected</code></dt>
+<dd>
+<p>if <code>TRUE</code>, the object represents an
+interpolated or expected VGC, with expected vocabulary size and
+spectrum elements.  Otherwise, the object represents an observed
+VGC.</p>
+</dd>
+<dt><code>hasVariances</code></dt>
+<dd>
+<p>indicates whether or not the <code>VV</code>
+variable is present (as well as <code>VV1</code>, <code>VV2</code>, etc., if
+appropriate)</p>
+</dd>
+</dl>
+<h3>Value</h3>
+
+<p>An object of class <code>vgc</code> representing the specified vocabulary
+growth curve.  This object should be treated as read-only (although
+such behaviour cannot be enforced in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>read.vgc</code>, <code>write.vgc</code>, <code>plot.vgc</code>,
+<code>vgc.interp</code>, <code>lnre.vgc</code> 
+</p>
+<p>Generic methods supported by <code>vgc</code> objects are
+<code>print</code>, <code>summary</code>, <code>N</code>,
+<code>V</code>, <code>Vm</code>, <code>VV</code>, and
+<code>VVm</code>.
+</p>
+<p>Implementation details and non-standard arguments for these methods
+can be found on the manpages <code>print.vgc</code>,
+<code>summary.vgc</code>, <code>N.vgc</code>, <code>V.vgc</code>,
+etc.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## load Dickens' work empirical vgc and take a look at it
+
+data(Dickens.emp.vgc)
+summary(Dickens.emp.vgc)
+print(Dickens.emp.vgc)
+
+plot(Dickens.emp.vgc,add.m=1)
+
+## vectors of sample sizes in the vgc, and the
+## corresponding V and V_1 vectors
+Ns &lt;- N(Dickens.emp.vgc)
+Vs &lt;- V(Dickens.emp.vgc)
+Vm &lt;- V(Dickens.emp.vgc,1)
+
+## binomially interpolated V and V_1 at the same sample sizes
+## as the empirical curve
+data(Dickens.spc)
+Dickens.bin.vgc &lt;- vgc.interp(Dickens.spc,N(Dickens.emp.vgc),m.max=1)
+
+## compare observed and interpolated
+plot(Dickens.emp.vgc,Dickens.bin.vgc,add.m=1,legend=c("observed","interpolated"))
+
+
+## load Italian ultra- prefix data
+data(ItaUltra.spc)
+
+## compute zm model
+zm &lt;- lnre("zm",ItaUltra.spc)
+
+## compute vgc up to about twice the sample size
+## with variance of V
+zm.vgc &lt;- lnre.vgc(zm,(1:100)*70, variances=TRUE)
+
+summary(zm.vgc)
+print(zm.vgc)
+
+## plot with confidence intervals derived from variance in
+## vgc (with larger datasets, ci will typically be almost
+## invisible)
+plot(zm.vgc)
+
+## for more examples of vgc usages, see manpages of lnre.vgc,
+## plot.vgc, print.vgc  and vgc.interp
+
+
+</code></pre>
+
+
+</div>

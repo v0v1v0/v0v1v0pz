@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>maize.model2</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The basic Maize model for use with maize.simule</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper pour maize.model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">maize.model2(param, weather, sdate, ldate)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>: a vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weather</code></td>
+<td>
+<p>: weather data.frame for one single year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sdate</code></td>
+<td>
+<p>: sowing date</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ldate</code></td>
+<td>
+<p>: last date</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with daily TT, LAI,B
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">weather = maize.weather(working.year=2010, working.site=30,weather_all=weather_EuropeEU)
+maize.model2(maize.define.param()["nominal",], weather, sdate=100, ldate=250)
+</code></pre>
+
+
+</div>

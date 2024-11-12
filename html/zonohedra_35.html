@@ -1,0 +1,134 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>inside</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+test points for being inside a zonotope
+</h2>
+
+<h3>Description</h3>
+
+<p>Test points for being inside a zonotope.
+The boundary points are considered to be inside.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonotope'
+inside( x, p )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonotope</b> object - a <b>zonohedron</b>, <b>zonogon</b>,
+or <b>zonoseg</b>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+
+<p>an NxM numeric matrix, where M is the dimension of the zonotope.
+The points to be tested are in the rows.
+<code>p</code> can also be a numeric vector that can be converted
+to such a matrix, by row.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The given zonotope is viewed as the intersection of <em>slabs</em>;
+there is a slab for each hyperplane in the simplified matroid.
+For each slab a signed distance to boundary of the slab
+is computed.
+For points outside the slab the distance is positive,
+for points on the boundary, the distance is 0,
+and for points in the interior of the slab the distance is negative.
+The distance to the zonotope is computed as the
+maximum over all these slab distances,
+and the <em>critical hyperplane</em> index is recorded.
+A point is inside iff the zonotope distance <code class="reqn">\le</code> 0.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>inside.zonotope()</code> returns a <code>data.frame</code> with N rows and these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>the given point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inside</code></td>
+<td>
+<p>whether the point is inside the zonotope. For boundary points, <code>inside</code> is <code>TRUE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance</code></td>
+<td>
+<p>the distance from the point to the zonotope. For boundary points, <code>distance</code> is 0.  When <code>distance</code> &gt; 0, it may be larger
+than the true mathematical distance, so <code>distance</code> is really
+a pseudo-distance.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>idxhyper</code></td>
+<td>
+<p>the index of the <em>critical hyperplane</em> in the
+simplified matroid. This is the index of the slab where the maximum slab distance was taken.
+For a <b>zonoseg</b> there is only 1 hyperplane (the empty set)
+so this is always 1.
+</p>
+</td>
+</tr>
+</table>
+<p>If the row names of <code>p</code> are unique,
+they are copied to the row names of the output.
+<br>
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>inside2trans()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zono1 = zonoseg( c(1,-2,3,0,-3,-4) )
+
+getsegment(zono1)
+# [1] -9 4
+
+p = c( 0, -3*pi, pi, 2*pi, getsegment(zono1) )
+
+inside( zono1, p )
+#           p inside   distance idxhyper
+# 1  0.000000   TRUE -4.0000000        1
+# 2 -9.424778  FALSE  0.4247780        1
+# 3  3.141593   TRUE -0.8584073        1
+# 4  6.283185  FALSE  2.2831853        1
+# 5 -9.000000   TRUE  0.0000000        1
+# 6  4.000000   TRUE  0.0000000        1
+</code></pre>
+
+
+</div>

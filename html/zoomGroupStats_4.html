@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>batchVideoFaceAnalysis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Batch analyze faces in videos</h2>
+
+<h3>Description</h3>
+
+<p>Using this function you can analyze attributes of facial expressions within
+a batch of video files. This batch approach requires breaking the videos into
+still frames in advance by using the batchGrabVideoStills() function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">batchVideoFaceAnalysis(
+  batchInfo,
+  imageDir,
+  sampleWindow,
+  facesCollectionID = NA
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>batchInfo</code></td>
+<td>
+<p>the batchInfo data.frame that is output from batchProcessZoomOutput</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imageDir</code></td>
+<td>
+<p>the path to the top-level directory of where all the images are stored</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sampleWindow</code></td>
+<td>
+<p>an integer indicating how frequently you have sampled images
+in number of seconds.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>facesCollectionID</code></td>
+<td>
+<p>name of an 'AWS' collection with identified faces</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with one record for every face detected in each frame across all meetings. For each face, there is an abundance of information from 'AWS Rekognition'. This output is quite detailed. Note that there will be a varying number of faces per sampled frame in the video. Imagine that you have sampled the meeting and had someone rate each person's face within that sampled moment.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  vidOut = batchVideoFaceAnalysis(batchInfo=zoomOut$batchInfo, 
+  imageDir="~/Documents/meetingImages",
+  sampleWindow = 300)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

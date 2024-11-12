@@ -1,0 +1,81 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zendesk</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> zendesk</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to create a Zendesk.com API session.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zendesk(username, password, url)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>username</code></td>
+<td>
+
+<p>Your Zendesk username.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>password</code></td>
+<td>
+
+<p>Your Zendesk password.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+
+<p>Your organization's Zendesk URL (e.g. https://help.basho.com).
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function will initialize a Zendesk.com API session.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Initializes a Zendesk.com API session. Will throw an error if all 3 parameters are not passed to the function.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tanya Cashorali</p>
+
+
+<h3>References</h3>
+
+<p>http://developer.zendesk.com/documentation/rest_api/introduction.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+    ## This requires Zendesk authentication
+    zendesk('username', 'password', 'https://help.basho.com')
+
+## End(Not run)</code></pre>
+
+
+</div>

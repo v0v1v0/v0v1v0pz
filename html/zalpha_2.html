@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>LDprofile</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dataset containing an example LD profile</h2>
+
+<h3>Description</h3>
+
+<p>A simulated LD profile, containing example LD statistics for
+genetic distances of 0 to 0.0049, in bins of size 0.0001.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(LDprofile)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 50 rows and 5 variables:
+</p>
+
+<dl>
+<dt>bin</dt>
+<dd>
+<p>the lower bound of each bin</p>
+</dd>
+<dt>rsq</dt>
+<dd>
+<p>the expected <code class="reqn">r^2</code> value for a pair of SNPs, where the genetic distance between them falls in the given bin</p>
+</dd>
+<dt>sd</dt>
+<dd>
+<p>the standard deviation of the expected <code class="reqn">r^2</code> value</p>
+</dd>
+<dt>Beta_a</dt>
+<dd>
+<p>the first shape parameter for the Beta distribution fitted for this bin</p>
+</dd>
+<dt>Beta_b</dt>
+<dd>
+<p>the second shape parameter for the Beta distribution fitted for this bin</p>
+</dd>
+</dl>
+</div>

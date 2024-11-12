@@ -1,0 +1,125 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetZestimate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make request to Zillow API GetZestimate Web Service</h2>
+
+<h3>Description</h3>
+
+<p>For a specified Zillow property identifier (zpid), the GetZestimate API
+returns:
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetZestimate(
+  zpid = NULL,
+  rentzestimate = FALSE,
+  zws_id = getOption("ZillowR-zws_id"),
+  url = "http://www.zillow.com/webservice/GetZestimate.htm"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zpid</code></td>
+<td>
+<p>The Zillow Property ID for the property for which to obtain
+information. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rentzestimate</code></td>
+<td>
+<p>Return Rent Zestimate information if available (logical,
+default: false).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zws_id</code></td>
+<td>
+<p>The Zillow Web Service Identifier. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>URL for the GetZestimate Web Service. Required.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+
+<ul>
+<li>
+<p> The most recent property Zestimate
+</p>
+</li>
+<li>
+<p> The date the Zestimate was computed
+</p>
+</li>
+<li>
+<p> The valuation range
+</p>
+</li>
+<li>
+<p> The Zestimate ranking within the property's ZIP code.
+</p>
+</li>
+<li>
+<p> The full property address and geographic location (latitude/longitude)
+and a set of identifiers that uniquely represent the region (ZIP code,
+city, county &amp; state) in which the property exists.
+</p>
+</li>
+</ul>
+<p>The GetZestimate API will only surface properties for which a Zestimate
+exists. If a request is made for a property that has no Zestimate, an error
+code is returned. Zillow doesn't have Zestimates for all the homes in its
+database. For such properties, we do have tax assessment data, but that is
+not provided through the API. For more information, see our Zestimate
+coverage.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A named list with the following elements:
+</p>
+
+<dl>
+<dt><strong>request</strong></dt>
+<dd>
+<p>a list with the request parameters</p>
+</dd>
+<dt><strong>message</strong></dt>
+<dd>
+<p>a list of status code(s) and message(s)
+returned by the API</p>
+</dd>
+<dt><strong>response</strong></dt>
+<dd>
+<p>an XMLNode with the API-specific response
+values. At this time, no further coercion is performed, so you
+may have to use functions from the <code>XML</code> package to extract
+the desired output.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+GetZestimate(zpid = 48749425)
+GetZestimate(zpid = 48749425, rentzestimate = TRUE)
+## End(Not run)
+</code></pre>
+
+
+</div>

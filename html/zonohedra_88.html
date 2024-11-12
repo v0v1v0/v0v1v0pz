@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spherize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+spherize a zonotope
+</h2>
+
+<h3>Description</h3>
+
+<p>The input is a zonotope with a best-fit ellipsoid
+(or ellipse for a <b>zonogon</b>)
+with axes that may have very different lengths.
+The function computes a <em>spherizing matrix</em> <code>W</code>, and then
+transforms the zonotope so its boundary is close to a sphere.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonotope'
+spherize( x, method='ZCA', ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a zonotope object -  a <b>zonohedron</b>, a <b>zonogon</b>,
+or a <b>zonoseg</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+
+<p>for computing the matrix <code>W</code>, either <code>'ZCA'</code> or <code>'PCA-COR'</code>.
+Matching is partial and case-insensitive.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The 2 methods are taken from <b>Kessy, et. al.</b>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>After computing the matrix <code>W</code>,
+the function return <code>lintransform(x,W)</code>.
+The <code>"sphering"</code> attribute is set to <code>W</code>.
+<br>
+If <code>x</code> is a 1D <b>zonoseg</b>, sphering is not really possible,
+so the function prints a warning message and returns <code>x</code>.
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Agnan Kessy, Alex Lewin, Korbinian Strimmer.
+<b>Optimal whitening and decorrelation</b>.<br><a href="https://arxiv.org/abs/1512.00809">https://arxiv.org/abs/1512.00809</a>
+v4 2016.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>lintransform()</code>
+</p>
+
+
+</div>

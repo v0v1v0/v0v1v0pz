@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zb_plot</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot zones</h2>
+
+<h3>Description</h3>
+
+<p>This function opens a static map of the zones
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zb_plot(
+  z,
+  palette = c("rings", "hcl", "dartboard"),
+  title = NULL,
+  text_size = c(0.3, 1),
+  zone_label_thres = 0.002
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>An 'sf' object containing zones covering the region</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>palette</code></td>
+<td>
+<p>Palette type, one of <code>"hcl"</code> (a palette based on the HCL color space), <code>"rings"</code> (a palette which colors the rings using the YlOrBr color brewer palette), <code>"dartboard"</code> (a palette which resembles a dartboard)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p>Plot title</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>text_size</code></td>
+<td>
+<p>Vector of two numeric values that determine the relative text sizes. The first determines the smallest text size and the second one the largest text size. The largest text size is used for the outermost circle, and the smallest for the central circle in case there are 9 or more circles. If there are less circles, the relative text size is larger (see source code for exact method)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zone_label_thres</code></td>
+<td>
+<p>This number determines in which zones labels are printed, namely each zone for which the relative area size is larger than 'zone_label_thres'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A static plot created using R's base 'graphics' package
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zb_plot(zb_zone(london_c()))
+</code></pre>
+
+
+</div>

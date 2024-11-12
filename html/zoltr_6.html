@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_timezero</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a timezero</h2>
+
+<h3>Description</h3>
+
+<p>Creates the timezero in the passed project using the passed list. Fails if a timezero with the passed timezero_date
+already exists.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_timezero(
+  zoltar_connection,
+  project_url,
+  timezero_date,
+  data_version_date = NULL,
+  is_season_start = FALSE,
+  season_name = ""
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>project_url</code></td>
+<td>
+<p>url of a project in zoltar_connection's projects. this is the project the new timezero will be
+created in</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timezero_date</code></td>
+<td>
+<p>The timezero's date in YYYY-MM-DD format as documented at https://docs.zoltardata.com/fileformats/#project-creation-configuration-json</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data_version_date</code></td>
+<td>
+<p>Optional data version date in the same format. Pass NULL if the timezero does not have one</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>is_season_start</code></td>
+<td>
+<p>TRUE if this starts a season, and FALSE otherwise</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>season_name</code></td>
+<td>
+<p>Applicable when is_season_start is true, names the season, e.g., "2010-2011"</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>model_url of the newly-created timezero
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  new_timezero_url &lt;- create_timezero(conn, "https://www.zoltardata.com/api/project/9/",
+                     "2022-11-08", "2022-11-09", TRUE, "2010-2011")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

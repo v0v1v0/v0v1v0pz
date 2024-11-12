@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>deflate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compress a raw GZIP stream</h2>
+
+<h3>Description</h3>
+
+<p>Compress a raw GZIP stream
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">deflate(buffer, level = 6L, pos = 1L, size = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>buffer</code></td>
+<td>
+<p>Raw vector, containing the data to compress.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Compression level, integer between 1 (fatest) and 9 (best).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pos</code></td>
+<td>
+<p>Start position of data to compress in <code>buffer</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>size</code></td>
+<td>
+<p>Compressed size estimate, or <code>NULL</code>. If not given, or too
+small, the output buffer is resized multiple times.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Named list with three entries:
+</p>
+
+<ul>
+<li> <p><code>output</code>: raw vector, the compressed data,
+</p>
+</li>
+<li> <p><code>bytes_read</code>: number of bytes used from <code>buffer</code>,
+</p>
+</li>
+<li> <p><code>bytes_written</code>: number of bytes written to the output buffer.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>base::memCompress()</code> does the same with <code>type = "gzip"</code>,
+but it does not tell you the number of bytes read from the input.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data_gz &lt;- deflate(charToRaw("Hello world!"))
+inflate(data_gz$output)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,125 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multKM</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Multiplicative Kaplan-Meier smoothing spline (KMSS) replacement
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements non-parametric multiplicative KMSS imputation of left-censored values (e.g. values below detection limit, rounded zeros) in compositional data sets. It is based on simulation from a smoothing spline fitted to the Kaplan-Meier (KM) estimate of the empirical cumulative distribution function (ECDF) of the data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multKM(X, label = NULL, dl = NULL, n.draws = 1000, n.knots = NULL,
+          z.warning = 0.8, z.delete = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Compositional data set (<code>matrix</code> or <code>data.frame</code> class).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote zeros/unobserved left-censored values in <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dl</code></td>
+<td>
+
+<p>Numeric vector or matrix of detection limits/thresholds. These must be given on the same scale as <code>X</code>. If <code>NULL</code> the column minima are used as thresholds.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.draws</code></td>
+<td>
+
+<p>Number of random draws from the inverse KM ECDF generated to produce an averaged imputed value (<code>n.draws=1000</code>, default).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.knots</code></td>
+<td>
+<p>Integer or function giving the number of knots used for fitting a cubic smoothing spline to the KM ECDF (see <code>smooth.spline</code> for default value). It allows for a vector or list of settings per column of <code>X</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.warning</code></td>
+<td>
+<p>Threshold used to identify individual rows or columns including an excess of zeros/unobserved values (to be specify in proportions, default <code>z.warning=0.8</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.delete</code></td>
+<td>
+<p>Logical value. If set to <code>TRUE</code>, rows/columns identified by <code>z.warning</code> are omitted in the imputed data set. Otherwise, the function stops in error when rows/columns are identified by <code>z.warning</code> (default <code>z.delete=TRUE</code>).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function imputes left-censored compositional values by averaging (geometric mean) n random draws (<code>n.draws</code> argument) from a cubic smoothing spline curve fitting the inverse KM ECDF below the corresponding limit of detection or censoring threshold. It then applies a multiplicative adjustment to preserve the multivariate compositional properties of the samples. It allows for either single (<code>vector</code> form) or multiple (<code>matrix</code> form, same size as <code>X</code>) limits of detection by component. Although note that it is equivalent to simple substitution by the limit of detection for singly censored components. Any threshold value can be set for non-censored elements (e.g. use 0 if no threshold for a particular column or element of the data matrix).
+</p>
+<p>It produces an imputed data set on the same scale as the input data set. If <code>X</code> is not closed to a constant sum, then the results are adjusted to provide a compositionally equivalent data set, expressed in the original scale, which leaves the absolute values of the observed components unaltered.
+</p>
+<p>The level of smoothing of the estimated spline can be controlled by the <code>n.knots</code> argument. The function <code>splineKM</code> can assist in choosing a finer value, although the default setting works generally well.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> object containing the imputed compositional data set expressed in the original scale.
+</p>
+
+
+<h3>References</h3>
+
+<p>Palarea-Albaladejo J. and Martin-Fernandez JA. zCompositions – R package
+for multivariate imputation of left-censored data under a compositional approach.
+Chemometrics and Intelligent Laboratory Systems 2015; 143: 85-96.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code>, <code>splineKM</code>, <code>lrEM</code>, <code>lrSVD</code>, <code>lrDA</code>, <code>multRepl</code>, <code>multLN</code>, <code>cmultRepl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Water)
+data(mdl) # matrix of limits of detection for Water
+
+Water_multKM &lt;- multKM(Water,label=0,dl=mdl)
+
+# Different smoothing degree by component
+Water_multKM2 &lt;- multKM(Water,label=0,dl=mdl,n.knots=c(25,50,30,75))
+
+# Easy to use for KM multiple imputation (m = 10)
+Water.mi &lt;- vector("list",length=10)
+for (m in 1:10){
+  Water.mi[[m]] &lt;- multKM(Water,label=0,dl=mdl,n.draws=1)
+}
+
+</code></pre>
+
+
+</div>

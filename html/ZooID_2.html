@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>datasetPreProcessing</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>datasetPreProcessing</h2>
+
+<h3>Description</h3>
+
+<p>Preprocessing a directory structure of zooplankton images, and saving the resultant images
+to another directory structure
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">datasetPreProcessing(
+  zpFileDir,
+  zpSaveDir,
+  minPixels = 5000,
+  imageExtension = ".jpg",
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zpFileDir</code></td>
+<td>
+<p>Directory of subdirectories containing zooplankton images</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zpSaveDir</code></td>
+<td>
+<p>Directory to setup the subdirectory structure for the extracted images</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minPixels</code></td>
+<td>
+<p>Integer specifying the minimum number of pixels allowed in an extracted image
+See "batch_imagePreProcessing" for details [Default: 5000]</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imageExtension</code></td>
+<td>
+<p>String specifying the extension the images will have (must include ".")
+[Default: ".jpg"]</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Boolean variable indicating whether the script should print info to console
+[Default: TRUE]</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+zpFileDir &lt;- 'Users/$(whoami)/Images/ZooplanktonImages'
+zpSaveDir &lt;- 'Users/$(whoami)/Images/ExtractedImages'
+batchPreProcessing(zpImgDir, zpSaveDir)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

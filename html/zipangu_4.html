@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>convert_prefecture</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert prefecture names to roman or kanji</h2>
+
+<h3>Description</h3>
+
+<p>Convert prefecture names to roman or kanji
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">convert_prefecture(x, to)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>prefecture name in kanji</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>conversion destination</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">convert_prefecture(c("tokyo-to", "osaka", "ALL"), to="kanji")
+convert_prefecture(
+  c("\u6771\u4eac", "\u5927\u962a\u5e9c",
+  "\u5317\u6d77\u9053", "\u5168\u56fd"),
+  to = "roman")
+</code></pre>
+
+
+</div>

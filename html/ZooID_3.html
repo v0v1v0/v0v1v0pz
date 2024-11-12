@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>imagePreProcessing</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>imagePreProcessing</h2>
+
+<h3>Description</h3>
+
+<p>Preprocessing the passed image
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">imagePreProcessing(zpFilepath)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zpFilepath</code></td>
+<td>
+<p>Filepath to the zooplankton image to be processed</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>extractedImage The section of the image extracted by the algorithm,
+or NULL if the image was corrupted
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+zpFilepath &lt;- 'Users/$(whoami)/Images/ZooplanktonImages/ostracod1.png'
+ostracod1Image &lt;- imagePreProcessing(zpFilepath)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

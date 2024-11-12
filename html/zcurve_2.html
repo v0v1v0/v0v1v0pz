@@ -1,0 +1,193 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>control_density</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Control settings for the z-curve 2.0 density algorithm</h2>
+
+<h3>Description</h3>
+
+<p>All settings are passed to the density fitting
+algorithm. All unspecified settings are set to the default value.
+Setting <code>model = "KD2"</code> sets all settings to the default
+value irrespective of any other setting and fits z-curve as
+describe in Bartoš and Schimmack (2020). In order to fit the
+z-curve 1.0 density algorithm, set <code>model = "KD1"</code> and go to
+control_density_v1
+</p>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>version</code></td>
+<td>
+<p>Which version of z-curve should be fitted. Defaults to
+<code>2</code> = z-curve 2.0. Set to <code>1</code> in order to fit the original
+version of z-curve. For its settings page go to control_density_v1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>A type of model to be fitted, defaults to <code>"KD2"</code>
+(another possibility is <code>"KD1"</code> for the original z-curve 1.0, see
+control_density_v1 for its settings)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig_level</code></td>
+<td>
+<p>An alpha level of the test statistics, defaults to
+<code>.05</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>A beginning of fitting interval, defaults to
+<code>qnorm(sig_level/2,lower.tail = F)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>b</code></td>
+<td>
+<p>An end of fitting interval, defaults to <code>6</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu</code></td>
+<td>
+<p>Means of the components, defaults to <code>seq(0,6,1)</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sigma</code></td>
+<td>
+<p>A standard deviation of the components, "Don't touch this"
+\- Ulrich Schimmack, defaults to <code>1</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta_min</code></td>
+<td>
+<p>Lower limits for weights, defaults to
+<code>rep(0,length(mu))</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>theta_max</code></td>
+<td>
+<p>Upper limits for weights, defaults to
+<code>rep(1,length(mu))</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_iter</code></td>
+<td>
+<p>A maximum number of iterations for the nlminb
+optimization for fitting mixture model, defaults to <code>150</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max_eval</code></td>
+<td>
+<p>A maximum number of evaluation for the nlminb
+optimization for fitting mixture model, defaults to <code>1000</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion</code></td>
+<td>
+<p>A criterion to terminate nlminb optimization,
+defaults to <code>1e-03</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bw</code></td>
+<td>
+<p>A bandwidth of the kernel density estimation, defaults to <code>.10</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>aug</code></td>
+<td>
+<p>Augment truncated kernel density, defaults to <code>TRUE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>aug.bw</code></td>
+<td>
+<p>A bandwidth of the augmentation, defaults to <code>.20</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n.bars</code></td>
+<td>
+<p>A resolution of density function, defaults to <code>512</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>density_dbc</code></td>
+<td>
+<p>Use bckden to estimate a truncated kernel density,
+defaults to <code>FALSE</code>, in which case density is used</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>compute_FDR</code></td>
+<td>
+<p>Whether to compute FDR, leads to noticeable increase in
+computation, defaults to <code>FALSE</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion_FDR</code></td>
+<td>
+<p>A criterion for estimating the maximum FDR, defaults
+to <code>.02</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>criterion_FDR_dbc</code></td>
+<td>
+<p>A criterion for estimating the maximum FDR using
+the bckden function, defaults to <code>.01</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>precision_FDR</code></td>
+<td>
+<p>A maximum FDR precision, defaults to <code>.05</code></p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Bartoš F, Schimmack U (2020).
+“Z-curve. 2.0: Estimating Replication Rates and Discovery Rates.”
+<a href="https://doi.org/10.31219/osf.io/wr93f">doi:10.31219/osf.io/wr93f</a>, submitted for publication.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zcurve()</code>, control_density_v1, control_EM
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># to decrease the criterion and increase the number of iterations
+ctrl &lt;- list(
+   max_iter  = 300,
+   criterion = 1e-4
+)
+## Not run: zcurve(OSC.z, method = "density", control = ctrl)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Catalan</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Catalan numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A000108">A000108</a>, the <em>n</em>th <em>Catalan</em> number is given as
+</p>
+<p style="text-align: center;"><code class="reqn">C_n = \frac{(2n)!}{(n+1)!n!}</code>
+</p>
+
+<p>where the first 6 entries are 1, 1, 2, 5, 14, 42 with <code class="reqn">n\ge 0.</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Catalan(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 30 Catalan numbers
+print(Catalan(30))
+
+</code></pre>
+
+
+</div>

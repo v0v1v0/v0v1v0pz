@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIPG_main</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit zero-inflated poisson-gamma model via EM Algorithm</h2>
+
+<h3>Description</h3>
+
+<p>Fit zero-inflated poisson-gamma model via EM Algorithm
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIPG_main(
+  data,
+  W,
+  M,
+  X,
+  X_star,
+  return_model = TRUE,
+  pbWald_list = NULL,
+  bWald_list = NULL
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Data.frame for covariates of interest</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+<p>Count data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>M</code></td>
+<td>
+<p>Sequencing depth, ZIPG use log(M) as offset by default</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Formula of covariates of differential abundance</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X_star</code></td>
+<td>
+<p>Formula of covariates of differential varibility</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return_model</code></td>
+<td>
+<p>whether return full complete imfomation for fitted model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pbWald_list</code></td>
+<td>
+<p>A list of arguments for parameteric bootstrap Wald test,
+B for bootstrap sample size, X0 and X_star0 for formula of covariates included in H0</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bWald_list</code></td>
+<td>
+<p>A list of arguments for non-parameteric bootstrap Wald test, B for bootstrap sample size,</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of ZIPG fitted model. Use ZIPG_summary() for a quick look at the results.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Dietary)
+dat = Dietary
+ZIPG_res &lt;- ZIPG_main(data = dat$COV,
+X = ~ALC01+nutrPC1+nutrPC2, X_star = ~ ALC01,
+W = dat$OTU[,100], M = dat$M )
+ZIPG_summary(ZIPG_res)
+</code></pre>
+
+
+</div>

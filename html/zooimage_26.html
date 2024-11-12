@@ -1,0 +1,280 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIClass</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Create and manipulate 'ZIClass' objects </h2>
+
+<h3>Description</h3>
+
+<p>'ZIClass' objects are key items in ZooImage. They contain all what is required
+for automatically classify plancton from .zid files. They can be used as
+blackboxes by all users (but require users trained in machine learning
+techniques to build them). Hence, ZooImage is made very simple for biologists
+that just want to use classifiers but do not want to worry about all the
+complexities of what is done inside the engine!
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIClass(formula, data, method = getOption("ZI.mlearning", "mlRforest"),
+    calc.vars = getOption("ZI.calcVars", calcVars), drop.vars = NULL,
+    drop.vars.def = dropVars(), cv.k = 10, cv.strat = TRUE,
+    ..., subset, na.action = na.omit)
+
+## S3 method for class 'ZIClass'
+print(x, ...)
+## S3 method for class 'ZIClass'
+summary(object, sort.by = "Fscore", decreasing = TRUE,
+    na.rm = FALSE, ...)
+## S3 method for class 'ZIClass'
+predict(object, newdata, calc = TRUE, class.only = TRUE,
+    type = "class", ...)
+## S3 method for class 'ZIClass'
+confusion(x, y = response(x), labels = c("Actual", "Predicted"),
+    useNA = "ifany", prior, use.cv = TRUE, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+  
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p> a formula with left member being the class variable and the
+right member being a list of predicting variables separated by a '+' sign.
+Since <code>data</code> is supposed to be previously filtered using
+<code>calc.vars</code> and the class variable in 'ZITrain' object is always
+named <code>Class</code>, the formula almost always reduces to <code>Class ~ .</code> </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p> a data frame (a 'ZITrain' object usually), containing both
+measurement and manual classification (a factor variables usually named
+'Class'). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p> the machine learning method to use. It should produce
+results compatible with <code>mlearning</code> objects as returned by the various
+<code>mlXXX()</code> functions in the <code>mlearning</code> package. By default, the
+random forest algorithm is used (it is among the ones that give best result
+with plankton). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>calc.vars</code></td>
+<td>
+<p> a function to use to calculate variables from the original
+data frame. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop.vars</code></td>
+<td>
+<p> a character vector with names of variables to drop for the
+classification, or <code>NULL</code> (by default) to keep them all. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>drop.vars.def</code></td>
+<td>
+<p> a second list of variables to drop contained in a
+character vector. That list is supposed to match the name of variables that
+are obviously non informative and are dropped by default. It can be gathered
+automatically using <code>dropVars()</code>. See <code>?calcVars</code> for more details. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.k</code></td>
+<td>
+<p> the k times for cross-validation. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cv.strat</code></td>
+<td>
+<p> do we use a stratified sampling for cross-validation?
+(recommended). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> further arguments to pass to the classification algorithm (see
+help of that particular function). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subset</code></td>
+<td>
+<p> an expression for subsetting to original data frame. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.action</code></td>
+<td>
+<p> the function to filter the initial data frame for missing
+values. Althoung the default in R is <code>na.fail</code>, leading to failure if
+at least one <code>NA</code> is found in the data frame, the default here is
+<code>na.omit</code> which leads to elimination of all lines containing at least
+one <code>NA</code>. Take care about how many items remain, if you encounter
+many <code>NA</code>s in your dataset! </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p> a 'ZIClass' object. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p> a 'ZIClass' object. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>newdata</code></td>
+<td>
+<p> a 'ZIDat' object, or a 'data.frame' to use for prediction. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sort.by</code></td>
+<td>
+<p> the statistics to use to sort the table (by default, F-score). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>decreasing</code></td>
+<td>
+<p> do we sort in increasing or decreasing order? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.rm</code></td>
+<td>
+<p> do we eliminate entries with missing data first (using
+<code>na.omit()</code>)? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>calc</code></td>
+<td>
+<p> a boolean indicating if variables have to be recalculated
+before running the prediction. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>class.only</code></td>
+<td>
+<p> if TRUE, return just a vector with classification,
+otherwise, return the 'ZIDat' object with 'Predicted' column appended to it. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p> the type of result to return, <code>"class"</code> by default. No other
+value is permitted if class.only is <code>FALSE</code>. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p> a factor with reference classes. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>labels</code></td>
+<td>
+<p> labels to use for, respectively, the reference class and the
+predicted class. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>useNA</code></td>
+<td>
+<p> do we keep NAs as a separate category? The default <code>"ifany"</code>
+creates this category only if there are missing values. Other possibilities
+are <code>"no"</code>, or <code>"always"</code>. The default is suitable for test sets
+because unclassified items (those in the "\_" directory or one of its
+subdirectories) get <code>NA</code> for Class. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prior</code></td>
+<td>
+<p> class frequencies to use for first classifier that
+is tabulated in the rows of the confusion matrix. This is either a single
+positive numeric to set all class frequencies to this value (use 1 for
+relative frequencies and 100 for relative freqs in percent), or a vector of
+positive numbers of the same length as the levels in the object. If the
+vector is named, names must match levels. Alternatively, providing
+<code>NULL</code> or an object of null length resets row class prefencies into
+their initial values. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>use.cv</code></td>
+<td>
+<p> the predicted values extracted from the 'ZIClass' object can
+either be the predicted values from the training set, or the cross-validated
+predictions (by default). Most of the time, you want the cross-validated
+predictions, which allows for not (or less) biased evaluation of the
+classifier prediction... So, if you don't know, you are probably better
+leaving the default value. </p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>ZIClass()</code> is the constructor that build the 'ZIClass' object.
+<code>print()</code>, <code>summary()</code> and <code>predict())</code> are the methods to
+print the object, to calculate statistics on this classifier based on the
+confusion matrix and to predict groups for ZooImage samples, using one
+'ZIClass' object.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Always analyze carefully the properties, performances and limitations of a
+'ZIClass' object before using it to classify objects of one series. For
+instance, you can use <code>confusion()</code> to compare two classifiers, or an
+automatic classifier with a manual classification done by a taxonomists.
+Always respect the limitations in the use of a 'ZIClass' object (for
+instance, a classifier specific of one given series should not be used to
+classify items in a different series)! It is a good practice to make a
+report, documenting a 'ZIClass' object, together with the comments of
+taxonomists that made the reference training set, and with details on the
+analysis of the performances of the classifier.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>getTrain</code>, <code>confusion</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">##TODO...
+</code></pre>
+
+
+</div>

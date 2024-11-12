@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>convert_jdate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert Japanese date format to date object</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="../help/figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">convert_jdate(date, legacy = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>A character object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legacy</code></td>
+<td>
+<p>A logical to switch converter. If <code>TRUE</code> supplied, use the legacy
+converter instead of 'ICU' implementation.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<div class="sourceCode r"><pre>convert_jdate("R3/2/27")
+#&gt; [1] "2021-02-27"
+convert_jdate("\u4ee4\u548c2\u5e747\u67086\u65e5")
+#&gt; [1] "2020-07-06"
+</pre></div>
+
+
+</div>

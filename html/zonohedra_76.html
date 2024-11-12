@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rank</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Rank and Independence
+</h2>
+
+<h3>Description</h3>
+
+<p>calculate the rank of any subset of a matroid, or determine whether any subset is independent
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">rank( x, subs )
+
+is_independent( x, subs )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a matroid object, as returned from the constructor <code>matroid()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subs</code></td>
+<td>
+
+<p>a list of integer vectors, representing subsets of the ground set of <code>x</code>.
+<code>subs</code> can also be an integer vector, which is put into a
+list of length 1.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>rank(x,subs)</code> returns an integer vector with the same length
+as the list <code>subs</code>.
+The i'th value is the rank of the i'th set in <code>subs</code>.
+If a set is not a subset of the ground set of <code>x</code>, the value is <code>NA</code>, and a warning message is printed.
+<br><br><code>is_independent(x,subs)</code> returns a logical vector with the same length
+as the list <code>subs</code>.
+The i'th value is the independence of i'th set in <code>x</code>.
+It is equal to <code>TRUE</code> iff the rank of the subset is equal to
+the cardinality of the subset.
+<br><br>
+For both functions the names are copied from input to output.
+</p>
+
+
+<h3>References</h3>
+
+<p>Matroid - Wikipedia.
+<a href="https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057">https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>matroid()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># make a matroid with rank 3
+mat = matroid( classics.genlist[['RT']] )
+
+
+# the ground set itself should have rank 3
+rank( mat, getground(mat) )
+##  [1] 3
+
+
+# single points should have rank 1  (there are no loops)
+rank( mat, as.list(getground(mat)) )
+##  [1] 1 1 1 1 1 1
+
+# all hyperplanes should have rank 2
+rank( mat, gethyperplane(mat) )
+##  [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+
+
+# a point not in the ground set should have rank NA
+# and the emtpy set should have rank 0
+rank( mat, list(100L,integer(0)) )
+##  1 of 1 subsets are not a subset of ground.
+##  [1] NA 0
+</code></pre>
+
+
+</div>

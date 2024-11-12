@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Subtaxonomy</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Subtaxonomy under taxonomical category</h2>
+
+<h3>Description</h3>
+
+<p>Functions to obtain the subtaxonomy or the set of taxa included in a
+particular taxonomic group, according to the <code>zoologTaxonomy</code>
+by default.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Subtaxonomy(
+  taxon,
+  taxonomy = zoologTaxonomy,
+  thesaurus = zoologThesaurus$taxon
+)
+
+SubtaxonomySet(
+  taxon,
+  taxonomy = zoologTaxonomy,
+  thesaurus = zoologThesaurus$taxon
+)
+
+GetSpeciesIn(
+  taxon,
+  taxonomy = zoologTaxonomy,
+  thesaurus = zoologThesaurus$taxon
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>taxon</code></td>
+<td>
+<p>A name of any of the taxa, at any rank included in the taxonomy
+(from species to family in the zoolog taxonomy).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>taxonomy</code></td>
+<td>
+<p>A taxonomy from which to extract the subtaxonomy.
+By default <code>taxonomy = zoologTaxonomy</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurus</code></td>
+<td>
+<p>A thesaurus allowing datasets with different nomenclatures
+to be merged. By default <code>thesaurus = zoologThesaurus$taxon</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>Subtaxonomy</code> returns a data.frame with the same structure of the input
+taxonomy but with only the species (rows) included in the queried
+<code>taxon</code>, and the taxonomic ranks (columns)
+up to its level.
+</p>
+<p><code>SubtaxonomySet</code> returns a character vector including a unique copy
+(set) of all the taxa, at any taxonomic rank, under the queried
+<code>taxon</code>.
+Equivalent to Subtaxonomy but as a set instead of a dataframe.
+</p>
+<p><code>GetSpeciesIn</code> returns a character vector including the species included
+in the queried <code>taxon</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Get species of genus Sus:
+GetSpeciesIn("Sus")
+
+## Get species of family Bovidae:
+GetSpeciesIn("Bovidae")
+
+## Get the subtaxonomy of the Tribe Caprini:
+Subtaxonomy("Caprini")
+
+## Use SubtaxonomySet to join categories for computing log-ratios.
+## For this, we read an example dataset:
+dataFile &lt;- system.file("extdata", "dataValenzuelaLamas2008.csv.gz",
+                        package="zoolog")
+dataExample &lt;- utils::read.csv2(dataFile,
+                                na.strings = "",
+                                encoding = "UTF-8")
+## We illustrate with a subset of cases to make the example run
+## sufficiently fast:
+dataExample &lt;- dataExample[1:1000, ]
+## Compute the log-ratios joining all taxa from tribe \emph{Caprini}
+## to use the reference of \emph{Ovis aries}:
+categoriesCaprini &lt;- list('Ovis aries' = SubtaxonomySet("Caprini"))
+dataExampleWithLogs &lt;- LogRatios(dataExample,
+                                 joinCategories = categoriesCaprini)
+</code></pre>
+
+
+</div>

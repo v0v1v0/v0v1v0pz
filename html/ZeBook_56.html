@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mm.HI.fct</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Harvest index function for Muchow et al. (1990) Maize model</h2>
+
+<h3>Description</h3>
+
+<p>Compute the harvest index.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mm.HI.fct(day, daysilking, HImax, d1 = 0.015, d2 = 3)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>day</code></td>
+<td>
+<p>: day of the year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>daysilking</code></td>
+<td>
+<p>: day of the year for silking (day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>HImax</code></td>
+<td>
+<p>: maximum harvest index - genetic potential (-)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d1</code></td>
+<td>
+<p>: coefficient of the statistical relation (day-1, default : 0.015)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>d2</code></td>
+<td>
+<p>: coefficient of the statistical relation (day, default : 3)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Harvest index
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>maize.muchow.model</code>, <code>mm.A.fct</code>, <code>mm.LN.fct</code>, <code>maize.multisy</code>,
+<code>mm.FAS.fct</code>,<code>maize.muchow.graph</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(1:350, mm.HI.fct(1:350, 200, 0.75), type="l")
+</code></pre>
+
+
+</div>

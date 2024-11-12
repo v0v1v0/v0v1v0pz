@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zprint</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Print the result of a function in a pipe but return original object</h2>
+
+<h3>Description</h3>
+
+<p>Given <code>x</code> and <code>f</code>, this function prints <code>f(x)</code> before returning the original
+<code>x</code>. It is useful in a pipe, when one wants a to print the derivative of an
+object in the pipe but then return or assign the original object. A common
+use case is printing the 'summary() of an estimated model but then assigning
+the original model (rather than the summary object) to a variable for further
+processing.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zprint(x, f = NULL, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object, typically in a pipe.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>f</code></td>
+<td>
+<p>A function to be applied to <code>x</code> before printing.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments to be passed to <code>f</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The original object <code>x</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">if (getRversion() &gt;= "4.1.0" &amp;&amp; require("dplyr")) {
+
+  # Print summary before assigning model to variable
+  m &lt;- lm( speed ~ dist, cars) |&gt;
+    zprint(summary) # prints summary(x)
+  m                 # m is the original model object
+
+  # Print grouped data before filtering original
+  cw_subset &lt;- chickwts |&gt;
+    zprint(count, feed, sort=TRUE) |&gt; # prints counts by feed
+    filter(feed=="soybean")
+  cw_subset # cw_subset is ungrouped, but filtered by feed
+}
+
+</code></pre>
+
+
+</div>

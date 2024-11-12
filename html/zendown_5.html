@@ -1,0 +1,105 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mirror_deposit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Mirror a Zenodo deposit locally</h2>
+
+<h3>Description</h3>
+
+<p>Mirror an entire Zenodo deposit or a specific file locally. The mirror is a folder with the deposit files created at the cache folder of the operating system.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mirror_deposit(
+  deposit_id,
+  file_name = NULL,
+  cache_dir = NULL,
+  cache_type = NULL,
+  clear_cache = FALSE,
+  quiet = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>deposit_id</code></td>
+<td>
+<p>numeric. The Zenodo deposit id.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file_name</code></td>
+<td>
+<p>character. If <code>NULL</code>, all files from the file list. If a file name is specified, only this file will be downloaded.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cache_dir</code></td>
+<td>
+<p>character. User specified cache directory for persistent cache type.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cache_type</code></td>
+<td>
+<p>character. Use <code>temporary</code> to a session temporary folder, <code>persistent</code> for a persistent cache folder or <code>NULL</code> to use the environment default. Check the section Cache Type for more details.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>clear_cache</code></td>
+<td>
+<p>logical. If the mirror already exists, clear its content.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quiet</code></td>
+<td>
+<p>logical. Show download info and progress bar.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a string with the mirror path.
+</p>
+
+
+<h3>Cache type</h3>
+
+<p>The Zenodo mirror will be cached locally on a system folder. This folder can be temporary, being cleared when the R session is ended, or persistent across sections and reboots.
+</p>
+<p>If the <code>cache_type</code> argument is <code>NULL</code> (the default) the package will check first the environment variable <code>zendown_cache_type</code>. If set, the package will use its value. If not set, a temporary cache folder will be used as default.
+</p>
+<p>You can set an environment variable with <code>usethis::edit_r_environ()</code> and write as bellow for a persistent cache storage.
+</p>
+<p><code>zendown_cache_type = "persistent"</code>
+</p>
+<p>After saving the file, remember to restart the session. With this setting, the cache will be persistent and stored at the directory given by <code>tools::R_user_dir("zendown", which = "cache")</code>
+</p>
+<p>You may also use a different folder for persistent storage by setting the <code>zendown_cache_dir</code> environment variable. For example:
+</p>
+<p><code style="white-space: pre;">⁠zendown_cache_dir = C:\my_cache\⁠</code>
+</p>
+<p>If you set the <code>cache_type</code> argument directly as <code>temporary</code> or <code>persistent</code>, it will override the environment setting.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# https://zenodo.org/records/10959197
+mirror_path &lt;- mirror_deposit(deposit_id = 10959197)
+file.exists(file.path(mirror_path, "iris.rds"))
+file.exists(file.path(mirror_path, "mtcars.rds"))
+
+</code></pre>
+
+
+</div>

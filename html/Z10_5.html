@@ -1,0 +1,56 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dp.avail</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Query for data product availability</h2>
+
+<h3>Description</h3>
+
+<p>Get dates of data product availability by NEON site.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dp.avail(dp.id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>dp.id</code></td>
+<td>
+<p>Parameter of class character. The data product code in question. See
+<a href="http://data.neonscience.org/data-product-catalog">http://data.neonscience.org/data-product-catalog</a> for a complete list.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A list of named data frames
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robert Lee <a href="mailto:rhlee@colorado.edu">rhlee@colorado.edu</a><br></p>
+
+
+<h3>See Also</h3>
+
+<p>Currently none
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+wind=Z10::dp.avail(dp.id = "DP1.00002.001")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

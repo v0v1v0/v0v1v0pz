@@ -1,0 +1,103 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>EV-EVm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Expected Frequency Spectrum (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>EV</code> and <code>EVm</code> are generic methods for computing the
+expected vocabulary size <code class="reqn">E[V]</code> and frequency spectrum
+<code class="reqn">E[V_m]</code> according to a LNRE model (i.e. an object belonging to a
+subclass of <code>lnre</code>).
+</p>
+<p>When applied to a frequency spectrum (i.e. an object of class
+<code>spc</code>), these methods perform binomial interpolation (see
+<code>EV.spc</code> for details), although <code>spc.interp</code>
+and <code>vgc.interp</code> might be more convenient binomial
+interpolation functions for most purposes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  EV(obj, N, ...)
+  EVm(obj, m, N, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an LNRE model (i.e. an object belonging to a subclass of
+<code>lnre</code>) or frequency spectrum (i.e. an object of class
+<code>spc</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>positive integer value determining the frequency class
+<code class="reqn">m</code> to be returned (or a vector of such values)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>sample size <code class="reqn">N</code> for which the expected vocabulary size
+and frequency spectrum are calculated (or a vector of sample sizes)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on to the method implementation
+(see respective manpages for details)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>EV</code> returns the expected vocabulary size <code class="reqn">E[V(N)]</code> in a
+sample of <code class="reqn">N</code> tokens, and <code>EVm</code> returns the expected spectrum
+elements <code class="reqn">E[V_m(N)]</code>, according to the LNRE model given by
+<code>obj</code> (or according to binomial interpolation).
+</p>
+
+
+<h3>See Also</h3>
+
+
+
+
+<p>See <code>lnre</code> for more information on LNRE models, a listing
+of available models, and methods for parameter estimation.
+</p>
+<p>The variances of the random variables <code class="reqn">V(N)</code> and <code class="reqn">V_m(N)</code> can
+be computed with the methods <code>VV</code> and <code>VVm</code>.
+
+
+</p>
+<p>See <code>EV.spc</code> and <code>EVm.spc</code> for more
+information about the usage of these methods to perform binomial
+interpolation (but consider using <code>spc.interp</code> and
+<code>vgc.interp</code> instead).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## see lnre() documentation for examples
+
+</code></pre>
+
+
+</div>

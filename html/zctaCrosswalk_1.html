@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_zctas_by_county</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return the ZCTAs in a vector of counties</h2>
+
+<h3>Description</h3>
+
+<p>Given a vector of counties, return the ZIP Code Tabulation Areas (ZCTAs)
+in those counties. Note counties must be identified by FIPS code (character
+or numeric) in this function because county names are not unique between states.
+For example, 30 states have a county named "Washington".
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_zctas_by_county(counties)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>counties</code></td>
+<td>
+<p>A vector of Counties. Must be by FIPS code (numeric or
+character).</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A vector, where each element is a ZCTA in the requested county.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># "06075" is San Francisco County, California
+get_zctas_by_county("06075")
+
+# 6075 (== as.numeric("06075")) works too
+get_zctas_by_county(6075)
+
+# Multiple counties at the same time are also OK
+get_zctas_by_county(c("06075", "36059"))
+
+</code></pre>
+
+
+</div>

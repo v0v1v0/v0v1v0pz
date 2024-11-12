@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>distinct</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Dataset composed of six different countries.</h2>
+
+<h3>Description</h3>
+
+<p>A dummy dataset to illustrate the final size of the base after
+expansion.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">distinct
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A dataframe object.
+</p>
+
+
+<h3>Details</h3>
+
+<p>A dataset consisting of three years, three exporting countries,
+three importing countries, three Harmonized System code and value of
+exports (all data is fictitious). The data includes the following fields:
+</p>
+<p>* ano - Numeric. Year in which exports were carried out.
+* ido - String. ISO code corresponding to the exporting country.
+* idd - String. ISO code corresponding to the importign country.
+* HS4 - Numeric. HS4 code corresponding to the merchandise sold.
+* comercio - Numeric. Dollar value of exports.
+</p>
+
+
+<h3>Value</h3>
+
+<p>a dataframe object contains the five variables passed as parameters
+to the get_zerotradeflow() function (year, exporter, importer, item, trade)
+including the bilateral trade flow equal to zero.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Note that the distinct.rda base has six different countries (three
+# exporters and three importers). Thus, when expanding this base, we have 81
+# observations as a result.
+
+
+
+
+distinctflow &lt;- get_zerotradeflow(distinct, ano, ido, idd, HS4, comercio)
+
+
+
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,89 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetRateSummary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make request to Zillow API GetRateSummary Web Service</h2>
+
+<h3>Description</h3>
+
+<p>The GetRateSummary API returns the current rates per loan type – as well as
+rates from a week ago – from Zillow Mortgage Marketplace. Current supported
+loan types are 30-year fixed, 15-year fixed, and 5/1 ARM. Rates are computed
+from real quotes borrowers receive from lenders just seconds before the rate
+data is returned. The GetRateSummary API returns rates for a specific state
+if the optional state parameter is used.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetRateSummary(
+  state = NULL,
+  zws_id = getOption("ZillowR-zws_id"),
+  url = "http://www.zillow.com/webservice/GetRateSummary.htm"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>state</code></td>
+<td>
+<p>The state for which to return average mortgage rates. Two-letter
+state abbreviations should be used (AK, AL, AR, AZ, CA, CO, CT, DE, FL,
+GA, HI, IA, ID, IL, IN, KS, KY, LA, MA, MD, ME, MI, MN, MO, MS, MT, NC,
+ND, NE, NH, NJ, NM, NV, NY, OH, OK, OR, PA, RI, SC, SD, TN, TX, UT, VA,
+VT, WA, DC, WI, WV, WY). If omitted, national average mortgage rates are
+returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zws_id</code></td>
+<td>
+<p>The Zillow Web Service Identifier. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>URL for the GetRateSummary Web Service. Required.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A named list with the following elements:
+</p>
+
+<dl>
+<dt><strong>request</strong></dt>
+<dd>
+<p>a list with the request parameters</p>
+</dd>
+<dt><strong>message</strong></dt>
+<dd>
+<p>a list of status code(s) and message(s)
+returned by the API</p>
+</dd>
+<dt><strong>response</strong></dt>
+<dd>
+<p>an XMLNode with the API-specific response
+values. At this time, no further coercion is performed, so you
+may have to use functions from the <code>XML</code> package to extract
+the desired output.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+GetRateSummary()
+GetRateSummary(state = 'WA')
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,186 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zeta.order.mc.mult</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Number of species in common between a specific number of assemblages or sites using Monte Carlo sampling, for multiple combinations and several groups of taxa</h2>
+
+<h3>Description</h3>
+
+<p>Computes the number of species shared by multiple assemblages, for a specific order (number of assemblages or sites), for multiple combinations and several groups of taxa.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zeta.order.mc.mult(
+  data.spec,
+  xy = NULL,
+  order = 1,
+  sam = 1000,
+  sd.correct = TRUE,
+  sd.correct.adapt = FALSE,
+  rescale = FALSE,
+  normalize = FALSE,
+  NON = FALSE,
+  FPO = NULL,
+  DIR = FALSE,
+  empty.row = "empty",
+  silent = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data.spec</code></td>
+<td>
+<p>A list of site-by-species presence-absence data frames, with sites as rows and species as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xy</code></td>
+<td>
+<p>Site coordinates. This is only used if <code>NON</code> = TRUE or <code>DIR</code> = TRUE.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>Specific number of assemblages or sites at which zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sam</code></td>
+<td>
+<p>Number of samples for which the zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd.correct</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation must be computed with an unbiased estimator (using the number of site combinations - 1 as the denominator) or not (using the number of site combinations as the denominator).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd.correct.adapt</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation must be computed with an unbiased estimator (using the number of site combinations - 1 as the denominator) if <code>sam</code> is higher than the number of possible combinations, or not (using the number of site combinations as the denominator) if <code>sam</code> is lower than the number of possible combinations. If <code>sd.correct.adapt == TRUE</code>, it takes precedence over <code>sd.correct</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the zeta values should be divided by <code class="reqn">\zeta_1</code>, to get a range of values between 0 and 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalize</code></td>
+<td>
+<p>Indicates if the zeta values for each sample should be divided by the total number of species for this specific sample (<code>normalize = "Jaccard"</code>), by the average number of species per site for this specific sample (<code>normalize = "Sorensen"</code>), or by the minimum number of species in the sites of this specific sample <br> (<code>normalize = "Simpson"</code>). Default value is <code>FALSE</code>, indicating that no normalization is performed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>NON</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the number of species in common should only be counted for the nearest neighbours.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>FPO</code></td>
+<td>
+<p>A vector with the coordinates of the fixed point origin from which the zeta diversity will be computed (overrides NON). In that case, <code class="reqn">\zeta_1</code> is the number of species in the closest site to the FPO, <code class="reqn">\zeta_2</code> is the number of species shared by the 2 closest sites, etc.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>DIR</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if zeta diversity must be computed using a directed nearest neighbour scheme in the direction away from the FPO, starting from any site.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>empty.row</code></td>
+<td>
+<p>Determines how to handle empty rows, i.e. sites with no species. Such sites can cause underestimations of zeta diversity, and computation errors for the normalized version of zeta due to divisions by 0. Options are "<code>empty</code>" to let the data untreated, "<code>remove</code>" to remove the empty rows, 0 to set the normalized zeta to 0 when zeta is divided by 0 during normalization (sites share no species, so are completely dissimilar), and 1 to set the normalized zeta to 1 when zeta is divided by 0 during normalization (i.e. sites are perfectly similar).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>silent</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if messages must be printed.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Contrary to <code>Zeta.order.mc</code>, the number of species shared by the different combinations of assemblages are not averaged, but returned as is. This is useful to then compare local zeta diversity for different groups of taxa.
+</p>
+<p>As for <code>Zeta.order.mc</code>, if the number of combinations of sites is lower than the value of the parameter <code>sam</code>, all the combinations are used and an exact solution is computed. In that case, using the number of site combinations as the denominator may be appropriate to compute the standard deviation, if all sites were sampled and the zeta values. This can be adjusted with parameters <code>sd.correct</code> and <code>sd.correct.adapt</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>Zeta.order.mc.mult</code>  returns a list containing the following components:
+</p>
+<table><tr style="vertical-align: top;">
+<td><code>zeta.order</code></td>
+<td>
+<p>The number of assemblages or sites for which the zeta diversity was computed.</p>
+</td>
+</tr></table>
+<p>#' @return </p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>sites</code></td>
+<td>
+<p>A matrix in which each row contains the indices of a given combination, i.e. of the specific  <code>sam</code> assemblages.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.val</code></td>
+<td>
+<p>A data frame in which each column is the number of species shared by the assemblages.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Hui C. &amp; McGeoch M.A. (2014). Zeta diversity as a concept and metric that unifies incidence-based biodiversity patterns. <em>The American Naturalist</em>, 184, 684-694.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.decline.mc</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+utils::data(Marion.species)
+xy.marion &lt;- Marion.species[1:2]
+
+data.spec.marion &lt;- Marion.species[3:33]
+
+##random other communities
+data.spec.marion2a &lt;- data.spec.marion
+data.spec.marion2a[which(data.spec.marion2a==1,arr.ind=TRUE)] &lt;- 0
+for(i in 1:ncol(data.spec.marion2a))
+  data.spec.marion2a[sample(nrow(data.spec.marion2a),8),i] &lt;- 1
+data.spec.marion2b &lt;- data.spec.marion
+data.spec.marion2b[which(data.spec.marion2b==1,arr.ind=TRUE)] &lt;- 0
+for(i in 1:ncol(data.spec.marion2b))
+data.spec.marion2b[sample(nrow(data.spec.marion2b),8),i] &lt;- 1
+
+dat.spec.tot &lt;- list(data.spec.marion,data.spec.marion2a,data.spec.marion2b)
+zeta.tot &lt;- Zeta.order.mc.mult(data.spec=dat.spec.tot,order=3,sam=200)
+
+</code></pre>
+
+
+</div>

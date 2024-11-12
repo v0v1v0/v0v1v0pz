@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>decompress</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Single-step decompression of raw data</h2>
+
+<h3>Description</h3>
+
+<p>Decompresses the provided compressed raw data in a single step.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">decompress(data, wbits = 0)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Compressed raw data to be decompressed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>wbits</code></td>
+<td>
+<p>The window size bits parameter. Default is 0.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <code>decompress</code> function offers a streamlined approach to decompressing
+raw data. By abstracting the creation of a decompression object, decompressing
+the data, and flushing the buffer into one function call, it provides a hassle-free
+way to retrieve original data from its compressed form. This function is designed
+to work seamlessly with data compressed using the <code>compress</code> function or
+any other zlib-based compression method.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A raw vector containing the decompressed data.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">original_data &lt;- charToRaw("some data")
+compressed_data &lt;- compress(original_data)
+decompressed_data &lt;- decompress(compressed_data)
+
+</code></pre>
+
+
+</div>

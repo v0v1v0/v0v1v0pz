@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>epirice.multi.simule</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Wrapper function to run Epirice multiple times (for multiple sets of inputs)</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper function for epirice.model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">epirice.multi.simule(param, multi.simule, all = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>: a vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>multi.simule</code></td>
+<td>
+<p>: matrix of n row definition of input variable : site, year and date of transplantation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all</code></td>
+<td>
+<p>: if you want a matrix combining multi.simule and output (default = FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>matrix with AUDPC for each input vector
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>epirice.model</code>
+</p>
+
+
+</div>

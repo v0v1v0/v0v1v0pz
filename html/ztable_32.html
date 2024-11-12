@@ -1,0 +1,94 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>make.cell.color</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make a data.frame named "cellcolor" from ztable call</h2>
+
+<h3>Description</h3>
+
+<p>Make a data.frame named "cellcolor" from ztable call
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">make.cell.color(
+  x,
+  zebra,
+  zebra.color,
+  zebra.type,
+  zebra.list,
+  zebra.colnames,
+  zebra.rownames
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a data.frame</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra</code></td>
+<td>
+<p>Null or an integer of 0 or 1 or 2. The arguments zebra and zebra.color are
+used to make a Zebra striping table(table with alternating background colors)
+easily. A value of 1 sets background color of all odd rows/columns with specified with
+zebra.color. A value of 2 sets all even rows/columns. A value of 0 sets
+background colors of all rows/columns with colors specified with zebra.color.
+When zebra is 1 or 2, the parameters of prefix.rows and commands ignored.
+Default is NULL.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.color</code></td>
+<td>
+<p>A color name or a numeric value indicating pre-defined color.
+When parameter zebra is 0 or 1 or 2 and zebra.color is NULL, then zebra.color
+is set to "platinum". Numeric values between 1 to 13 is converted to
+predefined color names. The predefined color names are c("peach","peach-orange",
+"peachpuff","peach-yellow","pear","pearl","peridot","periwinkle","pastelred",
+"pastelgray"). Default is NULL.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.type</code></td>
+<td>
+<p>An integer of 0 or 1 or 2 or 3. A value of 1 sets background colors by row.
+A value of 2 sets background colors by column. A value of 0 sets background colors of all cells.
+A value of 3 sets background colors of cells specified with zebra.list.
+Default value is 1.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.list</code></td>
+<td>
+<p>A list consists of y,x,color. zebra.list is used only when zebra.type=3.
+zebra.list sets the cells specified with rows of vector "y" and columns of vector "x" with "color".
+The y and x are integer vector indicating rows and columns. NA value of y or x indicating all columns or rows.
+The color is an character vector consists of names of color.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.colnames</code></td>
+<td>
+<p>whether or not use background colors in column names row,
+Default value is FALSE</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zebra.rownames</code></td>
+<td>
+<p>whether or not use background colors in row names column,
+Default value is TRUE</p>
+</td>
+</tr>
+</table>
+</div>

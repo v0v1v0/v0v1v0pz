@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>z_to_power</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Compute power corresponding to z-scores</h2>
+
+<h3>Description</h3>
+
+<p>A function for computing power of two-sided tests
+corresponding to z-scores for a given significance level.
+<code>alpha</code> (or corresponding cut-off z-score <code>a</code>)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">z_to_power(
+  z,
+  alpha = 0.05,
+  a = stats::qnorm(alpha/2, lower.tail = FALSE),
+  two.sided = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>A vector of z-scores</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Level of significance alpha</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>a</code></td>
+<td>
+<p>Or, alternatively a z-score corresponding to <code>alpha</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>two.sided</code></td>
+<td>
+<p>Whether directionality of the effect size should be taken into account.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># mean powers corresponding to the mean components of KD2
+z_to_power(0:6, alpha = .05)
+</code></pre>
+
+
+</div>

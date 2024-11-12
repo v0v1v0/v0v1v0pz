@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>InCategory</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Value Matching by Thesaurus Category</h2>
+
+<h3>Description</h3>
+
+<p>Function to check if an element belongs to a category according to a
+thesaurus. It is similar to <code>%in%</code> and
+<code>is.element</code>, returning a logical vector indicating if each
+element in a given vector is included in a given set. But <code>InCategory</code>
+checks for equality assuming the equivalencies defined in the given thesaurus.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">InCategory(x, category, thesaurus)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Character vector to be checked for its inclusion in the category.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>category</code></td>
+<td>
+<p>Character vector identifying the categories in which the
+inclusion of <code>x</code> will be checked. Each category can be identified by
+any equivalent name in the thesaurus.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurus</code></td>
+<td>
+<p>A thesaurus object.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A logical vector of the same length as <code>x</code>. Each value answers the
+question: <em>Does the corresponding element in <code>x</code> belongs to any of
+the thesaurus categories identified by <code>category</code>?</em>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zoologThesaurus</code>, <code>%in%</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">InCategory(c("sheep", "cattle", "goat", "red deer"),
+           c("ovis", "capra"),
+           zoologThesaurus$taxon)
+
+</code></pre>
+
+
+</div>

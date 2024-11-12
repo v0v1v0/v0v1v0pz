@@ -1,0 +1,138 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>grpDuplicated</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Grouping by duplicated elements
+</h2>
+
+<h3>Description</h3>
+
+<p><code>grpDuplicated()</code> is a generic function that takes an indexed set
+of "elements", and outputs an integer vector with the same length.
+The "elements" can be components of a vector,
+or the row vectors or column vectors of a matrix.
+In the output vector, a component is 0 if and only if the corresponding
+element is unique.
+When the element is unique, it forms a <em>singleton group</em>.
+Output components have equal positive integer values
+if and only if the corresponding elements are identical to each other.
+These elements form a <em>non-singleton group</em>,
+and the positive integer is called the <em>group number</em>.
+</p>
+<p>The number of singleton groups is equal to #(zeros),
+which is equal to the #(elements) - #(duplicated elements).<br>
+The number of non-singleton groups is equal to max(output vector).<br> 
+The number of all groups is equal to #(zeros) + max(output vector).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## Default S3 method:
+grpDuplicated( x, ... )
+	
+## S3 method for class 'matrix'
+grpDuplicated( x, MARGIN=1, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector or matrix of atomic mode <code>"numeric"</code>, <code>"integer"</code>, <code>"logical"</code>, <code>"complex"</code>, <code>"character"</code> or <code>"raw"</code>.  
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>MARGIN</code></td>
+<td>
+<p>an integer scalar, the matrix margin to be held fixed, as in <code>apply</code>. <code>MARGIN=1</code> means that it looks for duplicated rows, and <code>MARGIN=2</code> means that it looks for duplicated columns.  Other values are invalid.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>arguments for particular methods.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The implementation is based on <code>std::unordered_map</code> in C++11,
+which uses a hash-table.
+</p>
+
+
+<h3>Value</h3>
+
+<p>The return value is an integer vector with all elements ranging from 0 to <code>K</code>, where <code>K</code> is the number of non-singleton groups.<br>
+For vector <code>x</code> the elements are the vector components,
+and the output is the same length as the input.<br>
+For a matrix <code>x</code> with <code>MARGIN=1</code>, the elements are the rows of
+the matrix and the output has length <code>nrow(x)</code>.<br>
+For a matrix <code>x</code> with <code>MARGIN=2</code>, the elements are the columns of
+the matrix and the output has length <code>ncol(x)</code>.<br>
+The <code>'ngroups'</code> attribute of the returned vector is set to an integer 3-vector.
+The 1st component is the total number of groups,
+the 2nd component is the number of singleton groups,
+and the 3rd component is the number of non-singleton groups <code>K</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The templated C++ function that does the real work is taken from the package <b>uniqueAtomMat</b>
+by Long Qu,
+but the returned vector is slightly modified by Glenn Davis.<br></p>
+
+
+<h3>Author(s)</h3>
+
+<p>Long Qu and Glenn Davis
+</p>
+
+
+<h3>Source</h3>
+
+<p><a href="https://github.com/cran/uniqueAtomMat/">https://github.com/cran/uniqueAtomMat/</a><br>
+The package <b>uniqueAtomMat</b> was removed from CRAN by its author Long Qu.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">set.seed(0)
+
+#   test a numeric vector
+x = rnorm(7)
+y = rnorm(5)
+grpDuplicated( c(x,y,rev(x)) )
+##  [1] 7 6 5 4 3 2 1 0 0 0 0 0 1 2 3 4 5 6 7
+##  attr(,"ngroups")
+##  [1] 12  5  7
+
+# test a numeric matrix, both rows and columns
+A = matrix( rnorm(3*7), 3, 7 )
+B = matrix( rnorm(3*5), 3, 5 )
+
+#   the columns of cbind(A,B,A) have the duplicates one would expect
+grpDuplicated( cbind(A,B,A), MARGIN=2 )
+##  [1] 1 2 3 4 5 6 7 0 0 0 0 0 1 2 3 4 5 6 7
+##  attr(,"ngroups")
+##  [1] 12  5  7
+
+# but the rows of cbind(A,B,A) are unique
+grpDuplicated( cbind(A,B,A), MARGIN=1 )
+##  [1] 0 0 0
+##  attr(,"ngroups")
+##  [1] 3 3 0
+</code></pre>
+
+
+</div>

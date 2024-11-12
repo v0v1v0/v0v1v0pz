@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zb_doughnut</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make doughnuts</h2>
+
+<h3>Description</h3>
+
+<p>Make doughnuts
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zb_doughnut(
+  x = NULL,
+  area = NULL,
+  n_circles = NA,
+  distance = 1,
+  distance_growth = 1
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Centre point. Should be an <code>sf</code> or <code>sfc</code> object containing one point, or a name of a city (which is looked up with OSM geocoding).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>area</code></td>
+<td>
+<p>(optional) Area. Should be an <code>sf</code> or <code>sfc</code> object containing one (multi) polygon</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_circles</code></td>
+<td>
+<p>Number of rings including the central circle. By default 5, unless <code>area</code> is specified (then it is set automatically to fill the area).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance</code></td>
+<td>
+<p>Distance The distances between the circles. For the center circle, it is the distance between the center and the circle. If only one number is specified, <code>distance_growth</code> determines the increment at which the distances grow for the outer circles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance_growth</code></td>
+<td>
+<p>The rate at which the distances between the circles grow. Only applicable when <code>distance</code> is one number and <code>n_circles &gt; 1</code>. See also <code>distance</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An 'sf' data frame
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zb_plot(zb_doughnut(london_c(), london_a()))
+</code></pre>
+
+
+</div>

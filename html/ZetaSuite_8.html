@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>QC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Quality control of input datasets.</h2>
+
+<h3>Description</h3>
+
+<p>Quality Control (QC) is a step in evaluating the experiment design. For all two-dimension high throughput data, the t-SNE plot is firstly used to evaluate whether features are sufficient to separate positive and negative controls.
+The SSMD score (See reference Zhang) is further generated for each readout to evaluate the percentage of high-quality readouts.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">QC(countMat, negGene, posGene)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>countMat</code></td>
+<td>
+<p>input data set. The siRNA/gene x readouts matrix from HTS2 or large-scale RNAi screens</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>negGene</code></td>
+<td>
+<p>negative control data set, the siRNAs/genes used as negative controls in screening.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>posGene</code></td>
+<td>
+<p>positive control data set, the siRNAs/genes used as positive controls in screening.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of plots, and their names are 'score_q', 'tSNE_QC', 'QC_box' and 'QC_SSMD'. 'tSNE_QC' is the global evaluation based on all the readouts. This figure can evaluate whether the positive and negative samples are well separated based on current all readouts. And the other 3 plots are the quality evaluation of the individual readouts.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yajing Hao, Shuyang Zhang, Junhui Li, Guofeng Zhao, Xiang-Dong Fu
+</p>
+
+
+<h3>References</h3>
+
+<p>Laurens van der Maaten GH: Visualizing Data using t-SNE. JournalofMachineLearningResearch 2008,9(2008):2579-2605.
+</p>
+<p>Zhang XD: A pair of new statistical parameters for quality control in RNA interference high-throughput screening assays. Genomics 2007, 89:552-561.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+data(countMat)
+data(negGene)
+data(posGene)
+QC(countMat,negGene,posGene)
+
+</code></pre>
+
+
+</div>

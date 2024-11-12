@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>merge.tfl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Merging Type Frequency Lists (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Merge two or more type frequency lists. Types from the individual lists are pooled
+and frequencies of types occurring in multiple lists are aggregated.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+## S3 method for class 'tfl'
+merge(x, y, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, y</code></td>
+<td>
+<p>type frequency lists (i.e. objects of class <code>tfl</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>optional further type frequency lists to be merged</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>All type frequency lists to be merged must contain type labels,
+and none of them may be incomplete.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>tfl</code> for more information about type frequency lists.
+</p>
+
+
+</div>

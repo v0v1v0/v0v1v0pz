@@ -1,0 +1,172 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>file-utilities</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Various file utility functions used by ZooImage </h2>
+
+<h3>Description</h3>
+
+<p>These functions are usually not called directly by the user, but they are
+interesting for developers. They help to manage files in the context of
+ZooImage processes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">extensionPattern(extension = "r", add.dot = !grepl("[.]", extension))
+hasExtension(file, extension = "r", pattern = extensionPattern(extension))
+noExtension(file)
+
+listFilesExt(dir, extension = "r", pattern = extensionPattern(extension), ... )
+zimList(dir, ...)
+zimDatList(dir, ...)
+zipList(dir, ...)
+zidList(dir, ...)
+zidbList(dir, ...)
+jpgList(dir, ...)
+pngList(dir, ...)
+
+checkFileExists(file, extension, message = "file not found: %s",
+    force.file = FALSE)
+checkDirExists(dir, message = 'Path "%s" does not exist or is not a directory')
+checkEmptyDir(dir, message = 'dir "%s" is not empty')
+forceDirCreate(dir)
+
+checkFirstLine(file, expected = c("ZI1", "ZI2", "ZI3", "ZI4", "ZI5"), 
+    message = 'file "%s" is not a valid ZooImage version &lt;= 5 file')
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>extension</code></td>
+<td>
+<p> lowercase version of the extension (the pattern will be
+constructed to be case-insensitive). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>add.dot</code></td>
+<td>
+<p> if a dot is not provided, it is added by default in front of
+the pattern. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p> one or more file names or file paths to check. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pattern</code></td>
+<td>
+<p> a pattern matching a given file extension. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> further arguments passed to the function. Currently, not in use. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dir</code></td>
+<td>
+<p> the directory to work with. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>message</code></td>
+<td>
+<p> a warning message to provide (file/dirname replacement using %s). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.file</code></td>
+<td>
+<p> make sure the item is a file, not a directory. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expected</code></td>
+<td>
+<p> the expected content of the first line of the file. </p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>All these function issue only warnings, no errors. Those functions that
+return <code>TRUE</code> or <code>FALSE</code> are designed to be used in batch mode.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A string with suitable pattern to match a file extension for
+<code>extensionPattern()</code>.
+</p>
+<p>The function <code>noExtension()</code> return base filenames without extensions.
+</p>
+<p>A list of files with given extension for <code>listFilesExt()</code>, and
+<code>xxxList()</code> functions.
+</p>
+<p>The other functions return <code>TRUE</code> or <code>FALSE</code>, depending if the
+tested condition is met or not.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt;</p>
+
+
+<h3>See Also</h3>
+
+<p><code>sampleInfo</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Construct a suitable pattern to match extensions of TIFF image files
+extensionPattern("tif")
+# Test if file names match given extensions (first 2 items only)
+hasExtension(c("test1.tif", "test2.TIF", "test3.R"), "tif")
+noExtension(c("test1.tif", "test2.TIF", "test3.R"))
+
+# List all files with a given extension in a directory
+ziDir &lt;- system.file("examples", package = "zooimage")
+listFilesExt(ziDir, "zid")
+zidList(ziDir) # Idem
+
+# Check that a file or a directory exists
+checkDirExists(ziDir)
+zisFile &lt;- file.path(ziDir, "Description.zis")
+checkFileExists(zisFile)
+
+# Is this directory empty? (no)
+checkEmptyDir(ziDir)
+
+# force (re)creation of a directory
+tmpDir &lt;- file.path(tempdir(), "testdir")
+forceDirCreate(tmpDir)
+file.info(tmpDir)$isdir # yes
+checkEmptyDir(tmpDir)   # yes
+file.remove(tmpDir)
+file.exists(tmpDir)
+
+# Every .zis file must start with ZI1-5 =&gt; check this...
+checkFirstLine(zisFile)
+
+# Clean up
+rm(ziDir, zisFile, tmpDir)
+</code></pre>
+
+
+</div>

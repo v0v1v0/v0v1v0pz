@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZetaSuitSC</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculation of zeta score for single cell RNA-seq.</h2>
+
+<h3>Description</h3>
+
+<p>This tool is used to evalucate the quality of cells detected in the single-cell RNA-seq. A zeta score will be assigned to each cell. And a cut-off for low quality and broken cells will be provided. The users can based on the selected cut-off to select the high quality cells for further analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZetaSuitSC(countMatSC, binNum = 10, filter = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>countMatSC</code></td>
+<td>
+<p>Shalek input matrix</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>binNum</code></td>
+<td>
+<p>bin number for ZetaScore calculation.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filter</code></td>
+<td>
+<p>Whether to filter the extreme low read counts cells with nCount &lt;100. default is TRUE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of data.frame and plots. The data.frame is the Cell matrix with column name 'Cell' and 'Zeta'. The plot is the distribution of Zeta score for the detected cells and including a cut-off for removing the broken and empty cells.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yajing Hao, Shuyang Zhang, Junhui Li, Guofeng Zhao, Xiang-Dong Fu
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(countMatSC)
+zetaDataSC &lt;- ZetaSuitSC(countMatSC,binNum=50,filter=TRUE)
+
+</code></pre>
+
+
+</div>

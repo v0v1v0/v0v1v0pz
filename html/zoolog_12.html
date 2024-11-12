@@ -1,0 +1,621 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>referencesDatabase</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>References</h2>
+
+<h3>Description</h3>
+
+<p>Several osteometrical references are provided in <span class="pkg">zoolog</span> to enable
+researchers to use the one of their choice. The user can also use their
+own osteometrical reference if preferred.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">reference
+
+referenceSets
+
+referencesDatabase
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>Each reference is a data.frame including 4 columns:
+</p>
+
+<dl>
+<dt>TAX</dt>
+<dd>
+<p>The taxon to which each reference bone belongs.</p>
+</dd>
+<dt>EL</dt>
+<dd>
+<p>The skeletal element.</p>
+</dd>
+<dt>Measure</dt>
+<dd>
+<p>The type of measurement taken on the bone.</p>
+</dd>
+<dt>Standard</dt>
+<dd>
+<p>The value of the measurement taken on the bone.
+All the measurements are expressed in millimetres.</p>
+</dd>
+</dl>
+<p>An object of class <code>data.frame</code> with 4 rows and 15 columns.
+</p>
+<p>An object of class <code>list</code> of length 15.
+</p>
+
+
+<h3>Data Source</h3>
+
+<p>Currently, the references include reference values for the main domesticates
+and their agriotypes (<em>Bos</em>, <em>Ovis</em>, <em>Capra</em>,
+<em>Sus</em>), and other less frequent species, such as red deer and donkey,
+drawn from the following publications and resources:
+</p>
+
+<dl>
+<dt><strong>Cattle - <em>Bos</em></strong></dt>
+<dd>
+<dl>
+<dt>Nieto</dt>
+<dd>
+<p><em>Bos taurus</em>.
+Female cow dated to the Early Bronze Age (Minferri, Catalonia),
+in Nieto-Espinet (2018).</p>
+</dd>
+<dt>Basel</dt>
+<dd>
+<p><em>Bos taurus</em>.
+Inv.nr. 2426 (Hinterwälder; female; 17 years old;
+live weight: 340 kg; withers height: 113 cm),
+from Stopp and Deschler-Erb (2018).</p>
+</dd>
+<dt>Johnstone</dt>
+<dd>
+<p><em>Bos taurus</em>.
+Standard values from means of cattle measures from Period II (Late Iron
+Age to Romano-British transition) of Elms Farm, Heybridge
+(Johnstone and Albarella 2002).</p>
+</dd>
+<dt>Degerbøl</dt>
+<dd>
+<p><em>Bos primigenius</em>.
+Female aurochs from Degerbøl and Fredskild (1970).
+Non-standard measures converted to more standard ones
+(Von den Driesch 1976)</p>
+</dd>
+<dt>Steppan</dt>
+<dd>
+<p><em>Bos primigenius</em>.
+Female aurochs from Steppan (2001).
+Same specimen as in Degerbøl and Fredskild (1970),
+but with new and more standandard measures (Von den Driesch 1976).
+Mean measurements from left and right bones when available.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Sheep - <em>Ovis</em></strong></dt>
+<dd>
+<dl>
+<dt>Davis</dt>
+<dd>
+<p><em>Ovis aries</em>.
+Mean values of measurements from a group of adult female Shetland sheep
+skeletons from a single flock
+(Davis 1996).</p>
+</dd>
+<dt>Clutton</dt>
+<dd>
+<p><em>Ovis aries</em>.
+Mean measurements from a group of male Soay sheep of known age
+(Clutton-Brock et al. 1990).</p>
+</dd>
+<dt>Basel</dt>
+<dd>
+<p><em>Ovis musimon</em>.
+Inv.nr. 2266 (male; adult),
+from Stopp and Deschler-Erb (2018).</p>
+</dd>
+<dt>Uerpmann</dt>
+<dd>
+<p><em>Ovis orientalis</em>.
+Field Museum of Chicago catalogue number: FMC 57951 (female; western Iran)
+from Uerpmann and Uerpmann (1994).</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Goat - <em>Capra</em></strong></dt>
+<dd>
+<dl>
+<dt>Basel</dt>
+<dd>
+<p><em>Capra hircus</em>.
+Inv.nr. 1597 (male; adult), from
+Stopp and Deschler-Erb (2018).</p>
+</dd>
+<dt>Clutton</dt>
+<dd>
+<p><em>Capra hircus</em>.
+Mean measurements from a group of goats of unknown age and sex
+(Clutton-Brock et al. 1990).</p>
+</dd>
+<dt>Uerpmann</dt>
+<dd>
+<p><em>Capra aegagrus</em>.
+Measurements based on female and male <em>Capra aegagrus</em>,
+Natural History Museum in London number: BMNH 651 M and L2
+(Taurus Mountains in southern Turkey)
+from Uerpmann and Uerpmann (1994).</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Pig - <em>Sus</em></strong></dt>
+<dd>
+<dl>
+<dt>Albarella</dt>
+<dd>
+<p><em>Sus domesticus</em>.
+Mean measurements from a group of Late Neolithic pigs from
+Durrington Walls, England
+(Albarella and Payne 2005).</p>
+</dd>
+<dt>Basel</dt>
+<dd>
+<p><em>Sus scrofa</em>.
+Inv.nr. 1446 (male; 2-3 years old; life weight: 120 kg)
+from Stopp and Deschler-Erb (2018).</p>
+</dd>
+<dt>Hongo</dt>
+<dd>
+<p><em>Sus scrofa</em>.
+Averaged left and right measurements of a female wild board from near
+Elaziğ, Turkey. Museum of Comparative Zoology, Harvard University,
+specimen #51621 (Hongo and Meadow 2000).</p>
+</dd>
+<dt>Payne</dt>
+<dd>
+<p><em>Sus scrofa</em>.
+Measurements based on a sample of modern wild boar, <em>Sus scrofa libycus</em>,
+(male and female; Kizilcahamam, Turkey) from
+Payne and Bull (1988), Appendix 2.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Red deer - <em>Cervus</em></strong></dt>
+<dd>
+<dl>
+<dt>Basel</dt>
+<dd>
+<p><em>Cervus elaphus</em>.
+Inv.nr. 2271 (male; adult) from
+Stopp and Deschler-Erb (2018).</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Fallow deer - <em>Dama</em></strong></dt>
+<dd>
+<dl>
+<dt>Haifa</dt>
+<dd>
+<p><em>Dama mesopotamica</em>.
+Adult female modern specimen from Israel (id #1047), curated in
+Archaeozoology Laboratory at the University of Haifa
+(Harding and Marom 2021).</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Gazelle - <em>Gazella</em></strong></dt>
+<dd>
+<dl>
+<dt>Haifa</dt>
+<dd>
+<p><em>Gazella gazella</em>.
+Adult female modern specimen from Israel (id #1037), curated in
+Archaeozoology Laboratory at the University of Haifa
+(Harding and Marom 2021).</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Equid - <em>Equus</em></strong></dt>
+<dd>
+<dl>
+<dt>Haifa</dt>
+<dd>
+<p><em>Equus asinus</em>.
+Adult male modern specimen from Israel (id #1076), curated in
+Archaeozoology Laboratory at the University of Haifa
+(Harding and Marom 2021).</p>
+</dd>
+<dt>Johnstone</dt>
+<dd>
+<p><em>Equus caballus</em>.
+3 years old Icelandic mare (all bones fused, female) died in 1961,
+(Johnstone 2004). Skeleton
+held at the Zoologische Staatssammlung Munich in Germany.
+Specimen ID 1961/29.</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>European rabbit - <em>Oryctolagus</em></strong></dt>
+<dd>
+<dl>
+<dt>Nottingham</dt>
+<dd>
+<p><em>Oryctolagus cuniculus</em>.
+Adult male European rabbit from Audley End, Essex, UK, curated in the
+reference collection at University of Nottingham Arch department (ID RS139)
+(Ameen 2021).</p>
+</dd>
+</dl>
+</dd>
+<dt><strong>Canid - <em>Canis</em></strong></dt>
+<dd>
+<dl>
+<dt>Russell</dt>
+<dd>
+<p><em>Canis lupus</em>.
+Hungarian Agricultural Museum:
+Specimen 73.4 (small mature female; probably local origin)
+from Russell (1993).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p>The <span class="pkg">zoolog</span> variable <code>referencesDatabase</code> collects all these
+references. It is structured as a named list of named lists, following the
+hierarchy described above:
+</p>
+<div class="sourceCode r"><pre>str(referencesDatabase, max.level = 2)
+#&gt; List of 15
+#&gt;  $ Bos taurus           :List of 3
+#&gt;   ..$ Nieto    :'data.frame':	68 obs. of  4 variables:
+#&gt;   ..$ Basel    :'data.frame':	50 obs. of  4 variables:
+#&gt;   ..$ Johnstone:'data.frame':	24 obs. of  4 variables:
+#&gt;  $ Bos primigenius      :List of 2
+#&gt;   ..$ Degerbol:'data.frame':	50 obs. of  4 variables:
+#&gt;   ..$ Steppan :'data.frame':	84 obs. of  4 variables:
+#&gt;  $ Ovis aries           :List of 2
+#&gt;   ..$ Davis  :'data.frame':	23 obs. of  4 variables:
+#&gt;   ..$ Clutton:'data.frame':	71 obs. of  4 variables:
+#&gt;  $ Ovis orientalis      :List of 2
+#&gt;   ..$ Basel   :'data.frame':	36 obs. of  4 variables:
+#&gt;   ..$ Uerpmann:'data.frame':	50 obs. of  4 variables:
+#&gt;  $ Capra hircus         :List of 2
+#&gt;   ..$ Basel  :'data.frame':	35 obs. of  4 variables:
+#&gt;   ..$ Clutton:'data.frame':	60 obs. of  4 variables:
+#&gt;  $ Capra aegagrus       :List of 1
+#&gt;   ..$ Uerpmann:'data.frame':	50 obs. of  4 variables:
+#&gt;  $ Sus domesticus       :List of 1
+#&gt;   ..$ Albarella:'data.frame':	42 obs. of  4 variables:
+#&gt;  $ Sus scrofa           :List of 3
+#&gt;   ..$ Basel:'data.frame':	41 obs. of  4 variables:
+#&gt;   ..$ Hongo:'data.frame':	96 obs. of  4 variables:
+#&gt;   ..$ Payne:'data.frame':	33 obs. of  4 variables:
+#&gt;  $ Cervus elaphus       :List of 1
+#&gt;   ..$ Basel:'data.frame':	14 obs. of  4 variables:
+#&gt;  $ Dama mesopotamica    :List of 1
+#&gt;   ..$ Haifa:'data.frame':	60 obs. of  4 variables:
+#&gt;  $ Gazella gazella      :List of 1
+#&gt;   ..$ Haifa:'data.frame':	63 obs. of  4 variables:
+#&gt;  $ Equus asinus         :List of 1
+#&gt;   ..$ Haifa:'data.frame':	48 obs. of  4 variables:
+#&gt;  $ Equus caballus       :List of 1
+#&gt;   ..$ Johnstone:'data.frame':	75 obs. of  4 variables:
+#&gt;  $ Oryctolagus cuniculus:List of 1
+#&gt;   ..$ Nottingham:'data.frame':	58 obs. of  4 variables:
+#&gt;  $ Canis lupus          :List of 1
+#&gt;   ..$ Russell:'data.frame':	77 obs. of  4 variables:
+</pre></div>
+
+
+<h3>Reference Sets</h3>
+
+<p>The references' database is organized per taxon. However, in general the
+zooarchaeological data to be analysed includes several taxa. Thus, the
+reference dataframe should include one reference standard for each relevant
+taxon.
+The <span class="pkg">zoolog</span> variable <code>referenceSets</code> defines four possible
+references:
+</p>
+<div class="sourceCode r"><pre>referenceSets
+</pre></div>
+<table>
+<tr>
+<td style="text-align: left;">
+    </td>
+<td style="text-align: left;"> Bos taurus </td>
+<td style="text-align: left;"> Bos primigenius </td>
+<td style="text-align: left;"> Ovis aries </td>
+<td style="text-align: left;"> Ovis orientalis </td>
+<td style="text-align: left;"> Capra hircus </td>
+<td style="text-align: left;"> Capra aegagrus </td>
+<td style="text-align: left;"> Sus domesticus </td>
+<td style="text-align: left;"> Sus scrofa </td>
+<td style="text-align: left;"> Cervus elaphus </td>
+<td style="text-align: left;"> Dama mesopotamica </td>
+<td style="text-align: left;"> Gazella gazella </td>
+<td style="text-align: left;"> Equus asinus </td>
+<td style="text-align: left;"> Equus caballus </td>
+<td style="text-align: left;"> Oryctolagus cuniculus </td>
+<td style="text-align: left;"> Canis lupus </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   NietoDavisAlbarella </td>
+<td style="text-align: left;"> Nieto </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Davis </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Albarella </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Basel </td>
+<td style="text-align: left;"> Basel </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Basel </td>
+<td style="text-align: left;"> Basel </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Basel </td>
+<td style="text-align: left;"> Basel </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Combi </td>
+<td style="text-align: left;"> Nieto </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Clutton </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Clutton </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Basel </td>
+<td style="text-align: left;"> Basel </td>
+<td style="text-align: left;"> Haifa </td>
+<td style="text-align: left;"> Haifa </td>
+<td style="text-align: left;"> Haifa </td>
+<td style="text-align: left;"> Johnstone </td>
+<td style="text-align: left;"> Nottingham </td>
+<td style="text-align: left;"> Russell </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Groningen </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Degerbol </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Uerpmann </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Uerpmann </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;"> Hongo </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+<td style="text-align: left;">  </td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+</tr>
+</table>
+<p>Each row defines a reference set consisting of a reference source for
+each taxon (column). The function
+<code>AssembleReference</code> allows us to build the reference set
+taking the selected taxon-specific references from the
+<code>referencesDatabase</code>.
+</p>
+<p>The <span class="pkg">zoolog</span> variable <code>reference</code> is a named list including the
+references defined by <code>referenceSets</code>:
+</p>
+<div class="sourceCode r"><pre>str(reference)
+#&gt; List of 4
+#&gt;  $ NietoDavisAlbarella:'data.frame':	133 obs. of  4 variables:
+#&gt;   ..$ TAX     : Factor w/ 3 levels "bota","ovar",..: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;   ..$ EL      : Factor w/ 27 levels "AS","CAL","FE",..: 4 4 4 4 4 4 4 4 4 11 ...
+#&gt;   ..$ Measure : Factor w/ 26 levels "BFd","BFp","BT",..: 8 9 5 7 13 4 3 12 6 8 ...
+#&gt;   ..$ Standard: num [1:133] 259 234 78.3 90.2 29 ...
+#&gt;  $ Basel              :'data.frame':	176 obs. of  4 variables:
+#&gt;   ..$ TAX     : Factor w/ 5 levels "BOTA","Ovis orientalis",..: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;   ..$ EL      : Factor w/ 28 levels "Astragalus","Calcaneus",..: 14 14 14 14 5 5 5 13 13 13 ...
+#&gt;   ..$ Measure : Factor w/ 26 levels "BFd","BFp","BG",..: 21 13 18 3 5 4 19 6 19 5 ...
+#&gt;   ..$ Standard: num [1:176] 65.9 83 66.9 58.1 95.3 ...
+#&gt;  $ Combi              :'data.frame':	635 obs. of  4 variables:
+#&gt;   ..$ TAX     : Factor w/ 11 levels "bota","OVAR",..: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;   ..$ EL      : Factor w/ 69 levels "AS","CAL","FE",..: 4 4 4 4 4 4 4 4 4 11 ...
+#&gt;   ..$ Measure : Factor w/ 83 levels "BFd","BFp","BT",..: 8 9 5 7 13 4 3 12 6 8 ...
+#&gt;   ..$ Standard: num [1:635] 259 234 78.3 90.2 29 ...
+#&gt;  $ Groningen          :'data.frame':	246 obs. of  4 variables:
+#&gt;   ..$ TAX     : Factor w/ 4 levels "Bos primigenius",..: 1 1 1 1 1 1 1 1 1 1 ...
+#&gt;   ..$ EL      : Factor w/ 23 levels "Astragalus","Calcaneus",..: 13 13 13 5 5 5 5 5 12 12 ...
+#&gt;   ..$ Measure : Factor w/ 45 levels "BFp","BG","BT",..: 14 12 2 8 9 4 3 13 8 5 ...
+#&gt;   ..$ Standard: num [1:246] 69 70 60 359 309 97 89 46 320 100 ...
+</pre></div>
+<p><code>reference$Combi</code> includes the most comprehensive reference for each
+species so that more measurements can be considered. It is the default
+reference for computing the log ratios.
+</p>
+<p>If desired, the user can define their own combinations or can also use
+their own references, which must be a dataframe with the format described
+above.
+</p>
+
+
+<h3>File Structure</h3>
+
+<p><code>referencesDatabase</code>, <code>refereceSets</code>, and <code>reference</code> are exported variables
+automatically loaded in memory. In addition, <span class="pkg">zoolog</span> provides in the
+<code>extdata</code> folder a set of semicolon separated files (csv), generating
+them:
+</p>
+
+<dl>
+<dt><code>referenceSets.csv</code></dt>
+<dd>
+<p>Defines <code>referenceSets</code>.</p>
+</dd>
+<dt><code>referencesDatabase.csv</code></dt>
+<dd>
+<p>Defines the structure of
+<code>referencesDatabase</code>.</p>
+</dd>
+<dt>...</dt>
+<dd>
+<p>A csv file for each taxon-specific reference, as named in
+<code>referencesDatabase.csv</code>.</p>
+</dd>
+</dl>
+<div class="sourceCode r"><pre>utils::read.csv2(system.file("extdata", "referencesDatabase.csv",
+                             package = "zoolog"))
+#&gt;                              Genus                 Taxon     Source
+#&gt; 1                   Cattle - *Bos*            Bos taurus      Nieto
+#&gt; 2                   Cattle - *Bos*            Bos taurus      Basel
+#&gt; 3                   Cattle - *Bos*            Bos taurus  Johnstone
+#&gt; 4                   Cattle - *Bos*       Bos primigenius   Degerbol
+#&gt; 5                   Cattle - *Bos*       Bos primigenius    Steppan
+#&gt; 6                   Sheep - *Ovis*            Ovis aries      Davis
+#&gt; 7                   Sheep - *Ovis*            Ovis aries    Clutton
+#&gt; 8                   Sheep - *Ovis*       Ovis orientalis      Basel
+#&gt; 9                   Sheep - *Ovis*       Ovis orientalis   Uerpmann
+#&gt; 10                  Goat - *Capra*          Capra hircus      Basel
+#&gt; 11                  Goat - *Capra*          Capra hircus    Clutton
+#&gt; 12                  Goat - *Capra*        Capra aegagrus   Uerpmann
+#&gt; 13                     Pig - *Sus*        Sus domesticus  Albarella
+#&gt; 14                     Pig - *Sus*            Sus scrofa      Basel
+#&gt; 15                     Pig - *Sus*            Sus scrofa      Hongo
+#&gt; 16                     Pig - *Sus*            Sus scrofa      Payne
+#&gt; 17             Red deer - *Cervus*        Cervus elaphus      Basel
+#&gt; 18            Fallow deer - *Dama*     Dama mesopotamica      Haifa
+#&gt; 19             Gazelle - *Gazella*       Gazella gazella      Haifa
+#&gt; 20                 Equid - *Equus*          Equus asinus      Haifa
+#&gt; 21                 Equid - *Equus*        Equus caballus  Johnstone
+#&gt; 22 European rabbit - *Oryctolagus* Oryctolagus cuniculus Nottingham
+#&gt; 23                 Canid - *Canis*           Canis lupus    Russell
+#&gt;                          Filename
+#&gt; 1       referenceCattle_Nieto.csv
+#&gt; 2       referenceCattle_Basel.csv
+#&gt; 3   referenceCattle_Johnstone.csv
+#&gt; 4    referenceCattle_Degerbol.csv
+#&gt; 5     referenceCattle_Steppan.csv
+#&gt; 6        referenceSheep_Davis.csv
+#&gt; 7      referenceSheep_Clutton.csv
+#&gt; 8        referenceSheep_Basel.csv
+#&gt; 9     referenceSheep_Uerpmann.csv
+#&gt; 10        referenceGoat_Basel.csv
+#&gt; 11      referenceGoat_Clutton.csv
+#&gt; 12     referenceGoat_Uerpmann.csv
+#&gt; 13     referencePig_Albarella.csv
+#&gt; 14         referencePig_Basel.csv
+#&gt; 15         referencePig_Hongo.csv
+#&gt; 16         referencePig_Payne.csv
+#&gt; 17     referenceRedDeer_Basel.csv
+#&gt; 18        referenceDama_Haifa.csv
+#&gt; 19     referenceGazelle_Haifa.csv
+#&gt; 20       referenceEquid_Haifa.csv
+#&gt; 21   referenceEquid_Johnstone.csv
+#&gt; 22 referenceRabbit_Nottingham.csv
+#&gt; 23     referenceCanid_Russell.csv
+</pre></div>
+
+
+<h3>Acknowledgement</h3>
+
+<p>We are grateful to Barbara Stopp and Sabine Deschler-Erb
+(University of Basel, Switzerland)
+for providing the Basel references for cattle, sheep, goat, wild boar,
+and red deer (Stopp and Deschler-Erb 2018),
+together with the permission to publish them as part of <span class="pkg">zoolog</span>.
+</p>
+<p>We thank also Francesca Slim and Dimitris Filioglou (University of Groningen)
+for providing the references for aurochs, mouflon, wild goat, and wild boar
+(Degerbøl and Fredskild 1970; Uerpmann and Uerpmann 1994; Hongo and Meadow 2000)
+in the Groningen set.
+</p>
+<p>We thank Claudia Minniti (University of Salento) for providing Johnstone's
+reference for cattle (Johnstone and Albarella 2002).
+</p>
+<p>We are also grateful to Sierra Harding and Nimrod Marom (University of Haifa)
+for providing the Haifa standard measurements for donkey, mountain gazelle,
+and Persian fallow deer (Harding and Marom 2021).
+</p>
+<p>We thank Carly Ameen and Helene Benkert (University of Exeter) for providing
+references for horse (Johnstone 2004) and
+European rabbit (Ameen 2021).
+</p>
+<p>We thank Mikolaj Lisowski (University of York) for pointing to the existence
+of the improved reference for Bos primigenius
+(Steppan 2001) and providing its source.
+</p>
+
+
+<h3>References</h3>
+
+<p>Albarella U, Payne S (2005).
+“Neolithic pigs from Durrington Walls, Wiltshire, England: a biometrical database.”
+<em>Journal of Archaeological Science</em>, <b>32</b>(4), 589–599.<br><br> Ameen C (2021).
+“Measurements from an adult male specimen from Audley End, Essex, UK. in the reference collection at the University of Nottingham Archaeology Department under ID RS139.”
+Personal communication, included permission to publish them as part of the package zoolog.<br><br> Clutton-Brock J, Dennis-Bryan K, Armitage PL, Jewell PA (1990).
+“Osteology of the Soay sheep.”
+<em>Bulletin of the British Museum, Natural History. Zoology</em>, <b>56</b>(1), 1–56.<br><br> Davis SJ (1996).
+“Measurements of a group of adult female Shetland sheep skeletons from a single flock: a baseline for zooarchaeologists.”
+<em>Journal of archaeological science</em>, <b>23</b>(4), 593–612.<br><br> Degerbøl M, Fredskild B (1970).
+<em>The Urus (Bos Primigenius Bojanus) and Neolithic Domesticated Cattle (Bos Taurus Domesticus Linné) in Denmark: Zoological and Palynological Investigations</em>,  Biologiske skrifter, 17:1.
+København, (Munksgaard).<br><br> Harding S, Marom N (2021).
+“Measurements compiled for the Zooarchaeology of Southern Phoenicia (ZSP) Project, from the reference collection in the Leon Recanati Institute for Maritime Studies (RIMS, Department of Maritime Civilizations, University of Haifa, Israel).”
+Personal communication, included permission to publish them as part of the package zoolog.<br><br> Hongo H, Meadow RH (2000).
+“Faunal remains from Prepottery Neolithic levels at Çayönü, southeastern Turkey: a preliminary report focusing on pigs (Sus sp.).”
+In <em>Archaeozoology of the Near East IVA Proceedings of the fourth international symposium on the archaeozoology of southwestern Asia and adjacent areas. Groningen: ARC Publications</em>, 121–139.<br><br> Johnstone C, Albarella U (2002).
+“The Late Iron Age and Romano-British Mammal and Bird Bone Assemblage from Elms Farm, Heybridge, Essex (Site Code: Hyef93-95).”
+Technical Report Report 45/2002, tab.16, p. 70, Centre for Archaeology.<br><br> Johnstone CJ (2004).
+<em>A biometric study of equids in the Roman world</em>.
+Ph.D. thesis, University of York.<br><br> Nieto-Espinet A (2018).
+“Element measure standard biometrical data from a cow dated to the Early Bronze Age (Minferri, Catalonia).”
+doi: <a href="https://doi.org/10.13140/RG.2.2.13512.78081">10.13140/RG.2.2.13512.78081</a>.<br><br> Payne S, Bull G (1988).
+“Components of variation in measurements of pig bones and teeth, and the use of measurements to distinguish wild from domestic pig remains.”
+<em>Archaeozoologia</em>, <b>2</b>(1), 27–66.<br><br> Russell N (1993).
+<em>Hunting, Herding and Feasting: human use of animals in Neolithic Southeast Europe</em>.
+Ph.D. thesis, University of California, Berkeley.<br><br> Steppan K (2001).
+“Ur oder Hausrind? Die Variabilität der Wildtieranteile in linearbandkeramischen Tierknochenkomplexen.”
+In Arbogast R, Jeunesse C, Schibler J (eds.), <em>Rôle et statut de la chasse dans le Néolithique ancien danubien (5500 - 4900 av. J.-C.) /Rolle und Bedeutung der Jagd während des Frühneolithikums Mitteleuropas (Linearbandkeramik 5500 - 4900 v.Chr.). Premières rencontres danubiennes, Strasbourg 20 et 21 novembre 1996, Actes de la première table-ronde. Internationale Archäologie: Arbeitsgemeinschaft, Symposium, Tagung, Kongress Band 1</em>, 171–186.
+na.<br><br> Stopp B, Deschler-Erb S (2018).
+“Measurements compiled from the reference collection in the Integrative Prähistorische und Naturwissenschaftliche Archäologie (IPNA, University of Basel, Switzerland).”
+Personal communication, included permission to publish them as part of the package zoolog.<br><br> Uerpmann M, Uerpmann H (1994).
+“Animal bone finds from excavation 520 at Qala’at al-Bahrain.”
+In Hojlund F, Andersen HH (eds.), <em>Gala'at Al-Bahrain. 1 The Northern City Wall And The Islamic Fortress</em>, 417–444.
+Jutland Archaeological Society.<br><br> Von den Driesch A (1976).
+<em>A guide to the measurement of animal bones from archaeological sites: as developed by the Institut für Palaeoanatomie, Domestikationsforschung und Geschichte der Tiermedizin of the University of Munich</em>, volume 1.
+Peabody Museum Press.
+</p>
+
+
+</div>

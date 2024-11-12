@@ -1,0 +1,104 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfpss</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Zipf-Poisson Stop Sum Distribution (Zipf-PSS).</h2>
+
+<h3>Description</h3>
+
+<p>Probability mass function, cumulative distribution function, quantile function and random number
+generation for the Zipf-PSS distribution with parameters <code class="reqn">\alpha</code> and <code class="reqn">\lambda</code>. The support of the Zipf-PSS
+distribution are the positive integer numbers including the zero value. In order to work with its zero-truncated version
+the parameter <code>isTruncated</code> should be equal to True.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dzipfpss(x, alpha, lambda, log = FALSE, isTruncated = FALSE)
+
+pzipfpss(q, alpha, lambda, log.p = FALSE, lower.tail = TRUE,
+  isTruncated = FALSE)
+
+rzipfpss(n, alpha, lambda, log.p = FALSE, lower.tail = TRUE,
+  isTruncated = FALSE)
+
+qzipfpss(p, alpha, lambda, log.p = FALSE, lower.tail = TRUE,
+  isTruncated = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>Vector of positive integer values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>Value of the <code class="reqn">\lambda</code> parameter (<code class="reqn">\lambda &gt; 0</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>Logical; if TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>isTruncated</code></td>
+<td>
+<p>Logical; if TRUE, the zero truncated version of the distribution is returned.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>Logical; if TRUE (default), probabilities are <code class="reqn">P[X \leq x]</code>, otherwise, <code class="reqn">P[X &gt; x]</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of random values to return.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Vector of probabilities.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The support of the <code class="reqn">\lambda</code> parameter increases when the distribution is truncated at zero being
+<code class="reqn">\lambda \geq 0</code>. It has been proved that when <code class="reqn">\lambda = 0</code> one has the degenerated version of the distribution at one.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Panjer, H. H. (1981). Recursive evaluation of a family of compound
+distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 22-26.
+</p>
+<p>Sundt, B., &amp; Jewell, W. S. (1981). Further results on recursive evaluation of
+compound distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 27-39.
+
+</p>
+
+
+</div>

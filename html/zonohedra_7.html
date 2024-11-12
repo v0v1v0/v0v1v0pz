@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>genlist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+zonohedra generators useful for testing and plotting
+</h2>
+
+<h3>Description</h3>
+
+
+<table>
+<tr>
+<td style="text-align: left;">
+<code>classics.genlist</code> </td>
+<td style="text-align: left;"> 13 classic zonohedra generators</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+<code>colorimetry.genlist</code> </td>
+<td style="text-align: left;"> 4 sets of Color Matching Functions (each set is a 3xN matrix)</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+</td>
+</tr>
+</table>
+<h3>Format</h3>
+
+<p>Each is an S3 class <b>genlist</b> object organized as a list of 3xN matrices (N varies).
+The list must have names, preferably short names or abbreviations.
+Each matrix can have optional attributes 
+<code>"shortname"</code> and <code>"fullname"</code>
+which are useful when printing with <code>print.genlist()</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>Making these S3 class <b>genlist</b> makes it possible to easily
+print a short summary using <code>print.genlist()</code>.
+</p>
+<p>For colorimetry.genlist[[2]] a few remarks are in order.
+These generators come from the xyz CIE color matching functions of 1931,
+from 360 to 830 nm with 1 nm step.
+From 699 to 830 nm, the angles between the generators only differ by a few microradians,
+and it apparent that the designers tapered all 3 functions identically in that nm range.
+For an illustration of this in the chromaticity domain, see Burns, Figure 10.
+When the zonohedron is constructed from these 132 generators, with the default options,
+all these generators a 'collapsed' into a single one.
+In the original matroid these 132 <em>points</em> form a <em>multiple group</em>,
+and in the simplified matroid they are collapsed to a single <em>point</em>, labeled with 699.
+</p>
+
+
+<h3>Source</h3>
+
+<p>David Eppstein.
+<b>Zonohedra and Zonotopes</b>.
+<br><a href="https://www.ics.uci.edu/~eppstein/junkyard/ukraine/ukraine.html">https://www.ics.uci.edu/~eppstein/junkyard/ukraine/ukraine.html</a>
+</p>
+<p>Colour &amp; Vision Research Laboratory.
+University College London.
+<a href="http://www.cvrl.org">http://www.cvrl.org</a>
+</p>
+
+
+<h3>References</h3>
+
+<p>ASTM E 308 - 01.
+Standard Practice for Computing the Colors of Objects by Using the CIE System.
+Table 1 
+</p>
+<p>Scott A Burns.
+<b>The location of optimal object colors with more than two transitions</b>.
+Color Research &amp; Application.
+Vol. 46.
+No. 6.
+pp 1180-1193.
+2021.
+</p>
+<p>Günther Wyszecki and W.S. Stiles.
+<b>Color Science : Concepts and Methods, Quantitative Data and Formulae</b>.
+Second Edition.
+Wiley-Interscience. 1982.
+Table I(3.3.1).
+pp. 723-735.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>print.genlist()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># get the names of 3 sets of color matching functions
+names(colorimetry.genlist)
+# [1] "xyz1931.5nm" "xyz1931.1nm" "lms2000.1nm"
+
+
+# print zonohedra metrics associated with 3 sets of color matching functions
+colorimetry.genlist
+#                            fullname generators vertices  edges facets      area     volume pointed
+# xyz1931.5nm  xyz at 5nm step                81     5100  10146   5048  1582.722   4070.345    TRUE
+# xyz1931.1nm  xyz at 1nm step               471   112910 225720 112812 39586.707 509434.149    TRUE
+# lms2000.1nm  lms at 1nm step               441   146642 292860 146220 22736.652 181369.085    TRUE
+# ciexyzjv.5nm xyz at 5nm step (1978)         90     8012  16020   8010  1553.535   3951.899    TRUE
+</code></pre>
+
+
+</div>

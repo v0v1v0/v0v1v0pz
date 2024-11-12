@@ -1,0 +1,46 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>human_filesize</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Human-readable binary file size</h2>
+
+<h3>Description</h3>
+
+<p>Takes an integer (referring to number of bytes) and returns an optimally
+human-readable
+<a href="https://en.wikipedia.org/wiki/Binary_prefix">binary-prefixed</a>
+byte size (KiB, MiB, GiB, TiB, PiB, EiB).
+The function is vectorised.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">human_filesize(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A positive integer, i.e. the number of bytes (B).
+Can be a vector of file sizes.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A character vector.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Floris Vanderhaeghe, <a href="mailto:floris.vanderhaeghe@inbo.be">floris.vanderhaeghe@inbo.be</a>
+</p>
+
+
+</div>

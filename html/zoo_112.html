@@ -1,0 +1,63 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>frequency&lt;-</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Replacing the Index of Objects</h2>
+
+<h3>Description</h3>
+
+<p>Generic function for replacing the frequency of an object.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">frequency(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>value</code></td>
+<td>
+<p>a frequency.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>frequency&lt;-</code> is a generic function for replacing (or assigning)
+the frequency of an object. Currently, there is a <code>"zooreg"</code> and
+a <code>"zoo"</code> method. In both cases, the <code>value</code> is assigned
+to the <code>"frequency"</code> of the object if it complies with the
+<code>index(x)</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zooreg</code>, <code>index</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">z &lt;- zooreg(1:5)
+z
+as.ts(z)
+frequency(z) &lt;- 3
+z
+as.ts(z)
+</code></pre>
+
+
+</div>

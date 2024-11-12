@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Zero-Inflated Poisson Distribution</h2>
+
+<h3>Description</h3>
+
+<p>Density, distribution function, quantile function and random generation for the 
+zero-inflated Poisson (ZIP) distribution with parameters <code>lambda</code> and <code>omega</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dzip(x, lambda, omega, log = FALSE)
+pzip(q, lambda, omega, lower.tail = TRUE, log.p = FALSE)
+qzip(p, lambda, omega, lower.tail = TRUE, log.p = FALSE)
+rzip(n, lambda, omega)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>vector of quantiles.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>number of random values to return.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lambda</code></td>
+<td>
+<p>vector of (non-negative) means.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>omega</code></td>
+<td>
+<p>zero-inflation parameter.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>logical; if TRUE, probabilities <code>p</code> are given as <code>log(p)</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>logical; if TRUE (default), probabilities are <code>P[X &lt;= x]</code>, otherwise, <code>P[X &gt; x]</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>dzip</code> gives the density, <code>pzip</code> gives the distribution function,
+<code>qzip</code> gives the quantile function, and <code>rzip</code> generates random deviates.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>dzinb</code>, <code>pzinb</code>, <code>qzinb</code>, and <code>rzinb</code>
+for the zero-inflated negative binomial (ZINB) distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dzip(x = 0:10, lambda = 1, omega = 0.5)
+pzip(q = c(1, 5, 9), lambda = 1, omega = 0.5)
+qzip(p = c(0.25, 0.50, 0.75), lambda = 1, omega = 0.5)
+set.seed(123)
+rzip(n = 100, lambda = 1, omega = 0.5)
+</code></pre>
+
+
+</div>

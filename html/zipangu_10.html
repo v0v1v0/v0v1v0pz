@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>is_jholiday</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Is x a public holidays in Japan?</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+Whether it is a holiday defined by Japanese law (enacted in 1948)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">is_jholiday(date)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>date</code></td>
+<td>
+<p>a vector of POSIXt, numeric or character objects</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Holiday information refers to data published as of December 21, 2020.
+Future holidays are subject to change.
+</p>
+
+
+<h3>Value</h3>
+
+<p>TRUE if x is a public holidays in Japan, FALSE otherwise.
+</p>
+
+
+<h3>Examples</h3>
+
+<div class="sourceCode r"><pre>is_jholiday("2021-01-01")
+#&gt; [1] TRUE
+is_jholiday("2018-12-23")
+#&gt; [1] TRUE
+is_jholiday("2019-12-23")
+#&gt; [1] FALSE
+</pre></div>
+
+
+</div>

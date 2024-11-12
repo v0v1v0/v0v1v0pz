@@ -1,0 +1,203 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lrSVD</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Log-ratio SVD algorithm</h2>
+
+<h3>Description</h3>
+
+<p>This function implements an iterative algorithm to impute left-censored data (e.g. values below detection limit,
+rounded zeros) based on the singular value decomposition (SVD) of a compositional data set. It is particularly indicated for the case in which the data contain more variables than observations.
+</p>
+<p>This function can be also used to impute missing data instead by setting <code>imp.missing = TRUE</code> (see <code>lrSVDplus</code> to treat censored and missing data simultaneously).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lrSVD(X, label = NULL, dl = NULL, frac = 0.65, ncp = 2, 
+         imp.missing=FALSE, beta = 0.5, method = c("ridge", "EM"),
+         row.w = NULL, coeff.ridge = 1, threshold = 1e-04, seed = NULL,
+         nb.init = 1, max.iter = 1000, z.warning = 0.8, z.delete = TRUE,
+         ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Compositional data set (<code>matrix</code> or <code>data.frame</code> class).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote zeros/unobserved values in <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dl</code></td>
+<td>
+<p>Numeric vector or matrix of detection limits/thresholds. These must be given on the same scale as <code>X</code>. If <code>NULL</code> the column minima are used as thresholds.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>frac</code></td>
+<td>
+<p>Parameter for initial multiplicative simple replacement of left-censored data (see <code>multRepl</code>) (default = 0.65).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncp</code></td>
+<td>
+<p>Number of components for low-rank matrix approximation (default = 2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imp.missing</code></td>
+<td>
+<p>If <code>TRUE</code> then unobserved data identified by <code>label</code> are treated as missing data (default = <code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Weighting parameter, balance between the two conditions in objective function (default = 0.5).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Parameter estimation method for the iterative algorithm (<code>method = "ridge"</code>, default).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>row.w</code></td>
+<td>
+<p>row weights (default = NULL, a vector of 1 for uniform row weights).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>coeff.ridge</code></td>
+<td>
+<p>Used when <code>method = "ridge"</code> (default = 1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>threshold</code></td>
+<td>
+<p>Threshold for assessing convergence (default = 1e-04).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+<p>Seed for random initialisation of the algorithm (default <code>seed = NULL</code>, unobserved values initially imputed by the column mean).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nb.init</code></td>
+<td>
+<p>Number of random initialisations (default = 1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>max.iter</code></td>
+<td>
+<p>Maximum number of iterations for the algorithm (default = 1000).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.warning</code></td>
+<td>
+<p>Threshold used to identify individual rows or columns including an excess of zeros/unobserved values (to be specify in proportions, default <code>z.warning=0.8</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.delete</code></td>
+<td>
+<p>Logical value. If set to <code>TRUE</code>, rows/columns identified by <code>z.warning</code> are omitted in the imputed data set. Otherwise, the function stops in error when rows/columns are identified by <code>z.warning</code> (default <code>z.delete=TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function implements an efficient imputation algorithm particularly suitable for the case of continuous high-dimensional (wide) compositional data sets (more columns than rows), although it is equally applicable to regular data sets. It is based on a low-rank representation of the data set by a principal components (PC) model as derived by singular value decomposition (SVD) of the data matrix, extending recent work on principal component imputation and matrix completion methods to the case of censored compositional data (the code builds on the function <code>imputePCA</code>; see <code>missMDA</code> package for more details). A preliminary imputation by multiplicative replacement (see <code>multRepl</code>) is conducted to initiate the iterative algorithm in log-ratio coordinates. Two steps, estimation of latent PC model loadings and imputation of empty data matrix cells using the model, are iteratively repeated until convergence. Parameter fitting in this context is performed by a regularisation method (ridge regression in this case) or by the expectation-maximisation (EM) algorithm. Regularization has been shown generally preferable and it is set as default method (note the regularisation parameter <code>coeff.ridge</code> set to 1 by default. If it is &lt; 1 the result is closer to EM estimation, whereas for values &gt; 1 it is closer to mean estimation).
+</p>
+<p>An imputed data set is produced on the same scale as the input data set. If <code>X</code> is not closed to a constant sum, then the results are adjusted to provide a compositionally equivalent data set, expressed in the original scale, which leaves the absolute values of the observed components unaltered.
+</p>
+<p><em>Missing data imputation</em>
+</p>
+<p>When <code>imp.missing = TRUE</code>, unobserved values are treated as general missing data. For this case, the argument <code>label</code> indicates the unique label for missing values and the argument <code>dl</code> is ignored.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> object containing the imputed compositional data set expressed in the original scale.
+</p>
+
+
+<h3>References</h3>
+
+<p>Palarea-Albaladejo, J, Antoni Martín-Fernández, J, Ruiz-Gazen, A, Thomas-Agnan, C. lrSVD: An efficient imputation algorithm for incomplete high-throughput compositional data. Journal of Chemometrics 2022; 36: e3459.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code>, <code>lrSVD</code>, <code>lrDA</code>, <code>multRepl</code>, <code>multLN</code>, <code>multKM</code>, <code>cmultRepl</code>, <code>lrSVDplus</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"> # Data set closed to 100 (percentages, common dl = 1%)
+ X &lt;- matrix(c(26.91,8.08,12.59,31.58,6.45,14.39,
+               39.73,26.20,0.00,15.22,6.80,12.05,
+               10.76,31.36,7.10,12.74,31.34,6.70,
+               10.85,46.40,31.89,10.86,0.00,0.00,
+               7.57,11.35,30.24,6.39,13.65,30.80,
+               38.09,7.62,23.68,9.70,20.91,0.00,
+               27.67,7.15,13.05,32.04,6.54,13.55,
+               44.41,15.04,7.95,0.00,10.82,21.78,
+               11.50,30.33,6.85,13.92,30.82,6.58,
+               19.04,42.59,0.00,38.37,0.00,0.00),byrow=TRUE,ncol=6)
+ 
+ X_lrSVD&lt;- lrSVD(X,label=0,dl=rep(1,6))
+ 
+ # Multiple limits of detection by component
+ mdl &lt;- matrix(0,ncol=6,nrow=10)
+ mdl[2,] &lt;- rep(1,6)
+ mdl[4,] &lt;- rep(0.75,6)
+ mdl[6,] &lt;- rep(0.5,6)
+ mdl[8,] &lt;- rep(0.5,6)
+ mdl[10,] &lt;- c(0,0,1,0,0.8,0.7)
+ 
+ X_lrSVD2 &lt;- lrSVD(X,label=0,dl=mdl)
+ 
+ # Non-closed compositional data set
+ data(LPdata) # data (ppm/micrograms per gram)
+ dl &lt;- c(2,1,0,0,2,0,6,1,0.6,1,1,0,0,632,10) # limits of detection (0 for no limit)
+ LPdata2 &lt;- subset(LPdata,select=-c(Cu,Ni,La))  # select a subset for illustration purposes
+ dl2 &lt;- dl[-c(5,7,10)]
+ 
+ LPdata2_lrSVD &lt;- lrSVD(LPdata2,label=0,dl=dl2)
+ 
+ # Treating zeros as general missing data for illustration purposes only
+ LPdata2_miss &lt;- lrSVD(LPdata2,label=0,imp.missing=TRUE)
+</code></pre>
+
+
+</div>

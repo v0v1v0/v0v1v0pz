@@ -1,0 +1,109 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zz_post</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Post file to Zamzar endpoint</h2>
+
+<h3>Description</h3>
+
+<p>Per default ‘zz_post()' assumes that you’re doing development, thus using a 
+development endpoint. Set parameter 'prod' to 'TRUE' to change this behavior.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zz_post(
+  file = NULL,
+  extension = NULL,
+  usr = NULL,
+  prod = FALSE,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>The path to the file you want to convert.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>extension</code></td>
+<td>
+<p>The file type you want to convert to. E.g., 'png'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>usr</code></td>
+<td>
+<p>The username/API key you are using. If not set, the function
+will check if a key exists as a 'ZAMZAR_USR' variable  in '.Renviron' and use that.    
+</p>
+<p>See: <a href="https://developers.zamzar.com/user">https://developers.zamzar.com/user</a></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prod</code></td>
+<td>
+<p>Boolean deciding whether to use production or development endpoint.
+Defaults to 'FALSE'.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Boolean deciding whether or not verbose status messages
+should be returned. Defaults to 'FALSE'.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>On differences between endpoints, see: <a href="https://developers.zamzar.com/docs#section-Next_steps">https://developers.zamzar.com/docs#section-Next_steps</a> and  <a href="https://developers.zamzar.com/docs#section-Rate_Limits">https://developers.zamzar.com/docs#section-Rate_Limits</a>
+</p>
+<p>Please note that a Zamzar key passed as argument to 'usr' takes precedence over a
+Zamzar key extracted from an '.Renviron'.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A status message indicating either success or failure.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zz_format</code> for a list of formats you can convert to.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Per default zz_post uses the development endpoint.
+zz_post(file = "avatar.emf", extension = "png")
+
+# Setting prod parameter to FALSE is the same as above.
+zz_post(file = "avatar.emf", extension = "png", prod = FALSE)
+
+# You need to flip prod to TRUE if you want to use the production endpoint.
+zz_post(file = "avatar.emf", extension = "png", prod = TRUE)
+
+# Remember you can always pass a Zamzar key to the usr parameter if you don't
+# want to use an .Renviron file.
+zz_post(file = "avatar.emf", usr = "key", extension = "png", prod = TRUE)
+ 
+
+## End(Not run)
+</code></pre>
+
+
+</div>

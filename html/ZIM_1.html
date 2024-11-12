@@ -1,0 +1,43 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIM-package</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zero-Inflated Models for Count Time Series with Excess Zeros</h2>
+
+<h3>Description</h3>
+
+<p>Fits observation-driven and parameter-driven models for count time series with excess zeros.
+</p>
+
+
+<h3>Details</h3>
+
+<p>The package <code>ZIM</code> contains functions to fit statistical models for count time series 
+with excess zeros (Yang et al., 2013, 2015). The main function for fitting observation-driven models 
+is <code>zim</code>, and the main function for fitting parameter-driven models is <code>dzim</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The observation-driven models for zero-inflated count time series can also be fit using the function 
+<code>zeroinfl</code> from the <code>pscl</code> package (Zeileis et al., 2008). 
+Fitting parameter-driven models is based on sequential Monte Carlo (SMC) methods, which are
+computer intensive and could take several hours to estimate the model parameters.
+</p>
+
+
+<h3>References</h3>
+
+<p>Yang, M., Cavanaugh, J. E., and Zamba, G. K. D. (2015). State-space models for count time series
+with excess zeros. <em>Statistical Modelling</em>, <b>15</b>:70-90 <br><br>
+Yang, M., Zamba, G. K. D., and Cavanaugh, J. E. (2013). Markov regression models for count time series
+with excess zeros: A partial likelihood approach. <em>Statistical Methodology</em>, <b>14</b>:26-38. <br><br>
+Zeileis, A., Kleiber, C., and Jackman, S. (2008). Regression models for count data in <code>R</code>.  
+<em>Journal of Statistical Software</em>, <b>27</b>(8).
+</p>
+
+
+</div>

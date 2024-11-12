@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zb_lines</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create lines radiating at equal angles from a point</h2>
+
+<h3>Description</h3>
+
+<p>Create lines radiating at equal angles from a point
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zb_lines(point, n, starting_angle = 45, distance = 1e+05)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>point</code></td>
+<td>
+<p>Center point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of lines</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>starting_angle</code></td>
+<td>
+<p>Starting angle</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance</code></td>
+<td>
+<p>Distance</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Objects of class 'sfc' containing linestring geometries
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">point = sf::st_centroid(london_a())
+n = 4
+l = zb_lines(point, n)
+plot(l)
+</code></pre>
+
+
+</div>

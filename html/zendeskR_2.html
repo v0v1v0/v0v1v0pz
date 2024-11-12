@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getAllOrganizations</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> getAllOrganizations</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to retrieve information on all registered organizations in your Zendesk organization
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getAllOrganizations()
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p>This function will return a data.frame containing all fields on every organization.
+The tags key will be returned within the data.frame as a list.
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a data.frame of all organizations
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tanya Cashorali</p>
+
+
+<h3>References</h3>
+
+<p>http://developer.zendesk.com/documentation/rest_api/organizations.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+    ## This requires Zendesk authentication
+    organizations &lt;- getAllOrganizations()
+
+## End(Not run)</code></pre>
+
+
+</div>

@@ -1,0 +1,107 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sample.spc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Incremental Samples from a Frequency Spectrum (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Compute incremental random samples from a frequency spectrum (an object
+of class <code>spc</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  sample.spc(obj, N, force.list=FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>spc</code>, representing a frequency
+spectrum</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>a vector of non-negative integers in increasing order, the
+sample sizes for which incremental samples will be generated</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>force.list</code></td>
+<td>
+<p>if <code>TRUE</code>, the return value will always be a
+list of <code>spc</code> objects, even if <code>N</code> is just a single
+integer</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function is currently implemented as a wrapper around
+<code>sample.tfl</code>, using <code>spc2tfl</code> and <code>tfl2spc</code> to convert
+between frequency spectra and type frequency lists.  A direct
+implementation might be slightly more efficient, but would very likely
+not make a substantial difference.
+</p>
+
+
+<h3>Value</h3>
+
+<p>If <code>N</code> is a single integer (and the <code>force.list</code> flag is not
+set), a <code>spc</code> object representing the frequency spectrum of a
+random sample of size <code class="reqn">N</code> from <code>obj</code>.
+</p>
+<p>If <code>N</code> is a vector of length greater one, or if
+<code>force.list=TRUE</code>, a list of <code>spc</code> objects representing the
+frequency spectra of incremental random samples of the specified sizes
+<code class="reqn">N</code>.  <em>Incremental</em> means that each sample is a superset of
+the preceding sample.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>spc</code> for more information about frequency spectra
+</p>
+<p><code>sample.tfl</code> is an analogous function for type frequency
+lists (objects of class <code>tfl</code>)
+</p>
+<p><code>sample.spc</code> takes a single <em>concrete</em> random
+subsample from a spectrum and returns the spectrum of the subsample,
+unlike <code>spc.interp</code>, that computes the <em>expected</em>
+frequency spectrum for random subsamples of size <code>N</code> by
+binomial interpolation.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## read Brown spectrum
+data(Brown.spc)
+summary(Brown.spc)
+
+## sample a spectrum of 100k tokens
+MiniBrown.spc &lt;- sample.spc(Brown.spc,1e+5)
+summary(MiniBrown.spc)
+
+## if we repat, we get a different sample
+MiniBrown.spc &lt;- sample.spc(Brown.spc,1e+5)
+summary(MiniBrown.spc)
+
+</code></pre>
+
+
+</div>

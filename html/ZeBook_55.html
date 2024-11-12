@@ -1,0 +1,68 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>mm.FAS.fct</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Senescence function for Muchow et al. (1990) Maize model</h2>
+
+<h3>Description</h3>
+
+<p>Senesced fraction of total leaf area (FAS) increase with thermal units (TU) from emergence
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">mm.FAS.fct(TT, TTE, c1 = 0.00161, c2 = 0.00328)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>TT</code></td>
+<td>
+<p>: Thermal time (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>TTE</code></td>
+<td>
+<p>: Thermal units from sowing to emergence/leaf growth (degC.day)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c1</code></td>
+<td>
+<p>: coefficient of the statistical relation (default : 0.00161)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>c2</code></td>
+<td>
+<p>: coefficient of the statistical relation (default : 0.00328)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Senesced fraction of total leaf area
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>maize.muchow.model</code>, <code>mm.A.fct</code>, <code>mm.LN.fct</code>, <code>maize.multisy</code>,
+<code>mm.HI.fct</code>,<code>maize.muchow.graph</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(1:2500,mm.FAS.fct(1:2500,TTE=87))
+</code></pre>
+
+
+</div>

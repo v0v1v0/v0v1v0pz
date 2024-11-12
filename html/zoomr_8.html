@@ -1,0 +1,74 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_webinar_details</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get Webinar Details</h2>
+
+<h3>Description</h3>
+
+<p>Get metadata about a single webinar.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_webinar_details(webinar_id, account_id, client_id, client_secret)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>webinar_id</code></td>
+<td>
+<p>Zoom Webinar Id, typically an 11 digit number.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>account_id</code></td>
+<td>
+<p>Account Id granted by the Zoom developer app.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>client_id</code></td>
+<td>
+<p>Client Id granted by the Zoom developer app.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>client_secret</code></td>
+<td>
+<p>Client secret granted by the Zoom developer app.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with the metadata about a webinar.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See &lt;https://marketplace.zoom.us/docs/api-reference/zoom-api/&gt; for 
+documentation on the Zoom API.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+dat &lt;- get_webinar_details(webinar_id = "99911112222",
+  your_account_id,
+  your_client_id,
+  your_client_secret)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

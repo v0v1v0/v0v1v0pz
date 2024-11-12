@@ -1,0 +1,196 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zeta.scale.min.dist</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zeta diversity scaling with sample grain dependency based on the minimum distance between sites</h2>
+
+<h3>Description</h3>
+
+<p>Computes zeta diversity scaling with sample grain for a specific order (number of assemblages or sites), increasing grain by sequentially adding sites based on the minimum distance between them.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zeta.scale.min.dist(
+  xy,
+  data.spec,
+  m,
+  order = 1,
+  reorder = 100,
+  shuffle = TRUE,
+  sam = 1000,
+  method = "mean",
+  rescale = FALSE,
+  normalize = FALSE,
+  plot = TRUE,
+  sd = TRUE,
+  distance.type = "Euclidean",
+  dist.custom = NULL,
+  zeta.type = "exact"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>xy</code></td>
+<td>
+<p>Site-by-coordinate data frame, with sites as rows and coordinates as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.spec</code></td>
+<td>
+<p>Site-by-species presence-absence data frame, with sites as rows and species as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>Vector of mapping grains: <code>m[i]</code> sites are grouped together to generate data at a coarser grain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>Specific number of assemblages or sites at which zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>reorder</code></td>
+<td>
+<p>Number of times the sites are rearranged and grouped together for the computation of zeta (see Details).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>shuffle</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the order of the sites must be randomised, which can have an impact on the outputs if some distances are equal.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sam</code></td>
+<td>
+<p>Number of samples for which the zeta diversity is computed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Name of a function (as a string) indicating how to combine the coordinates. It can be a basic R-function such as "<code>mean</code>" or "<code>max</code>", but also a custom function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rescale</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the zeta values should be divided by <code class="reqn">\zeta_1</code>, to get a range of values between 0 and 1. Has no effect if <code>normalize</code> != <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalize</code></td>
+<td>
+<p>Indicates if the zeta values for each sample should be divided by the total number of species for this specific sample (<code>normalize = "Jaccard"</code>), by the average number of species per site for this specific sample (<code>normalize = "Sorensen"</code>), or by the minimum number of species in the sites of this specific sample <br> (<code>normalize = "Simpson"</code>). Default value is <code>FALSE</code>, indicating that no normalization is performed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the outputs must be plotted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd</code></td>
+<td>
+<p>Boolean value (TRUE or FALSE) indicating if the standard deviation must be plotted for each grain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>distance.type</code></td>
+<td>
+<p>Method to compute distance. Default is "<code>Euclidean</code>", for Euclidean distance. The other options are (i) "<code>ortho</code>" for orthodromic distance, if xy correspond to longitudes and latitudes (orthodromic distance is computed using the <code>geodist</code> function from package <code>geodist</code>); and (ii) "<code>custom</code>", in which case the user must provide a distance matrix for <code>dist.custom</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dist.custom</code></td>
+<td>
+<p>Distance matrix provided by the user when <code>distance.type</code> = <code>"custom"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zeta.type</code></td>
+<td>
+<p>The function that must be used for the computation of zeta diversity. Default is "<code>exact</code>" for calling <code>Zeta.order.ex</code>. Use "<code>monte carlo</code>" for calling <code>Zeta.order.mc</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The nearest neighbouring sites (plots, quadrates, or areas of varying shapes) are grouped as spatial clusters of 2, 3, 4, etc. sites, based on the minimum distance between them. Since the procedure is based on the relative distance between sites, the site order can have an impact on the output. The procedure is therefore performed 'reorder' times, for which sites are randomly reordered each time, and the mean zeta is computed. This function is suitable for both regularly and irregularly spaced sites, contiguous or non contiguous (<em>sensu</em> Scheiner et al., 2011). For regularly spaced sites, the use of <code>Zeta.scale.regular</code> is recommended.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>zeta.scale.min.dist</code> returns a list containing the following components:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>The order of zeta.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>The vector of mapping grains: m[i] sites are grouped together to generate data at a coarser grain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>values</code></td>
+<td>
+<p>A matrix containing the zeta diversity values over the '<code>reorder</code>' computations, for each grain.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sd</code></td>
+<td>
+<p>A matrix containing the standard deviation of zeta diversity over the '<code>reorder</code>' computations, for each grain.</p>
+</td>
+</tr>
+</table>
+<h3>References</h3>
+
+<p>Hui C. &amp; McGeoch M.A. (2014). Zeta diversity as a concept and metric that unifies incidence-based biodiversity patterns. <em>The American Naturalist</em>, 184, 684-694.
+</p>
+<p>Scheiner S.M., Chiarucci A., Fox G.A., Helmus M.R., McGlinn D.J. &amp; Willig M.R. (2011). The underpinnings of the relationship of species richness with space and time. <em>Ecological Monographs</em>, 81, 195-213.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.decline.mc</code>, <code>Zeta.order.mc</code>, <code>Zeta.decline.ex</code>, <code>Zeta.order.ex</code>,
+</p>
+<p><code>Zeta.scale.regular</code>, <code>rescale.regular</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::data(Marion.species)
+xy.marion &lt;- Marion.species[,1:2]
+data.spec.marion &lt;- Marion.species[,3:33]
+
+dev.new()
+zeta.scale.irreg.species &lt;- Zeta.scale.min.dist(xy.marion, data.spec.marion, m = 1:3,
+    order = 3, reorder = 3, sam = 50, normalize = "Jaccard")
+
+</code></pre>
+
+
+</div>

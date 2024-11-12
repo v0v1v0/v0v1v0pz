@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIPG_summary</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Summary for ZIPG_main() result.</h2>
+
+<h3>Description</h3>
+
+<p>Summary for ZIPG_main() result.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIPG_summary(ZIPG_res, type = "Wald")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>ZIPG_res</code></td>
+<td>
+<p>Result from ZIPG_main()</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Type of hypothesis testing method, 'Wald','bWald' or 'pbWald'.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>pvalue
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Dietary)
+dat = Dietary
+ZIPG_res &lt;- ZIPG_main(data = dat$COV,
+X = ~ALC01+nutrPC1+nutrPC2, X_star = ~ ALC01,
+W = dat$OTU[,100], M = dat$M )
+ZIPG_summary(ZIPG_res)
+</code></pre>
+
+
+</div>

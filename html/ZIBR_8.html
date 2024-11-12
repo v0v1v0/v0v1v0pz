@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zibr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Fit zero-inflated beta regression with random effects</h2>
+
+<h3>Description</h3>
+
+<p>Fit zero-inflated beta regression with random effects
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zibr(
+  logistic_cov,
+  beta_cov,
+  Y,
+  subject_ind,
+  time_ind,
+  component_wise_test = TRUE,
+  quad_n = 30,
+  verbose = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>logistic_cov</code></td>
+<td>
+<p>the covariates in logistic component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta_cov</code></td>
+<td>
+<p>the covariates in beta component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+<p>the response variable in the regression model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subject_ind</code></td>
+<td>
+<p>the variable for subject IDs</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_ind</code></td>
+<td>
+<p>the variable for time points</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>component_wise_test</code></td>
+<td>
+<p>whether to perform component wise test.
+If true, ZIBR will calculate p-values for logistic and beta component respectively.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>quad_n</code></td>
+<td>
+<p>Gaussian quadrature points</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>print the fitting process</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a named list
+</p>
+
+<ul>
+<li>
+<p> logistic_est_table - the estimated coefficients for logistic component.
+</p>
+</li>
+<li>
+<p> logistic_s1_est - the estimated standard deviation for the random effect in the logistic component.
+</p>
+</li>
+<li>
+<p> beta_est_table - the estimated coefficients for logistic component.
+</p>
+</li>
+<li>
+<p> beta_s2_est - the estimated standard deviation for the random effect in the beta component.
+</p>
+</li>
+<li>
+<p> beta_v_est - the estimated dispersion parameter in the beta component.
+</p>
+</li>
+<li>
+<p> loglikelihood - the log likelihood of fitting ZIBR model on the data.
+</p>
+</li>
+<li>
+<p> joint_p - the p-values for jointly testing each covariate in both logistic and beta component.
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## simulate some data
+sim &lt;- simulate_zero_inflated_beta_random_effect_data(
+  subject_n = 100, time_n = 5,
+  X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+  Z = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+  alpha = as.matrix(c(-0.5, 1)),
+  beta = as.matrix(c(-0.5, 0.5)),
+  s1 = 1, s2 = 0.8,
+  v = 5,
+  sim_seed = 100
+)
+
+## run zibr on the simulated data
+zibr_fit &lt;- zibr(
+  logistic_cov = sim$X, beta_cov = sim$Z, Y = sim$Y,
+  subject_ind = sim$subject_ind, time_ind = sim$time_ind
+)
+
+zibr_fit
+</code></pre>
+
+
+</div>

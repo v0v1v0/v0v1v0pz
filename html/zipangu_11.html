@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>is_prefecture</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Check correctly prefecture names</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#stable"><img src="../help/figures/lifecycle-stable.svg" alt="[Stable]"></a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">is_prefecture(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Input vector.</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>Check if the string is a prefectural string.
+If it contains the name of the prefecture and other
+strings (e.g. city name), it returns <code>FALSE</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p>logical
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">is_prefecture("\u6771\u4eac\u90fd")
+is_prefecture(c("\u6771\u4eac", "\u4eac\u90fd", "\u3064\u304f\u3070"))
+</code></pre>
+
+
+</div>

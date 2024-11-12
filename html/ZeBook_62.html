@@ -1,0 +1,151 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>population.age.model.ode</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The PopulationAge model (Population Dynamics with Age Classes) - ode form</h2>
+
+<h3>Description</h3>
+
+<p>Population Dynamics Model with Age Classes for an insect
+Exactly the same model as population.age.model, but written as an ordinary differential equation system (ode) with deSolve package.
+7 states variables
+E : egg stage. homogenous population (density) (number per ha)
+L1 : larvae1 stage. homogenous population (density) (number per ha)
+L2 : larvae2 stage. homogenous population (density) (number per ha)
+L3 : larvae3 stage. homogenous population (density) (number per ha)
+L4 : larvae4 stage. homogenous population (density) (number per ha)
+P : pupae stage. homogenous population (density) (number per ha)
+A : adult stage. homogenous population (density) (number per ha)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">population.age.model.ode(rb = 3.5, mE = 0.017, rE = 0.172,
+  m1 = 0.06, r12 = 0.217, m2 = 0.032, r23 = 0.313, m3 = 0.022,
+  r34 = 0.222, m4 = 0.02, r4P = 0.135, mP = 0.02, rPA = 0.099,
+  mA = 0.027, iA = 0, duration = 100, dt = 1, method = "euler")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>rb</code></td>
+<td>
+<p>: eggs laid per adult per unit area (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mE</code></td>
+<td>
+<p>: relative mortality rate of egg (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rE</code></td>
+<td>
+<p>: eggs hatch (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m1</code></td>
+<td>
+<p>: relative mortality rate of larvae L1 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r12</code></td>
+<td>
+<p>: relative rate L1-&gt;L2 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m2</code></td>
+<td>
+<p>: relative mortality rate of larvae L2 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r23</code></td>
+<td>
+<p>: relative rate L2-&gt;L3 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m3</code></td>
+<td>
+<p>: relative mortality rate of larvae L3 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r34</code></td>
+<td>
+<p>: relative rate L3-&gt;L4 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m4</code></td>
+<td>
+<p>: relative mortality rate of larvae L4 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>r4P</code></td>
+<td>
+<p>: relative rate L4-&gt;P (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mP</code></td>
+<td>
+<p>: relative mortality rate of purpae (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rPA</code></td>
+<td>
+<p>: relative rate P-&gt;A (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mA</code></td>
+<td>
+<p>: relative mortality rate of adult L1 (day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iA</code></td>
+<td>
+<p>: input rate of adult (unit.day-1)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>duration</code></td>
+<td>
+<p>: simulation duration</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dt</code></td>
+<td>
+<p>: time step for integration</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>: integration method (euler, rk4,...)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with values for state variables for each time step.
+</p>
+
+
+</div>

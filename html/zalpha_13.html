@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Zbeta</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Runs the Zbeta function</h2>
+
+<h3>Description</h3>
+
+<p>Returns a <code class="reqn">Z_{\beta}</code> value for each SNP location supplied to the function.
+For more information about the <code class="reqn">Z_{\beta}</code> statistic, please see Jacobs (2016).
+The <code class="reqn">Z_{\beta}</code> statistic is defined as:
+</p>
+<p style="text-align: center;"><code class="reqn">Z_{\beta}=\frac{\sum_{i \in L,j \in R}r^2_{i,j}}{|L||R|}</code>
+</p>
+
+<p>where <code>|L|</code> and <code>|R|</code> are the number of SNPs to the left and right of the current locus within the given window <code>ws</code>, and <code class="reqn">r^2</code> is equal to the squared correlation between a pair of SNPs
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Zbeta(pos, ws, x, minRandL = 4, minRL = 25, X = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>pos</code></td>
+<td>
+<p>A numeric vector of SNP locations</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ws</code></td>
+<td>
+<p>The window size which the <code class="reqn">Z_{\beta}</code> statistic will be calculated over. This should be on the same scale as the <code>pos</code> vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A matrix of SNP values. Columns represent chromosomes; rows are SNP locations. Hence, the number of rows should equal the length of the <code>pos</code> vector. SNPs should all be biallelic.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minRandL</code></td>
+<td>
+<p>Minimum number of SNPs in each set R and L for the statistic to be calculated. Default is 4.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minRL</code></td>
+<td>
+<p>Minimum value for the product of the set sizes for R and L. Default is 25.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>Optional. Specify a region of the chromosome to calculate <code class="reqn">Z_{\beta}</code> for in the format <code>c(startposition, endposition)</code>. The start position and the end position should be within the extremes of the positions given in the <code>pos</code> vector. If not supplied, the function will calculate <code class="reqn">Z_{\beta}</code> for every SNP in the <code>pos</code> vector.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list containing the SNP positions and the <code class="reqn">Z_{\beta}</code> values for those SNPs
+</p>
+
+
+<h3>References</h3>
+
+<p>Jacobs, G.S., T.J. Sluckin, and T. Kivisild, <em>Refining the Use of Linkage Disequilibrium as a Robust Signature of Selective Sweeps.</em> Genetics, 2016. <strong>203</strong>(4): p. 1807
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load the snps example dataset
+data(snps)
+## run Zbeta over all the SNPs with a window size of 3000 bp
+Zbeta(snps$bp_positions,3000,as.matrix(snps[,3:12]))
+## only return results for SNPs between locations 600 and 1500 bp
+Zbeta(snps$bp_positions,3000,as.matrix(snps[,3:12]),X=c(600,1500))
+
+</code></pre>
+
+
+</div>

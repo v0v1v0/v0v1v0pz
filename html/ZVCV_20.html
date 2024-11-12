@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>squareNorm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Squared norm matrix calculation</h2>
+
+<h3>Description</h3>
+
+<p>This function gets the matrix of square norms which is needed for all kernels.
+Calculating this can help to save time if you are also interested in calculating the median heuristic, handling multiple tuning parameters
+or trying other kernels.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">squareNorm(samples, nystrom_inds = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p>An <code class="reqn">N</code> by <code class="reqn">d</code> matrix of samples from the target</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nystrom_inds</code></td>
+<td>
+<p>The (optional) sample indices to be used in the Nystrom approximation (for when using aSECF).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An <code class="reqn">N</code> by <code class="reqn">N</code> matrix of squared norms between samples (or <code class="reqn">N</code> by <code class="reqn">m</code> where <code class="reqn">m</code> is the length of <code>nystrom_inds</code>).
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Leah F. South
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See <code>medianTune</code> and <code>K0_fn</code> for functions which use this.
+</p>
+
+
+</div>

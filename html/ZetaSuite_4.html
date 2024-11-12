@@ -1,0 +1,85 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>FDRcutoff</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Find a cut-off according to screen strength.</h2>
+
+<h3>Description</h3>
+
+<p>Find a cutoff according to the Screen Strength (SS) and graph the Screen Strength plot.
+Zeta score is used to rank genes, and then, SS is calculated to define a suitable cutoff so that the cutoff can define hits at different confidence intervals.
+Formula of SS: SS = 1 - aFDR/bFDR, where aFDR (apparent FDR)  = number of non-expressors identified at hits divided by the total number of hits, bFDR (baseline FDR) = total number of non-expressors divided by all screened genes.
+SS plot labels: x-axis: zeta score, y-axis: Screen Strength,
+SS value is determined at each bin (m bin in total), then connect individual SS value to generate a simulated SS curve based on balance points. Users may choose one or multiple balance point as the different SS intervals.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">FDRcutoff(zetaData, negGene, posGene, nonExpGene, combine = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zetaData</code></td>
+<td>
+<p>ZetaScore file calculated by ZetaSuite.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>negGene</code></td>
+<td>
+<p>negative control dataset, the siRNAs/genes used as negative controls in screening.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>posGene</code></td>
+<td>
+<p>positive control dataset, the siRNAs/genes used as positive controls in screening.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nonExpGene</code></td>
+<td>
+<p>non-expressed gene</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>combine</code></td>
+<td>
+<p>combine two direction zeta together(TRUE or FALSE),default FALSE</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of data.frame and plots, the data.frame is cut off matrix with 6 columns including "Cut_Off","aFDR", "SS","TotalHits","Num_nonExp" and "Type". Plots includes 'Zeta_type' and 'SS_cutOff'.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Yajing Hao, Shuyang Zhang, Junhui Li, Guofeng Zhao, Xiang-Dong Fu
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(nonExpGene)
+data(negGene)
+data(posGene)
+data(ZseqList)
+data(countMat)
+ZscoreVal &lt;- Zscore(countMat,negGene)
+zetaData &lt;- Zeta(ZscoreVal,ZseqList,SVM=FALSE)
+cutoffval &lt;- FDRcutoff(zetaData,negGene,posGene,nonExpGene,combine=TRUE)
+
+</code></pre>
+
+
+</div>

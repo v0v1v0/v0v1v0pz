@@ -1,0 +1,203 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonogon-invert</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+invert points in a zonogon
+</h2>
+
+<h3>Description</h3>
+
+<p>A <em>zonogon</em> <code class="reqn">Z</code> is the image of a linear map
+<code class="reqn">[0,1]^n \to Z \subset \bold{R}^2</code>, from the n-cube to the plane.
+For a point in a zonogon, this function
+finds a point in the unit cube that maps to it.
+There are infinitely many such points in general (unless <code class="reqn">n=2</code>),
+but this function picks a specific point using the <em>standard tiling</em>,
+see <b>Details</b>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonogon'
+invert( x, z, tol=0, plot=FALSE, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonogon</b> object as returned by the constructor <code>zonogon()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+
+<p>a numeric Mx2 matrix, with M points in the rows.
+<code>z</code> can also be a numeric vector that can be converted to such
+a matrix, by row.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tol</code></td>
+<td>
+
+<p>points that are within <code>tol</code> of the boundary are
+still processed, see <b>Details</b>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+
+<p>if <code>TRUE</code> then the points in <code>z</code> are <em>added</em> to an existing
+plot of the zonogon <code>x</code>, using a red X symbol,
+see <code>plot.zonogon()</code>.
+If there is no plot open, a warning is issued.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The given points are first tested for being inside the zonogon,
+using <code>inside()</code> and the given <code>tol</code>.
+If any are outside, a warning is issued.
+When the corresponding point <code>pcube</code> is computed,
+it is clamped to the unit cube,
+so the inversion error may be as large as <code>tol</code>.
+<br><br>
+Inversion is not unique in general.
+For this function, the <em>standard tiling</em> of the zonogon by parallelograms
+is computed; it is an example of a <em>zonotopal tiling</em>.
+It is a <em>regular zonotopal tiling</em> because it arises from the
+projection of a zonohedron onto the plane, see <cite>Ziegler</cite>.
+The function <code>plot.zonogon()</code> has an option to plot this tiling.
+Given the point <code>z</code>, the function determines a parallelogram
+that contains the point.
+The <code>pcube</code> coordinates of the <em>base</em> of this parallelogram are
+all 0 or 1, and the coordinates of <code>z</code>
+<em>within</em> the parallelogram are in [0,1].
+Thus, all coordinates of <code>pcube</code> are 0 or 1,
+except possibly for 2 of them.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>invert.zonogon()</code> returns a <code>data.frame</code> with M rows and these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>z</code></td>
+<td>
+<p>the given point</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>pcube</code></td>
+<td>
+
+<p>a point in the unit cube that maps to <code>z</code>.
+Every <code>pcube</code> has all coordinates 0 or 1,
+except possibly for the 2 given by <code>hyper</code>, see <b>Details</b>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hyper</code></td>
+<td>
+
+<p>the 2 indexes of the generators of the parallelogram
+that contains <code>z</code>, in the simplified matroid.
+These 2 coordinates in <code>pcube</code> are not 0 or 1 in general.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hyperidx</code></td>
+<td>
+<p>the index of the parallelogram that contains <code>z</code></p>
+</td>
+</tr>
+</table>
+<p>If a point <code>z</code> cannot be inverted, the other columns are
+all <code>NA</code>, and a warning message is printed.  
+</p>
+<p>If the row names of <code>z</code> are unique,
+they are copied to the row names of the output.
+The column names of <code>pcube</code> are copied from the ground set of the
+associated matroid.
+<br><br>
+In case of error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Ziegler, G.M.
+<b>Lectures on Polytopes</b>.
+Graduate Texts in Mathematics.
+Springer New York.
+2007.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonogon()</code>,
+<code>inside()</code>,
+<code>plot.zonogon()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">#   make a zonogon with 5 generators
+pz20 = polarzonogon( 20, 5 )
+
+#   make 7 random points in the zonogon
+set.seed(0)
+pcube = matrix( runif(5*7), 5, 7 )
+z = t( getmatrix(pz20) %*% pcube )
+
+#  invert these 7 points back to the cube
+invert( pz20, z )
+#         z.1       z.2    pcube.1    pcube.2    pcube.3    pcube.4    pcube.5
+# 1 2.0676319 1.6279807 0.00000000 0.70030526 1.00000000 1.00000000 0.01553241
+# 2 2.4031738 1.9658035 0.00000000 0.96572153 1.00000000 1.00000000 0.28450140
+# 3 0.9230336 1.0885446 0.00000000 0.00000000 0.39548689 1.00000000 0.04948838
+# 4 2.5242122 1.7395069 0.16540765 1.00000000 1.00000000 1.00000000 0.03542132
+# 5 2.2598725 1.0601592 0.38111324 1.00000000 1.00000000 0.20192029 0.00000000
+# 6 1.1387813 1.2636700 0.00000000 0.00000000 0.65250505 1.00000000 0.07478012
+# 7 1.6315341 1.0777737 0.00000000 0.64210923 1.00000000 0.36039509 0.00000000
+
+#   hyper.1 hyper.2 hyperidx
+# 1       2       5        7
+# 2       2       5        7
+# 3       3       5        9
+# 4       1       5        4
+# 5       1       4        3
+# 6       3       5        9
+# 7       2       4        6
+</code></pre>
+
+
+</div>

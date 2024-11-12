@@ -1,0 +1,73 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>magarey.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Magarey model</h2>
+
+<h3>Description</h3>
+
+<p>Generic model of infection for foliar diseases caused by fungi (from Magarey et al.,2005).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">magarey.model(T, Tmin, Topt, Tmax, Wmin, Wmax)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>T</code></td>
+<td>
+<p>: input variable. Either a scalar or a vector (for a weather series).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Tmin</code></td>
+<td>
+<p>: parameter of minimal temperature for infection (degC)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Topt</code></td>
+<td>
+<p>: parameter of optimal temperature for infection (degC)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Tmax</code></td>
+<td>
+<p>: parameter of maximal temperature for infection (degC)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Wmin</code></td>
+<td>
+<p>: parameter of minimal wetness duration for infection (hour)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Wmax</code></td>
+<td>
+<p>: parameter of maximal wetness duration for infection (hour)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Wetness duration (W, hour). Either a scalar or a vector depending on T.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(1:35, magarey.model (1:35,7, 18, 30, 10, 42), type="l", xlab="T", ylab="W")
+</code></pre>
+
+
+</div>

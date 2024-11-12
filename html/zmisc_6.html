@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ll_val_labels</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get or set value labels of a labelled variable</h2>
+
+<h3>Description</h3>
+
+<p>Gets or sets the value labels (<code>labels</code> attribute) of a labelled vector. The
+getters/setters should be used rather than manipulating attributes directly,
+since these functions perform checks to ensure that the result, and the
+resulting labelled variable, are valid.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ll_val_labels(x, always = FALSE)
+
+ll_val_labels(x) &lt;- value
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A labelled variable</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>always</code></td>
+<td>
+<p>Always return at least an empty vector of the correct
+type, even if the attribute is not set.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p>Other labelled light: 
+<code>ll_assert_labelled()</code>,
+<code>ll_labelled()</code>,
+<code>ll_to_character()</code>,
+<code>ll_var_label()</code>,
+<code>threadbare()</code>
+</p>
+
+
+</div>

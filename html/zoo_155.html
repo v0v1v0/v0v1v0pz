@@ -1,0 +1,95 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>MATCH</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Value Matching</h2>
+
+<h3>Description</h3>
+
+<p><code>MATCH</code> is a generic function for value matching.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">MATCH(x, table, nomatch = NA, ...)
+## S3 method for class 'times'
+MATCH(x, table, nomatch = NA, units = "sec", eps = 1e-10, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>an object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>the values to be matched against.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nomatch</code></td>
+<td>
+<p>the value to be returned in the case when no match is
+found.  Note that it is coerced to <code>integer</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>See <code>trunc.times</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>eps</code></td>
+<td>
+<p>See <code>trunc.times</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>further arguments to be passed to methods.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>MATCH</code> is a new generic function which aims at providing
+the functionality of the non-generic base function <code>match</code>
+for arbitrary objects. Currently, there is a default method which
+simply calls <code>match</code> and various methods for time/date
+objects.
+</p>
+<p>The <code>MATCH</code> method for <code>Date</code> objects coerces the <code>table</code>
+to <code>Date</code> as well (if necessary) and then uses
+<code>match(unclass(x), unclass(table), ...</code>. Similarly, the <code>MATCH</code>
+methods for <code>POSIXct</code>, <code>POSIXlt</code>, and <code>timeDate</code> coerce
+both <code>x</code> and <code>table</code> to <code>POSIXct</code> and then match the unclassed
+objects.
+</p>
+<p><code>MATCH.times</code> is used for <code>chron</code> objects. <code>x</code> will
+match any time in <code>table</code> less than <code>units</code> away.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>match</code></p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">MATCH(1:5, 2:3)
+</code></pre>
+
+
+</div>

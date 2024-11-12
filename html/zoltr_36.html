@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>upload_forecast</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Upload a forecast</h2>
+
+<h3>Description</h3>
+
+<p>This function submits forecast data to the server for uploading. Returns a Job object that can be used to
+up, which depends on the number of current uploads in the queue. Zoltar tracks these via <code>Job</code> objects.)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">upload_forecast(
+  zoltar_connection,
+  model_url,
+  timezero_date,
+  forecast_data,
+  is_json = TRUE,
+  notes = ""
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model_url</code></td>
+<td>
+<p>URL of a model in zoltar_connection's projects</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>timezero_date</code></td>
+<td>
+<p>The date of the project timezero you are uploading for. it is a string in format YYYYMMDD</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>forecast_data</code></td>
+<td>
+<p>Forecast data to upload data to upload, either a <code>list</code> (if is_json==TRUE) or a <code>dataframe</code>
+otherwise. formats are documented at https://docs.zoltardata.com/</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>is_json</code></td>
+<td>
+<p>TRUE if forecast_data is JSON (list) format, and FALSE if it is CSV (dataframe) format</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>notes</code></td>
+<td>
+<p>Optional user notes for the new forecast</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A Job URL for the upload
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  forecast_data &lt;- jsonlite::read_json("docs-predictions.json")
+  job_url &lt;- upload_forecast(conn, "http://www.zoltardata.com/api/model/1/",
+                             "2017-01-17", forecast_data, TRUE, "a mid-January forecast")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

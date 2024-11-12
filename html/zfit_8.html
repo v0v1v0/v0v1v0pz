@@ -1,0 +1,173 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zlm</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Run an lm model in a pipe.</h2>
+
+<h3>Description</h3>
+
+<p>This function wraps around the lm function in order to make it
+more friendly to pipe syntax (with the data first).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zlm(
+  data,
+  formula,
+  subset,
+  weights,
+  na.action,
+  method = "qr",
+  model = TRUE,
+  x = FALSE,
+  y = FALSE,
+  qr = TRUE,
+  singular.ok = TRUE,
+  contrasts = NULL,
+  offset,
+  ...
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>A <code>data.frame</code> containing the model data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>The <code>formula</code> to be fitted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subset</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weights</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>na.action</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>model</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>qr</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>singular.ok</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>contrasts</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>offset</code></td>
+<td>
+<p>See the <code>lm</code> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Other arguments to be passed to the <code>lm</code> function.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A fitted model.
+</p>
+
+
+<h3>See Also</h3>
+
+
+<ul><li> <p>zglm is a wrapper for <code>glm</code>, to fit generalized
+linear models.
+</p>
+</li></ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># Usage is possible without pipes
+zlm( cars, dist ~ speed )
+
+# zfit works well with dplyr and magrittr pipes
+if ( require("dplyr", warn.conflicts=FALSE) ) {
+
+  # Pipe cars dataset into zlm for fitting
+  cars %&gt;% zlm(speed ~ dist)
+
+  # Process iris with filter before piping to zlm
+  iris %&gt;%
+    filter(Species == "setosa") %&gt;%
+    zlm(Sepal.Length ~ Sepal.Width + Petal.Width)
+}
+
+# zfit also works well with the native pipe
+if ( require("dplyr") &amp;&amp; getRversion() &gt;= "4.1.0" ) {
+
+  # Pipe cars dataset into zlm for fitting
+  cars |&gt; zlm(speed ~ dist)
+
+  # Process iris with filter() before piping. Print a
+  # summary of the fitted model using zprint() before
+  # assigning the model itself (not the summary) to m.
+  m &lt;- iris |&gt;
+    filter(Species == "setosa") |&gt;
+    zlm(Sepal.Length ~ Sepal.Width + Petal.Width) |&gt;
+    zprint(summary)
+}
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_prep_hud</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Convert HUD Crosswalk Data to Finalized Crosswalk</h2>
+
+<h3>Description</h3>
+
+<p>The output from <code>zi_load_crosswalk()</code> for HUD data requires
+additional processing to be used in the <code>zi_crosswalk()</code> function.
+This function prepares the HUD data for use in joins.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_prep_hud(.data, by, return_max = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.data</code></td>
+<td>
+<p>The output from <code>zi_load_crosswalk()</code> with HUD data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>by</code></td>
+<td>
+<p>Character scalar; the column name to use for identifying the best
+match for a given ZIP Code. This could be either <code>"residential"</code>,
+<code>"commercial"</code>, or <code>"total"</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>return_max</code></td>
+<td>
+<p>Logical scalar; if <code>TRUE</code> (default), only the county
+with the highest proportion of the ZIP Code type will be returned. If the
+ZIP Code straddles two states, two records will be returned. If <code>FALSE</code>,
+all records for the ZIP Code will be returned. Where a tie exists (i.e.
+two counties each contain half of all addresses), the county with the lowest
+<code>GEOID</code> value will be returned.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A tibble that has been further prepared for use as a crosswalk.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># load sample crosswalk data
+mo_xwalk &lt;- zi_mo_hud
+
+  # the above data can be replicated with the following code:
+  # zi_load_crosswalk(zip_source = "HUD", year = 2023, qtr = 1,
+  #   target = "COUNTY", query = "MO")
+
+# prep crosswalk
+# when a ZIP Code crosses county boundaries, the portion with the largest
+# number of residential addresses will be returned
+zi_prep_hud(mo_xwalk, by = "residential", return_max = TRUE)
+
+</code></pre>
+
+
+</div>

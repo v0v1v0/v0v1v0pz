@@ -1,0 +1,66 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Factorial.Double</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Double Factorial numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A000165">A000165</a> and <a href="https://oeis.org/A001147">A001147</a>, a <em>Double Factorial</em> is the factorial of numbers with same parity.
+For example, if <code class="reqn">n=5</code>, then <code class="reqn">n!!=5*3*1</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Factorial.Double(n, gmp = TRUE, odd = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>odd</code></td>
+<td>
+<p>a logical; <code>TRUE</code> for double factorial of odd numbers, <code>FALSE</code> for even numbers.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Factorial</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## generate first 10 double factorials
+print(Factorial.Double(10))
+
+
+</code></pre>
+
+
+</div>

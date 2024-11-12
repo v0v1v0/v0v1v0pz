@@ -1,0 +1,118 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_get_demographics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Download Demographic Data for Five-digit ZCTAs</h2>
+
+<h3>Description</h3>
+
+<p>This function returns demographic data for five-digit ZIP Code
+Tabulation Areas (ZCTAs), which are rough approximations of many (but not
+all) USPS ZIP codes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_get_demographics(year, variables = NULL, table = NULL,
+    survey, output = "tidy", zcta = NULL, key = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>year</code></td>
+<td>
+<p>A four-digit numeric scalar for year. <code>zippeR</code> currently
+supports data for from 2010 to 2022. Different <code>survey</code> products
+are available for different years. See the <code>survey</code> parameter
+for more details</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>variables</code></td>
+<td>
+<p>A character scalar or vector of variable IDs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>table</code></td>
+<td>
+<p>A character scalar of a table ID (only one table may be
+requested per call).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>survey</code></td>
+<td>
+<p>A character scalar representing the Census product. It can
+be either a Decennial Census product (either <code>"sf1"</code> or <code>"sf3"</code>)
+or an American Community Survey product (either <code>"acs1"</code>,
+<code>"acs3"</code>, or <code>"acs5"</code>). For Decennial Census calls, only the 2010
+Census is available. In addition, if a variable cannot be found in <code>"sf1"</code>,
+the function will look in <code>"sf3"</code>. Also note that <code>"acs3"</code> was
+discontinued after 2013.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output</code></td>
+<td>
+<p>A character scalar; one of <code>"tidy"</code> (long output) or
+<code>"wide"</code> depending on the type of data format you want. If you are
+planning to pass these data to <code>zi_aggregate()</code>, you must choose
+<code>"tidy"</code>. If you are leaving these data as five-digit ZCTAs and are
+planning to join them with geometric data, <code>"wide"</code> is the
+strongly encouraged format.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zcta</code></td>
+<td>
+<p>An optional vector of ZCTAs that demographic data are requested
+for. If this is <code>NULL</code>, data will be returned for all ZCTAs. If a
+vector is supplied, only data for those requested ZCTAs will be returned.
+The vector can be created with <code>zi_get_geometry()</code> and should only
+contain five-digit ZCTAs.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>key</code></td>
+<td>
+<p>A Census API key, which can be obtained at
+<a href="https://api.census.gov/data/key_signup.html">https://api.census.gov/data/key_signup.html</a>. This can be omitted if
+<code>tidycensus::census_api_key()</code> has been used to write your key to
+your <code>.Renviron</code> file. You can check whether an API key has been
+written to <code>.Renviron</code> by using <code>Sys.getenv("CENSUS_API_KEY")</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A tibble containing all demographic data requested in either
+<code>"tidy"</code> or <code>"wide"</code> format.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+  # download all ZCTAs
+  zi_get_demographics(year = 2012, variables = "B01003_001", survey = "acs5")
+
+  # limit output to subset of ZCTAs
+  ## download all ZCTAs in Missouri, intersects method
+  mo20 &lt;- zi_get_geometry(year = 2020, state = "MO", method = "intersect")
+
+  ## download demographic data
+  zi_get_demographics(year = 2012, variables = "B01003_001", survey = "acs5",
+      zcta = mo20$GEOID)
+
+
+</code></pre>
+
+
+</div>

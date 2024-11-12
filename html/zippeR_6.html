@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_label</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Label ZIP Codes with Contextual Data</h2>
+
+<h3>Description</h3>
+
+<p>This function appends information about the city (for five-digit
+ZIP Codes) or area (for three-digit ZIP Codes) to a data frame containing
+these values. State is returned for both types of ZIP Codes. The function
+also optionally returns data on Sectional Center Facilities (SCFs) for
+three-digit ZIP Codes.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_label(.data, input_var, label_source = "UDS", source_var,
+    type = "zip5", include_scf = FALSE, vintage = 2022)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>.data</code></td>
+<td>
+<p>An "input object" that is data.frame or tibble that contains
+ZIP Codes to be crosswalked.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>input_var</code></td>
+<td>
+<p>The column in the input data that contains five-digit ZIP
+Codes. If the input is numeric, it will be transformed to character data
+and leading zeros will be added.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label_source</code></td>
+<td>
+<p>Required character scalar or data frame; specifies the
+source of the label data. This could be either <code>'UDS'</code> (default) or
+<code>'USPS'</code>, or a data frame containing a custom dictionary.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>source_var</code></td>
+<td>
+<p>Character scalar, required when <code>label_source</code> is a
+data frame containing a custom dictionary; specifies the column name in
+the dictionary object that contains ZIP Codes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>Character scalar, required when <code>label_source</code> is either
+<code>label_source</code> is <code>'UDS'</code> or <code>'USPS'</code>; one of either
+<code>'zip3'</code> or <code>'zip5'</code>. The  <code>'zip3'</code> type is only available
+from the <code>'USPS'</code> source, while the <code>'zip5'</code> type is available
+from <code>'UDS'</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>include_scf</code></td>
+<td>
+<p>A logical scalar required when <code>label_source = 'USPS'</code> and
+<code>type = 'zip3'</code>; specifying whether to include the SCF (Sectional
+Center Facility) ID in the output. The default is <code>FALSE</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vintage</code></td>
+<td>
+<p>Character or numeric scalar, required when <code>label_source</code>
+is either <code>label_source</code> is <code>'UDS'</code> or <code>'USPS'</code>; specifying
+the date for <code>label_source = 'USPS'</code> or the year of the data for
+<code>label_source = 'UDS'</code>. The <code>zip_load_labels_list()</code> function
+can be used to see available date values for <code>label_source = 'USPS'</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Labels are approximations of the actual location of a ZIP Code. For
+five-digit ZIP Codes, the city and state may or may not correspond to
+an individuals' mailing address city (since multiple cities may be
+accepted as valid by USPS for a particular ZIP Code) or state (since ZIP
+Codes may cross state lines).
+</p>
+<p>For three-digit ZIP Codes, the area and state may or may not correspond to
+an individuals' mailing address state (since SCFs cover multiple states).
+For example, the three digit ZIP Code <code>010</code> covers Western Massachusetts
+in practice, but is assigned to the state of Connecticut.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A tibble containing the original data with additional columns from the
+selected label data set appended.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># create sample data
+df &lt;- data.frame(
+  id = c(1:3),
+  zip5 = c("63005", "63139", "63636"),
+  zip3 = c("630", "631", "636")
+)
+
+# UDS crosswalk
+
+  zi_label(df, input_var = zip5, label_source = "UDS", vintage = 2022)
+
+
+# USPS crosswalk
+
+  zi_label(df, input_var = zip3, label_source = "USPS", type = "zip3",
+    vintage = 202408)
+
+
+# custom dictionary
+## load sample ZIP3 label data to simulate custom dictionary
+mo_label &lt;- zi_mo_usps
+
+## label
+zi_label(df, input_var = zip3, label_source = mo_label, source_var = zip3,
+  type = "zip3")
+
+</code></pre>
+
+
+</div>

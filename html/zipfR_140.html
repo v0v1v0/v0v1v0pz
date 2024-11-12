@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>vec2xxx</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Type-Token Statistics for Samples and Empirical Data (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Compute type-frequency list, frequency spectrum and vocabulary growth
+curve from a token vector representing a random sample or an observed
+sequence of tokens.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  vec2tfl(x)
+
+  vec2spc(x)
+
+  vec2vgc(x, steps=200, stepsize=NA, m.max=0)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>a vector of length <code class="reqn">N_0</code>, representing a random sample or
+other observed data set of <code class="reqn">N_0</code> tokens.  For each token, the
+corresponding element of <code>x</code> specifies the <em>type</em> that the
+token belongs to.  Usually, <code>x</code> is a character vector, but it
+might also specify integer IDs in some cases.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>steps</code></td>
+<td>
+<p>number of steps for which vocabulary growth data
+<code class="reqn">V(N)</code> is calculated.  The values of <code class="reqn">N</code> will be evenly
+spaced (up to rounding differences) from <code class="reqn">N=1</code> to <code class="reqn">N=N_0</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>stepsize</code></td>
+<td>
+<p>alternative way of specifying the steps of the
+vocabulary growth curve.  In this case, vocabulary growth data will
+be calculated every <code>stepsize</code> tokens.  The first step is
+chosen such that the last step corresponds to the full sample
+(<code class="reqn">N=N_0</code>).  Only one of the parameters <code>steps</code> and
+<code>stepsize</code> may be specified.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m.max</code></td>
+<td>
+<p>an integer in the range $1 ... 9$, specifying how many
+spectrum elements <code class="reqn">V_m(N)</code> to include in the vocabulary growth
+curve.  By default only vocabulary size <code class="reqn">V(N)</code> is calculated,
+i.e. <code>m.max=0</code>.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>There are two main applications for the <code>vec2xxx</code> functions:
+</p>
+
+<dl>
+<dt>a)</dt>
+<dd>
+<p>They can be used to calculate type-token statistics and
+vocabulary growth curves for random samples generated from a LNRE
+model (with the <code>rlnre</code> function).</p>
+</dd>
+<dt>b)</dt>
+<dd>
+<p>They provide an easy way to process a user's own data
+without having to rely on external scripts to compute frequency
+spectra and vocabulary growth curves.  All that is needed is a
+text file in one-token-per-line formt (i.e. where each token is
+given on a separate line).  See "Examples" below for further
+hints.</p>
+</dd>
+</dl>
+<p>Both applications work well for samples of up to approx. 1 million
+tokens.  For considerably larger data sets, specialized external
+software should be used, such as the Perl scripts provided on the
+<code>zipfR</code> homepage.
+</p>
+
+
+<h3>Value</h3>
+
+<p>An object of class <code>tfl</code>, <code>spc</code> or <code>vgc</code>, representing
+the type frequency list, frequency spectrum or vocabulary growth curve
+of the token vector <code>x</code>, respectively.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>tfl</code>, <code>spc</code> and <code>vgc</code> for more
+information about type frequency lists, frequency spectra and
+vocabulary growth curves
+</p>
+<p><code>rlnre</code> for generating random samples (in the form of the
+required token vectors) from a LNRE model
+</p>
+<p><code>readLines</code> and <code>scan</code> for loading token
+vectors from disk files
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## type-token statistics for random samples from a LNRE distribution
+
+model &lt;- lnre("fzm", alpha=.5, A=1e-6, B=.05)
+x &lt;- rlnre(model, 100000)
+
+vec2tfl(x)
+vec2spc(x)  # same as tfl2spc(vec2tfl(x))
+vec2vgc(x)
+
+sample.spc &lt;- vec2spc(x)
+exp.spc &lt;- lnre.spc(model, 100000)
+plot(exp.spc, sample.spc)
+
+sample.vgc &lt;- vec2vgc(x, m.max=1, steps=500)
+exp.vgc &lt;- lnre.vgc(model, N=N(sample.vgc), m.max=1)
+plot(exp.vgc, sample.vgc, add.m=1)
+
+## Not run: 
+## load token vector from a file in one-token-per-line format
+x &lt;- readLines(filename)
+x &lt;- readLines(file.choose()) # with file selection dialog 
+
+## you can also perform whitespace tokenization and filter the data
+brown &lt;- scan("brown.pos", what=character(0), quote="")
+nouns &lt;- grep("/NNS?$", brown, value=TRUE)
+plot(vec2spc(nouns))
+plot(vec2vgc(nouns, m.max=1), add.m=1)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

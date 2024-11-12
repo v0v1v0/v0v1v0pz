@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>confint.lnre</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Confidence Intervals for LNRE Model Parameters (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Compute bootstrapped confidence intervals for LNRE model parameters.
+The supplied model must contain a sufficient number of bootstrapping replicates.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'lnre'
+confint(object, parm, level=0.95, method=c("mad", "normal", "empirical"), 
+        plot=FALSE, breaks="Sturges", ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an LNRE model (i.e. an object belonging to a subclass of <code>lnre</code>) with bootstrapping data</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parm</code></td>
+<td>
+<p>model parameter(s) for which confidence intervals are desired.
+If unspecified, all parameters as well as population diversity <code class="reqn">S</code> and goodness-of-fit statistic <code class="reqn">X^2</code> are shown.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>desired confidence level (two-sided)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>type of confidence interval to be estimated (see <code>bootstrap.confint</code> for details). Note that this parameter defaults to the asymmetric and more robust <code>mad</code> method here.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>plot</code></td>
+<td>
+<p>if <code>TRUE</code>, plot bootstrapping histogram of the respective model parameter with density estimate and confidence interval</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>breaks</code></td>
+<td>
+<p>breakpoints for histogram shown with <code>plot=TRUE</code> (see <code>hist</code> for details)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>all other arguments are ignored</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A data frame with one numeric column for each selected model parameter (labelled with the parameter name) and four rows:
+</p>
+
+<ol>
+<li>
+<p> the lower boundary of the confidence interval (labelled with the corresponding quantile, e.g. <code>2.5%</code>)
+</p>
+</li>
+<li>
+<p> the upper boundary of the confidence interval (labelled with the corresponding quantile, e.g. <code>97.5%</code>)
+</p>
+</li>
+<li>
+<p> an estimate of central tendency (labelled <code>center</code>)
+</p>
+</li>
+<li>
+<p> an estimate of spread on a scale comparable to standard deviaton (labelled <code>spread</code>)
+</p>
+</li>
+</ol>
+<h3>See Also</h3>
+
+<p><code>lnre</code> for estimating LNRE models with bootstrap replicates,
+<code>lnre.bootstrap</code> for the underlying parameteric bootstrapping code, and
+<code>bootstrap.confint</code> for the different methods of estimating confidence intervals.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+model &lt;- lnre("fzm", spc=BrownAdj.spc, bootstrap=20)
+confint(model, "alpha") # Zipf slope
+confint(model, "S")     # population diversity
+confint(model, "S", method="normal") # Gaussian approx works well in this case
+
+confint(model) # overview
+confint(model, "alpha", plot=TRUE) # visualize bootstrap distribution
+
+</code></pre>
+
+
+</div>

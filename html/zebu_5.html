@@ -1,0 +1,72 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>estimate_prob</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Estimate marginal and multivariate probabilities</h2>
+
+<h3>Description</h3>
+
+<p>Maximum-likelihood estimation of marginal and multivariate observed and expected independence probabilities. Marginal probability refers to probability of each factor per individual column. Multivariate probability refer to cross-classifying factors for all columns.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">estimate_prob(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>data.frame or matrix.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>List containing the following values:
+</p>
+
+<ul>
+<li>
+<p> margins: a list of marginal probabilities. Names correspond to colnames(x).
+</p>
+</li>
+<li>
+<p> observed: observed multivariate probability array.
+</p>
+</li>
+<li>
+<p> expected: expected multivariate probability array
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R"># This is what happens behind the curtains in the 'lassie' function
+# Here we compute the association between the 'Girth' and 'Height' variables
+# of the 'trees' dataset
+
+# 'select' and 'continuous' take column numbers or names
+select &lt;- c('Girth', 'Height') # select subset of trees
+continuous &lt;-c(1, 2) # both 'Girth' and 'Height' are continuous
+
+# equal-width discretization with 3 bins
+breaks &lt;- 3
+
+# Preprocess data: subset, discretize and remove missing data
+pre &lt;- preprocess(trees, select, continuous, breaks)
+
+# Estimates marginal and multivariate probabilities from preprocessed data.frame
+prob &lt;- estimate_prob(pre$pp)
+
+# Computes local and global association using Ducher's Z
+lam &lt;- local_association(prob, measure = 'z')
+</code></pre>
+
+
+</div>

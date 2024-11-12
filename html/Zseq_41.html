@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Bell</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Bell numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A000110">A000110</a>, the <em>n</em>th <em>Bell</em> number is
+the number of ways to partition a set of <code>n</code> labeled elements,
+where the first 6 entries are 1, 1, 2, 5, 15, 52.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Bell(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 30 Bell numbers and print
+print(Bell(30))
+
+</code></pre>
+
+
+</div>

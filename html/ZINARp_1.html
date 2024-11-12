@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>estimate_zinarp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parameter estimation for ZINARp models</h2>
+
+<h3>Description</h3>
+
+<p>This function uses MCMC algorithms (Metropolis-Hastings and Gibbs Sampler) to generate a chain of INAR/ZINAR(p) parameter estimators.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">estimate_zinarp(
+  x,
+  p,
+  iter = 5000,
+  thin = 2,
+  burn = 0.1,
+  innovation = "Poisson"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A vector containing a discrete non-negative time series dataset.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>The order of the INAR/ZINAR process.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>iter</code></td>
+<td>
+<p>The number of iterations to be considered. Defaults to 5000.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thin</code></td>
+<td>
+<p>Lag for posterior sample. Defaults to 2.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>burn</code></td>
+<td>
+<p>Burn-in for posterior sample. Defaults to 0.1. Must be in (0,1).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>innovation</code></td>
+<td>
+<p>Distribution to be used for the innovation : "Poisson" or "ZIP". Defaults to Poisson.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Returns a list containing a posteriori samples for the specified model parameters.
+</p>
+
+
+<h3>References</h3>
+
+<p>Garay, Aldo M., Francyelle L. Medina, Celso RB Cabral, and Tsung-I. Lin. "Bayesian analysis of the p-order integer-valued AR process with zero-inflated Poisson innovations." Journal of Statistical Computation and Simulation 90, no. 11 (2020): 1943-1964.
+</p>
+<p>Garay, Aldo M., Francyelle L. Medina, Isaac Jales CS, and Patrice Bertail. "First-Order Integer Valued AR Processes with Zero-Inflated Innovations." In Workshop on Nonstationary Systems and Their Applications, pp. 19-40. Springer, Cham, 2021.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">test &lt;- simul_zinarp(alpha = 0.1, lambda = 1, n = 100)
+e.test &lt;- estimate_zinarp(x = test, p = 1, iter = 800, innovation= "Poisson")
+alpha_hat &lt;- mean(e.test$alpha)
+lambda_hat &lt;- mean(e.test$lambda)
+
+data(slesions)
+e.slesions &lt;- estimate_zinarp(slesions$y, p = 1, iter = 800, innovation = 'ZIP')
+alpha_hat_slesions &lt;- mean(e.slesions$alpha)
+lambda_hat_slesions &lt;- mean(e.slesions$lambda)
+rho_hat_slesions &lt;- mean(e.slesions$rho)
+</code></pre>
+
+
+</div>

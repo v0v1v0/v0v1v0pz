@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfpolylogMoments</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Moments of the Zipf-Polylog Distribution.</h2>
+
+<h3>Description</h3>
+
+<p>General function to compute the k-th moment of the ZipfPolylog distribution for any integer value <code class="reqn">k \geq 1</code>,
+when it exists. #'
+For k = 1, this function returns the same value as the zipfpolylogMean function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zipfpolylogMoments(k, alpha, beta, tolerance = 10^(-4), nSum = 1000)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>k</code></td>
+<td>
+<p>Order of the moment to compute.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; k + 1</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Value of the <code class="reqn">\beta</code> parameter (<code class="reqn">\beta \in (-\infty, +\infty)</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tolerance</code></td>
+<td>
+<p>Tolerance used in the calculations (default = <code class="reqn">10^{-4}</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nSum</code></td>
+<td>
+<p>The number of terms used for computing the Polylogarithm function (default = 1000).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The k-th moment of the Zipf-Polylog distribution is always finite, but,
+for <code class="reqn">\alpha &gt;1</code> and <code class="reqn">\beta = 0</code> the k-th moment is only finite for all <code class="reqn">\alpha &gt; k + 1</code>.
+It is computed by calculating the partial sums of the serie, and stopping when two
+consecutive partial sums differ less than the <code>tolerance</code> value.
+The value of the last partial sum is returned.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A positive real value corresponding to the k-th moment of the distribution.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zipfpolylogMoments(1, 0.2, 0.90)
+zipfpolylogMoments(3, 4.5, 0.90,  1*10^(-3))
+</code></pre>
+
+
+</div>

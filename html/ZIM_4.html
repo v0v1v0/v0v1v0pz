@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dzim.control</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Auxiliary for Controlling DZIM Fitting</h2>
+
+<h3>Description</h3>
+
+<p>Auxiliary function for <code>dzim</code> fitting. Typically only used internally by 
+<code>dzim.fit</code>, but may be used to construct a control argument for either function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dzim.control(dist = c("poisson", "nb", "zip", "zinb"), trace = FALSE,
+  start = NULL, order = 1, mu0 = rep(0, order), Sigma0 = diag(1,
+  order), N = 1000, R = 1000, niter = 500)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>dist</code></td>
+<td>
+<p>count model family</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trace</code></td>
+<td>
+<p>logical; if TRUE, display iteration history.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>start</code></td>
+<td>
+<p>initial parameter values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>order</code></td>
+<td>
+<p>autoregressive order.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mu0</code></td>
+<td>
+<p>mean vector for initial state.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Sigma0</code></td>
+<td>
+<p>covariance matrix for initial state.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>number of particiles in particle filtering.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>R</code></td>
+<td>
+<p>number of replications in particle smoothing.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>niter</code></td>
+<td>
+<p>number of iterations.</p>
+</td>
+</tr>
+</table>
+<h3>Note</h3>
+
+<p>The default values of <code>N</code>, <code>R</code>, and <code>niter</code> are chosen based on our experience.
+In some cases, <code>N</code> = 500, <code>R</code> = 500, and <code>niter</code> = 200 might be sufficient. 
+The <code>dzim.plot</code> function should always be used for convergence diagnostics.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>dzim</code>,
+<code>dzim.fit</code>, 
+<code>dzim.filter</code>, 
+<code>dzim.smooth</code>,
+<code>dzim.sim</code>,
+<code>dzim.plot</code>
+</p>
+
+
+</div>

@@ -1,0 +1,230 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>spc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Frequency Spectra (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>In the <code>zipfR</code> library, <code>spc</code> objects are used to represent
+a word frequency spectrum (either an observed spectrum or the expected
+spectrum of a LNRE model at a given sample size).
+</p>
+<p>With the <code>spc</code> constructor function, an object can be initialized
+directly from the specified data vectors.  It is more common to read
+an observed spectrum from a disk file with <code>read.spc</code> or
+compute an expected spectrum with <code>lnre.spc</code>, though.
+</p>
+<p><code>spc</code> objects should always be treated as read-only.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  spc(Vm, m=1:length(Vm), VVm=NULL, N=NA, V=NA, VV=NA,
+      m.max=0, expected=!missing(VVm))
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>integer vector of frequency classes <code class="reqn">m</code> (if omitted,
+<code>Vm</code> is assumed to list the first <code class="reqn">k</code> frequency classes
+<code class="reqn">V_1, \ldots, V_k</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Vm</code></td>
+<td>
+<p>vector of corresponding class sizes <code class="reqn">V_m</code> (may be
+fractional for expected frequency spectrum <code class="reqn">E[V_m]</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>VVm</code></td>
+<td>
+<p>optional vector of estimated variances
+<code class="reqn">\mathop{Var}[V_m]</code> (for expected frequency spectrum
+only)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N, V</code></td>
+<td>
+<p>total sample size <code class="reqn">N</code> and vocabulary size <code class="reqn">V</code> of
+frequency spectrum.  While these values are usually determined
+automatically from <code>m</code> and <code>Vm</code>, they are required for an
+incomplete frequency spectrum that does not list all non-empty
+frequency classes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>VV</code></td>
+<td>
+<p>variance <code class="reqn">\mathop{Var}[V]</code> of expected
+vocabulary size.  If <code>VVm</code> is specified, <code>VV</code> should
+also be given.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m.max</code></td>
+<td>
+<p>highest frequency class <code class="reqn">m</code> listed in incomplete
+spectrum.  If <code>m.max</code> is set, <code>N</code> and <code>V</code> also have
+to be specified, and all non-zero frequency classes up to
+<code>m.max</code> have to be included in the input vectors.  Frequency
+classes above <code>m.max</code> in the input will automatically be
+deleted.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>expected</code></td>
+<td>
+<p>set to <code>TRUE</code> if the frequency spectrum
+represents expected values <code class="reqn">E[V_m]</code> of the class sizes according
+to some LNRE model (this is automatically triggered when the
+<code>VVm</code> argument is specified).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>A <code>spc</code> object is a data frame with the following variables:
+</p>
+
+<dl>
+<dt><code>m</code></dt>
+<dd>
+<p>frequency class <code class="reqn">m</code>, an integer vector</p>
+</dd>
+<dt><code>Vm</code></dt>
+<dd>
+<p>class size, i.e. number <code class="reqn">V_m</code> of types in
+frequency class <code class="reqn">m</code> (either observed class size from a sample
+or expected class size <code class="reqn">E[V_m]</code> based on a LNRE model)</p>
+</dd>
+<dt><code>VVm</code></dt>
+<dd>
+<p>optional: estimated variance <code class="reqn">V[V_m]</code> of
+expected class size (only meaningful for expected spectrum derived
+from LNRE model)</p>
+</dd>
+</dl>
+<p>The following attributes are used to store additional information
+about the frequency spectrum:
+</p>
+
+<dl>
+<dt><code>m.max</code></dt>
+<dd>
+<p>if non-zero, the frequency spectrum is
+incomplete and lists only frequency classes up to <code>m.max</code></p>
+</dd>
+<dt><code>N, V</code></dt>
+<dd>
+<p>sample size <code class="reqn">N</code> and vocabulary size <code class="reqn">V</code>
+of the frequency spectrum.  For a complete frequency spectrum,
+these values could easily be determined from <code>m</code> and
+<code>Vm</code>, but they are essential for an incomplete spectrum.</p>
+</dd>
+<dt><code>VV</code></dt>
+<dd>
+<p>variance of expected vocabulary size; only present
+if <code>hasVariances</code> is <code>TRUE</code>.  Note that <code>VV</code> may
+have the value <code>NA</code> is the user failed to specify it.</p>
+</dd>
+<dt><code>expected</code></dt>
+<dd>
+<p>if <code>TRUE</code>, frequency spectrum lists
+expected class sizes <code class="reqn">E[V_m]</code> (rather than observed
+sizes <code class="reqn">V_m</code>).  Note that the <code>VVm</code> variable is only
+allowed for an expected frequency spectrum.</p>
+</dd>
+<dt><code>hasVariances</code></dt>
+<dd>
+<p>indicates whether or not the <code>VVm</code>
+variable is present</p>
+</dd>
+</dl>
+<h3>Value</h3>
+
+<p>An object of class <code>spc</code> representing the specified frequency
+spectrum.  This object should be treated as read-only (although such
+behaviour cannot be enforced in <span style="font-family: Courier New, Courier; color: #666666;"><b>R</b></span>).
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>read.spc</code>, <code>write.spc</code>,
+<code>spc.vector</code>, <code>sample.spc</code>,
+<code>spc2tfl</code>, <code>tfl2spc</code>,
+<code>lnre.spc</code>, <code>plot.spc</code>
+</p>
+<p>Generic methods supported by <code>spc</code> objects are
+<code>print</code>, <code>summary</code>, <code>N</code>,
+<code>V</code>, <code>Vm</code>, <code>VV</code>, and
+<code>VVm</code>.
+</p>
+<p>Implementation details and non-standard arguments for these methods
+can be found on the manpages <code>print.spc</code>,
+<code>summary.spc</code>, <code>N.spc</code>, <code>V.spc</code>,
+etc.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+## load Brown imaginative prose spectrum and inspect it
+data(BrownImag.spc)
+
+summary(BrownImag.spc)
+print(BrownImag.spc)
+
+plot(BrownImag.spc)
+
+N(BrownImag.spc)
+V(BrownImag.spc)
+Vm(BrownImag.spc,1)
+Vm(BrownImag.spc,1:5)
+
+## compute ZM model, and generate PARTIAL expected spectrum
+## with variances for a sample of 10 million tokens
+zm &lt;- lnre("zm",BrownImag.spc)
+zm.spc &lt;- lnre.spc(zm,1e+7,variances=TRUE)
+
+## inspect extrapolated spectrum
+summary(zm.spc)
+print(zm.spc)
+
+plot(zm.spc,log="x")
+
+N(zm.spc)
+V(zm.spc)
+VV(zm.spc)
+Vm(zm.spc,1)
+VVm(zm.spc,1)
+
+## generate an artificial Zipfian-looking spectrum
+## and take a look at it
+zipf.spc &lt;- spc(round(1000/(1:1000)^2))
+
+summary(zipf.spc)
+plot(zipf.spc)
+
+## see manpages of lnre, and the various *.spc mapages
+## for more examples of spc usage
+
+</code></pre>
+
+
+</div>

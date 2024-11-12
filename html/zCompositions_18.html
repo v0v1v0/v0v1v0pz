@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Water</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Water data set
+</h2>
+
+<h3>Description</h3>
+
+<p>100 simulated samples of a 4-part groundwater composition in percentage subject to multiple limits of detection by component. The associated matrix of limits of detection is stored in <code>mdl</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(Water)</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A <code>data.frame</code> with 100 observations on the following 4 variables.
+</p>
+
+<dl>
+<dt><code>Potassium</code></dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt><code>Arsenic</code></dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt><code>Calcium</code></dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+<dt><code>Sulphate</code></dt>
+<dd>
+<p>a numeric vector</p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>Three limits of detection (0.75, 1 and 1.25) were considered for Potassium, four for Arsenic (1.5, 3, 4 and 5), two for Sulphate (29 and 35) and no one for Calcium. In the case of Sulphate, the detection limit equal to 29 is the minimum value registered for that component. All nondetects coded as 0.</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(Water)
+zPatterns(Water,label=0)
+</code></pre>
+
+
+</div>

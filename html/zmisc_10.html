@@ -1,0 +1,106 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lookup</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Lookup values from a lookup table</h2>
+
+<h3>Description</h3>
+
+<p>The <code>lookup()</code> function implements lookup of certain strings (such as
+variable names) from a lookup table which maps keys onto values (such as
+variable labels or descriptions).
+</p>
+<p>The lookup table can be in the form of a two-column <code>data.frame</code>, in the form
+of a named <code>vector</code>, or in the form of a <code>list</code>. If the table is in the form
+of a <code>data.frame</code>, the lookup columns should be named <code>name</code> (for the key)
+and <code>value</code> (for the value). If the lookup table is in the form of a named
+<code>vector</code> or <code>list</code>, the name is used for the key, and the returned value is
+taken from the values in the vector or list.
+</p>
+<p>Original values are returned if they are not found in the lookup table.
+Alternatively, a <code>default</code> can be specified for values that are not found.
+Note that an <code>NA</code> in x will never be found and will be replaced with the
+default value. To specify different defaults for values that are not found
+and for <code>NA</code> values in <code>x</code>, the <code>default</code> must be crafted manually to achieve
+this.
+</p>
+<p>Any names in x are not included in the result.
+</p>
+<p>The <code>lookuper()</code> function returns <em>a function</em> equivalent to the <code>lookup()</code>
+function, except that instead of taking a lookup table as an argument, the
+lookup table is embedded in the function itself.
+</p>
+<p>This can be very useful, in particular when using the lookup function as an
+argument to other functions that expect a function which maps
+<code>character</code>-&gt;<code>character</code> but do not offer a good way to pass additional
+arguments to that function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lookup(x, lookup_table, default = x)
+
+lookuper(lookup_table, default = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>A string vector whose elements are to be looked up.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lookup_table</code></td>
+<td>
+<p>The lookup table to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>default</code></td>
+<td>
+<p>If a value is not found in the lookup table, the value will be
+taken from <code>default</code>. This must be a character vector of length 1 or the
+same length as x. Useful values include <code>x</code> (the default setting), <code>NA</code>, or
+<code>""</code> (an empty string).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>The <code>lookup()</code> function returns string vector based on <code>x</code>, with
+values replaced with the lookup values from <code>lookup_table</code>. Any values not
+found in the lookup table are taken from <code>default</code>.
+</p>
+<p>The <code>lookuper()</code> function returns <em>a function</em> that takes <code>character</code>
+vectors as its argument <code>x</code>, and returns either the corresponding values
+from the underlying lookup table, or the original values from x for those
+elements that are not found in the lookup table (or looks them up from the
+<code>default</code>).
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">fruit_lookup_vector &lt;- c(a="Apple", b="Banana", c="Cherry")
+lookup(letters[1:5], fruit_lookup_vector)
+lookup(letters[1:5], fruit_lookup_vector, default = NA)
+
+mtcars_lookup_data_frame &lt;- data.frame(
+  name = c("mpg", "hp", "wt"),
+  value = c("Miles/(US) gallon", "Gross horsepower", "Weight (1000 lbs)"))
+lookup(names(mtcars), mtcars_lookup_data_frame)
+
+lookup_fruits &lt;- lookuper(list(a="Apple", b="Banana", c="Cherry"))
+lookup_fruits(letters[1:5])
+
+</code></pre>
+
+
+</div>

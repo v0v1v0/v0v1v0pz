@@ -1,0 +1,140 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonogon</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+zonogon construction
+</h2>
+
+<h3>Description</h3>
+
+<p>Construct a zonogon from a numeric matrix with 2 rows.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zonogon( mat, e0=0, e1=1.e-6, ground=NULL )
+
+polarzonogon( n, m=n, ground=NULL )
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>mat</code></td>
+<td>
+
+<p>a numeric 2xM matrix, where 2 <code class="reqn">\le</code> M.
+The matrix must have rank 2 (verified).
+The M columns are the generators of the zonogon.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e0</code></td>
+<td>
+
+<p>threshold for a column of <code>mat</code> to be considered 0,
+in the <code class="reqn">L^\infty</code> norm.
+Since the default is <code>e0=0</code>, 
+by default a column must be exactly 0 to be considered 0.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>e1</code></td>
+<td>
+
+<p>threshold, in a pseudo-angular sense,
+for non-zero column vectors to be multiples of each other,
+and thus members of a group of multiple (aka parallel) points in the associated matroid.
+It OK for a column to be a negative multiple of another.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ground</code></td>
+<td>
+
+<p>The <em>ground set</em> of the associated matroid of rank 2 -
+an integer vector in strictly increasing order, or <code>NULL</code>.
+<br>
+When <code>ground</code> is <code>NULL</code>, it is set to <code>1:ncol(mat)</code>.
+If <code>ground</code> is not <code>NULL</code>, <code>length(ground)</code> must be equal to <code>ncol(mat)</code>.
+The point <code>ground[i]</code> corresponds to the <em>i'th</em> column of <code>mat</code>.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+
+<p>an integer <code class="reqn">\ge</code> 3.
+The generators are computed as <code>n</code> equally spaced points on
+the unit circle, starting at (1,0).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>an integer with 2 <code class="reqn">\le</code> <code>m</code> <code class="reqn">\le</code> <code>n</code>.
+When  <code>m</code> &lt; <code>n</code>, only the first <code>m</code>
+points are used as generators of the zonogon.
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>polarzonogon()</code> is useful for testing.
+The term <em>polar zonogon</em> is my own, and based on
+the <em>polar zonohedron</em> in <em>Chilton &amp; Coxeter</em>.
+It it loads the matrix <code>mat</code> and passes it to <code>zonogon()</code>.
+When <code>m=n</code> the zonogon is a regular 2n-gon.
+When <code>m&lt;n</code> the zonogon is a has 2<code>m</code> vertices,
+but is not necessarily regular.
+The generators correspond to the n'th-roots of unity.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>zonogon()</code> and <code>polarzonogon()</code> return a list with S3 class <code>'zonogon'</code>.
+In case of error, e.g. invalid <code>mat</code>,
+the functions print an error message and returns <code>NULL</code>.
+</p>
+
+
+<h3>Note</h3>
+
+<p>The <em>ground set</em> of positive integers should not be too sparse;
+otherwise performance may suffer.
+</p>
+
+
+<h3>References</h3>
+
+<p>B. L. Chilton and H. S. M. Coxeter.
+<b>Polar Zonohedra</b>.
+The American Mathematical Monthly.
+Vol 70. No. 9.
+pp. 946-951.
+1963.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>zonoseg()</code>,
+</p>
+
+
+</div>

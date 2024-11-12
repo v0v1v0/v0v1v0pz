@@ -1,0 +1,195 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipfR.par</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Set or Query Graphics Parameters (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Set default graphics parameters for <code>zipfR</code> high-level plots and
+plot utilities, similar to <code>par</code> for general graphics parameters.
+The current parameter values are queried by giving their names as
+character strings.  The values can be set by specifying them as
+arguments in <code>name=value</code> form, or by passing a single list of
+named values.
+</p>
+<p><b>NB:</b> This is an advanced function to fine-tune zipfR
+plots. For basic plotting options (that are likely to be sufficient
+for most purposes) see <code>plot.spc</code> and
+<code>plot.vgc</code> instead.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  zipfR.par(..., bw.mode=FALSE)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>either character strings (or vectors) specifying the names
+of parameters to be queried, or parameters to be set in
+<code>name=value</code> form, or a single list of named values.  A listing
+of valid parameter names is given below.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bw.mode</code></td>
+<td>
+<p>if <code>TRUE</code> and parameter values are queried, then
+return the corresponding parameters for B/W mode if possible (e.g.,
+<code>zipfR.par("col",bw.mode=TRUE)</code> returns the value of the
+<code>col.bw</code> parameter).  Note that <code>bw.mode</code> cannot be
+abbreviated in the function call!</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Parameters are set by specifying their names and the new values as
+<code>name=value</code> pairs.  Such a list can also be passed as a single
+argument to <code>zipfR.par</code>, which is typically used to restore previous
+parameter values (that have been saved in a list variable).
+</p>
+<p>Most of the default values can be manually overridden in the
+high-level plots.
+</p>
+<p><code>zipfR.par()</code> shows all parameters with their current values, and
+<code>names(zipfR.par())</code> produces a listing of valid parameter names.
+</p>
+
+
+<h3>Value</h3>
+
+<p>When parameters are set, their former values are returned in an
+invisible named list.  Such a list can be passed as a single argument
+to <code>zipfR.par</code> to restore the parameter values.
+</p>
+<p>When a single parameter is queried, its value is returned directly.
+When two or more parameters are queried, the result is a named list.
+</p>
+<p>Note the inconsistency, which is the same as for <code>par</code>: setting
+one parameter returns a list, but querying one parameter returns a
+vector (or a scalar, i.e. a vector of length 1).
+</p>
+
+
+<h3>zipfR Graphics Parameters</h3>
+
+
+<dl>
+<dt><code>col</code></dt>
+<dd>
+<p>a character or integer vector specifying up to 10
+line colours (see the <code>par</code> manpage for
+details).  Values of shorter vectors are recycled as necessary.</p>
+</dd>
+<dt><code>lty</code></dt>
+<dd>
+<p>a character or integer vector specifying up to 10
+line styles (see the <code>par</code> manpage for
+details).  Values of shorter vectors are recycled as necessary.</p>
+</dd>
+<dt><code>lwd</code></dt>
+<dd>
+<p>a numeric vector specifying up to 10 line widths
+(see the <code>par</code> manpage for details).  Values of shorter
+vectors are recycled as necessary.</p>
+</dd>
+<dt><code>pch</code></dt>
+<dd>
+<p>a character or integer vector specifying up to 10
+plot symbols.  Values of shorter vectors are recycled as
+necessary.</p>
+</dd>
+<dt><code>barcol</code></dt>
+<dd>
+<p>a character or integer vector specifying up to
+10 colours for the bars in non-logarithmic spectrum plots.  Values
+of shorter vectors are recycled as necessary.</p>
+</dd>
+<dt><code>col.bw</code></dt>
+<dd>
+<p>the line colours used in B/W mode
+(<code>bw=TRUE</code>)</p>
+</dd>
+<dt><code>lty.bw</code></dt>
+<dd>
+<p>the line styles used in B/W mode
+(<code>bw=TRUE</code>)</p>
+</dd>
+<dt><code>lwd.bw</code></dt>
+<dd>
+<p>the line widths used in B/W mode
+(<code>bw=TRUE</code>)</p>
+</dd>
+<dt><code>pch.bw</code></dt>
+<dd>
+<p>the plot symbols used in B/W mode
+(<code>bw=TRUE</code>)</p>
+</dd>
+<dt><code>barcol.bw</code></dt>
+<dd>
+<p>the bar colours used in B/W mode
+(<code>bw=TRUE</code>)</p>
+</dd>
+<dt><code>bw</code></dt>
+<dd>
+<p>if <code>TRUE</code>, plots are drawn in B/W mode unless
+specified otherwise (default: <code>FALSE</code>, i.e. colour mode</p>
+</dd>
+<dt><code>device</code></dt>
+<dd>
+<p>plot device used by the <code>zipfR</code> plotutils
+(see <code>zipfR.begin.plot</code> for details).  Currently
+supported devices are <code>x11</code> (default on most platforms), <code>eps</code>,
+<code>pdf</code>, as well as <code>png</code> and <code>quartz</code> where
+available (default on Mac OS X).</p>
+</dd>
+<dt><code>init.par</code></dt>
+<dd>
+<p>list of named graphics parameters passed to
+the <code>par</code> function whenever a new viewport is created with
+<code>zipfR.begin.plot</code></p>
+</dd>
+<dt>
+<code>width</code>, <code>height</code>
+</dt>
+<dd>
+<p>default width and height of the
+plotting window opened by <code>zipfR.begin.plot</code></p>
+</dd>
+</dl>
+<h3>See Also</h3>
+
+<p><code>plot.spc</code>, <code>plot.vgc</code>,
+<code>zipfR.begin.plot</code>, <code>zipfR.end.plot</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+print(names(zipfR.par()))         # list available parameters
+
+zipfR.par("col", "lty", "lwd")    # the default line styles
+zipfR.par(c("col", "lty", "lwd")) # works as well
+
+## temporary changes to graphics paramters:
+par.save &lt;- zipfR.par(bw=TRUE, lwd.bw=2)
+## plots use the modified parameters here
+zipfR.par(par.save)		  # restore previous values
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,198 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>multRepl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Multiplicative simple replacement
+</h2>
+
+<h3>Description</h3>
+
+<p>This function implements non-parametric multiplicative simple imputation of left-censored (e.g. values below detection limit, rounded zeros) and missing data in compositional data sets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">multRepl(X, label = NULL, dl = NULL, frac = 0.65, imp.missing = FALSE, closure = NULL,
+            z.warning=0.8, z.delete = TRUE, delta = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+
+<p>Compositional vector (<code>numeric</code> class) or data set (<code>matrix</code> or <code>data.frame</code> class).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>label</code></td>
+<td>
+<p>Unique label (<code>numeric</code> or <code>character</code>) used to denote zeros/unobserved values in <code>X</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dl</code></td>
+<td>
+
+<p>Numeric vector or matrix of detection limits/thresholds. These must be given on the same scale as <code>X</code>. If <code>NULL</code> the column minima are used as thresholds.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>frac</code></td>
+<td>
+
+<p>Fraction of the detection limit/threshold used for imputation (default = 0.65, expressed as a proportion).
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imp.missing</code></td>
+<td>
+<p>If <code>TRUE</code> then unobserved values identified by <code>label</code> are treated as missing data (default = <code>FALSE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>closure</code></td>
+<td>
+<p>Closure value used to add a residual part for imputation (see below).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.warning</code></td>
+<td>
+<p>Threshold used to identify individual rows or columns including an excess of zeros/unobserved values (to be specify in proportions, default <code>z.warning=0.8</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>z.delete</code></td>
+<td>
+<p>Logical value. If set to <code>TRUE</code>, rows/columns identified by <code>z.warning</code> are omitted in the imputed data set. Otherwise, the function stops in error when rows/columns are identified by <code>z.warning</code> (default <code>z.delete=TRUE</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delta</code></td>
+<td>
+<p>This argument has been deprecated and replaced by <code>frac</code> (see package's NEWS for details).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This function imputes left-censored compositional values by a given fraction <code>frac</code> of the corresponding limit of detection and applies a multiplicative adjustment to preserve the multivariate compositional properties of the samples. It allows for either single (<code>vector</code> form) or multiple (<code>matrix</code> form, same size as <code>X</code>) limits of detection by component. Any threshold value can be set for non-censored elements (e.g. use 0 if no threshold for a particular column or element of the data matrix).
+</p>
+<p><em>Missing data imputation</em>: missing data can be imputed by setting <code>imp.missing = TRUE</code>. They are replaced by the estimated column geometric mean from observed values. The non-missing parts in the composition are applied multiplicative adjustment. The argument <code>dl</code> and <code>frac</code> are ignored and <code>X</code> is require to be a data matrix in this case.
+</p>
+<p>Note: negative values can be generated when unobserved components are a large portion of the composition, which is more likely for missing data (e.g in major chemical elements) and non-closed compositions. A workaround is to add a residual filling the gap up to the closure/total when possible. This is done internally when a value for <code>closure</code> is specified (e.g. <code>closure=10^6</code> if ppm or <code>closure=100</code> if percentages). The residual is discarded after imputation.
+</p>
+<p>This function produces an imputed data set on the same scale as the input data set. If <code>X</code> is not closed to a constant sum, then the results are adjusted to provide a compositionally equivalent data set, expressed in the original scale, which leaves the absolute values of the observed components unaltered. Note that this adjustment only applies to data sets and not when a single composition is entered. In this latter case, the composition is treated as a closed vector.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> object containing the imputed compositional vector or data set expressed in the original scale.
+</p>
+
+
+<h3>References</h3>
+
+<p>Martin-Fernandez JA, Barcelo-Vidal C, Pawlowsky-Glahn V. Dealing with zeros and missing values in compositional data sets using nonparametric imputation. Mathematical Geology 2003; 35: 253-78.
+</p>
+<p>Palarea-Albaladejo J, Martin-Fernandez JA. Values below detection limit in compositional chemical data. Analytica Chimica Acta 2013; 764: 32-43.
+</p>
+<p>Palarea-Albaladejo J. and Martin-Fernandez JA. zCompositions – R package for multivariate imputation of
+left-censored data under a compositional approach. Chemometrics and Intelligence Laboratory Systems 2015; 143: 85-96.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zPatterns</code>, <code>lrEM</code>, <code>lrSVD</code>, <code>lrDA</code>, <code>multLN</code>, <code>multKM</code>, <code>cmultRepl</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># A compositional vector (NA indicates nondetect)
+y &lt;- c(0.6,NA,0.25,0.03,0.12,NA)
+dl &lt;- c(0,0.01,0,0,0,0.005)
+# Using the default frac = 0.65
+yr &lt;- multRepl(y,label=NA,dl=dl)
+round(yr,4)
+
+# Data set closed to 100 (percentages, common dl = 1%)
+X &lt;- matrix(c(26.91,8.08,12.59,31.58,6.45,14.39,
+              39.73,26.20,0.00,15.22,6.80,12.05,
+              10.76,31.36,7.10,12.74,31.34,6.70,
+              10.85,46.40,31.89,10.86,0.00,0.00,
+              7.57,11.35,30.24,6.39,13.65,30.80,
+              38.09,7.62,23.68,9.70,20.91,0.00,
+              27.67,7.15,13.05,32.04,6.54,13.55,
+              44.41,15.04,7.95,0.00,10.82,21.78,
+              11.50,30.33,6.85,13.92,30.82,6.58,
+              19.04,42.59,0.00,38.37,0.00,0.00),byrow=TRUE,ncol=6)
+              
+X_multRepl &lt;- multRepl(X,label=0,dl=rep(1,6))
+
+# Multiple limits of detection by component
+mdl &lt;- matrix(0,ncol=6,nrow=10)
+mdl[2,] &lt;- rep(1,6)
+mdl[4,] &lt;- rep(0.75,6)
+mdl[6,] &lt;- rep(0.5,6)
+mdl[8,] &lt;- rep(0.5,6)
+mdl[10,] &lt;- c(0,0,1,0,0.8,0.7)
+
+X_multRepl2 &lt;- multRepl(X,label=0,dl=mdl)
+
+# Non-closed compositional data set
+data(LPdata) # data (ppm/micrograms per gram)
+dl &lt;- c(2,1,0,0,2,0,6,1,0.6,1,1,0,0,632,10) # limits of detection (0 for no limit)
+LPdata_multRepl &lt;- multRepl(LPdata,label=0,dl=dl)
+
+# Two subsets of limits of detection
+data(LPdata)
+dl &lt;- c(2,1,0,0,2,0,6,1,0.6,1,1,0,0,632,10) # limits of detection (0 for no limit)
+ # DLs for first 50 samples of LPdata
+dl1 &lt;- matrix(rep(1,50),ncol=1)%*%dl
+ # DLs for last 46 samples of LPdata
+dl2 &lt;- matrix(rep(1,46),ncol=1)%*%c(1,0.5,0,0,2.5,0,5.5,0.75,0.3,1.5,1,0,0,600,8) 
+
+mdl &lt;- rbind(dl1,dl2)
+LPdata_multRepl2 &lt;- multRepl(LPdata,label=0,dl=mdl)
+
+# Data set with missing values closed to 100 (percentages)
+X &lt;- matrix(c(10.47,8.58,59.72,19.30,1.93,
+              12.13,7.44,62.87,16.37,1.19,
+                 NA,7.30,75.91,16.79,NA,
+               9.77,7.80,65.68,14.78,1.97,
+              10.79,9.55,65.87,12.41,1.38,
+              14.54,8.18,64.55,12.73,NA,
+              12.28,7.58,66.01,12.93,1.20,
+              28.09,22.92,NA,40.11,8.88,
+               7.02,6.30,75.65,11.03,NA),byrow=TRUE,ncol=5)
+              
+X_multReplMiss &lt;- multRepl(X,label=NA,imp.missing=TRUE)
+
+# Non-closed compositional data set
+data(LPdata) # (in ppm units)
+# Treating zeros as missing data for illustration purposes only
+LPdata_multReplMiss &lt;- multRepl(LPdata,label=0,imp.missing=TRUE)
+# Negative values generated (see e.g. K and Rb in sample #60)
+
+# Workaround: use residual part to fill up the gap to 10^6 for imputation
+LPdata_multReplMiss2 &lt;- multRepl(LPdata,label=0,imp.missing=TRUE,closure=10^6)
+
+
+
+</code></pre>
+
+
+</div>

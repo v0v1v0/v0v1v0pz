@@ -1,0 +1,100 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>GetDeepSearchResults</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Make request to Zillow API GetDeepSearchResults Web Service</h2>
+
+<h3>Description</h3>
+
+<p>The GetDeepSearchResults API finds a property for a specified address. The
+result set returned contains the full address(s), zpid and Zestimate data
+that is provided by the GetSearchResults API. Moreover, this API call also
+gives rich property data like lot size, year built, bath/beds, last sale
+details etc.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">GetDeepSearchResults(
+  address = NULL,
+  citystatezip = NULL,
+  rentzestimate = FALSE,
+  zws_id = getOption("ZillowR-zws_id"),
+  url = "http://www.zillow.com/webservice/GetDeepSearchResults.htm"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>address</code></td>
+<td>
+<p>The address of the property to search. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>citystatezip</code></td>
+<td>
+<p>The city+state combination and/or ZIP code for which to
+search. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rentzestimate</code></td>
+<td>
+<p>Return Rent Zestimate information if available (logical,
+default: false).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zws_id</code></td>
+<td>
+<p>The Zillow Web Service Identifier. Required.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>url</code></td>
+<td>
+<p>URL for the GetDeepSearchResults Web Service. Required.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A named list with the following elements:
+</p>
+
+<dl>
+<dt><strong>request</strong></dt>
+<dd>
+<p>a list with the request parameters</p>
+</dd>
+<dt><strong>message</strong></dt>
+<dd>
+<p>a list of status code(s) and message(s)
+returned by the API</p>
+</dd>
+<dt><strong>response</strong></dt>
+<dd>
+<p>an XMLNode with the API-specific response
+values. At this time, no further coercion is performed, so you
+may have to use functions from the <code>XML</code> package to extract
+the desired output.</p>
+</dd>
+</dl>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+GetDeepSearchResults(address = '2114 Bigelow Ave', citystatezip = 'Seattle, WA')
+GetDeepSearchResults(address = '2114 Bigelow Ave', citystatezip = 'Seattle, WA',
+                     rentzestimate = TRUE)
+## End(Not run)
+</code></pre>
+
+
+</div>

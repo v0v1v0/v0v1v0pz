@@ -1,0 +1,75 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>find_peaks</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Find peaks in a periodogram</h2>
+
+<h3>Description</h3>
+
+<p>This function locates the peaks in a pregenerated periodogram.
+Detection is based on pracma::findpeaks.
+Only the significant (i.e. <code>power &gt; signif_threshold</code>) peaks are extracted.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">find_peaks(data, n_peaks = 3)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>behavr::behavr table representing a periodogram, as returned by periodogram</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n_peaks</code></td>
+<td>
+<p>maximal numbers of peak to be detected</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>behavr::behavr table that is <code>data</code> with an extra column <code>peak</code>.
+<code>peak</code> is filled with zeros except for rows match a peak.
+In which case, rows have an integer value corresponding to the rank of the peak (e.g. 1 for the first peak).
+</p>
+
+
+<h3>References</h3>
+
+
+<ul><li> <p><a href="https://rethomics.github.io/zeitgebr.html">zeitgebr tutorial</a> – the relevant rehtomics tutorial
+</p>
+</li></ul>
+<h3>See Also</h3>
+
+
+<ul>
+<li> <p>periodogram – to generate a periodogram in a first place
+</p>
+</li>
+<li> <p>ggetho::geom_peak – a layer to show peaks on a periodogram
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(dams_sample)
+# only four ndividuals for the sake of the example
+dt &lt;- dams_sample[xmv(region_id) %in% c(1, 7, 21, 31)]
+per_dt_xs &lt;- periodogram(activity, dt, FUN = chi_sq_periodogram)
+per_dt_xs_with_peaks &lt;- find_peaks(per_dt_xs)
+per_dt_xs_with_peaks[peak == 1]
+</code></pre>
+
+
+</div>

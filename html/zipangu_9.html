@@ -1,0 +1,99 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>kana</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create kana vector</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+Generates a vector consisting of the elements of kana.
+Options exist for the inclusion of several elements.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">kana(type, ...)
+
+hiragana(
+  core = TRUE,
+  dakuon = FALSE,
+  handakuon = FALSE,
+  kogaki = FALSE,
+  historical = FALSE
+)
+
+katakana(
+  core = TRUE,
+  dakuon = FALSE,
+  handakuon = FALSE,
+  kogaki = FALSE,
+  historical = FALSE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>"hiragana" ("hira") or "katakana" ("kata")</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+
+<p>Arguments passed on to <code>hiragana</code>
+</p>
+
+<dl>
+<dt></dt>
+<dd></dd>
+</dl>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>core</code></td>
+<td>
+<p>is include core kana characters.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dakuon</code></td>
+<td>
+<p>e.g. ga, gi, gu, ge, go</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>handakuon</code></td>
+<td>
+<p>e.g. pa, pi, pu, pe, po</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kogaki</code></td>
+<td>
+<p>small character</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>historical</code></td>
+<td>
+<p>old style</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">kana(type = "hira", core = TRUE)
+kana(type = "hira", core = TRUE, handakuon = TRUE)
+</code></pre>
+
+
+</div>

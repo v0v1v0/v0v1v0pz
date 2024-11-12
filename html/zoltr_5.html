@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>create_project</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a project</h2>
+
+<h3>Description</h3>
+
+<p>Creates the project using the passed project configuration list. Fails if a project with the passed name already
+exists.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">create_project(zoltar_connection, project_config)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>project_config</code></td>
+<td>
+<p>A <code>list</code> containing a Zoltar project configuration. note that this list validated by the
+server and not here. An example: cdc-project.json Full documentation at <a href="https://docs.zoltardata.com/">https://docs.zoltardata.com/</a>.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>project_url of the newly-created project
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  new_project_url &lt;- create_project(conn, jsonlite::read_json("cdc-project.json"))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

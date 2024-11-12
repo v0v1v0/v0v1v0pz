@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zipcode_spacer</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Insert and remove zip-code connect character</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="../help/figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
+Inserts a hyphen as a delimiter in the given zip-code string.
+Or exclude the hyphen.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zipcode_spacer(x, remove = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Zip-code. Number or character. Hyphens may be included,
+but the input must contain a 7-character number.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>remove</code></td>
+<td>
+<p>Default is <code>FALSE</code>. If <code>TRUE</code>, remove the hyphen.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">zipcode_spacer(7000027)
+zipcode_spacer("305-0053")
+zipcode_spacer("305-0053", remove = TRUE)
+</code></pre>
+
+
+</div>

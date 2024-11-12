@@ -1,0 +1,122 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>jholiday_spec</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Public holidays in Japan</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">jholiday_spec(year, name, lang = "en")
+
+jholiday(year, lang = "en")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>year</code></td>
+<td>
+<p>numeric years after 1949.
+If <code>NA</code> supplied, <code>jholiday_spec</code> returns <code>NA</code> respectively.
+On the other hand, <code>jholiday</code> always omits any <code>NA</code> values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>name</code></td>
+<td>
+<p>holiday names.
+If this argument is not the same length of year, the first element will be recycled.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lang</code></td>
+<td>
+<p>switch for turning values to "en" or "jp".</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Holiday information refers to data published as of December 21, 2020.
+Future holidays are subject to change.
+</p>
+
+
+<h3>Examples</h3>
+
+<div class="sourceCode r"><pre>jholiday_spec(2019, "Sports Day")
+#&gt; [1] "2019-10-14"
+jholiday_spec(2021, "Sports Day")
+#&gt; [1] "2021-07-23"
+</pre></div>
+<p>List of a specific year holidays
+</p>
+<div class="sourceCode r"><pre>jholiday(2021, "en")
+#&gt; $`New Year's Day`
+#&gt; [1] "2021-01-01"
+#&gt; 
+#&gt; $`Coming of Age Day`
+#&gt; [1] "2021-01-11"
+#&gt; 
+#&gt; $`Foundation Day`
+#&gt; [1] "2021-02-11"
+#&gt; 
+#&gt; $`The Emperor's Birthday`
+#&gt; [1] "2021-02-23"
+#&gt; 
+#&gt; $`Vernal Equinox Day`
+#&gt; [1] "2021-03-20"
+#&gt; 
+#&gt; $`Showa Day`
+#&gt; [1] "2021-04-29"
+#&gt; 
+#&gt; $`Constitution Memorial Day`
+#&gt; [1] "2021-05-03"
+#&gt; 
+#&gt; $`Greenery Day`
+#&gt; [1] "2021-05-04"
+#&gt; 
+#&gt; $`Children's Day`
+#&gt; [1] "2021-05-05"
+#&gt; 
+#&gt; $`Marine Day`
+#&gt; [1] "2021-07-22"
+#&gt; 
+#&gt; $`Sports Day`
+#&gt; [1] "2021-07-23"
+#&gt; 
+#&gt; $`Mountain Day`
+#&gt; [1] "2021-08-08"
+#&gt; 
+#&gt; $`Respect for the Aged Day`
+#&gt; [1] "2021-09-20"
+#&gt; 
+#&gt; $`Autumnal Equinox Day`
+#&gt; [1] "2021-09-23"
+#&gt; 
+#&gt; $`Culture Day`
+#&gt; [1] "2021-11-03"
+#&gt; 
+#&gt; $`Labour Thanksgiving Day`
+#&gt; [1] "2021-11-23"
+</pre></div>
+
+
+<h3>References</h3>
+
+<p>Public Holiday Law <a href="https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html">https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html</a>,
+<a href="https://elaws.e-gov.go.jp/document?lawid=323AC1000000178">https://elaws.e-gov.go.jp/document?lawid=323AC1000000178</a>
+</p>
+
+
+</div>

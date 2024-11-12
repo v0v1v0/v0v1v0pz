@@ -1,0 +1,98 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonotope-props</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>zonotope properties</h2>
+
+<h3>Description</h3>
+
+<p>Get some important boolean properties of a zonotope.
+<br><br><em>pointed</em> means that 0 is a vertex of the zonotope.
+<em>salient</em> means that 0 is in the boundary of the zonotope.
+So pointed implies salient, but not the reverse.
+<br><br>
+A zonotope has an associated <em>convex cone</em> - allow the
+coefficients of the generators to be any non-negative numbers.
+For convex cones, <em>pointed</em> means that the cone
+is in an open linear halfspace (except for 0).
+And <em>salient</em> means that the cone is in a
+closed linear halfspace (the cone may contain a line).
+<br><br>
+In terms of generators (of both zonotopes and convex cones),
+<em>pointed</em> means that the generators
+are in an open linear halfspace (except for 0 generators).
+And <em>salient</em> means that the generators
+are in a closed linear halfspace.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonotope'
+is_pointed( x )
+
+## S3 method for class 'zonotope'
+is_salient( x )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a zonotope object -  a <b>zonohedron</b>, a <b>zonogon</b>, or a <b>zonoseg</b>
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>For a <b>zonohedron</b>, if 0 is in the interior of an edge or a facet,
+then the zonohdron is salient but not pointed.
+<br>
+For a <b>zonogon</b>, if 0 is in the interior of an edge,
+then the zonogon is salient but not pointed.
+<br>
+For a <b>zonoseg</b>, both <em>pointed</em> and <em>salient</em> are equivalent
+to 0 being a boundary point.
+And this is equivalent to all the non-zero generators having
+the same sign  (all negative or all positive).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>TRUE</code> or <code>FALSE</code>
+</p>
+
+
+<h3>References</h3>
+
+<p><b>Zonohedron - Wikipedia</b>.<br><a href="https://en.wikipedia.org/wiki/Zonohedron">https://en.wikipedia.org/wiki/Zonohedron</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>zonogon()</code>,
+<code>zonoseg()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zono1 = zonoseg( c(1,-2,3,0,-3,-4) )
+
+is_pointed( zono1 )
+# [1] FALSE
+
+is_salient( zono1 )
+# [1] FALSE
+</code></pre>
+
+
+</div>

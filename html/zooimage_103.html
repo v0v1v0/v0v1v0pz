@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zic</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Check .zic files (ZooImage Categories) </h2>
+
+<h3>Description</h3>
+
+<p>Categories (i.e., plankton taxa), with possibly several sub-levels are defined
+in .zic files. This function check the files are correct.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zicCheck(zicfile)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zicfile</code></td>
+<td>
+<p> the name of the .zic file to test. </p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>This function return <code>TRUE</code> or <code>FALSE</code>, depending on the content
+of the tested file.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>prepareTrain</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Check that Detailed.zic file in the /etc subdir is correct
+zicCheck(file.path(svMisc::getTemp("ZIetc"), "Detailed.zic"))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,93 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>N-V-Vm.tfl</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Access Methods for Type Frequency Lists (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Return the sample size (<code>N.tfl</code>) and vocabulary size
+(<code>V.tfl</code>) of the type frequency list represented by a <code>tfl</code>
+object, as well as class sizes (<code>Vm.tfl</code>) of the corresponding
+frequency spectrum.
+</p>
+<p>Note that these functions are not user-visible.  They can be called
+implicitly through the generic methods <code>N</code>, <code>V</code> and
+<code>Vm</code>, applied to an object of type <code>tfl</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'tfl'
+N(obj, ...)
+
+  ## S3 method for class 'tfl'
+V(obj, ...)
+
+  ## S3 method for class 'tfl'
+Vm(obj, m, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>tfl</code>, representing an observed
+type frequency list</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>non-negative integer value determining the frequency class
+<code class="reqn">m</code> to be returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on from generic method will be
+ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Only a single value is allowed for <code class="reqn">m</code>, which may also be 0.
+In order to obtain multiple class sizes <code class="reqn">V_m</code>, convert the type
+frequency list to a frequency spectrum with <code>tfl2spc</code> first.
+</p>
+<p>For an incomplete type frequency list, <code>Vm.tfl</code> will return
+<code>NA</code> if <code>m</code> is outside the range of listed frequencies
+(i.e. for <code>m &lt; f.min</code> or <code>m &gt; f.max</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>N.tfl</code> returns the sample size <code class="reqn">N</code>, <code>V.tfl</code> returns the
+vocabulary size <code class="reqn">V</code> (or expected vocabulary size <code class="reqn">E[V]</code>), and
+<code>Vm.tfl</code> returns the number of types that occur exactly <code class="reqn">m</code>
+times in the sample, i.e. the class size <code class="reqn">V_m</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>N</code>, <code>V</code>, <code>Vm</code> for the generic
+methods and links to other implementations
+</p>
+<p><code>tfl</code> for details on type frequency list objects and links
+to other relevant functions
+</p>
+
+
+</div>

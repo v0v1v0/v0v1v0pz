@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zb_quadrat</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Divide a region into quadrats</h2>
+
+<h3>Description</h3>
+
+<p>Divide a region into quadrats
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zb_quadrat(x, ncol, nrow = NULL, intersection = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>x</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ncol</code></td>
+<td>
+<p>ncol</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nrow</code></td>
+<td>
+<p>nrow</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intersection</code></td>
+<td>
+<p>intersection</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>An sf object
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x = london_a()
+c = sf::st_centroid(london_a())
+plot(zb_quadrat(x, ncol = 2), col = 2:5)
+plot(c, add = TRUE, col = "white")
+plot(zb_quadrat(x, ncol = 3))
+plot(zb_quadrat(x, ncol = 4))
+plot(zb_quadrat(x, ncol = 4, intersection = FALSE))
+</code></pre>
+
+
+</div>

@@ -1,0 +1,92 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>rescale.regular</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Rescaling of data following a hierarchical increase in grain size</h2>
+
+<h3>Description</h3>
+
+<p>Increases grain by hierarchically nesting regularly spaced sites.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">rescale.regular(xy, data.spec, data.env = NULL, method = "mean", n)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>xy</code></td>
+<td>
+<p>Site-by-coordinate data frame, with sites as rows and coordinates as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.spec</code></td>
+<td>
+<p>Site-by-species presence-absence data frame, with sites as rows and species as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>data.env</code></td>
+<td>
+<p>Site-by-variable data frame, with sites as rows and environmental variables as columns.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>Name of a function (as a string) indicating how to combine the coordinates and the environmental variables. It can be a basic R-function such as "<code>mean</code>" or "<code>max</code>", but also a custom function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Mapping grain (the number of sites combined to generate data at a coarser grain). Regularly spaced sites are grouped as <code>n</code> x <code>n</code> sites.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The sites (plots or quadrates) are aggregated as nearest neighbouring groups of <code>n</code> x <code>n</code> sites, using a nested approach, starting from the lowest x and y, to increase the grain. The sites can be spatially contiguous or discontiguous, as long as they are regularly spaced. This function is not suitable for irregularly spaced sites. If the total number of sites is not a multiple of <code>n</code> x <code>n</code>, the extra sites are discarded.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>rescale.regular</code> returns a data frame with the rescaled data.
+</p>
+
+
+<h3>References</h3>
+
+<p>Hui C. &amp; McGeoch M.A. (2014). Zeta diversity as a concept and metric that unifies incidence-based biodiversity patterns. <em>The American Naturalist</em>, 184, 684-694.
+</p>
+<p>Scheiner S.M., Chiarucci A., Fox G.A., Helmus M.R., McGlinn D.J. &amp; Willig M.R. (2011). The underpinnings of the relationship of species richness with space and time. <em>Ecological Monographs</em>, 81, 195-213.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Zeta.decline.mc</code>, <code>Zeta.order.mc</code>, <code>Zeta.decline.ex</code>, <code>Zeta.order.ex</code>, <code>Zeta.scale.regular</code>, <code>Zeta.scale.min.dist</code>, <code>rescale.min.dist</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+utils::data(bird.spec.fine)
+xy.bird &lt;- bird.spec.fine[1:2]
+data.spec.bird &lt;- bird.spec.fine[3:192]
+
+data.rescale &lt;- rescale.regular(xy.bird, data.spec.bird, n = 4)
+</code></pre>
+
+
+</div>

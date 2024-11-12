@@ -1,0 +1,91 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonogon-getmetrics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+get important metrics about a zonogon, 
+and print basic facts about a zonogon.
+</h2>
+
+<h3>Description</h3>
+
+<p>Get some important zonogon metrics; some computation is used.
+Also print the data, and more.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonogon'
+getmetrics( x )
+
+## S3 method for class 'zonogon'
+print( x, ... )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonogon</b> object
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>not used</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>print.zonogon()</code> prints some basic information about the zonogon,
+and the associated matroid.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>getmetrics()</code> returns a list with these items:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>vertices</code></td>
+<td>
+<p>the number of vertices</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>perimeter</code></td>
+<td>
+<p>the sum of the lengths of the all edges</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>area</code></td>
+<td>
+<p>as a polygon</p>
+</td>
+</tr>
+</table>
+<p>All of these are always positive.
+</p>
+<p><code>print.zonogon()</code> returns <code>TRUE</code> or <code>FALSE</code>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonogon()</code>,
+<code>getmetrics.zonohedron()</code>
+</p>
+
+
+</div>

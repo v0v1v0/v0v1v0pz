@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getAllTicketMetrics</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> getAllTicketMetrics</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to retrieve all ticket metrics from all tickets in your Zendesk organization
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getAllTicketMetrics()
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p>This function will return a data.frame containing all ticket metrics, such as latest_comment_added_at, first_resolution_time_in_minutes, etc. on every ticket.
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a data.frame of all ticket metrics for all tickets
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tanya Cashorali</p>
+
+
+<h3>References</h3>
+
+<p>http://developer.zendesk.com/documentation/rest_api/ticket_metrics.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+    ## This requires Zendesk authentication
+    ticket_metrics &lt;- getAllTicketMetrics()
+
+## End(Not run)</code></pre>
+
+
+</div>

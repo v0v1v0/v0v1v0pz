@@ -1,0 +1,80 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>BrownSubsets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Brown Corpus Subset Frequency Data (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Objects of classes <code>spc</code> and <code>vgc</code> that
+contain frequency data for various subsets of words from the Brown
+corpus (see Kucera and Francis 1967).
+</p>
+
+
+<h3>Details</h3>
+
+<p><code>BrownAdj.spc</code>, <code>BrownNoun.spc</code> and <code>BrownVer.spc</code>
+are frequency spectra of all the Brown corpus words tagged as
+adjectives, nouns and verbs, respectively. <code>BrownAdj.emp.vgc</code>,
+<code>BrownNoun.emp.vgc</code> and <code>BrownVer.emp.vgc</code> are the
+corresponding observed vocabulary growth curves (tracking the
+development of <code>V</code> and <code>V(1)</code>, like all the files with
+suffix <code>.emp.vgc</code> below).
+</p>
+<p><code>BrownImag.spc</code> and <code>BrownInform.spc</code> are frequency
+spectra of the Brown corpus words subdivided into the two main
+stylistic partitions of the corpus, i.e., imaginative and
+informative prose, respectively. <code>BrownImag.emp.vgc</code> and
+<code>BrownInform.emp.vgc</code> are the corresponding observed vocabulary
+growth curves.
+</p>
+<p><code>Brown100k.spc</code> is the spectrum of the first 100,000 tokens in
+the Brown (useful, e.g., for extrapolation experiments in which we
+want to estimate a <code>lnre</code> model on a subset of the data
+available). The corresponding observed growth curve can be easily
+obtained from the one for the whole Brown (<code>Brown.emp.vgc</code>).
+</p>
+<p>Notice that we removed numbers and other forms of non-linguistic
+material before collecting any data from the Brown.
+</p>
+
+
+<h3>References</h3>
+
+<p>Kucera, H. and Francis, W.N. (1967). <em>Computational analysis of
+present-day American English</em>. Brown University Press, Providence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The data described in <code>Brown</code> pertain to the Brown as a
+whole.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+  data(BrownAdj.spc)
+  summary(BrownAdj.spc)
+
+  data(BrownAdj.emp.vgc)
+  summary(BrownAdj.emp.vgc)
+
+  data(BrownInform.spc)
+  summary(BrownInform.spc)
+
+  data(BrownInform.emp.vgc)
+  summary(BrownInform.emp.vgc)
+
+  data(Brown100k.spc)
+  summary(Brown100k.spc)
+
+</code></pre>
+
+
+</div>

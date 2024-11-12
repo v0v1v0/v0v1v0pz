@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getAllTickets</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> getAllTickets</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to return all tickets stored in your organization.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## Admin only
+getAllTickets()
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p>This function can only be used by Admins within your organization. Tickets are ordered chronologically by created date, from oldest to newest.
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a data.frame of all tickets ordered chronologically by created date, from oldest to newest.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tanya Cashorali</p>
+
+
+<h3>References</h3>
+
+<p>http://developer.zendesk.com/documentation/rest_api/tickets.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+    ## This requires Zendesk authentication
+    tickets &lt;- getAllTickets()
+
+## End(Not run)</code></pre>
+
+
+</div>

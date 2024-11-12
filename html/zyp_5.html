@@ -1,0 +1,202 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zyp.trend.csv</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>zyp.trend.csv</h2>
+
+<h3>Description</h3>
+
+<p>Computes prewhitened nonlinear trends on CSV files or data frames with 0 to n columns of
+metadata, with 1 row per location and each column containing data for
+a particular time (day, month, year). The zyp package allows you to
+use either Zhang's method, or the Yue Pilon method of computing
+nonlinear prewhitened trends.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zyp.trend.dataframe(indat, metadata.cols, method=c("zhang", "yuepilon"),
+                    conf.intervals=TRUE, preserve.range.for.sig.test=FALSE)
+zyp.trend.csv(filename, output.filename, metadata.cols,
+              method=c("zhang", "yuepilon"), conf.intervals=TRUE,
+              csv.header=TRUE, preserve.range.for.sig.test=FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>indat</code></td>
+<td>
+<p>the input data frame.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>filename</code></td>
+<td>
+<p>the filename of the input CSV file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>output.filename</code></td>
+<td>
+<p>the filename to write output to.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>metadata.cols</code></td>
+<td>
+<p>the number of columns of metadata.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p>the prewhitened trend method to use.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>conf.intervals</code></td>
+<td>
+<p>whether to compute a 95 percent confidence
+interval based on all possible slopes.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>preserve.range.for.sig.test</code></td>
+<td>
+<p>whether to re-inflate values by
+dividing by (1 - ac) following removal of autocorrelation prior to
+computation of significance.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>csv.header</code></td>
+<td>
+<p>whether the input CSV file has a header.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>These routines compute prewhitened nonlinear trends on either CSV
+files with or without a header or data frames with 0 to n columns of
+metadata (which is preserved in the output). Each row is expected to
+contain metadata followed by a timeseries, and all rows are expected
+to have the same length of timeseries. NA values are handled
+correctly, so if you have several timeseries of unequal length you can
+pad them with NA values to provide valid input.
+</p>
+<p>The prewhitened trend computation methods used are either Zhang's
+method (described in Wang and Swail, 2001) or Yue and Pilon's method
+(described in Yue and Pilon, 2002).
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame containing the trends, in the case of
+zyp.trend.dataframe. Columns of the output are as follows.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>lbound</code></td>
+<td>
+<p>the lower bound of the trend's confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trend</code></td>
+<td>
+<p>the Sen's slope (trend) per unit time.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>trendp</code></td>
+<td>
+<p>the Sen's slope (trend) over the time period.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ubound</code></td>
+<td>
+<p>the upper bound of the trend's confidence interval.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>tau</code></td>
+<td>
+<p>Kendall's tau statistic computed on the final detrended timeseries.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sig</code></td>
+<td>
+<p>Kendall's P-value computed for the final detrended timeseries.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nruns</code></td>
+<td>
+<p>the number of runs required to converge upon a trend.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>autocor</code></td>
+<td>
+<p>the autocorrelation of the final detrended timeseries.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>valid_frac</code></td>
+<td>
+<p>the fraction of the data which is valid (not NA)
+once autocorrelation is removed.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>linear</code></td>
+<td>
+<p>the least squares fit trend on the same dat.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intercept</code></td>
+<td>
+<p>the intercept of the Sen's slope (trend).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lbound_intercept</code></td>
+<td>
+<p>the lower bound of the estimate of the intercept of the Sen's slope (trend).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ubound_intercept</code></td>
+<td>
+<p>the upper bound of the estimate of the intercept of the Sen's slope (trend).</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>zyp.trend.vector</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+zyp.trend.csv("in.csv", "out.csv", 2, "yuepilon", F)
+trends &lt;- zyp.trend.dataframe(indat, 2, "yuepilon")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

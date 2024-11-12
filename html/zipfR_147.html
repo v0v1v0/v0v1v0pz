@@ -1,0 +1,116 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>N-V-Vm.vgc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Access Methods for Vocabulary Growth Curves (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Return the vector of sample sizes (<code>N.vgc</code>), vocabulary sizes
+(<code>V.vgc</code>) or class sizes (<code>Vm.vgc</code>) from the vocabulary
+growth curve (VGC) represented by a <code>vgc</code> object.  For an
+expected or interpolated VGC with variance information, <code>VV.vgc</code>
+returns the vector of variances of the vocabulary size and
+<code>VVm.vgc</code> the variance vectors for individual spectrum elements.
+</p>
+<p>Note that these functions are not user-visible.  They can be called
+implicitly through the generic methods <code>N</code>, <code>V</code>, <code>Vm</code>,
+<code>VV</code> and <code>VVm</code>, applied to an object of type <code>vgc</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'vgc'
+N(obj, ...)
+
+  ## S3 method for class 'vgc'
+V(obj, ...)
+
+  ## S3 method for class 'vgc'
+Vm(obj, m, ...)
+
+  ## S3 method for class 'vgc'
+VV(obj, N=NA, ...)
+
+  ## S3 method for class 'vgc'
+VVm(obj, m, N=NA, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>vgc</code>, representing an observed,
+interpolated or expected VGC</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>positive integer value determining the frequency class
+<code class="reqn">m</code> for which the vector of class sizes is returned</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>not applicable (this argument of the generic method is not
+used by the implementation for <code>vgc</code> objects and must not be
+specified)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on from generic method will be ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>VV.vgc</code> a <code>VVm.vgc</code> will fail if the object <code>obj</code> does
+not include variance data.  <code>Vm.vgc</code> and <code>VVm.vgc</code> will fail
+if the selected frequency class is not included in the VGC data.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>N.vgc</code> returns the vector of sample sizes <code class="reqn">N</code>, <code>V.vgc</code>
+returns the corresponding vocabulary sizes <code class="reqn">V(N)</code> (or expected
+vocabulary sizes <code class="reqn">E[V(N)]</code>), and <code>Vm.vgc</code> returns the vector of
+class sizes <code class="reqn">V_m(N)</code> (or the expected spectrum elements
+<code class="reqn">E[V_m(N)]</code>) for the selected frequency class <code class="reqn">m</code>.
+</p>
+<p>For an expected or interpolated VGC with variance information,
+<code>VV.vgc</code> returns the vector of variances
+<code class="reqn">\mathop{Var}[V(N)]</code> of the expected vocabulary size,
+and <code>VVm.vgc</code> returns vector of variances
+<code class="reqn">\mathop{Var}[V_m(N)]</code> for the selected frequency
+class <code class="reqn">m</code>.
+</p>
+<p>Except for <code>N.vgc</code>, the vector returned will be labelled with
+corresponding sample sizes.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>N</code>, <code>V</code>, <code>Vm</code>, <code>VV</code>,
+<code>VVm</code> for the generic methods and links to other
+implementations
+</p>
+<p><code>vgc</code> for details on vocabulary growth curve objects and
+links to other relevant functions
+</p>
+
+
+</div>

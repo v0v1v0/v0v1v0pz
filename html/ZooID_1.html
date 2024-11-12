@@ -1,0 +1,84 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>batchPreProcessing</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>batchPreProcessing</h2>
+
+<h3>Description</h3>
+
+<p>Preprocessing a directory of zooplankton images
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">batchPreProcessing(
+  zpFileDir,
+  zpSaveDir,
+  minPixels = 5000,
+  imageExtension = ".jpg",
+  noRepeats = TRUE,
+  verbose = TRUE
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zpFileDir</code></td>
+<td>
+<p>Directory full of zooplankton images to extract</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zpSaveDir</code></td>
+<td>
+<p>Directory to save the extracted images to</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>minPixels</code></td>
+<td>
+<p>Integer specifying the minimum number of pixels allowed in an extracted image
+Any extracted image with fewer pixels will not be saved
+[Default:  5000 (~70 by 70 pixels)]</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>imageExtension</code></td>
+<td>
+<p>String specifying the extension the images will have (must include ".")
+[Default: ".jpg"]</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>noRepeats</code></td>
+<td>
+<p>Boolean variable to decide whether to ignore images that are already present in
+the save dir, or not [Default: TRUE]</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>verbose</code></td>
+<td>
+<p>Boolean variable indicating whether the script should print info to console
+[Default: TRUE]</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+zpFileDir &lt;- 'Users/$(whoami)/Images/ZooplanktonImages/ostracod'
+zpSaveDir &lt;- 'Users/$(whoami)/Images/ExtractedImages/ostracod'
+batchPreProcessing(zpFileDir, zpSaveDir)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

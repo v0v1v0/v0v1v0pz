@@ -1,0 +1,142 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>moezipf</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Marshal-Olkin Extended Zipf Distribution (MOEZipf).</h2>
+
+<h3>Description</h3>
+
+<p>Probability mass function, cumulative distribution function, quantile function and random number
+generation for the MOEZipf distribution with parameters <code class="reqn">\alpha</code> and <code class="reqn">\beta</code>. The support of the MOEZipf
+distribution are the strictly positive integer numbers large or equal than one.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dmoezipf(x, alpha, beta, log = FALSE)
+
+pmoezipf(q, alpha, beta, log.p = FALSE, lower.tail = TRUE)
+
+qmoezipf(p, alpha, beta, log.p = FALSE, lower.tail = TRUE)
+
+rmoezipf(n, alpha, beta)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, q</code></td>
+<td>
+<p>Vector of positive integer values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>Value of the <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>Value of the <code class="reqn">\beta</code> parameter (<code class="reqn">\beta &gt; 0</code> ).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log, log.p</code></td>
+<td>
+<p>Logical; if TRUE, probabilities p are given as log(p).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lower.tail</code></td>
+<td>
+<p>Logical; if TRUE (default), probabilities are <code class="reqn">P[X \leq x]</code>, otherwise, <code class="reqn">P[X &gt; x]</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>Vector of probabilities.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>Number of random values to return.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The <em>probability mass function</em> at a positive integer value <code class="reqn">x</code> of the MOEZipf distribution with
+parameters <code class="reqn">\alpha</code> and <code class="reqn">\beta</code> is computed as follows:
+</p>
+<p style="text-align: center;"><code class="reqn">p(x | \alpha, \beta) = \frac{x^{-\alpha} \beta \zeta(\alpha) }{[\zeta(\alpha) - \bar{\beta} \zeta (\alpha, x)] [\zeta (\alpha) - \bar{\beta} \zeta (\alpha, x + 1)]},\, x = 1,2,...,\, \alpha &gt; 1, \beta &gt; 0, </code>
+</p>
+
+<p>where <code class="reqn">\zeta(\alpha)</code> is the Riemann-zeta function at <code class="reqn">\alpha</code>, <code class="reqn">\zeta(\alpha, x)</code>
+is the Hurtwitz zeta function with arguments <code class="reqn">\alpha</code> and x, and <code class="reqn">\bar{\beta} = 1 - \beta</code>.
+</p>
+<p>The <em>cumulative distribution function</em>, at a given positive integer value <code class="reqn">x</code>,
+is computed as <code class="reqn">F(x) = 1 - S(x)</code>, where the survival function <code class="reqn">S(x)</code> is equal to:
+</p>
+<p style="text-align: center;"><code class="reqn">S(x) = \frac{\beta\, \zeta(\alpha, x + 1)}{\zeta(\alpha) - \bar{\beta}\,\zeta(\alpha, x + 1)},\, x = 1, 2, .. </code>
+</p>
+
+<p>The quantile of the MOEZipf<code class="reqn">(\alpha, \beta)</code> distribution of a given probability value p
+is equal to the quantile of the Zipf<code class="reqn">(\alpha)</code> distribution at the value:
+</p>
+<p style="text-align: center;"><code class="reqn">p\prime = \frac{p\,\beta}{1 + p\,(\beta - 1)}</code>
+</p>
+
+<p>The quantiles of the Zipf<code class="reqn">(\alpha)</code> distribution are computed by means of the <em>tolerance</em>
+package.
+</p>
+<p>To generate random data from a MOEZipf one applies the <em>quantile</em> function over <em>n</em> values randomly generated
+from an Uniform distribution in the interval (0, 1).
+</p>
+
+
+<h3>Value</h3>
+
+
+<p><code>dmoezipf</code> gives the probability mass function,
+<code>pmoezipf</code> gives the cumulative distribution function,
+<code>qmoezipf</code> gives the quantile function, and
+<code>rmoezipf</code> generates random values from a MOEZipf distribution.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Casellas, A. (2013) <em>La distribució Zipf Estesa segons la transformació Marshall-Olkin</em>. Universitat Politécnica de Catalunya.
+</p>
+<p>Devroye L. (1986) Non-Uniform Random Variate Generation. Springer, New York, NY.
+</p>
+<p>Duarte-López, A., Prat-Pérez, A., &amp; Pérez-Casany, M. (2015). <em>Using the Marshall-Olkin Extended Zipf Distribution in Graph Generation</em>. European Conference on Parallel Processing, pp. 493-502, Springer International Publishing.
+</p>
+<p>Pérez-Casany, M. and Casellas, A. (2013) <em>Marshall-Olkin Extended Zipf Distribution</em>. arXiv preprint arXiv:1304.4540.
+</p>
+<p>Young, D. S. (2010). <em>Tolerance: an R package for estimating tolerance intervals</em>. Journal of Statistical Software, 36(5), 1-39.
+
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">dmoezipf(1:10, 2.5, 1.3)
+pmoezipf(1:10, 2.5, 1.3)
+qmoezipf(0.56, 2.5, 1.3)
+rmoezipf(10, 2.5, 1.3)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,50 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>search_cd</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get all ZIP codes that fall within a given congressional district</h2>
+
+<h3>Description</h3>
+
+<p>Get all ZIP codes that fall within a given congressional district
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">search_cd(state_fips_code, congressional_district)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>state_fips_code</code></td>
+<td>
+<p>A two-digit U.S. FIPS code for a state</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>congressional_district</code></td>
+<td>
+<p>A two digit number specifying a congressional district in a given</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>tibble of all congressional districts found for given ZIP code, including state code
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">search_cd("34", "03")
+search_cd("36", "05")
+</code></pre>
+
+
+</div>

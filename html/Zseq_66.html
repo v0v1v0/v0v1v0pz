@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Perfect</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Perfect numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A000396">A000396</a>, a <em>Perfect</em> number is
+a number whose proper divisors sum up to the extent equal to the number itself. First
+6 abundant numbers are	6, 28, 496, 8128, 33550336, 8589869056.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Perfect(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Deficient</code>, <code>Abundant</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## generate first 7 Perfect numbers
+print(Perfect(10))
+
+## End(Not run)
+
+</code></pre>
+
+
+</div>

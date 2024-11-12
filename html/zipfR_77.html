@@ -1,0 +1,113 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>N-V-Vm.spc</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Access Methods for Frequency Spectra (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Return the sample size (<code>N.spc</code>), vocabulary size (<code>V.spc</code>)
+and class sizes (<code>Vm.spc</code>) of the frequency spectrum represented
+by a <code>spc</code> object.  For an expected spectrum with variance
+information, <code>VV.spc</code> returns the variance of the expected
+spectrum size and <code>VVm.spc</code> the variances of individual spectrum
+elements.
+</p>
+<p>Note that these functions are not user-visible.  They can be called
+implicitly through the generic methods <code>N</code>, <code>V</code>, <code>Vm</code>,
+<code>VV</code> and <code>VVm</code>, applied to an object of type <code>spc</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'spc'
+N(obj, ...)
+
+  ## S3 method for class 'spc'
+V(obj, ...)
+
+  ## S3 method for class 'spc'
+Vm(obj, m, ...)
+
+  ## S3 method for class 'spc'
+VV(obj, N=NA, ...)
+
+  ## S3 method for class 'spc'
+VVm(obj, m, N=NA, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>obj</code></td>
+<td>
+<p>an object of class <code>spc</code>, representing an observed or
+expected frequency spectrum</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>m</code></td>
+<td>
+<p>positive integer value determining the frequency class
+<code class="reqn">m</code> to be returned (or a vector of such values).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>N</code></td>
+<td>
+<p>not applicable (this argument of the generic method is not
+used by the implementation for <code>spc</code> objects and must not be
+specified)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional arguments passed on from generic method will be ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><code>VV.spc</code> a <code>VVm.spc</code> will fail if the object <code>obj</code> is
+not an expected frequency spectrum with variance data.
+</p>
+<p>For an incomplete frequency spectrum, <code>Vm.spc</code> (and
+<code>VVm.spc</code>) will return <code>NA</code> for all spectrum elements that
+are not listed in the object (i.e. for <code>m &gt; m.max</code>).
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>N.spc</code> returns the sample size <code class="reqn">N</code>, <code>V.spc</code> returns the
+vocabulary size <code class="reqn">V</code> (or expected vocabulary size <code class="reqn">E[V]</code>), and
+<code>Vm.spc</code> returns a vector of class sizes <code class="reqn">V_m</code> (ot the
+expected spectrum elements <code class="reqn">E[V_m]</code>).
+</p>
+<p>For an expected spectrum with variances, <code>VV.spc</code> returns the
+variance <code class="reqn">\mathop{Var}[V]</code> of the expected vocabulary
+size, and <code>VVm.spc</code> returns variances
+<code class="reqn">\mathop{Var}[V_m]</code> of the spectrum elements.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>N</code>, <code>V</code>, <code>Vm</code>, <code>VV</code>,
+<code>VVm</code> for the generic methods and links to other
+implementations
+</p>
+<p><code>spc</code> for details on frequency spectrum objects and links
+to other relevant functions
+</p>
+
+
+</div>

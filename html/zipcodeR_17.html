@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zip_distance</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate the distance between two ZIP codes in miles</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the distance between two ZIP codes in miles
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zip_distance(zipcode_a, zipcode_b, lonlat = TRUE, units = "miles")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zipcode_a</code></td>
+<td>
+<p>First vector of ZIP codes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zipcode_b</code></td>
+<td>
+<p>Second vector of ZIP codes</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lonlat</code></td>
+<td>
+<p>lonlat argument to pass to raster::pointDistance() to select method of distance calculation. Default is TRUE to calculate distance over a spherical projection. FALSE will calculate the distance in Euclidean (planar) space.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>units</code></td>
+<td>
+<p>Specify which units to return distance calculations in. Choices include meters or miles.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a data.frame containing a column for each ZIP code and a new column containing the distance between the two columns of ZIP code
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">zip_distance("08731", "08901")
+
+</code></pre>
+
+
+</div>

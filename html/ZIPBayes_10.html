@@ -1,0 +1,235 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIPMErr</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+Zero-inflated Poisson model with measurement error
+</h2>
+
+<h3>Description</h3>
+
+<p>The function implements the MCMC algorithm with data augmentation to estimate the parameters in the zero-inflated Poisson model while correcting for the measurement error arising from the responses. The function returns the trace of the sampled parameters in each iteraction. To obtain the summary estimation, use <code>summary</code>().
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIPMErr (Ystar, Covarmainphi, Covarmainmu, Covarplus, Covarminus,
+        betaphi, betamu, alphaplus, alphaminus,
+        Uibound = c(7,11),
+        priorgamma, priormu, priorSigma, propsigmaphi,  propsigmamu = propsigmaphi,
+        propsigmaplus = propsigmaphi,  propsigmaminus = propsigmaphi, 
+        seed = 1, nmcmc = 500)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Ystar</code></td>
+<td>
+
+<p>a count vector of length <code class="reqn">n</code> specifying the error-prone response in the zero-inflated Poisson model.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Covarmainphi</code></td>
+<td>
+
+<p>a <code class="reqn">n \times p_1</code> dimensional data.frame or matrix of the covariate data with respect to the probability component of the zero-inflated Poisson model
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Covarmainmu</code></td>
+<td>
+
+<p>a <code class="reqn">n \times p_2</code> dimensional data.frame or matrix of the covariate data with respect to the mean component of the zero-inflated Poisson model
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Covarplus</code></td>
+<td>
+
+<p>a <code class="reqn">n \times q_1</code> dimensional data.frame or matrix of the covariate data for the measurement error model of the add-in error process
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Covarminus</code></td>
+<td>
+
+<p>a <code class="reqn">n \times q_1</code> dimensional data.frame or matrix of the covariate data for the measurement error model of the leave-out error process
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betaphi</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_1</code> specifying the initial values of the parameters in the probability component of the zero-inflated Poisson model
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betamu</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_2</code> specifying the initial values of the parameters in the probability component of the zero-inflated Poisson model
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alphaplus</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">q_1</code> specifying the initial values of the parameters for the measurement error model of the add-in error process
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alphaminus</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">q_2</code> specifying the initial values of the parameters in the probability component of the leave-out error process
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Uibound</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">2</code> specifying the maximum number of the count in the inverse sampling method
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>priorgamma</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">2</code> specifying the two parameters of gamma prior
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>priormu</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">q_2</code> specifying the mean vector of the normal prior for the measurement error model of the leave-out error process
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>priorSigma</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">q_2</code> specifying the standard erros of the normal prior for the measurement error model of the leave-out error process
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>propsigmaphi</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_1</code> specifying the standard error of the Gaussian proposal distribution for the parameters corresponds to the probability component. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>propsigmamu</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_2</code> specifying the standard error of the Gaussian proposal distribution for the parameters corresponds to the mean component. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>propsigmaplus</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">q_1</code> specifying the standard error of the Gaussian proposal distribution for the parameters corresponds to the add-in error process. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>propsigmaminus</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">q_1</code> specifying the standard error of the Gaussian proposal distribution for the parameters corresponds to the leave-out error process. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+
+<p>a numeric value specifying the seed for random generator
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nmcmc</code></td>
+<td>
+
+<p>a integer specify the number of the generation of MCMC algorithm
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The zero-inflated Poisson model involves two components, the probability components and the mean compoenents (Zhang, 2020). Although there are might arugments involved in the functions, they can be summarized to four sources in the model. The response model (zero-inflated Poisson model) involves two components: the probability component and the mean count component. The measurement error models contains two process: the add-in process and leave-out process. The arguements end with "-phi" corresponds to the probability component of the response model. The arguements end with "-mu" corresponds to the mean component of the response model.  The arguements end with "-plus" corresponds to the add-in error process in the measurment error model.  The arguements end with "-minus" corresponds to the leave-out process of the measurement error model. 
+</p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>BayesResults</code></td>
+<td>
+<p>the list of trace of generated parameters for each component of the models. Data frame "betaphi_trace" corresponds to the probability component of ZIP response model; "betamu_trace" refers to the mean component of the ZIP response model. Data frames "alphaplus_trace" and "alphaminus_trace", respectively, correspond to the add-in error and leave-out error process in the measruement error model.</p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Qihuang Zhang and Grace Y. Yi
+</p>
+
+
+<h3>References</h3>
+
+<p>Zhang, Qihuang. "Inference Methods for Noisy Correlated Responses with Measurement Error." (2020).</p>
+
+
+<h3>See Also</h3>
+
+<p><code>glm</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## load data
+data(datasim)
+set.seed(0)
+example_ZIP_MErr &lt;-  ZIPMErr (Ystar = datasim$Ystar,
+                         Covarmainphi = datasim[,c("intercept","X1")],
+                         Covarmainmu = datasim[,c("intercept","X2")],
+                         Covarplus = datasim[,c("intercept","Xplus")],
+                         Covarminus = datasim[,c("intercept","Xminus")],
+                         betaphi = c(0.7,-0.7), betamu = c(1,-1.5), 
+                         alphaplus = c(0,0), alphaminus=c(0,0),
+                         priorgamma = c(0.001,0.001), priormu = c(0,0),
+                         priorSigma = c(1,1), propsigmaphi = c(0.05,0.05), 
+                         nmcmc = 10) 
+
+summary(example_ZIP_MErr)
+</code></pre>
+
+
+</div>

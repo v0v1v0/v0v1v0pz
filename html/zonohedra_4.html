@@ -1,0 +1,141 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>boundarypgramdata</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+compute data about specific parallelograms in the boundary of a zonohedron
+</h2>
+
+<h3>Description</h3>
+
+<p>The boundary of a zonohedron is the union of parallelograms,
+where some of them may be facets, and some may be tiles
+in the standard tiling of more complex facets.
+The edges of each parallelogram are given by a pair of distinct simplified generators.
+If a zonohedron has <code class="reqn">n</code> of these generators,
+then there are <code class="reqn">n(n{-}1)/2</code> such pairs.
+For each pair of generators,
+there are 2 parallelograms which are antipodal to each other.
+This function computes data about one parallelogram from this antipodal pair.
+The total number of parallelograms is <code class="reqn">n(n{-}1)</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">boundarypgramdata( x, gndpair, cube=FALSE )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a <b>zonohedron</b> object as returned by the constructor <code>zonohedron()</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gndpair</code></td>
+<td>
+
+<p>an Mx2 integer matrix.
+Each row of <code>gndpair</code> must contain a pair of points
+in the ground set of the simplified matroid of the zonohedron <code>x</code>.
+The 1st point must be less that the 2nd point.
+<br><code>gndpair</code> can also be a numeric vector that can be converted
+to such a matrix, by row.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>cube</code></td>
+<td>
+
+<p>if <code>TRUE</code>, then a point of the cube that maps to the center
+of the given parallelogram is returned, see <b>Value</b>.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>boundarypgramdata()</code> returns a <code>data.frame</code>
+with M rows and these columns:
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>gndpair</code></td>
+<td>
+<p>the given <code>gndpair</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>hyperplaneidx</code></td>
+<td>
+
+<p>the index of the hyperplane in the simplified matroid
+of <code>x</code> that contains <code>gndpair</code>
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>center</code></td>
+<td>
+<p>the center of the parallelogram <em>relative to the center of
+the zonohedron</em>.
+For the antipodal parallelogram, multiply this by -1.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>transitions</code></td>
+<td>
+
+<p>the number of transitions in <code>pcube</code> - a point in the n-cube
+that maps to <code>center</code>.
+This is a non-negative even integer.
+</p>
+</td>
+</tr>
+</table>
+<p>And if <code>cube</code> is <code>TRUE</code>, then this column is added:
+</p>
+<table><tr style="vertical-align: top;">
+<td><code>pcube</code></td>
+<td>
+
+<p>a point in the n-cube that maps to <code>center</code>.
+For the antipodal parallelogram, subtract this from 1;
+the number of transitions is the same.
+</p>
+</td>
+</tr></table>
+<p>If a row of <code>gndpair</code> has an invalid pair,
+the other columns are filled with <code>NA</code>s.
+</p>
+<p>In case of global error, the function returns <code>NULL</code>.
+</p>
+
+
+<h3>WARNING</h3>
+
+<p>In this version of the package,
+when the parallelogram is a tile in a more complex facet,
+the function may return incorrect results.
+This will be fixed in a future version.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>
+</p>
+
+
+</div>

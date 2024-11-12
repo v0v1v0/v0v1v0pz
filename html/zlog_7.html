@@ -1,0 +1,117 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>z</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Calculate z/zlog Values</h2>
+
+<h3>Description</h3>
+
+<p>Calculates the z or z(log) values for laboratory measurement standardisation
+as proposed in Hoffmann 2017 et al.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">z(x, limits, probs = c(0.025, 0.975), log = FALSE)
+
+zlog(x, limits, probs = c(0.025, 0.975))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>numeric</code>, laboratory values.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>limits</code></td>
+<td>
+<p><code>numeric</code> or <code>matrix</code>, lower and upper reference limits. Has to
+be of length 2 for <code>numeric</code> or a two-column <code>matrix</code> with as many rows as
+elements in <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>probs</code></td>
+<td>
+<p><code>numeric</code>, probabilities of the lower and upper reference limit,
+default: <code>c(0.025, 0.975)</code> (spanning 95 %). Has to be of length 2 for
+<code>numeric</code> or a two-column <code>matrix</code> with as many rows as elements in <code>x</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>log</code></td>
+<td>
+<p><code>logical</code>, should z (<code>log = FALSE</code>, default) or
+z(log) (<code>log = TRUE</code>) calculated?</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The z value is calculated as follows (assuming that the limits where 0.025
+and 0.975 quantiles):
+<code class="reqn">z = (x - (limits_1 + limits_2 )/2) * 3.92/(limits_2 - limits_1)</code>.
+</p>
+<p>The z(log) value is calculated as follows (assuming that the limits where 0.025
+and 0.975 quantiles):
+<code class="reqn">z = (\log(x) - (\log(limits_1) + \log(limits_2))/2) * 3.92/(\log(limits_2) - \log(limits_1))</code>.
+</p>
+<p><code>zlog</code> is an alias for <code>z(..., log = TRUE)</code>.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>numeric</code>, z or z(log) values.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Sebastian Gibb
+</p>
+
+
+<h3>References</h3>
+
+<p>Georg Hoffmann, Frank Klawonn, Ralf Lichtinghagen, and Matthias Orth.
+2017.
+"The Zlog-Value as Basis for the Standardization of Laboratory Results."
+LaboratoriumsMedizin 41 (1): 23–32.
+<a href="https://doi.org/10.1515/labmed-2016-0087">doi:10.1515/labmed-2016-0087</a>.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>izlog()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">z(1:10, limits = c(2, 8))
+
+# from Hoffmann et al. 2017
+albumin &lt;- c(42, 34, 38, 43, 50, 42, 27, 31, 24)
+zlog(albumin, limits = c(35, 52))
+
+bilirubin &lt;- c(11, 9, 2, 5, 22, 42, 37, 200, 20)
+
+limits &lt;- cbind(
+    lower = rep(c(35, 2), c(length(albumin), length(bilirubin))),
+    upper = rep(c(52, 21), c(length(albumin), length(bilirubin)))
+)
+zlog(c(albumin, bilirubin), limits = limits)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>submit_query</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Submit a query</h2>
+
+<h3>Description</h3>
+
+<p>Submits a request for the execution of a query of either forecasts or truth in this Project.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">submit_query(zoltar_connection, project_url, query_type, query)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>project_url</code></td>
+<td>
+<p>URL of a project in zoltar_connection's projects</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>query_type</code></td>
+<td>
+<p>A character indicating the type of query to run. Must be one of: "forecasts" or "truth".</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>query</code></td>
+<td>
+<p>A <code>list</code> of character <code>list</code>s that constrains the queried data. It is the analog of
+the JSON object documented at <a href="https://docs.zoltardata.com/">https://docs.zoltardata.com/</a>. The keys vary depending on query_type. References
+to models, units, targets, and timezeros are strings that name the objects, and not IDs.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a Job URL for tracking the query and getting its results when it successfully completes
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  job_url &lt;- submit_query(conn, "https://www.zoltardata.com/api/project/9/", "forecasts",
+                          list("models"=list("60-contact", "CovidIL_100"), "units"=list("US"),
+                          "targets"=list(1894, 1897), "timezeros"=list("2020-05-14", "2020-05-09"),
+                          "types"=list("point", "quantile")))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

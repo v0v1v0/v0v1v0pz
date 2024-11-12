@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>latest_forecasts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get a project's latest_forecasts</h2>
+
+<h3>Description</h3>
+
+<p>Get a project's latest_forecasts
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">latest_forecasts(zoltar_connection, project_url)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zoltar_connection</code></td>
+<td>
+<p>A <code>ZoltarConnection</code> object as returned by <code>new_connection()</code></p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>project_url</code></td>
+<td>
+<p>URL of a project in zoltar_connection's projects</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> of all of the latest forecasts for the passed project. columns: forecast_id, source.
+(Later we may generalize to allow passing specific columns to retrieve, such as 'forecast_model_id',
+'time_zero_id', 'issued_at', 'created_at', 'source', and 'notes'.)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  the_latest_forecasts &lt;- latest_forecasts(conn, "https://www.zoltardata.com/api/project/9/")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

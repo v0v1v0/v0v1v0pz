@@ -1,0 +1,121 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ThesaurusReaderWriter</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Thesaurus Readers and Writers</h2>
+
+<h3>Description</h3>
+
+<p>Functions to read and write thesauri and thesaurus sets.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ReadThesaurus(
+  file,
+  caseSensitive = FALSE,
+  accentSensitive = FALSE,
+  punctuationSensitive = FALSE
+)
+
+ReadThesaurusSet(file)
+
+WriteThesaurus(thesaurus, file)
+
+WriteThesaurusSet(thesaurusSet, file)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>file</code></td>
+<td>
+<p>Name of a file.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>caseSensitive, accentSensitive, punctuationSensitive</code></td>
+<td>
+<p>Logical. They set
+the case, accent, and punctuation sensitivity (<code>FALSE</code> by default) of
+the thesaurus.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurus</code></td>
+<td>
+<p>A thesaurus object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>thesaurusSet</code></td>
+<td>
+<p>A thesaurus set.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>WriteThesaurus</code> and <code>WriteThesaurusSet</code> create or overwrite the
+corresponding files. No value is returned.
+</p>
+<p><code>ReadThesaurus</code> and <code>ReadThesaurusSet</code> return the read thesaurus or
+thesaurusSet, respectively.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zoologThesaurus</code> for a description of the thesaurus and
+thesaurus set structure,
+</p>
+<p><code>ThesaurusManagement</code>,
+<code>StandardizeNomenclature</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Read a thesaurus for taxa:
+thesaurusFile &lt;- system.file("extdata", "taxonThesaurus.csv", package="zoolog")
+thesaurus &lt;- ReadThesaurus(thesaurusFile)
+## The attributes of the thesaurus include the fields 'caseSensitive',
+## 'accentSensitive', and 'punctuationSensitive', all FALSE by default.
+attributes(thesaurus)
+
+## Any of them can be set by the user if desired:
+thesaurus2 &lt;- ReadThesaurus(thesaurusFile, accentSensitive = TRUE)
+attributes(thesaurus2)
+
+## Write the thesarus to a file:
+fileExample &lt;- file.path(tempdir(), "thesaurusExample.csv")
+WriteThesaurus(thesaurus, fileExample)
+## Replace tempdir() for your preferred local path if you want to easily
+## examine the written file.
+
+## Read a thesaurus set:
+thesaurusSetFile &lt;- system.file("extdata", "zoologThesaurusSet.csv", package="zoolog")
+thesaurusSet &lt;- ReadThesaurusSet(thesaurusSetFile)
+## The attributes of the thesaurus set include information of the constituent
+## thesauri: names, source file names, and their mode of application on datasets.
+attributes(thesaurusSet)
+## The attributes of each thesaurus are also set by 'ReadThesaurusSet'.
+attributes(thesaurusSet$measure)
+
+## Write the thesaurus set to a file:
+fileSetExample &lt;- file.path(tempdir(), "thesaurusSetExample.csv")
+WriteThesaurusSet(thesaurusSet, fileSetExample)
+## It writes the thesaurus-set main data frame and each of the included
+## thesaurus files.
+## Again, replace tempdir() for your preferred local path if you want to
+## easily examine the written files.
+
+</code></pre>
+
+
+</div>

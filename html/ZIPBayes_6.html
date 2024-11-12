@@ -1,0 +1,157 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>ZIP</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+zero-inflated Poisson model
+</h2>
+
+<h3>Description</h3>
+
+<p>The function implements the MCMC algorithm with data augmentation to estimate the parameters in the zero-inflated Poisson model. The function returns the trace of the sampled parameters in each interaction. To obtain the summary estimation, use <code>summary</code>().
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">ZIP(Y, Covarmainphi, Covarmainmu, 
+                         betaphi, betamu, 
+                         priorgamma, 
+                         propsigmaphi,  propsigmamu = propsigmaphi,
+                         seed = 1, nmcmc = 500)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>Y</code></td>
+<td>
+
+<p>a count vector of length <code class="reqn">n</code> specifying response in the zero-inflated Poisson model.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Covarmainphi</code></td>
+<td>
+
+<p>a <code class="reqn">n \times p_1</code> dimensional data.frame or matrix of  data with respect to the probability component of the zero-inflated Poisson model. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Covarmainmu</code></td>
+<td>
+
+<p>a <code class="reqn">n \times p_2</code> dimensional data.frame or matrix of  data with respect to the mean component of the zero-inflated Poisson model. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betaphi</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_1</code> specifying the initial values of the parameters in the probability component of the zero-inflated Poisson model
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>betamu</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_2</code> specifying the initial values of the parameters in the probability component of the zero-inflated Poisson model
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>priorgamma</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">2</code> specifying the two parameters of gamma prior
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>propsigmaphi</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_1</code> specifying the standard error of the Gaussian proposal distribution for the parameters corresponds to the probability component. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>propsigmamu</code></td>
+<td>
+
+<p>a vector of length <code class="reqn">p_2</code> specifying the standard error of the Gaussian proposal distribution for the parameters corresponds to the mean component. 
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>seed</code></td>
+<td>
+
+<p>a numeric value specifying the seed for random generator
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nmcmc</code></td>
+<td>
+
+<p>a integer specify the number of the generation of MCMC algorithm
+</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The zero-inflated Poisson model involves two components, the probability components and the mean compoenents (Zhang, 2020). Argument <code>Covarmainphi</code>, <code>betaphi</code>, <code>propsigmaphi</code> correspond to the probability compoenent; <code>Covarmainmu</code>, <code>betamu</code>, <code>propsigmamu</code> correspond to the mean compoenent.
+</p>
+
+
+<h3>Value</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>BayesResults</code></td>
+<td>
+<p>the list of trace of generated parameters for each component of the models. Data.frame "betaphi_trace" corresponds to the probability component of ZIP response model; "betamu_trace" refers to the mean component of the ZIP response model. </p>
+</td>
+</tr></table>
+<h3>Author(s)</h3>
+
+<p>Qihuang Zhang and Grace Y. Yi
+</p>
+
+
+<h3>References</h3>
+
+<p>Zhang, Qihuang. "Inference Methods for Noisy Correlated Responses with Measurement Error." (2020).</p>
+
+
+<h3>See Also</h3>
+
+<p><code>glm</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data(datasim)
+set.seed(0)
+example_ZIP &lt;- ZIP( Y = datasim$Ystar,
+                         Covarmainphi = datasim[,c("intercept","X1")],
+                         Covarmainmu = datasim[,c("intercept","X2")],
+                         betaphi = c(-0.7,0.7), betamu = c(1,-0.5),
+                         priorgamma = rep(1,1), propsigmaphi = c(0.05,0.05),
+                         nmcmc = 100)
+
+summary(example_ZIP)
+</code></pre>
+
+
+</div>

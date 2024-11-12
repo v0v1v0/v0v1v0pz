@@ -1,0 +1,62 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>harmonize_prefecture_name</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Harmonize the notation of Japanese prefecture names.</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental"><img src="../help/figures/lifecycle-experimental.svg" alt="[Experimental]"></a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">harmonize_prefecture_name(x, to)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>Input vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>to</code></td>
+<td>
+<p>Option. Whether to use longer ("long") or shorter ("short")
+prefectures.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Convert with and without terminal notation, respectively.
+</p>
+
+<ul>
+<li>
+<p> long option, long formal name
+</p>
+</li>
+<li>
+<p> Use the short option to omit the trailing characters
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c("\u6771\u4eac\u90fd", "\u5317\u6d77\u9053", "\u6c96\u7e04\u770c")
+harmonize_prefecture_name(x, to = "short")
+x &lt;- c("\u6771\u4eac", "\u5317\u6d77\u9053", "\u6c96\u7e04")
+harmonize_prefecture_name(x, to = "long")
+</code></pre>
+
+
+</div>

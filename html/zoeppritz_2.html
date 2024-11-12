@@ -1,0 +1,69 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>piczoeppritz</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Show Scattering Diagram Cartoon</h2>
+
+<h3>Description</h3>
+
+<p>Adds a small diagram showing two layers and
+labeled scattered ray paths.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">piczoeppritz(LL = list(x = c(0, 1), y = c(0, 1)), chincw = "P")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>LL</code></td>
+<td>
+<p>Bounds of Box for plotting</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>chincw</code></td>
+<td>
+<p>character for incident wave</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This code simply adds a small cartoon showing incoming and outgoing
+waves in scattering matrix.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Graphical side effect.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jonathan M. Lees&lt;jonathan.lees@unc.edu&gt;</p>
+
+
+<h3>See Also</h3>
+
+<p>pzoeppritz</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">plot(c(0,1), c(0,1), type='n')
+piczoeppritz(LL = list(x = c(0.5, 0.75), y = c(0.5, 0.75)), chincw = "P")
+
+</code></pre>
+
+
+</div>

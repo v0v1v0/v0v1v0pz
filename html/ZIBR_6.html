@@ -1,0 +1,88 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simulate_logistic_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate logistic data</h2>
+
+<h3>Description</h3>
+
+<p>Simulate logistic data
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simulate_logistic_data(
+  subject_n = 50,
+  time_n = 5,
+  alpha = as.matrix(c(0, 0.5, -1)),
+  s1 = 0.5,
+  sim_seed = 100
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>subject_n</code></td>
+<td>
+<p>the number of subjects</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_n</code></td>
+<td>
+<p>the number of time points</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s1</code></td>
+<td>
+<p>FILL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sim_seed</code></td>
+<td>
+<p>the random seed with which to simulate the data</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a named list
+</p>
+
+<ul>
+<li>
+<p> X
+</p>
+</li>
+<li>
+<p> Y
+</p>
+</li>
+<li>
+<p> b
+</p>
+</li>
+<li>
+<p> subject_ind
+</p>
+</li>
+<li>
+<p> time_ind
+</p>
+</li>
+</ul>
+</div>

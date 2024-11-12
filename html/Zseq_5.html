@@ -1,0 +1,58 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Odious</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Odious numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A000069">A000069</a>, an <em>Odious</em> number has an odd number of 1's in its binary expansion.
+First 6 Odious numbers are   	1, 2, 4, 7, 8, 11.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Odious(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>Evil</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 20 Odious numbers
+print(Odious(20))
+
+</code></pre>
+
+
+</div>

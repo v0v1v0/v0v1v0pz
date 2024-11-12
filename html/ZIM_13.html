@@ -1,0 +1,49 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>pvalue</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Function to Compute P-value.</h2>
+
+<h3>Description</h3>
+
+<p>Function to compute p-value based on a t-statistic.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">pvalue(t, df = Inf, alternative = c("two.sided", "less", "greater"))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>t</code></td>
+<td>
+<p>t-statistic.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>df</code></td>
+<td>
+<p>degree of freedoms.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alternative</code></td>
+<td>
+<p>type of alternatives.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">pvalue(1.96, alternative = "greater")
+</code></pre>
+
+
+</div>

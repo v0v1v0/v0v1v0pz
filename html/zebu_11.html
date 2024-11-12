@@ -1,0 +1,101 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>permtest</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Permutation test for local and global association measures</h2>
+
+<h3>Description</h3>
+
+<p>Permutation test: statistical significance of local and
+global association measures
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">permtest(x, nb = 1000L, group = as.list(colnames(x$data$pp)), p_adjust = "BH")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p><code>lassie</code> S3 object.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nb</code></td>
+<td>
+<p>number of resampling iterations.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>group</code></td>
+<td>
+<p>list of column names specifying which columns
+should be permuted together. This is useful for the multivariate case,
+for example, when there is many dependent variables and one
+independent variable. By default, permutes all columns separately.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p_adjust</code></td>
+<td>
+<p>multiple testing correction method.
+(see <code>p.adjust.methods</code> for a list of methods).</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>permtest</code> returns an S3 object of class
+<code>lassie</code> and <code>permtest</code>.
+Adds the following to the lassie object <code>x</code>:
+</p>
+
+<ul>
+<li>
+<p> global_p: global association p-value.
+</p>
+</li>
+<li>
+<p> local_p: array of local association p-values.
+</p>
+</li>
+<li>
+<p> global_perm: numeric global association values obtained with permutations.
+</p>
+</li>
+<li>
+<p> local_perm: matrix local association values obtained with permutations. Column number correspond to positions in local association array after converting to numeric (e.g. local_perm[, 1] corresponds to local[1]).
+</p>
+</li>
+<li>
+<p> perm_params: parameters used when calling permtest (nb and p_adjust).
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>lassie</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# Calling lassie on cars dataset
+las &lt;- lassie(cars, continuous = colnames(cars))
+
+# Permutation test using default settings
+permtest(las, nb = 30) # keep resampling low for example
+
+</code></pre>
+
+
+</div>

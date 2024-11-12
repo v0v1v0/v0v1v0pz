@@ -1,0 +1,48 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>dl_zipcode_file</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Download a zip-code file</h2>
+
+<h3>Description</h3>
+
+<p><a href="https://lifecycle.r-lib.org/articles/stages.html#maturing"><img src="../help/figures/lifecycle-maturing.svg" alt="[Maturing]"></a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">dl_zipcode_file(path, exdir = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p>local file path or zip file URL</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>exdir</code></td>
+<td>
+<p>The directory to extract zip file. If <code>NULL</code>, use temporary folder.</p>
+</td>
+</tr>
+</table>
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+dl_zipcode_file(path = "https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/02aomori.zip")
+dl_zipcode_file("https://www.post.japanpost.jp/zipcode/dl/oogaki/zip/02aomori.zip",
+                exdir = getwd())
+
+## End(Not run)
+</code></pre>
+
+
+</div>

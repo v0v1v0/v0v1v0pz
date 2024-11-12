@@ -1,0 +1,47 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_load_labels_list</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Load List of Available Label Data Sets</h2>
+
+<h3>Description</h3>
+
+<p>This function loads a list of available label data sets that can
+be used to label ZIP Codes. Currently, only three-digit ZIP Codes are
+supported.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_load_labels_list(type = "zip3")
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>A character scalar specifying the type of label data to load. The
+only supported type is  <code>'zip3'</code> (three-digit ZIP Codes).</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A tibble containing date values that can be used with <code>zi_load_labels</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+  zi_load_labels_list(type = "zip3")
+
+
+</code></pre>
+
+
+</div>

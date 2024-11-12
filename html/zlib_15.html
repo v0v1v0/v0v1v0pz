@@ -1,0 +1,97 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zlib_constants</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Retrieve zlib Constants</h2>
+
+<h3>Description</h3>
+
+<p>This function returns a list of constants from the zlib C library.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zlib_constants()
+</code></pre>
+
+
+<h3>Details</h3>
+
+<p>The constants are defined as follows:
+</p>
+
+<ul>
+<li> <p><code>DEFLATED</code>: The compression method, set to 8.
+</p>
+</li>
+<li> <p><code>DEF_BUF_SIZE</code>: The default buffer size, set to 16384.
+</p>
+</li>
+<li> <p><code>DEF_MEM_LEVEL</code>: Default memory level, set to 8.
+</p>
+</li>
+<li> <p><code>MAX_WBITS</code>: Maximum size of the history buffer, set to 15.
+</p>
+</li>
+<li> <p><code>Z_BEST_COMPRESSION</code>: Best compression level, set to 9.
+</p>
+</li>
+<li> <p><code>Z_BEST_SPEED</code>: Best speed for compression, set to 1.
+</p>
+</li>
+<li> <p><code>Z_BLOCK</code>: Block compression mode, set to 5.
+</p>
+</li>
+<li> <p><code>Z_DEFAULT_COMPRESSION</code>: Default compression level, set to -1.
+</p>
+</li>
+<li> <p><code>Z_DEFAULT_STRATEGY</code>: Default compression strategy, set to 0.
+</p>
+</li>
+<li> <p><code>Z_FILTERED</code>: Filtered compression mode, set to 1.
+</p>
+</li>
+<li> <p><code>Z_FINISH</code>: Finish compression mode, set to 4.
+</p>
+</li>
+<li> <p><code>Z_FULL_FLUSH</code>: Full flush mode, set to 3.
+</p>
+</li>
+<li> <p><code>Z_HUFFMAN_ONLY</code>: Huffman-only compression mode, set to 2.
+</p>
+</li>
+<li> <p><code>Z_NO_COMPRESSION</code>: No compression, set to 0.
+</p>
+</li>
+<li> <p><code>Z_NO_FLUSH</code>: No flush mode, set to 0.
+</p>
+</li>
+<li> <p><code>Z_PARTIAL_FLUSH</code>: Partial flush mode, set to 1.
+</p>
+</li>
+<li> <p><code>Z_RLE</code>: Run-length encoding compression mode, set to 3.
+</p>
+</li>
+<li> <p><code>Z_SYNC_FLUSH</code>: Synchronized flush mode, set to 2.
+</p>
+</li>
+<li> <p><code>Z_TREES</code>: Tree block compression mode, set to 6.
+</p>
+</li>
+</ul>
+<h3>Value</h3>
+
+<p>A named list of zlib constants.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">constants &lt;- zlib_constants()
+</code></pre>
+
+
+</div>

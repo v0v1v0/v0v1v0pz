@@ -1,0 +1,133 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>read.multiple.objects</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Reading Multiple Objects from Files (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>read.multiple.objects</code> constructs a list of <code>spc</code>,
+<code>vgc</code> or <code>tfl</code> objects from a set of input
+text files in the specified directory
+</p>
+<p><b>NB</b>: This function is intended for users that want to run
+advanced experiments (e.g., handling hundreds of spectra generated in
+multiple randomizations experiments). For the standard
+one-object-at-a-time reading functionality, look at the documentation
+of <code>read.spc</code>, <code>read.vgc</code> and
+<code>read.tfl</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  read.multiple.objects(directory, prefix, class=c("spc", "vgc", "tfl"))
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>directory</code></td>
+<td>
+<p>character string specifying the directory where the
+target input files reside (absolute path, or path relative to
+current working directory)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>prefix</code></td>
+<td>
+<p>character string specifying prefix that must be shared
+by all target input file names</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>class</code></td>
+<td>
+<p>one of <code>spc</code>, <code>vgc</code> or <code>tfl</code> as character
+string, specifying the class of object we are importing (see the
+manpages of <code>spc</code>, <code>vgc</code> and <code>tfl</code>
+for details)</p>
+</td>
+</tr>
+</table>
+<h3>Format</h3>
+
+<p><code>read.multiple.objects</code> reads in all files matching the pattern
+<code>prefix.id.class</code> from the specified directory, where the
+<code>prefix</code> and <code>class</code> strings are passed as arguments, and
+<code>id</code> is an arbitrary string that is used as index of the
+corresponding object in the output list
+</p>
+<p><code>read.multiple.objects</code> calls the <code>read</code> function
+corresponding to the <code>class</code> argument. Thus, the input files must
+respect the formatting conventions of the relevant reading functions
+(see documentation of <code>read.spc</code>, <code>read.vgc</code>
+and <code>read.tfl</code>)
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>read.multiple.objects</code> returns a list of objects of the
+specified class; each object is indexed with the id extracted from the
+corresponding file name (see section "Format")
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the <code>spc</code>, <code>vgc</code> and <code>tfl</code>
+manpages for details on the corresponding objects;
+<code>read.spc</code>, <code>read.vgc</code> and
+<code>read.tfl</code> for the single-file reading functions and input
+format details
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+## These are just illustrative examples. Users should fill in their
+## own files instead of the dummy names used here.
+
+## suppose that the current working directory contains
+## 100 spc files named: rand.1.spc, rand.2.spc, ...,
+## rand.100.spc
+
+## read the files in:
+spc.list &lt;- read.multiple.objects(".","rand","spc")
+
+## you can access each spc using the id extracted from
+## the file name, e.g.:
+summary(spc.list[["1"]])
+
+## more usefully, you might want to iterate over the
+## whole list, e.g., to calculate mean V:
+mean(sapply(spc.list,V))
+
+## notice that ids are arbitrary strings
+## e.g., suppose that directory /home/me/animals
+## contains sounds.dog.vgc and sounds.elephant.vgc
+
+## we read the vgcs in:
+vgc.list &lt;- read.multiple.objects("/home/me/animals","sounds","vgc")
+
+## accessing the elephant vgc:
+V(vgc.list[["elephant"]])
+
+## of course, tfl-reading works in the same way (assuming
+## that the animals directory also contains some tfl files):
+tfl.list &lt;- read.multiple.objects("/home/me/animals","sounds","tfl")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Regular</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Regular numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A051037">A051037</a>, a <em>Regular</em> number - also known as 5-smooth - is a positive integer that
+even divide powers of 60, or equivalently, whose prime divisors are only 2,3, and 5. First 6 Regular numbers are 1, 2, 3, 4, 5, 6.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Regular(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 20 Regular numbers
+print(Regular(20))
+
+</code></pre>
+
+
+</div>

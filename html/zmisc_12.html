@@ -1,0 +1,67 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>notate</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Embed factor levels and value labels in values.</h2>
+
+<h3>Description</h3>
+
+<p>This function adds level/label information as an annotation to either factors
+or <code>labelled</code> variables. This function is called <code>notate()</code> rather than
+<code>annotate()</code> to avoid conflict with <code>ggplot2::annotate()</code>. It is a generic that
+can operate either on individual vectors or on a <code>data.frame</code>.
+</p>
+<p>When printing <code>labelled</code> variables from a <code>tibble</code> in a console, both the
+numeric value and the text label are shown, but no variable labels. When
+using the <code>View()</code> function, only variable labels are shown but no value
+labels. For factors, there is no way to view the integer levels and values at
+the same time.
+</p>
+<p>In order to allow the viewing of both variable and value labels at the same
+time, this function converts both <code>factor</code> and <code>labelled</code> variables to
+<code>character</code>, including both numeric levels (<code>labelled</code> values) and character
+values (<code>labelled</code> labels) in the output.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">notate(x)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>The object (either vector or <code>date.frame</code> of vectors), that one
+desires to annotate and/or view.</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>The processed <code>data.frame</code>, suitable for viewing, in particular
+through the <code>View()</code> function.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">d &lt;- data.frame(
+  chr = letters[1:4],
+  fct = factor(c("alpha", "bravo", "chrly", "delta")),
+  lbl = ll_labelled(c(1, 2, 3, NA),
+                    labels = c(one=1, two=2),
+                    label = "A labelled vector")
+)
+dn &lt;- notate(d)
+dn
+# View(dn)
+
+</code></pre>
+
+
+</div>

@@ -1,0 +1,110 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>textConversationAnalysis</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Analyze conversation attributes</h2>
+
+<h3>Description</h3>
+
+<p>This function takes in the output of one of the other functions (either processZoomChat or processZoomTranscript)
+and produces a set of conversation measures.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">textConversationAnalysis(
+  inputData,
+  inputType,
+  meetingId,
+  speakerId,
+  sentMethod = "none"
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>inputData</code></td>
+<td>
+<p>data.frame that is the output of either processZoomChat or processZoomTranscript</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>inputType</code></td>
+<td>
+<p>string of either 'transcript' or 'chat'</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>meetingId</code></td>
+<td>
+<p>string giving the name of the variable with the meetingId</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>speakerId</code></td>
+<td>
+<p>string giving the name of the identifier for the individual who made this contribution</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sentMethod</code></td>
+<td>
+<p>string giving the type of sentiment analysis to include, either 'aws' or 'syuzhet'</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>A list of two data.frames, with names conditional on your choice to analyze
+a parsed transcript file or a parsed chat file. The first list item contains
+statistics at the corpus level. The second list item contains statistics
+at the speaker/messager level of analysis.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">convo.out = textConversationAnalysis(inputData=sample_transcript_processed, 
+inputType='transcript', meetingId='batchMeetingId', 
+speakerId='userName', sentMethod="none")
+
+convo.out = textConversationAnalysis(inputData=sample_transcript_sentiment_syu, 
+inputType='transcript', meetingId='batchMeetingId', 
+speakerId='userName', sentMethod="syuzhet")
+
+convo.out = textConversationAnalysis(inputData=sample_chat_sentiment_aws, 
+inputType='chat', meetingId='batchMeetingId', 
+speakerId='userName', sentMethod="aws")
+
+## Not run: 
+convo.out = textConversationAnalysis(inputData=sample_transcript_sentiment_aws, 
+inputType='transcript', meetingId='batchMeetingId', 
+speakerId='userName', sentMethod="aws")
+
+convo.out = textConversationAnalysis(inputData=sample_transcript_sentiment_syu, 
+inputType='transcript', meetingId='batchMeetingId', 
+speakerId='userName', sentMethod="syuzhet")
+
+convo.out = textConversationAnalysis(inputData=sample_chat_processed, 
+inputType='chat', meetingId='batchMeetingId', 
+speakerId='userName', sentMethod="none")
+
+convo.out = textConversationAnalysis(inputData=sample_chat_sentiment_aws, 
+inputType='chat', meetingId='batchMeetingId', 
+speakerId='userName', sentMethod="aws")
+
+convo.out = textConversationAnalysis(inputData=sample_chat_sentiment_syu, 
+inputType='chat',meetingId='batchMeetingId',  
+speakerId='userName', sentMethod="syuzhet")
+
+## End(Not run)
+</code></pre>
+
+
+</div>

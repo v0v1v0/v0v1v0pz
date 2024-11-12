@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_mo_pop</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Total Population and Median Household Income, Missouri ZCTAs 2022</h2>
+
+<h3>Description</h3>
+
+<p>A tibble containing the total population
+and median household income estimates from the 2018-2022 5-year
+U.S. Census Bureau American Communiy Survey estimates for Missouri
+five-digit ZIP Code Tabulation Areas (ZCTAs).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data(zi_mo_pop)
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 2664 rows and 4 variables:
+</p>
+
+<dl>
+<dt>GEOID</dt>
+<dd>
+<p>full GEOID string</p>
+</dd>
+<dt>variable</dt>
+<dd>
+<p>variable, either <code>B01003_001</code> (total population) or
+<code>B19013_001</code> (median household income)</p>
+</dd>
+<dt>estimate</dt>
+<dd>
+<p>value for associated <code>variable</code></p>
+</dd>
+<dt>moe</dt>
+<dd>
+<p>margin of error for associated <code>variable</code></p>
+</dd>
+</dl>
+<h3>Details</h3>
+
+<p>The data included in <code>zi_mo_pop</code> can be replicated with the
+following code: <code>zi_get_demographics(year = 2022,
+  variables = c("B01003_001", "B19013_001"), survey = "acs5")</code>.
+</p>
+
+
+<h3>Source</h3>
+
+<p>U.S. Census Bureau American Community Survey
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">utils::str(zi_mo_pop)
+utils::head(zi_mo_pop)
+
+</code></pre>
+
+
+</div>

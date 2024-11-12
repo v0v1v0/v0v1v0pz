@@ -1,0 +1,246 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zidb</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> Manage .zidb files (ZooImage Databases) </h2>
+
+<h3>Description</h3>
+
+<p>Compress, uncompress .zidb files that contain data for a sample. Starting from
+ZooImage 3, the new format uses filehash tables for better performances.
+Conversion from and to the old .zid format (a zip archive indeed) is supported
+for compatibility with old datasets. Display content of a .zidb file is a
+simple way (both data/metadata and vignettes)
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zidbMake(zidir, zidbfile = paste0(sub("[/\\]+$", "", zidir), ".zidb"), zisfile =
+    file.path(dirname(zidir), "Description.zis"), type = "ZI5", smptime = "",
+    check = FALSE, check.vignettes = FALSE, replace = FALSE, delete.source = replace)
+zidbMakeAll(path = ".", samples, zisfiles = file.path(dirname(samples),
+    "Description.zis"), type = "ZI5", check = FALSE,
+    check.vignettes = FALSE, replace = FALSE, delete.source = replace)
+
+zidToZidb(zidfile, zisfile = file.path(dirname(zidfile),
+    "Description.zis"), replace = FALSE, delete.source = replace)
+zidToZidbAll(path = ".", zidfiles, zisfiles = file.path(dirname(zidfiles),
+    "Description.zis"), replace = FALSE, delete.source = replace)
+zidbToZid(zidbfile, zisfile = file.path(dirname(zidbfile),
+    "Description.zis"), replace = FALSE, delete.source = replace)
+zidbToZidAll(path = ".", zidbfiles, zisfiles = file.path(dirname(zidbfiles),
+    "Description.zis"), replace = FALSE, delete.source = replace)
+
+zidbLink(zidbfile)
+zidbDatRead(zidbfile)
+zidbSampleRead(zidbfile)
+zidbSummary(zidbfile, n = 3)
+
+zidbPlotNew(main = "ZooImage collage", ...)
+zidbDrawVignette(rawimg, type, item, nx = 5, ny = 5, vmar = 0.01)
+zidbPlotPage(zidbfile, page = 1, title = NULL, type = "guess", method = NULL,
+class = NULL)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>zidir</code></td>
+<td>
+<p> a directory containing data to put in a .zidb files. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zidbfile</code></td>
+<td>
+<p> the path of the .zidb file. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zidbfiles</code></td>
+<td>
+<p> the path of a series of .zidb files. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zidfile</code></td>
+<td>
+<p> the path of a .zid file. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zidfiles</code></td>
+<td>
+<p> the path of a series of .zid files. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zisfile</code></td>
+<td>
+<p> the path of the .zis file that contains description of this
+sample. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zisfiles</code></td>
+<td>
+<p> the path of a series of .zis files that contain description
+of the processed samples. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p> the ZI file format, currently only 'ZI5' type is supported. For
+<code>zidbDrawVignette()</code> and <code>zidbPlotPage()</code>, it is the type of
+vignette image. Currently, it can be either "jpg", or "png". If not
+provided, or if <code>type = "guess"</code> it will be guessed by the function. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>smptime</code></td>
+<td>
+<p> the time the sample was collected. This value will replace a
+<code>&lt;&lt;&lt;TIME&gt;&gt;&gt;</code> placeholder in the metadata. You can also use
+<code>&lt;&lt;&lt;SMP&gt;&gt;&gt;</code> and <code>&lt;&lt;&lt;DATE&gt;&gt;&gt;</code> placeholders in corresponding metadata
+and they will be replaced by values computed from the sample name. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check</code></td>
+<td>
+<p> do we check the files in this directory before/after compression? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>check.vignettes</code></td>
+<td>
+<p> do we check if the future .zidb file contains all
+vignettes? This is <code>FALSE</code> by default because they may not exist yet.
+This is the case when they are generated on the fly, like in the new version
+5.5 processes. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>replace</code></td>
+<td>
+<p> do we replace existing files? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>delete.source</code></td>
+<td>
+<p> do we delete source files after compression? </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p> the number of line of the data to print. If <code>n &lt;= 0</code> no data is
+printed (only metadata). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>path</code></td>
+<td>
+<p> look for files in this path. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>samples</code></td>
+<td>
+<p> a list of 'samples', i.e., subdirectories to process. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p> the title of the new plot. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p> further arguments passed to the <code>plot()</code> function. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rawimg</code></td>
+<td>
+<p> the raw content of a vignette, as stored in a .zidb file. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>item</code></td>
+<td>
+<p> the item number to draw (enumeration from left to right and from
+top to bottom). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nx</code></td>
+<td>
+<p> the number of vignettes in a column. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ny</code></td>
+<td>
+<p> the number of vignettes in a row. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>vmar</code></td>
+<td>
+<p> the relative size of vignette margins. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>page</code></td>
+<td>
+<p> the page to display (each page contains 25 vignettes). </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>title</code></td>
+<td>
+<p> the title of the page. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>method</code></td>
+<td>
+<p> the name of the validation method to use to extract validation
+data. </p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>class</code></td>
+<td>
+<p> a character vector with one or more classes for the validation
+data that we want to keep. </p>
+</td>
+</tr>
+</table>
+<h3>Author(s)</h3>
+
+<p> Philippe Grosjean &lt;Philippe.Grosjean@umons.ac.be&gt; </p>
+
+
+<h3>See Also</h3>
+
+ <p><code>zidCompress</code> </p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">##TODO...
+</code></pre>
+
+
+</div>

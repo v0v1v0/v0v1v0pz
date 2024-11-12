@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Brown</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Brown Corpus Frequency Data (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p><code>Brown.tfl</code>, <code>Brown.spc</code> and <code>Brown.emp.vgc</code> are
+<code>zipfR</code> objects of classes <code>tfl</code>,
+<code>spc</code> and <code>vgc</code>, respectively.
+</p>
+<p>These data were extracted from the Brown corpus (see Kucera and
+Francis 1967).
+</p>
+
+
+<h3>Details</h3>
+
+<p><code>Brown.emp.vgc</code> is the <em>empirical</em> vocabulary growth
+curve, reflecting the <code>V</code> and <code>V(1)</code> development in the
+non-randomized corpus.
+</p>
+<p>We removed numbers and other forms of non-linguistic material before
+collecting word counts from the Brown.
+</p>
+
+
+<h3>References</h3>
+
+<p>Kucera, H. and Francis, W.N. (1967). <em>Computational analysis of
+present-day American English</em>. Brown University Press, Providence.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>The datasets documented in <code>BrownSubsets</code> pertain to
+various subsets of the Brown (e.g., informative prose, adjectives
+only, etc.)
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+  data(Brown.tfl)
+  summary(Brown.tfl)
+
+  data(Brown.spc)
+  summary(Brown.spc)
+
+  data(Brown.emp.vgc)
+  summary(Brown.emp.vgc)
+
+</code></pre>
+
+
+</div>

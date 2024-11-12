@@ -1,0 +1,111 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zyp.sen</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>zyp.sen</h2>
+
+<h3>Description</h3>
+
+<p>Computes a Thiel-Sen estimate of slope for a vector of data.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zyp.sen(formula, dataframe)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>formula</code></td>
+<td>
+<p>a formula of the form y~x.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dataframe</code></td>
+<td>
+<p>an optional data frame to use with the formula.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This routine computes Sen's estimate of slope for a vector of data.
+</p>
+<p>The formula specified is of the form y~x, where y is the data and x is
+the accompanying dates of observation.
+</p>
+<p>If a data frame is specified, the formula selects columns within that
+data frame; otherwise, the formula uses the specified variables.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A vector containing the coefficients and associated data.
+</p>
+<table>
+<tr style="vertical-align: top;">
+<td><code>coefficients</code></td>
+<td>
+<p>the estimated intercept and slope.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>slopes</code></td>
+<td>
+<p>the list of slopes (used for confidence intervals).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>intercepts</code></td>
+<td>
+<p>the list of intercepts (used for confidence intervals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rank</code></td>
+<td>
+<p>the rank of the relation (2).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>residuals</code></td>
+<td>
+<p>the residuals of the fitted slope.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>the original x axis data.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>y</code></td>
+<td>
+<p>the original y axis data.</p>
+</td>
+</tr>
+</table>
+<h3>See Also</h3>
+
+<p><code>zyp.trend.vector</code>, zyp-package, confint.zyp.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c(0, 1, 2, 4, 5)
+y &lt;- c(6, 4, 1, 8, 7)
+slope &lt;- zyp.sen(y~x)
+</code></pre>
+
+
+</div>

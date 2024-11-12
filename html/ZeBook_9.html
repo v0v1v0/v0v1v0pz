@@ -1,0 +1,55 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>carcass.EMI.multi</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Wrapper function to run Carcass model on several animals with different conditions</h2>
+
+<h3>Description</h3>
+
+<p>wrapper function for multisimulation with carcass.EMI.model2
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">carcass.EMI.multi(param, list_individuals, energy, init_condition)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>param</code></td>
+<td>
+<p>: a vector of parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>list_individuals</code></td>
+<td>
+<p>: list of individuals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>energy</code></td>
+<td>
+<p>: Metabolizable energy available for all individuals</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_condition</code></td>
+<td>
+<p>: initial condition for all individuals</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>data.frame with id, ration ,duration, day, PV,ProtC,ProtNC,LipC,LipNC
+</p>
+
+
+</div>

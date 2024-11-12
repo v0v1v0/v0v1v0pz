@@ -1,0 +1,42 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_tracts</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Get all Census tracts within a given ZIP code</h2>
+
+<h3>Description</h3>
+
+<p>Get all Census tracts within a given ZIP code
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_tracts(zip_code)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zip_code</code></td>
+<td>
+<p>A U.S. ZIP code</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>tibble of Census tracts and data from Census crosswalk file found for given ZIP code
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">get_tracts("08731")
+get_tracts("90210")
+</code></pre>
+
+
+</div>

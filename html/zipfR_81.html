@@ -1,0 +1,193 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plot.lnre</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot LNRE Population Distribution (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Visualisation of LNRE population distribution, showing either the (log-transformed)
+type or probability density function or the cumulative probability distribution function.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'lnre'
+plot(x, y, ...,
+     type=c("types", "probability", "cumulative"),
+     xlim=c(1e-9, 1), ylim=NULL, steps=200,
+     xlab=NULL, ylab=NULL, legend=NULL, grid=FALSE,
+     main="LNRE Population Distribution",
+     lty=NULL, lwd=NULL, col=NULL, bw=zipfR.par("bw"))
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, y, ...</code></td>
+<td>
+<p>one or more objects of class <code>lnre</code>, containing trained
+LNRE models describing the population(s) to be plotted. Alternatively, all
+models can be passed as a list in the <code>x</code> argument if the method is
+called explicitly (see ‘Examples’).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>type</code></td>
+<td>
+<p>what type of plot should be drawn, <code>"types"</code> for the log-transformed
+type density function, <code>"probability"</code> for the log-transformed probability 
+density function, and <code>"cumulative"</code> for the cumulative probability distribution.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlim, ylim</code></td>
+<td>
+<p>visible range on x- and y-axis.  The default <code>ylim</code> is <code class="reqn">[0, 1]</code>
+for <code>type="cumulative"</code> and automatically chosen to fit the selected density curves  
+for <code>type="density"</code>.  Note that the x-axis is always logarithmic and <code>xlim</code>
+should be chosen accordingly.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>steps</code></td>
+<td>
+<p>number of steps for drawing curves (increase for extra smoothness)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>xlab, ylab</code></td>
+<td>
+<p>labels for the x-axis and y-axis (with suitable defaults depending on <code>type</code>)</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>legend</code></td>
+<td>
+<p>optional vector of character strings or expressions
+specifying labels for a legend box, which will be drawn in the upper
+right-hand or left-hand corner of the screen.  If <code>legend=TRUE</code>,
+labels showing model type and parameters are automatically generated.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>grid</code></td>
+<td>
+<p>whether to display a suitable grid in the background of the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>main</code></td>
+<td>
+<p>a character string or expression specifying a main title for the plot</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>lty, lwd, col</code></td>
+<td>
+<p>style vectors that can be used to
+override the global styles defined by <code>zipfR.par</code>.  If
+these vectors are specified, they must contain at least as many
+elements as the number of populations shown in the plot:
+the values are <em>not</em> automatically recycled.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bw</code></td>
+<td>
+<p>if <code>TRUE</code>, draw plot in B/W style (default is the
+global <code>zipfR.par</code> setting)</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>There are two useful ways of visualising a LNRE population distribution, selected with the 
+<code>type</code> argument:
+</p>
+
+<dl>
+<dt><code>types</code></dt>
+<dd>
+<p>A plot of the type density function <code class="reqn">g(\pi)</code> over the type probability <code class="reqn">\pi</code>
+on a log-transformed scale (so that the number of types corresponds to an integral over
+<code class="reqn">\log_{10} \pi</code>, see <code>ltdlnre</code>). 
+The log transformation is essential so that the density function
+remains in a reasonable range; a logarithmic y-axis would be very counter-intuitive.
+Note that density values correspond to the number of types per order of magnitude
+on the x-axis.
+</p>
+</dd>
+<dt><code>probability</code></dt>
+<dd>
+<p>A plot of the probability density function <code class="reqn">\pi g(\pi)</code> over the type probability <code class="reqn">\pi</code>
+on a log-transformed scale (so that probability mass corresponds to an integral over
+<code class="reqn">\log_{10} \pi</code>, see <code>ldlnre</code>). 
+Note that density values correspond to the total probability mass of types across one
+order of magnitude on the x-axis.
+</p>
+</dd>
+<dt><code>cumulative</code></dt>
+<dd>
+<p>A plot of the cumulative probability distribution, i.e. the distribution function 
+<code class="reqn">F(\rho) = P(\pi \le \rho)</code> showing the total probability mass of types with 
+type probability <code class="reqn">\pi \le \rho</code>.  The x-axis shows <code class="reqn">\rho</code> on a logarithmic scale
+(but is labelled more intuitively with <code class="reqn">\pi</code> by default).  No special transformations
+are required because <code class="reqn">0 \le F(\rho) \le 1</code>.
+</p>
+</dd>
+</dl>
+<p>Line styles are defined globally through <code>zipfR.par</code>,
+but can be overridden with the optional parameters
+<code>lty</code>, <code>lwd</code> and <code>col</code>.  In most cases, it is more advisable to
+change the global settings temporarily for a sequence of plots, though.
+</p>
+<p>The <code>bw</code> parameter is used to switch between B/W and colour
+modes.  It can also be set globally with <code>zipfR.par</code>.
+</p>
+<p>Other standard graphics parameters (such as <code>cex</code> or <code>mar</code>) cannot
+be passed to the plot function an need to be set up with <code>par</code>
+in advance.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>lnre</code>, <code>ltdlnre</code>, <code>plnre</code>
+<code>zipfR.par</code>, <code>zipfR.plotutils</code>
+</p>
+<p><code>plot.tfl</code> offers a different visualisation of the LNRE population distribution,
+in the form of a Zipf-Mandelbrot law rather than type density.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## visualise three LNRE models trained on same data
+m1 &lt;- lnre("zm", Dickens.spc)
+m2 &lt;- lnre("fzm", Dickens.spc)
+m3 &lt;- lnre("gigp", Dickens.spc)
+plot(m1, m2, m3, type="types",
+     xlim=c(1e-8, 1e-2), ylim=c(0, 7.5e4), legend=TRUE)
+plot(m1, m2, m3, type="probability", 
+     xlim=c(1e-8, 1e-2), grid=TRUE, legend=TRUE)
+
+## cumulative probability distribution is not available for GIGP
+plot(m1, m2, type="cumulative", grid=TRUE,
+     xlim=c(1e-8, 1e-2), legend=c("ZM", "fZM"))
+
+## first argument can also be a list of models with explicit call
+models &lt;- lapply(seq(.1, .9, .2), 
+                 function (x) lnre("zm", alpha=x, B=.1))
+plot.lnre(models, type="cum", grid=TRUE, legend=TRUE)
+plot.lnre(models, type="prob", grid=TRUE, legend=TRUE)
+</code></pre>
+
+
+</div>

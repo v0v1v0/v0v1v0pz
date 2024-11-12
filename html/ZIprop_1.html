@@ -1,0 +1,57 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>delta</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The scalar delta</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the scalar delta.
+This parameter comes from the optimal Spearman’s correlation
+when the rank of two vectors <code>X</code> and <code>proba</code> are equal except on a given set of indices.
+In our context, this set correspond to the zero-values of the vector <code>proba</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">delta(X, proba)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>a vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>proba</code></td>
+<td>
+<p>a zero-inflated proportions response.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p><code>Delta</code> the scalar Delta calculated for the vector <code>x</code>
+and the vector <code>proba</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">X = rnorm(100)
+proba = runif(100)
+proba[sample(1:100,80)]=0
+Delta = delta(X,proba)
+print(Delta)
+</code></pre>
+
+
+</div>

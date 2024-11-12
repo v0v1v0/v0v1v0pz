@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>plotzoeppritz</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Plot Scattering (Zoeppritz) Coefficients</h2>
+
+<h3>Description</h3>
+
+<p>Plot Scattering (Zoeppritz) Coefficients
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">plotzoeppritz(A, zoepcols = c("red", "green", "blue", "purple"), zoeplty = c(1, 1, 1, 1))
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>A</code></td>
+<td>
+<p>list output of pzoeppritz or zoeppritz</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zoepcols</code></td>
+<td>
+<p>vector of 4 colors</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>zoeplty</code></td>
+<td>
+<p>vector of 4 line types</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>Used to plot the matrix of scattering coefficients with different
+colros and/or line types.
+</p>
+
+
+<h3>Value</h3>
+
+<p>Graphical side effects.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Jonathan M. Lees&lt;jonathan.lees@unc.edu&gt;</p>
+
+
+<h3>See Also</h3>
+
+<p>zoeppritz, pzoeppritz, piczoeppritz</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+
+alpha1 = 4.98
+  beta1 =  2.9
+   rho1 = 2.667
+
+  alpha2 = 8.0
+   beta2 = 4.6
+   rho2 = 3.38
+###############   create the scattering matrix:
+ App =  pzoeppritz( "Amplitude" , alpha1, alpha2, beta1, beta2, rho1 ,rho2, "P", "NONE");
+
+#########  plot
+plotzoeppritz(App)
+
+</code></pre>
+
+
+</div>

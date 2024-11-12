@@ -1,0 +1,153 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>simulate_zero_inflated_beta_random_effect_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Simulate data according to zero-inflated beta random effects model</h2>
+
+<h3>Description</h3>
+
+<p>Simulate data according to zero-inflated beta random effects model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">simulate_zero_inflated_beta_random_effect_data(
+  subject_n = 50,
+  time_n = 5,
+  v = 2,
+  alpha = as.matrix(c(0, 0.5, -1)),
+  beta = as.matrix(c(-0.5, -0.5, 0.5)),
+  X = NA,
+  Z = NA,
+  s1 = 0.2,
+  s2 = 0.2,
+  sim_seed = 100
+)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>subject_n</code></td>
+<td>
+<p>number of subjects</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>time_n</code></td>
+<td>
+<p>number of time points for each subject</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>v</code></td>
+<td>
+<p>the dispersion parameter in beta component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>alpha</code></td>
+<td>
+<p>the coefficients in logistic component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>beta</code></td>
+<td>
+<p>the coefficients in beta component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>the covariates in logistic component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Z</code></td>
+<td>
+<p>the covariates in beta component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s1</code></td>
+<td>
+<p>the stardard deviation of random effect in logistic component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>s2</code></td>
+<td>
+<p>the stardard deviation of random effect in beta component</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sim_seed</code></td>
+<td>
+<p>the random seed</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a named list
+</p>
+
+<ul>
+<li>
+<p> Y the bacterial abundance generated from the model
+</p>
+</li>
+<li>
+<p> X the covariates in logistic component
+</p>
+</li>
+<li>
+<p> Z the covariates in beta component
+</p>
+</li>
+<li>
+<p> alpha the coefficients in logistic component
+</p>
+</li>
+<li>
+<p> beta the coefficients in beta component
+</p>
+</li>
+<li>
+<p> s1 the stardard deviation of random effect in logistic component
+</p>
+</li>
+<li>
+<p> s2 the stardard deviation of random effect in beta component
+</p>
+</li>
+<li>
+<p> subject_ind the IDs for each subject
+</p>
+</li>
+<li>
+<p> time_ind time points
+</p>
+</li>
+</ul>
+<h3>Examples</h3>
+
+<pre><code class="language-R">simulate_zero_inflated_beta_random_effect_data(
+  subject_n = 100, time_n = 5,
+  X = as.matrix(c(rep(0, 50 * 5), rep(1, 50 * 5))),
+  alpha = as.matrix(c(-0.5, 1)),
+  beta = as.matrix(c(-0.5, 0.5)),
+  s1 = 1, s2 = 0.8,
+  v = 5,
+  sim_seed = 100
+)
+</code></pre>
+
+
+</div>

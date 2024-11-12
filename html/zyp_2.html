@@ -1,0 +1,86 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>confint.zyp</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>confint.zyp</h2>
+
+<h3>Description</h3>
+
+<p>Computes a confidence interval on a result from zyp.sen.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zyp'
+confint(object, parm, level = 0.95, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>an object of class zyp, returned by zyp.sen.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>parm</code></td>
+<td>
+<p>unused; for compatibility with confint.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>the confidence level to compute a confidence interval at.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>additional unused arguments.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>This routine computes a confidence interval on the slope and intercept
+of the result returned by zyp.sen. The confidence interval on the
+slope is calculated using the method defined in (Sen, 1968).
+</p>
+<p>The confidence interval on the intercept is computed by taking the
+standard deviation of the intercepts (sd.i), the z statistic for the given
+confidence level (z), and the mean (m). The confidence level is then:
+</p>
+<p><code>c(m - z * sd.i, m + z * sd.i)</code>
+</p>
+
+
+<h3>Value</h3>
+
+<p>A matrix containing the upper and lower bounds of the intersect
+and slope, respectively.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zyp.trend.vector</code>, zyp-package.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">x &lt;- c(0, 1, 2, 4, 5)
+y &lt;- c(6, 4, 1, 8, 7)
+slope &lt;- zyp.sen(y~x)
+ci &lt;- confint.zyp(slope)
+</code></pre>
+
+
+</div>

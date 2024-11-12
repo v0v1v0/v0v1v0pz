@@ -1,0 +1,77 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>daily.rad.stats</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Return daily total radiation statistics for a site</h2>
+
+<h3>Description</h3>
+
+<p>This function calculates the daily daylight mean and maximum
+total solar radiation values for a site over the specified date range.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">daily.rad.stats(site, bgn.date, end.date)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>site</code></td>
+<td>
+<p>Parameter of class character.
+The NEON site data should be downloaded for.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>bgn.date</code></td>
+<td>
+<p>Optional. The start date of the period to generate statistics for.
+If not supplied, the first date of NEON data will be used.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>end.date</code></td>
+<td>
+<p>Optional. The end date of the period to generate statistics for.
+If not supplied, the last date of NEON data will be used.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>Mean and maximum daylight total solar radiation values by date,
+in watts per meter squared.
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Robert Lee <a href="mailto:rhlee@colorado.edu">rhlee@colorado.edu</a><br></p>
+
+
+<h3>See Also</h3>
+
+<p>Currently none
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+# Return radiaiton stats for CPER over the summer solstice
+cper=Z10::daily.rad.stats(site = "CPER")
+# More information on the radiation data product used:
+Z10::get.dp.meta("DP1.00014.001")$product.abstract
+
+## End(Not run)
+</code></pre>
+
+
+</div>

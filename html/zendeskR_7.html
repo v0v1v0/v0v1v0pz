@@ -1,0 +1,64 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>getTicket</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2> getTicket</h2>
+
+<h3>Description</h3>
+
+<p>This function is used to return ticket information for a given ticket ID
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">getTicket(ticket.id)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>ticket.id</code></td>
+<td>
+
+<p>A Zendesk ticket ID number (e.g.888)
+</p>
+</td>
+</tr></table>
+<h3>Details</h3>
+
+<p>This function will return a data.frame of ticket information for a given ticket.id.
+The fields key will be returned within the data.frame as a list.
+</p>
+
+
+<h3>Value</h3>
+
+<p>returns a data.frame of ticket information for the given ticket.id
+</p>
+
+
+<h3>Author(s)</h3>
+
+<p>Tanya Cashorali</p>
+
+
+<h3>References</h3>
+
+<p>http://developer.zendesk.com/documentation/rest_api/tickets.html
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+    ## This requires Zendesk authentication
+    ticket &lt;- getTicket(ticket.id)
+
+## End(Not run)</code></pre>
+
+
+</div>

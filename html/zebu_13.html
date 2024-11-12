@@ -1,0 +1,131 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>local_association</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Local Association Measures</h2>
+
+<h3>Description</h3>
+
+<p>Subroutines called by <code>lassie</code> to compute
+local and global association measures from a list of probabilities.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">local_association(x, measure = "chisq", nr = 1)
+
+lewontin_d(x)
+
+duchers_z(x)
+
+pmi(x, normalize)
+
+chisq(x, nr)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>list of probabilities as outputted by <code>estimate_prob</code>.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>measure</code></td>
+<td>
+<p>name of measure to be used:
+</p>
+
+<ul>
+<li>
+<p>'chisq': Chi-squared residuals.
+</p>
+</li>
+<li>
+<p>'d': Lewontin's D.
+</p>
+</li>
+<li>
+<p>'z': Ducher's 'z'.
+</p>
+</li>
+<li>
+<p>'pmi': Pointwise mutual information (in bits).
+</p>
+</li>
+<li>
+<p>'npmi': Normalized pointwise mutual information (Bouma).
+</p>
+</li>
+<li>
+<p>'npmi2': Normalized pointwise mutual information (Multivariate).
+</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>nr</code></td>
+<td>
+<p>number of rows/samples. Only used to estimate chi-squared residuals.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>normalize</code></td>
+<td>
+<p>0 for pmi, 1 for npmi, 2 for npmi2</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>List containing the following values:
+</p>
+
+<ul>
+<li>
+<p> local: local association array (may contain NA, NaN and Inf values).
+</p>
+</li>
+<li>
+<p> global: global association numeric value.
+</p>
+</li>
+</ul>
+<h3>See Also</h3>
+
+<p><code>lassie</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R"># This is what happens behind the curtains in the 'lassie' function
+# Here we compute the association between the 'Girth' and 'Height' variables
+# of the 'trees' dataset
+
+# 'select' and 'continuous' take column numbers or names
+select &lt;- c('Girth', 'Height') # select subset of trees
+continuous &lt;-c(1, 2) # both 'Girth' and 'Height' are continuous
+
+# equal-width discretization with 3 bins
+breaks &lt;- 3
+
+# Preprocess data: subset, discretize and remove missing data
+pre &lt;- preprocess(trees, select, continuous, breaks)
+
+# Estimates marginal and multivariate probabilities from preprocessed data.frame
+prob &lt;- estimate_prob(pre$pp)
+
+# Computes local and global association using Ducher's Z
+lam &lt;- local_association(prob, measure = 'z')
+</code></pre>
+
+
+</div>

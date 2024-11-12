@@ -1,0 +1,54 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>indicator</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The performance indicator</h2>
+
+<h3>Description</h3>
+
+<p>Calculate the indicator for a vector <code>X</code>
+and a zero-inflated proportions response <code>proba</code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">indicator(X, proba)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>a vector.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>proba</code></td>
+<td>
+<p>a zero-inflated proportions response.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a scalar represents the performance indicator
+and the vector <code>proba</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">X = rnorm(100)
+proba = runif(100)
+proba[sample(1:100,80)]=0
+print(indicator(X,proba))
+</code></pre>
+
+
+</div>

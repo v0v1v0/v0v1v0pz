@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>print.lnre</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Printing LNRE Models (zipfR)</h2>
+
+<h3>Description</h3>
+
+<p>Implementations of the <code>print</code> and <code>summary</code>
+methods for LNRE models (subclasses of <code>lnre</code>).
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">
+  ## S3 method for class 'lnre'
+print(x, ...)
+
+  ## S3 method for class 'lnre'
+summary(object, ...)
+
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x, object</code></td>
+<td>
+<p>an object of class <code>lnre</code> or one of its
+subclasses, representing a LNRE model</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>other arguments passed on from generic method will be ignored</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p><b>NB:</b> implementation details and format of the summary are
+subject to change in future releases
+</p>
+<p>In the current implementation, <code>print</code> and <code>summary</code> produce
+the same output for LNRE models.
+</p>
+<p>This summary comprises the type of LNRE model, its parameter values,
+derived parameters such as normalization constants, and the population
+size <code class="reqn">S</code>.
+</p>
+<p>If the model parameters have been estimated from an observed frequency
+spectrum, a comparison of the observed and expected frequency spectrum
+is shown, including goodness-of-fit statistics.
+</p>
+
+
+<h3>Value</h3>
+
+<p><code>NULL</code>
+</p>
+<p>Unlike other implementations of the <code>summary</code> method,
+<code>summary.lnre</code> only prints a summary on screen and does not return
+a special "summary" object.
+</p>
+
+
+<h3>See Also</h3>
+
+<p>See the <code>lnre</code> manpage for more information on LNRE
+models.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">
+# load Brown verbs dataset and estimate lnre models
+data(BrownVer.spc)
+zm &lt;- lnre("zm",BrownVer.spc)
+fzm &lt;- lnre("fzm",BrownVer.spc,exact=FALSE)
+gigp &lt;- lnre("gigp",BrownVer.spc)
+
+# look at summaries with either summary or print
+summary(zm)
+print(zm)
+
+summary(fzm)
+print(fzm)
+
+summary(gigp)
+print(gigp)
+
+</code></pre>
+
+
+</div>

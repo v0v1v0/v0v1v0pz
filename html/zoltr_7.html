@@ -1,0 +1,51 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>data_frame_from_forecast_data</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Converts forecast data from Zoltar's native <code>list</code> format to a <code>data.frame</code>
+</h2>
+
+<h3>Description</h3>
+
+<p>Converts forecast data from Zoltar's native <code>list</code> format to a <code>data.frame</code>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">data_frame_from_forecast_data(forecast_data)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>forecast_data</code></td>
+<td>
+<p>Forecast data as a <code>list</code> in the Zoltar standard format</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>A <code>data.frame</code> from forecast_data in zoltar-specific format. The columns are:
+'unit', 'target', 'class', 'value', 'cat', 'prob', 'sample', 'quantile', 'family',
+'param1', 'param2', 'param3'. They are documented at
+https://docs.zoltardata.com/fileformats/#forecast-data-format-csv .
+NB: columns are all character (i.e., data type information from forecast_data is lost). Also note that a retracted
+prediction element is represented as a single row with NA values for all but the first four columns.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+  forecast_data &lt;- jsonlite::read_json("docs-predictions.json")
+  data_frame &lt;- data_frame_from_forecast_data(forecast_data)
+
+## End(Not run)
+</code></pre>
+
+
+</div>

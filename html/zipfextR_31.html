@@ -1,0 +1,139 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zi_zipfpssFit</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Zero Inflated Zipf-PSS parameters estimation.</h2>
+
+<h3>Description</h3>
+
+<p>For a given sample of strictly positive integer numbers,  usually of the type of ranking data or
+frequencies of frequencies data, estimates the parameters of the zero inflated Zipf-PSS distribution by means of
+the maximum likelihood method. The input data should be provided as a frequency matrix.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">zi_zipfpssFit(data, init_alpha = 1.5, init_lambda = 1.5,
+  init_w = 0.1, level = 0.95, ...)
+
+## S3 method for class 'zi_zipfpssR'
+residuals(object, ...)
+
+## S3 method for class 'zi_zipfpssR'
+fitted(object, ...)
+
+## S3 method for class 'zi_zipfpssR'
+coef(object, ...)
+
+## S3 method for class 'zi_zipfpssR'
+plot(x, ...)
+
+## S3 method for class 'zi_zipfpssR'
+print(x, ...)
+
+## S3 method for class 'zi_zipfpssR'
+summary(object, ...)
+
+## S3 method for class 'zi_zipfpssR'
+logLik(object, ...)
+
+## S3 method for class 'zi_zipfpssR'
+AIC(object, ...)
+
+## S3 method for class 'zi_zipfpssR'
+BIC(object, ...)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>data</code></td>
+<td>
+<p>Matrix of count data in form of table of frequencies.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_alpha</code></td>
+<td>
+<p>Initial value of <code class="reqn">\alpha</code> parameter (<code class="reqn">\alpha &gt; 1</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_lambda</code></td>
+<td>
+<p>Initial value of <code class="reqn">\lambda</code> parameter (<code class="reqn">\lambda &gt; 0</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>init_w</code></td>
+<td>
+<p>Initial value of <code class="reqn">w</code> parameter (<code class="reqn">0 &lt; w &lt; 1</code>).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>level</code></td>
+<td>
+<p>Confidence level used to calculate the confidence intervals (default 0.95).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>...</code></td>
+<td>
+<p>Further arguments to the generic functions. The extra arguments are passing
+to the <em>optim</em> function.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>object</code></td>
+<td>
+<p>An object from class "zpssR" (output of <em>zipfpssFit</em> function).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+<p>An object from class "zpssR" (output of <em>zipfpssFit</em> function).</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>The argument <code>data</code> is a two column matrix with the first column containing the observations and
+the second column containing their frequencies.
+</p>
+
+
+<h3>References</h3>
+
+
+<p>Panjer, H. H. (1981). Recursive evaluation of a family of compound
+distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 22-26.
+</p>
+<p>Sundt, B., &amp; Jewell, W. S. (1981). Further results on recursive evaluation of
+compound distributions. ASTIN Bulletin: The Journal of the IAA, 12(1), 27-39.
+
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>getInitialValues</code>.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">data &lt;- rzipfpss(100, 2.5, 1.3)
+data &lt;- as.data.frame(table(data))
+data[,1] &lt;- as.numeric(as.character(data[,1]))
+data[,2] &lt;- as.numeric(as.character(data[,2]))
+obj &lt;- zipfpssFit(data, init_alpha = 1.5, init_lambda = 1.5)
+</code></pre>
+
+
+</div>

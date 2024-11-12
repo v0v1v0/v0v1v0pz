@@ -1,0 +1,53 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>createZoomRosetta</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Create a file to aid in adding a unique identifier to link to the zoom user name</h2>
+
+<h3>Description</h3>
+
+<p>A major challenge in analyzing virtual meetings is reconciling the display
+name that zoom users in chat and transcript. This function outputs a data.frame
+that can be helpful in manually adding a new unique identifier to use in
+further data anlaysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">createZoomRosetta(zoomOutput)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>zoomOutput</code></td>
+<td>
+<p>the output from running processZoomOutput</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p>a data.frame that has unique values for the zoom display name
+that show up across any files that are available, including
+participants, transcript, and chat. If the user gives the participants
+file, it will separate display name changes and include all versions. If
+there are emails attached to display names, it will include those.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">rosetta.out = createZoomRosetta(processZoomOutput(fileRoot=
+file.path(system.file('extdata', package = 'zoomGroupStats'),"meeting001")))
+## Not run: 
+rosetta.out = createZoomRosetta(processZoomOutput(fileRoot="~/zoomMeetings/meeting001"))
+
+## End(Not run)
+</code></pre>
+
+
+</div>

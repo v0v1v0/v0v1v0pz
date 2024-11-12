@@ -1,0 +1,52 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>Prime</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Prime numbers</h2>
+
+<h3>Description</h3>
+
+<p>Under OEIS <a href="https://oeis.org/A000040">A000040</a>, a <em>Prime</em> number is a natural number with no positive divisors other than 1 and itself.
+First 6 prime numbers are 2, 3, 5, 7, 11, 13.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">Prime(n, gmp = TRUE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>n</code></td>
+<td>
+<p>the number of first <code>n</code> entries from the sequence.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>gmp</code></td>
+<td>
+<p>a logical; <code>TRUE</code> to use large number representation, <code>FALSE</code> otherwise.</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a vector of length <code>n</code> containing first entries from the sequence.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## generate first 30 Regular numbers
+print(Prime(30))
+
+</code></pre>
+
+
+</div>

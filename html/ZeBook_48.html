@@ -1,0 +1,70 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>maize.simule240</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Wrapper function to run Maize model multiple times for multiple sets of parameter values and give Biomass at day240</h2>
+
+<h3>Description</h3>
+
+<p>Wrapper function for multiple simulation with Maize model
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">maize.simule240(X, weather, sdate, ldate, all = FALSE)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>X</code></td>
+<td>
+<p>: matrix of n row vectors of 7 parameters</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>weather</code></td>
+<td>
+<p>: weather data.frame for one single year</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>sdate</code></td>
+<td>
+<p>: sowing date</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ldate</code></td>
+<td>
+<p>: last date</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>all</code></td>
+<td>
+<p>: if you want a matrix combining X and output (default = FALSE)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>a matrix of biomass at day=240 for all combinations of parameters of X
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">sy="18-2006"
+weather = maize.weather(working.year=strsplit(sy,"-")[[1]][2],
+  working.site=strsplit(sy,"-")[[1]][1],weather_all=weather_EuropeEU)
+maize.simule240(maize.define.param(),weather, sdate=100, ldate=250, all=FALSE)
+</code></pre>
+
+
+</div>

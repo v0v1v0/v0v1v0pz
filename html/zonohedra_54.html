@@ -1,0 +1,87 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lintransform</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+linear transformations of zonotopes, and vector matroids
+</h2>
+
+<h3>Description</h3>
+
+<p>These functions perform straightforward linear transformations
+on the generators of a zonotope,
+and the column vectors of a vector matroid
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonohedron'
+lintransform( x, W )
+## S3 method for class 'zonogon'
+lintransform( x, W )
+## S3 method for class 'matroid'
+lintransform( x, W )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p><code>x</code> can be a vector matroid object, as returned from the constructor <code>matroid()</code> that takes a matrix as input.
+</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>W</code></td>
+<td>
+
+<p>An invertible matrix that matches the rank of <code>x</code>.
+This invertibility is verified.
+<code>W</code> can also be a scalar; it is then replaced by that scalar
+multiplied by the identity matrix of the appropriate rank.
+</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>If <code>x</code> is a zonohedron (or zonogon),
+<code>lintransform(x)</code> returns the zonohedron (or zonogon)
+whose generators are the generators of <code>x</code> with the matrix
+<code>W</code> applied on the left side.
+This function is optimized - it is <em>not</em> necessary
+to transform the generators and start all over again.
+<br><br>
+If <code>x</code> is a vector matroid, <code>lintransform(x)</code> returns the matroid
+whose generators are the generators of <code>x</code> with the matrix
+<code>W</code> applied on the left side.
+If <code>x</code> is a matroid, but *not* a vector matroid,
+it returns the original matroid and prints a warning message.
+<br><br>
+In case of error, e.g. invalid <code>W</code>,
+the function prints an error message and returns <code>NULL</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p>Matroid - Wikipedia.
+<a href="https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057">https://en.wikipedia.org/w/index.php?title=Matroid&amp;oldid=1086234057</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>rank()</code>, 
+<code>matroid()</code>
+</p>
+
+
+</div>

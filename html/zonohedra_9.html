@@ -1,0 +1,61 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>zonotope-getters</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>
+zonotope get functions
+</h2>
+
+<h3>Description</h3>
+
+<p>get some important members of a zonotope
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">## S3 method for class 'zonotope'
+getmatrix( x )
+
+## S3 method for class 'zonotope'
+getmatroid( x )
+
+## S3 method for class 'zonotope'
+getcenter( x )
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table><tr style="vertical-align: top;">
+<td><code>x</code></td>
+<td>
+
+<p>a zonotope object -  a <b>zonohedron</b>, a <b>zonogon</b>, or a <b>zonoseg</b>
+</p>
+</td>
+</tr></table>
+<h3>Value</h3>
+
+<p><code>getmatrix()</code> returns the matrix originally used to construct
+the zonotope <code>x</code>.
+<br><br><code>getmatroid()</code> returns the matroid (possibly nonsimple)
+constructed from the matrix
+<br><br><code>getcenter()</code> returns the center of the zonotope;
+which is also the center of radial symmetry.
+If <code>x</code> is an object-color solid, the center corresponds
+to the 50% graypoint.  For the whitepoint multiply by 2.
+</p>
+
+
+<h3>See Also</h3>
+
+<p><code>zonohedron()</code>,
+<code>zonogon()</code>,
+<code>zonoseg()</code>
+</p>
+
+
+</div>

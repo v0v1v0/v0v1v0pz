@@ -1,0 +1,181 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>lactation.machine.model</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>The Lactation model with milking machine</h2>
+
+<h3>Description</h3>
+
+<p><strong>Model description.</strong>
+This model is a model of lactating mammary glands of cattle described by Heather et al. (1983). This model was then inspired more complex models based on these principles.
+This model simulates the dynamics of the production of cow's milk.
+the system is represented by 6 state variables: change in hormone levels (H), the production and loss of milk secreting cells (CS), and removing the secretion of milk (M), the average quantity of milk contained in the animal (Mmean), the amount of milk removed (RM) and yield (Y).
+The model has a time step dt = 0.001 for milking machines.
+The model is defined by a few equations, with a total of twenty parameters for the described process.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">lactation.machine.model(cu, kdiv, kdl, kdh, km, ksl, kr, ks, ksm, mh, mm,
+  p, mum, rma, t1, t2, t3, t4, t5, t6, duration, dt, CSi, Mi)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>cu</code></td>
+<td>
+<p>: number of undifferentiated cells</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kdiv</code></td>
+<td>
+<p>: cell division rate, Michaelis-Menten constant</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kdl</code></td>
+<td>
+<p>: constant degradation of milk</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kdh</code></td>
+<td>
+<p>: rate of decomposition of the hormone</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>km</code></td>
+<td>
+<p>:  constant secretion of milk</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ksl</code></td>
+<td>
+<p>: milk secretion rate, Michaelis-Menten constant</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>kr</code></td>
+<td>
+<p>: average milk constant</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ks</code></td>
+<td>
+<p>: rate of degradation of the basal cells</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>ksm</code></td>
+<td>
+<p>: constant rate of degradation of milk secreting cells</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mh</code></td>
+<td>
+<p>: parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mm</code></td>
+<td>
+<p>: storage Capacity milk the animal</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>p</code></td>
+<td>
+<p>: parameter</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>mum</code></td>
+<td>
+<p>: setting the maximum rate of cell division</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>rma</code></td>
+<td>
+<p>: parameter of milk m (t) function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t1</code></td>
+<td>
+<p>: parameter of milk m (t) function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t2</code></td>
+<td>
+<p>: parameter of milk m (t) function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t3</code></td>
+<td>
+<p>: parameter of milk m (t) function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t4</code></td>
+<td>
+<p>: parameter of milk m (t) function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t5</code></td>
+<td>
+<p>: parameter of milk m (t) function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>t6</code></td>
+<td>
+<p>: parameter of milk m (t) function</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>duration</code></td>
+<td>
+<p>: duration of simulation</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>dt</code></td>
+<td>
+<p>: time step</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>CSi</code></td>
+<td>
+<p>: initial Number of secretory cells</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>Mi</code></td>
+<td>
+<p>: initial Quantity of milk in animal (kg)</p>
+</td>
+</tr>
+</table>
+<h3>Value</h3>
+
+<p>matrix with CS,M,Mmoy,RM
+</p>
+
+
+</div>

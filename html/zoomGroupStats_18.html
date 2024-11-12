@@ -1,0 +1,102 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>sample_transcript_sentiment_aws</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Parsed spoken language in a 'Zoom' meeting with AWS-based sentiment analysis.</h2>
+
+<h3>Description</h3>
+
+<p>Parsed spoken language in a 'Zoom' meeting with AWS-based sentiment analysis.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">sample_transcript_sentiment_aws
+</code></pre>
+
+
+<h3>Format</h3>
+
+<p>A data frame with 30 rows of 17 variables:
+</p>
+
+<dl>
+<dt>batchMeetingId</dt>
+<dd>
+<p>a character meeting identification variable</p>
+</dd>
+<dt>utteranceId</dt>
+<dd>
+<p>an incremented numeric identifier for a marked speech utterance</p>
+</dd>
+<dt>userName</dt>
+<dd>
+<p>'Zoom' display name attached to this speaker</p>
+</dd>
+<dt>utteranceStartSeconds</dt>
+<dd>
+<p>when the utterance started as the number of seconds from the start of the recording</p>
+</dd>
+<dt>utteranceStartTime</dt>
+<dd>
+<p>timestamp for the start of the utterance</p>
+</dd>
+<dt>utteranceEndSeconds</dt>
+<dd>
+<p>when the utterance ended as the number of seconds from the start of the recording</p>
+</dd>
+<dt>utteranceEndTime</dt>
+<dd>
+<p>timestamp for the end of the utterance</p>
+</dd>
+<dt>utteranceTimeWindow</dt>
+<dd>
+<p>duration of the utterance, in seconds</p>
+</dd>
+<dt>utteranceMessage</dt>
+<dd>
+<p>the text of the utterance</p>
+</dd>
+<dt>utteranceLanguage</dt>
+<dd>
+<p>language code of the utterance</p>
+</dd>
+<dt>userEmail</dt>
+<dd>
+<p>character email address</p>
+</dd>
+<dt>userId</dt>
+<dd>
+<p>numeric id of each speaker</p>
+</dd>
+<dt>aws_sentClass</dt>
+<dd>
+<p>character giving the sentiment classification of this text</p>
+</dd>
+<dt>aws_positive</dt>
+<dd>
+<p>probability that this text is mixed emotion</p>
+</dd>
+<dt>aws_negative</dt>
+<dd>
+<p>probability that this text is negative</p>
+</dd>
+<dt>aws_neutral</dt>
+<dd>
+<p>probability that this text is neutral</p>
+</dd>
+<dt>aws_mixed</dt>
+<dd>
+<p>probability that this text is positive</p>
+</dd>
+</dl>
+<h3>Source</h3>
+
+<p><a href="http://zoomgroupstats.org/">http://zoomgroupstats.org/</a>
+</p>
+
+
+</div>

@@ -1,0 +1,76 @@
+<div class="container">
+
+<table style="width: 100%;"><tr>
+<td>get_custom_fields</td>
+<td style="text-align: right;">R Documentation</td>
+</tr></table>
+<h2>Returns the system and all the custom fields defined by
+your organization's zendesk administrator</h2>
+
+<h3>Description</h3>
+
+<p>It takes your Email Id, authentication token,
+sub-domain  as parameters and gets the system and all
+the custom fields available for a zendesk ticket.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre><code class="language-R">get_custom_fields(email_id, token, subdomain)
+</code></pre>
+
+
+<h3>Arguments</h3>
+
+<table>
+<tr style="vertical-align: top;">
+<td><code>email_id</code></td>
+<td>
+<p>Zendesk Email Id (username).</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>token</code></td>
+<td>
+<p>Zendesk API token.</p>
+</td>
+</tr>
+<tr style="vertical-align: top;">
+<td><code>subdomain</code></td>
+<td>
+<p>Your organization's Zendesk sub-domain.</p>
+</td>
+</tr>
+</table>
+<h3>Details</h3>
+
+<p>It's not a good practice to write down these authentication
+parameters in your code. There are various methods and
+packages available that are more secure; this package
+doesn't require you to use any one in particular.
+</p>
+
+
+<h3>Value</h3>
+
+<p>A data frame containing all ticket fields
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://developer.zendesk.com/rest_api/docs/support/ticket_fields">https://developer.zendesk.com/rest_api/docs/support/ticket_fields</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre><code class="language-R">## Not run: 
+fields &lt;- get_custom_fields(email_id, token, subdomain)
+
+## End(Not run)
+</code></pre>
+
+
+</div>
